@@ -1,1270 +1,807 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#051329">
-    <meta name="description"
-        content="Nanditha Aquarium - Bengaluru's trusted retail aquarium and bird shop. Explore exotic tropical fish, hand-tamed cockatiels, vibrant budgies, premium pet foods, custom tanks & accessories. Delivery available across Bengaluru.">
-    <meta name="keywords"
-        content="Nanditha Aquarium, Aquarium shop KR Puram Bengaluru, buy betta fish Bangalore, cockatiel birds Bengaluru, budgies price Bangalore, aquarium fish food, custom fish tanks, aquarium accessories Bangalore">
-    <meta property="og:title" content="Nanditha Aquarium | Premium Retail Aquarium & Bird Shop Bengaluru">
-    <meta property="og:description"
-        content="Bring your little world of nature home. 4.4★ rated on Google with 516+ reviews. Retail shopping and doorstep delivery available.">
-    <meta property="og:type" content="website">
-
-    <title>NANDITHA AQUARIUM | Retail Aquarium & Bird Shop – KR Puram, Bengaluru</title>
-
-    <!-- Anti-Flash Theme Initializer (Executes before paint) -->
-    <script>
-        (function () {
-            try {
-                var savedTheme = localStorage.getItem('nanditha_theme');
-                var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                var theme = savedTheme ? savedTheme : (systemDark ? 'dark' : 'light');
-                document.documentElement.setAttribute('data-theme', theme);
-                var meta = document.querySelector('meta[name="theme-color"]');
-                if (meta) {
-                    meta.setAttribute('content', theme === 'dark' ? '#071827' : '#FFFFFF');
-                }
-            } catch (e) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        })();
-    </script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap"
-        rel="stylesheet">
-
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=3.5">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fish Tales — Exotic Pets, Aquarium Fish &amp; Bioactive Terrariums</title>
+  <meta name="description" content="Discover rare isopods, show guppy pairs, exotic tarantula spiderlings and bioactive vivarium kits at Fish Tales. Safe insulated shipping across India with direct WhatsApp checkout.">
+  <meta name="keywords" content="Fish Tales, exotic pets India, buy isopods India, Cubaris Murina Glacier, show guppies, tarantula spiderlings, bioactive terrarium kit, aquarium fish">
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Fish Tales — Premium Exotic Pets &amp; Aquarium">
+  <meta property="og:description" content="Explore rare isopods, beautiful aquarium fish, exotic tarantulas and premium bioactive habitats.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80">
+  
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <!-- Top Announcement Bar -->
-    <div class="announcement-bar">
-        <div class="container announcement-content">
-            <span class="announcement-item">
-                <span class="pulse-dot"></span> Open Today until <strong>10:00 PM</strong> | KR Puram, Bengaluru
-            </span>
-            <span class="announcement-item hide-on-mobile">
-                🚚 Bengaluru Doorstep Delivery Available | Call: <a href="tel:+919620935209">+91 96209 35209</a>
-            </span>
-            <span class="announcement-item">
-                ⭐ <strong>4.4 / 5</strong> Google Rating (516+ Happy Reviews)
-            </span>
+  <!-- ============================================================
+       1. STICKY HEADER & NAVIGATION
+       ============================================================ -->
+  <header class="site-header" id="siteHeader">
+    <nav class="nav-container" aria-label="Main Navigation">
+      <!-- Brand Logo -->
+      <a href="#hero" class="nav-brand" onclick="scrollToSection('hero')">
+        <div class="logo-badge" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.46-3.44 6-7 6s-7.56-2.54-8.5-6Z"/>
+            <path d="M18 12c-.5 1-1.5 2-3 2s-2.5-1-3-2 1.5-2 3-2 2.5 1 3 2Z"/>
+            <path d="M2 10l4.5 2L2 14"/>
+          </svg>
         </div>
-    </div>
+        <div class="logo-title">
+          <span class="logo-main">FISH <span class="logo-accent">TALES</span></span>
+          <span class="logo-sub">Exotic Living Art</span>
+        </div>
+      </a>
 
-    <!-- Sticky Navigation Header -->
-    <header class="site-header" id="siteHeader">
-        <div class="container header-container">
-            <!-- Brand Logo & Name -->
-            <a href="#home" class="brand" aria-label="Nanditha Aquarium Homepage">
-                <div class="brand-logo-icon">
-                    <svg viewBox="0 0 40 40" width="34" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#00e5ff" />
-                                <stop offset="50%" stop-color="#0284c7" />
-                                <stop offset="100%" stop-color="#0a2540" />
-                            </linearGradient>
-                        </defs>
-                        <circle cx="20" cy="20" r="19" stroke="url(#brandGrad)" stroke-width="2" fill="#041226" />
-                        <!-- Stylized Tropical Fish & Bird Motif -->
-                        <path
-                            d="M11 20C15 13 23 14 28 17C29.5 15 32 14 34 15C33 18 33 22 34 25C32 26 29.5 25 28 23C23 26 15 27 11 20Z"
-                            fill="url(#brandGrad)" />
-                        <circle cx="16" cy="19" r="1.5" fill="#ffffff" />
-                        <!-- Feather Accent -->
-                        <path d="M21 9C23 11 24 14 23 17" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" />
-                        <path d="M25 8C27 10.5 27.5 13.5 27 16" stroke="#22d3ee" stroke-width="1.5"
-                            stroke-linecap="round" />
-                    </svg>
-                </div>
-                <div class="brand-text">
-                    <span class="brand-name">NANDITHA <span class="brand-highlight">AQUARIUM</span></span>
-                    <span class="brand-tagline">AQUATIC BEAUTY &amp; FEATHERED FRIENDS</span>
-                </div>
+      <!-- Center Navigation Links -->
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#hero" class="nav-link" onclick="scrollToSection('hero')">Home</a></li>
+        <li><a href="#catalogue" class="nav-link" onclick="filterCategoryAndScroll('all')">Shop</a></li>
+        <li><a href="#catalogue" class="nav-link" onclick="filterCategoryAndScroll('aquarium')">Aquarium &amp; Fish</a></li>
+        <li><a href="#catalogue" class="nav-link" onclick="filterCategoryAndScroll('isopods')">Isopods</a></li>
+        <li><a href="#catalogue" class="nav-link" onclick="filterCategoryAndScroll('tarantulas')">Tarantulas</a></li>
+        <li><a href="#catalogue" class="nav-link" onclick="filterCategoryAndScroll('terrarium')">Terrarium Kits</a></li>
+        <li><a href="#about" class="nav-link" onclick="scrollToSection('about')">About Us</a></li>
+      </ul>
+
+      <!-- Right Action Icons -->
+      <div class="nav-actions">
+        <!-- Search Trigger -->
+        <button class="nav-btn" onclick="openSearchOverlay()" aria-label="Search products" title="Search products">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+
+        <!-- Shopping Cart Trigger -->
+        <button class="nav-btn" onclick="openCartDrawer()" aria-label="Open shopping cart" title="Shopping Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"/>
+            <circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+
+        <!-- Mobile Hamburger Menu Button -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         2. HERO SECTION
+         ============================================================ -->
+    <section class="hero-section" id="hero">
+      <div class="hero-bg-graphic" aria-hidden="true"></div>
+      <div class="hero-grid container">
+        <div class="hero-content">
+          <div class="section-badge-amber">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Premium Exotic Pets &amp; Habitats
+          </div>
+          <h1 class="hero-title">
+            Discover the Extraordinary <span>World of Exotic Pets.</span>
+          </h1>
+          <p class="hero-subtitle">
+            Explore rare isopods, beautiful aquarium fish, exotic tarantulas and premium bioactive habitats. Certified captive-bred specimens, temperature-controlled transit across India, and direct WhatsApp ordering.
+          </p>
+          <div class="hero-actions">
+            <a href="#catalogue" class="btn btn-primary btn-large" onclick="scrollToSection('catalogue')">
+              Explore Collection
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
+            <a href="#promotions" class="btn btn-outline btn-large" onclick="scrollToSection('promotions')">
+              Special Offers
+            </a>
+          </div>
 
-            <!-- Desktop Navigation Links (Compact & Single-Line) -->
-            <nav class="nav-links" id="mainNav" aria-label="Primary Navigation">
-                <a href="#home" class="nav-link active">Home</a>
-
-                <!-- Shop with Dropdown Mega Menu -->
-                <div class="nav-item-dropdown" id="shopDropdownWrap">
-                    <a href="#products" class="nav-link nav-link-dropdown" id="shopDropdownTrigger"
-                        aria-expanded="false" aria-haspopup="true">
-                        <span>Shop</span>
-                        <svg class="dropdown-caret" viewBox="0 0 24 24" width="14" height="14" fill="none"
-                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                            aria-hidden="true">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </a>
-
-                    <!-- Dropdown Content (8 Categories) -->
-                    <div class="shop-dropdown-menu" id="shopDropdownMenu" role="menu" aria-label="Shop Categories">
-                        <div class="dropdown-menu-inner">
-                            <!-- Left Column: Aquatic -->
-                            <div class="dropdown-col">
-                                <span class="dropdown-heading">AQUATIC WORLD</span>
-                                <a href="#products" class="dropdown-item" data-filter="fish" role="menuitem">
-                                    <span class="dropdown-item-icon">🐠</span>
-                                    <div class="dropdown-item-text">
-                                        <strong>Aquarium Fish</strong>
-                                        <small>Bettas, Guppies, Tetras &amp; more</small>
-                                    </div>
-                                </a>
-                                <a href="#products" class="dropdown-item" data-filter="fish-food" role="menuitem">
-                                    <span class="dropdown-item-icon">🍤</span>
-                                    <div class="dropdown-item-text">
-                                        <strong>Fish Food</strong>
-                                        <small>Pellets, Flakes, Frozen &amp; Live</small>
-                                    </div>
-                                </a>
-                                <a href="#products" class="dropdown-item" data-filter="tanks" role="menuitem">
-                                    <span class="dropdown-item-icon">🫧</span>
-                                    <div class="dropdown-item-text">
-                                        <strong>Aquarium Tanks</strong>
-                                        <small>Nano cubes, Rimless &amp; Custom</small>
-                                    </div>
-                                </a>
-                                <a href="#accessories-section" class="dropdown-item" data-quick-filter="aquarium-acc"
-                                    role="menuitem">
-                                    <span class="dropdown-item-icon">⚙️</span>
-                                    <div class="dropdown-item-text">
-                                        <strong>Aquarium Accessories</strong>
-                                        <small>Filters, Lights, Heaters &amp; Care</small>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <!-- Right Column: Birds -->
-                            <div class="dropdown-col">
-                                <span class="dropdown-heading">FEATHERED COMPANIONS</span>
-                                <a href="#products" class="dropdown-item" data-filter="cockatiels" role="menuitem">
-                                    <span class="dropdown-item-icon">🦜</span>
-                                    <div class="dropdown-item-text">
-                                        <strong>Cockatiels</strong>
-                                        <small>Hand-tamed, Lutino &amp; Pied</small>
-                                    </div>
-                                </a>
-                                <a href="#products" class="dropdown-item" data-filter="budgies" role="menuitem">
-                                    <span class="dropdown-item-icon">🐦</span>
-                                    <div class="dropdown-item-text">
-                                        <strong>Budgies</strong>
-                                        <small>Sky Blue, Yellow, White &amp; Pairs</small>
-                                    </div>
-                                </a>
-                                <a href="#products" class="dropdown-item" data-filter="bird-food" role="menuitem">
-                                    <span class="dropdown-item-icon">🌾</span>
-                                    <div class="dropdown-item-text">
-                                        <strong>Bird Food</strong>
-                                        <small>Spray Millet, Seeds &amp; Calcium</small>
-                                    </div>
-                                </a>
-                                <a href="#accessories-section" class="dropdown-item" data-quick-filter="bird-acc"
-                                    role="menuitem">
-                                    <span class="dropdown-item-icon">🪺</span>
-                                    <div class="dropdown-item-text">
-                                        <strong>Bird Accessories</strong>
-                                        <small>Enamelled Cages, Perches &amp; Toys</small>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Dropdown Footer -->
-                        <div class="dropdown-footer-row">
-                            <a href="#products" class="dropdown-footer-link" data-filter="all">
-                                <span>Browse Complete Catalog (32+ Products) &rarr;</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="#reviews" class="nav-link">Reviews</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </nav>
-
-            <!-- Header Actions: Search, Cart, Dark/Light Mode -->
-            <div class="header-actions">
-                <!-- Search Button -->
-                <button class="icon-btn" id="searchTriggerBtn" aria-label="Search Products"
-                    title="Search aquarium products and birds">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </button>
-
-                <!-- Cart Button with Live Counter Badge -->
-                <button class="cart-btn" id="cartOpenBtn" aria-label="Shopping Cart" title="View your selected items">
-                    <div class="cart-icon-wrap">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <path d="M16 10a4 4 0 0 1-8 0"></path>
-                        </svg>
-                        <span class="cart-badge" id="cartCountBadge">0</span>
-                    </div>
-                    <span class="cart-label hide-on-mobile">Cart</span>
-                </button>
-
-                <!-- Dark / Light Mode Toggle Button -->
-                <button class="theme-toggle-btn" id="themeToggleBtn" type="button"
-                    aria-label="Switch between Dark and Light mode" title="Toggle Dark / Light Theme">
-                    <span class="theme-icon-sun" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                    </span>
-                    <span class="theme-icon-moon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </span>
-                </button>
-
-                <!-- Mobile Menu Hamburger -->
-                <button class="menu-btn" id="menuToggleBtn" aria-label="Toggle Mobile Navigation" aria-expanded="false">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
+          <div class="hero-stats">
+            <div class="hero-stat-item">
+              <span class="hero-stat-num">30+</span>
+              <span class="hero-stat-label">Verified Species</span>
             </div>
-        </div>
-    </header>
-
-    <!-- Mobile Navigation Drawer -->
-    <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" aria-hidden="true"></div>
-    <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation" aria-hidden="true">
-        <div class="drawer-header">
-            <div class="brand">
-                <span class="brand-name">NANDITHA <span class="brand-highlight">AQUARIUM</span></span>
+            <div class="hero-stat-item">
+              <span class="hero-stat-num">100%</span>
+              <span class="hero-stat-label">Live Arrival Safe Pack</span>
             </div>
-            <button class="close-drawer-btn" id="closeDrawerBtn" aria-label="Close Navigation">&times;</button>
-        </div>
-        <div class="drawer-body">
-            <!-- Mobile Theme Switcher Bar -->
-            <div class="drawer-theme-box">
-                <span class="drawer-theme-label">Appearance:</span>
-                <button class="drawer-theme-toggle" id="drawerThemeToggleBtn" type="button"
-                    aria-label="Toggle Dark and Light Mode">
-                    <span class="drawer-theme-sun">☀️ Switch to Light</span>
-                    <span class="drawer-theme-moon">🌙 Switch to Dark</span>
-                </button>
+            <div class="hero-stat-item">
+              <span class="hero-stat-num">Direct</span>
+              <span class="hero-stat-label">WhatsApp Checkout</span>
             </div>
-
-            <div class="drawer-search-box">
-                <input type="text" id="drawerSearchInput" placeholder="Search fish, birds, food, tanks...">
-                <button id="drawerSearchSubmit" aria-label="Search">🔍</button>
-            </div>
-            <nav class="drawer-nav">
-                <a href="#home" class="drawer-nav-item">🏠 Home</a>
-
-                <!-- Expandable Shop Accordion -->
-                <div class="drawer-accordion" id="drawerShopAccordion">
-                    <button type="button" class="drawer-accordion-btn" id="drawerShopToggle" aria-expanded="false">
-                        <span>🛍️ Shop by Category</span>
-                        <svg class="accordion-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none"
-                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                            aria-hidden="true">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </button>
-                    <div class="drawer-accordion-content" id="drawerShopContent">
-                        <a href="#products" class="drawer-sub-link" data-filter="fish">🐠 Aquarium Fish</a>
-                        <a href="#products" class="drawer-sub-link" data-filter="fish-food">🍤 Fish Food &amp;
-                            Nutrition</a>
-                        <a href="#products" class="drawer-sub-link" data-filter="cockatiels">🦜 Cockatiels</a>
-                        <a href="#products" class="drawer-sub-link" data-filter="budgies">🐦 Budgies (Parakeets)</a>
-                        <a href="#products" class="drawer-sub-link" data-filter="bird-food">🌾 Bird Food &amp; Seeds</a>
-                        <a href="#products" class="drawer-sub-link" data-filter="tanks">🫧 Aquarium Tanks</a>
-                        <a href="#accessories-section" class="drawer-sub-link" data-quick-filter="aquarium-acc">⚙️
-                            Aquarium Accessories</a>
-                        <a href="#accessories-section" class="drawer-sub-link" data-quick-filter="bird-acc">🪺 Bird
-                            Accessories</a>
-                        <a href="#products" class="drawer-sub-link drawer-sub-all" data-filter="all">📦 View All
-                            Products (32+)</a>
-                    </div>
-                </div>
-
-                <a href="#reviews" class="drawer-nav-item">⭐ Customer Reviews (4.4★)</a>
-                <a href="#why-us" class="drawer-nav-item">✨ Why Choose Us</a>
-                <a href="#about" class="drawer-nav-item">🏢 About Us</a>
-                <a href="#contact" class="drawer-nav-item">📍 Store Location &amp; Contact</a>
-            </nav>
-            <div class="drawer-contact-card">
-                <p><strong>📞 Direct Call:</strong> +91 96209 35209</p>
-                <p><strong>💬 WhatsApp:</strong> Instant Delivery Help</p>
-                <p><strong>⏰ Hours:</strong> Open daily until 10 PM</p>
-                <a href="https://wa.me/919620935209?text=Hi%20Nanditha%20Aquarium!%20I%20am%20browsing%20your%20website%20and%20need%20assistance."
-                    target="_blank" rel="noopener" class="btn btn-whatsapp-drawer">
-                    Chat on WhatsApp &rarr;
-                </a>
-            </div>
-        </div>
-    </aside>
-
-    <!-- Search Overlay Modal -->
-    <div class="search-modal-backdrop" id="searchModalBackdrop" aria-hidden="true">
-        <div class="search-modal" role="dialog" aria-modal="true" aria-label="Search Catalog">
-            <div class="search-modal-header">
-                <div class="search-input-wrapper">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
-                        class="search-icon">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input type="text" id="globalSearchInput"
-                        placeholder="Search by name, variant, species, food, tank..." autocomplete="off">
-                    <button class="clear-search-btn" id="clearSearchBtn" aria-label="Clear Search">&times;</button>
-                </div>
-                <button class="close-modal-btn" id="closeSearchModalBtn" aria-label="Close Search">&times;</button>
-            </div>
-            <div class="search-modal-body">
-                <div class="quick-tags">
-                    <span class="quick-tag-label">Popular Searches:</span>
-                    <button class="quick-tag" data-tag="Betta">Betta Fish</button>
-                    <button class="quick-tag" data-tag="Cockatiel">Cockatiel</button>
-                    <button class="quick-tag" data-tag="Budgie">Budgies</button>
-                    <button class="quick-tag" data-tag="Hikari">Hikari Pellets</button>
-                    <button class="quick-tag" data-tag="Tank">Rimless Tank</button>
-                    <button class="quick-tag" data-tag="Filter">Filters</button>
-                </div>
-                <div class="search-results-list" id="searchResultsList">
-                    <p class="search-hint">Type any product name or category above to instantly view live stock and
-                        prices.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <main id="mainContent">
-
-        <!-- 1. HERO SECTION -->
-        <section class="hero-section" id="home">
-            <div class="hero-bg-media">
-                <div class="hero-underwater-overlay"></div>
-                <div class="ambient-glow glow-1"></div>
-                <div class="ambient-glow glow-2"></div>
-                <!-- Animated Floating Bubbles -->
-                <div class="bubble bubble-1"></div>
-                <div class="bubble bubble-2"></div>
-                <div class="bubble bubble-3"></div>
-                <div class="bubble bubble-4"></div>
-                <div class="bubble bubble-5"></div>
-            </div>
-
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <span class="badge-icon">🌊</span>
-                        <span>BENGALURU'S PREMIER AQUATIC &amp; AVIAN DESTINATION</span>
-                    </div>
-
-                    <h1 class="hero-title">
-                        Bring Your Little <br>
-                        <span class="gradient-text">World of Nature</span> Home.
-                    </h1>
-
-                    <p class="hero-description">
-                        Discover beautiful aquarium fish, charming birds, quality food and everything you need to create
-                        a happy home for your pets. Handpicked healthy livestock, crystal tanks, and specialized care in
-                        KR Puram, Bengaluru.
-                    </p>
-
-                    <div class="hero-cta-group">
-                        <a href="#categories" class="btn btn-primary hero-btn">
-                            <span>Explore Collection</span>
-                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </a>
-                        <a href="#products" class="btn btn-outline hero-btn" data-filter="all">
-                            <span>Shop Now</span>
-                            <span class="badge-count-pill" id="heroTotalProductsCount">32+ Products</span>
-                        </a>
-                        <a href="https://wa.me/919620935209?text=Hello%20Nanditha%20Aquarium!%20I%20would%20like%20to%20enquire%20about%20fish%20and%20birds%20available%20today."
-                            target="_blank" rel="noopener" class="btn btn-whatsapp-hero">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                                <path
-                                    d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z" />
-                            </svg>
-                            <span>WhatsApp Us</span>
-                        </a>
-                    </div>
-
-                    <!-- Trust Stats Bar in Hero -->
-                    <div class="hero-trust-bar">
-                        <div class="trust-stat">
-                            <span class="trust-stat-number">4.4 ★</span>
-                            <span class="trust-stat-label">Google Rating (516 Reviews)</span>
-                        </div>
-                        <div class="trust-stat-divider"></div>
-                        <div class="trust-stat">
-                            <span class="trust-stat-number">Quality Checked</span>
-                            <span class="trust-stat-label">Healthy &amp; Acclimatized Pets</span>
-                        </div>
-                        <div class="trust-stat-divider"></div>
-                        <div class="trust-stat">
-                            <span class="trust-stat-number">Doorstep Delivery</span>
-                            <span class="trust-stat-label">Available Across Bengaluru</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hero Visual Showcase Card -->
-                <div class="hero-showcase">
-                    <div class="hero-card-stack">
-                        <div class="showcase-main-card">
-                            <img src="https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=900&q=85"
-                                alt="Vibrant Halfmoon Betta fish in clean crystal aquarium" class="showcase-img"
-                                loading="eager">
-                            <div class="showcase-overlay">
-                                <div class="showcase-badge">FEATURED SPECIES</div>
-                                <h3>Royal Blue Halfmoon Betta</h3>
-                                <p class="showcase-price">Male ₹350 | Female ₹250</p>
-                            </div>
-                        </div>
-
-                        <!-- Floating Micro Cards -->
-                        <div class="micro-card micro-card-1">
-                            <div class="micro-icon">🦜</div>
-                            <div class="micro-info">
-                                <strong>Lutino Cockatiels</strong>
-                                <span>Hand-tamed &amp; Whistling</span>
-                            </div>
-                        </div>
-
-                        <div class="micro-card micro-card-2">
-                            <div class="micro-icon">✨</div>
-                            <div class="micro-info">
-                                <strong>Custom Glass Tanks</strong>
-                                <span>Ultra-clear 45° mitered edges</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. CATEGORY SECTION (Compact Retail Store Catalog - 8 Categories) -->
-        <section class="section categories-section" id="categories">
-            <div class="container">
-                <div class="section-header text-center">
-                    <span class="section-eyebrow">RETAIL STORE CATALOG</span>
-                    <h2 class="section-title">Shop by <span class="gradient-text">Category</span></h2>
-                    <p class="section-subtitle">Quickly explore live fish, birds, quality feeds, custom tanks, and
-                        specialized pet supplies.</p>
-                </div>
-
-                <div class="category-grid">
-                    <!-- 1. Aquarium Fish -->
-                    <a href="#products" class="category-card" data-category-target="fish"
-                        aria-label="Shop Aquarium Fish">
-                        <div class="category-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80"
-                                alt="Exotic Aquarium Fish" loading="lazy">
-                        </div>
-                        <div class="category-info">
-                            <h3>Aquarium Fish</h3>
-                            <p>Bettas, Guppies, Tetras &amp; More</p>
-                            <span class="category-link-text">Shop Now &rarr;</span>
-                        </div>
-                    </a>
-
-                    <!-- 2. Fish Food -->
-                    <a href="#products" class="category-card" data-category-target="fish-food"
-                        aria-label="Shop Fish Food">
-                        <div class="category-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=600&q=80"
-                                alt="Fish Food & Nutrition" loading="lazy">
-                        </div>
-                        <div class="category-info">
-                            <h3>Fish Food</h3>
-                            <p>Pellets, Flakes &amp; Bloodworms</p>
-                            <span class="category-link-text">Shop Now &rarr;</span>
-                        </div>
-                    </a>
-
-                    <!-- 3. Cockatiels -->
-                    <a href="#products" class="category-card" data-category-target="cockatiels"
-                        aria-label="Shop Cockatiels">
-                        <div class="category-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=600&q=80"
-                                alt="Hand Tamed Cockatiel Birds" loading="lazy">
-                        </div>
-                        <div class="category-info">
-                            <h3>Cockatiels</h3>
-                            <p>Lutino, Pied &amp; Pearl Mutations</p>
-                            <span class="category-link-text">Shop Now &rarr;</span>
-                        </div>
-                    </a>
-
-                    <!-- 4. Budgies -->
-                    <a href="#products" class="category-card" data-category-target="budgies" aria-label="Shop Budgies">
-                        <div class="category-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=600&q=80"
-                                alt="Vibrant Budgies Parakeets" loading="lazy">
-                        </div>
-                        <div class="category-info">
-                            <h3>Budgies</h3>
-                            <p>Sky Blue, Green &amp; Yellow Pairs</p>
-                            <span class="category-link-text">Shop Now &rarr;</span>
-                        </div>
-                    </a>
-
-                    <!-- 5. Bird Food -->
-                    <a href="#products" class="category-card" data-category-target="bird-food"
-                        aria-label="Shop Bird Food">
-                        <div class="category-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1608096299210-db7e38487075?auto=format&fit=crop&w=600&q=80"
-                                alt="Bird Seeds and Nutrition" loading="lazy">
-                        </div>
-                        <div class="category-info">
-                            <h3>Bird Food</h3>
-                            <p>Spray Millet, Seeds &amp; Calcium</p>
-                            <span class="category-link-text">Shop Now &rarr;</span>
-                        </div>
-                    </a>
-
-                    <!-- 6. Aquarium Tanks -->
-                    <a href="#products" class="category-card" data-category-target="tanks"
-                        aria-label="Shop Aquarium Tanks">
-                        <div class="category-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1520315342629-6ea920342047?auto=format&fit=crop&w=600&q=80"
-                                alt="Clear Glass Aquarium Tanks" loading="lazy">
-                        </div>
-                        <div class="category-info">
-                            <h3>Aquarium Tanks</h3>
-                            <p>Rimless Cubes &amp; Planted Setups</p>
-                            <span class="category-link-text">Shop Now &rarr;</span>
-                        </div>
-                    </a>
-
-                    <!-- 7. Aquarium Accessories -->
-                    <a href="#accessories-section" class="category-card" data-category-target="aquarium-acc"
-                        aria-label="Shop Aquarium Accessories">
-                        <div class="category-img-wrap">
-                            <img src="https://res.cloudinary.com/dfzk4sfkw/image/upload/v1794006045/43dbebf7-9c7d-4b82-818b-3f109562a1b4.png"
-                                alt="Aquarium Equipment and Filters" loading="lazy">
-                        </div>
-                        <div class="category-info">
-                            <h3>Aquarium Accessories</h3>
-                            <p>Filters, Heaters &amp; LED Lighting</p>
-                            <span class="category-link-text">Shop Now &rarr;</span>
-                        </div>
-                    </a>
-
-                    <!-- 8. Bird Accessories -->
-                    <a href="#accessories-section" class="category-card" data-category-target="bird-acc"
-                        aria-label="Shop Bird Accessories">
-                        <div class="category-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=600&q=80"
-                                alt="Bird Cages and Toys" loading="lazy">
-                        </div>
-                        <div class="category-info">
-                            <h3>Bird Accessories</h3>
-                            <p>Cages, Perches, Swings &amp; Toys</p>
-                            <span class="category-link-text">Shop Now &rarr;</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. FEATURED PRODUCTS & FULL STORE CATALOG -->
-        <section class="section products-section" id="products">
-            <div class="container">
-                <div class="section-header text-center">
-                    <span class="section-eyebrow">RETAIL STORE CATALOG</span>
-                    <h2 class="section-title">Handpicked <span class="gradient-text">Pet &amp; Aquatic Products</span>
-                    </h2>
-                    <p class="section-subtitle">Real-time stock from our KR Puram store. Select male/female variants
-                        with independent pricing, check specifications, or add directly to your order bag.</p>
-                </div>
-
-                <!-- Category Filter Pills (Compact Horizontal Scrollable Chips) -->
-                <div class="filter-bar" id="categoryFilterBar">
-                    <button type="button" class="filter-pill active" data-filter="all">All</button>
-                    <button type="button" class="filter-pill" data-filter="fish">Fish</button>
-                    <button type="button" class="filter-pill" data-filter="birds">Birds</button>
-                    <button type="button" class="filter-pill" data-filter="fish-food">Fish Food</button>
-                    <button type="button" class="filter-pill" data-filter="bird-food">Bird Food</button>
-                    <button type="button" class="filter-pill" data-filter="fish-tank">Fish Tank</button>
-                    <button type="button" class="filter-pill" data-filter="fish-bowl">Fish Bowl</button>
-                    <button type="button" class="filter-pill" data-filter="imported-tank">Imported Tank</button>
-                    <button type="button" class="filter-pill" data-filter="bird-acc">Bird Accessories</button>
-                    <button type="button" class="filter-pill" data-filter="aquarium-acc">Aquarium Accessories</button>
-                </div>
-
-                <!-- Search, Sort and Counter Toolbar -->
-                <div class="catalog-toolbar">
-                    <div class="catalog-count-wrap">
-                        Showing <strong id="visibleProductsCount">0</strong> of <strong
-                            id="totalMatchingCount">0</strong> products
-                        <span id="activeFilterBadge" class="active-filter-badge">All</span>
-                    </div>
-                    <div class="catalog-controls-group">
-                        <div class="catalog-quick-search">
-                            <input type="text" id="inlineProductSearch"
-                                placeholder="Search catalog (e.g. Betta, Food, Tank)..."
-                                aria-label="Search catalog products">
-                        </div>
-                        <div class="catalog-sort-select-wrap">
-                            <select id="catalogSortSelect" class="catalog-sort-select" aria-label="Sort products">
-                                <option value="featured">Sort: Featured</option>
-                                <option value="price-asc">Price: Low to High</option>
-                                <option value="price-desc">Price: High to Low</option>
-                                <option value="name-asc">Name: A to Z</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Products Grid -->
-                <div class="products-grid" id="productsGrid">
-                    <!-- Dynamic rendering via script.js -->
-                </div>
-
-                <!-- Load More / Pagination -->
-                <div class="load-more-wrapper" id="loadMoreWrapper">
-                    <button type="button" class="btn load-more-btn" id="loadMoreBtn">
-                        <span>Load More Products</span>
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
-                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </button>
-                    <p class="all-loaded-text" id="allLoadedText" style="display: none;">
-                        ✓ All <span id="totalViewedCount">33</span> products loaded
-                    </p>
-                </div>
-
-                <!-- Empty State -->
-                <div class="empty-state" id="emptyProductsState" style="display: none;">
-                    <div class="empty-icon">🔍</div>
-                    <h3>No matching products found</h3>
-                    <p>We couldn't find what you're looking for. Try a different keyword or reset filters.</p>
-                    <button type="button" class="btn btn-outline" id="resetFiltersBtn">Reset All Filters</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. DEDICATED ACCESSORIES SHOWCASE (Separated into Aquarium & Bird sections as required) -->
-        <section class="section accessories-split-section" id="accessories-section">
-            <div class="container">
-                <div class="section-header text-center">
-                    <span class="section-eyebrow">SPECIALIZED EQUIPMENT &amp; HOUSING</span>
-                    <h2 class="section-title">Complete Pet Accessories</h2>
-                    <p class="section-subtitle">Carefully separated sections for your underwater biospheres and
-                        feathered companions.</p>
-                </div>
-
-                <div class="accessories-split-grid">
-                    <!-- Left: Aquarium Accessories -->
-                    <div class="accessory-block">
-                        <div class="accessory-block-header aqua-header">
-                            <div class="acc-icon">🫧</div>
-                            <div>
-                                <h3>Aquarium Accessories &amp; Filtration</h3>
-                                <p>Ensure crystal clear water and a healthy environment for your aquatic friends.</p>
-                            </div>
-                        </div>
-                        <ul class="accessory-checklist">
-                            <li>
-                                <strong>High Efficiency Filters:</strong>
-                                <span>Hang-on-back, biochemical sponge filters, power heads &amp; multi-stage canister
-                                    systems.</span>
-                            </li>
-                            <li>
-                                <strong>Quiet Air Pumps &amp; Aeration:</strong>
-                                <span>Single and dual nozzle silent diaphragms with airstones &amp; check valves.</span>
-                            </li>
-                            <li>
-                                <strong>Aquatic Plant &amp; RGB Lights:</strong>
-                                <span>Full-spectrum LED lamps promoting photosynthesis and vivid fish color pop.</span>
-                            </li>
-                            <li>
-                                <strong>Auto Cut-Off Heaters:</strong>
-                                <span>Shatterproof quartz glass thermostat heaters (50W to 300W) for stable
-                                    temperature.</span>
-                            </li>
-                            <li>
-                                <strong>Live Plants &amp; Hardscape:</strong>
-                                <span>Anubias, Amazon swords, Java moss, Seiryu stones, Dragon stones &amp; aged
-                                    driftwood.</span>
-                            </li>
-                            <li>
-                                <strong>Maintenance &amp; Water Care:</strong>
-                                <span>Siphon gravel vacuums, magnetic glass scrapers, anti-chlorine conditioners &amp;
-                                    bio starters.</span>
-                            </li>
-                        </ul>
-                        <button class="btn btn-outline btn-block" data-quick-filter="aquarium-acc">
-                            View Aquarium Accessories In Catalog &rarr;
-                        </button>
-                    </div>
-
-                    <!-- Right: Bird Accessories -->
-                    <div class="accessory-block">
-                        <div class="accessory-block-header bird-header">
-                            <div class="acc-icon">🦜</div>
-                            <div>
-                                <h3>Bird Cages &amp; Enrichment Accessories</h3>
-                                <p>Spacious, safe, and stimulating equipment for happy, energetic birds.</p>
-                            </div>
-                        </div>
-                        <ul class="accessory-checklist">
-                            <li>
-                                <strong>Safe Enamelled Cages:</strong>
-                                <span>Spacious non-toxic powder coated wire habitats with slide-out cleaning
-                                    trays.</span>
-                            </li>
-                            <li>
-                                <strong>Natural Wood Perches:</strong>
-                                <span>Ergonomic rough-bark branch perches to prevent bumblefoot and promote healthy
-                                    claws.</span>
-                            </li>
-                            <li>
-                                <strong>Hygienic Feeders &amp; Drinkers:</strong>
-                                <span>Twin stainless steel clamping cups, automatic gravity water dispensers &amp; treat
-                                    holders.</span>
-                            </li>
-                            <li>
-                                <strong>Enrichment Toys &amp; Ladders:</strong>
-                                <span>Colorful wooden chew ladders, rope boings, foraging balls &amp; bell
-                                    pendants.</span>
-                            </li>
-                            <li>
-                                <strong>Breeding &amp; Nesting Boxes:</strong>
-                                <span>Naturally ventilated wooden nesting chambers customized for budgies and
-                                    cockatiels.</span>
-                            </li>
-                            <li>
-                                <strong>Health &amp; Calming Accessories:</strong>
-                                <span>Mineral calcium pecking blocks, cuttlefish bone brackets, and breathable night
-                                    cage covers.</span>
-                            </li>
-                        </ul>
-                        <button class="btn btn-outline btn-block" data-quick-filter="bird-acc">
-                            View Bird Accessories In Catalog &rarr;
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. WHY CHOOSE US -->
-        <section class="section why-us-section" id="why-us">
-            <div class="container">
-                <div class="section-header text-center">
-                    <span class="section-eyebrow">THE NANDITHA ADVANTAGE</span>
-                    <h2 class="section-title">Why Pet Lovers Choose <span class="gradient-text">Nanditha Aquarium</span>
-                    </h2>
-                    <p class="section-subtitle">Dedicated to animal welfare, honest advice, and lifelong guidance for
-                        hobbyists in KR Puram and Bengaluru.</p>
-                </div>
-
-                <div class="why-us-grid">
-                    <div class="why-card">
-                        <div class="why-icon-wrap">
-                            <span class="why-icon">🛡️</span>
-                        </div>
-                        <h3>Quality Products</h3>
-                        <p>Every fish is quarantined and inspected for health. We stock only trusted brands for fish
-                            food, bird seed blends, and certified aquarium hardware.</p>
-                    </div>
-
-                    <div class="why-card">
-                        <div class="why-icon-wrap">
-                            <span class="why-icon">🤝</span>
-                        </div>
-                        <h3>Friendly Service</h3>
-                        <p>Whether you're a first-time betta owner or setting up a 100-gallon planted tank, our
-                            knowledgeable staff guides you with genuine patience and pet care tips.</p>
-                    </div>
-
-                    <div class="why-card">
-                        <div class="why-icon-wrap">
-                            <span class="why-icon">🏷️</span>
-                        </div>
-                        <h3>Affordable Prices</h3>
-                        <p>Transparent pricing with distinct male and female rates. Fair retail value on all livestock,
-                            high-yield feed, and tanks without exorbitant markups.</p>
-                    </div>
-
-                    <div class="why-card">
-                        <div class="why-icon-wrap">
-                            <span class="why-icon">🐠</span>
-                        </div>
-                        <h3>Wide Variety</h3>
-                        <p>From vivid halfmoon bettas and glowing tetras to hand-tamed cockatiels, budgie color pairs,
-                            and custom-cut glass tanks under one friendly roof.</p>
-                    </div>
-
-                    <div class="why-card">
-                        <div class="why-icon-wrap">
-                            <span class="why-icon">🚚</span>
-                        </div>
-                        <h3>Delivery Available</h3>
-                        <p>Fast, oxygen-packed fish and bird transport across Bengaluru with specialized handling to
-                            ensure your pets reach home calm and safe.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. CUSTOMER REVIEWS (4.4★ Rating / 516 Reviews) -->
-        <section class="section reviews-section" id="reviews">
-            <div class="container">
-                <div class="reviews-header-block">
-                    <div class="rating-badge-card">
-                        <div class="google-logo-row">
-                            <svg viewBox="0 0 24 24" width="28" height="28">
-                                <path fill="#4285F4"
-                                    d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z" />
-                                <path fill="#34A853"
-                                    d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z" />
-                                <path fill="#FBBC05"
-                                    d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z" />
-                                <path fill="#EA4335"
-                                    d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" />
-                            </svg>
-                            <span class="google-text">Google Customer Reviews</span>
-                        </div>
-                        <div class="rating-number-wrap">
-                            <span class="rating-huge">4.4</span>
-                            <div class="rating-stars">★★★★★</div>
-                        </div>
-                        <p class="rating-count-text">Based on <strong>516+ Verified Customer Reviews</strong></p>
-                        <a href="https://www.google.com/maps/search/Nanditha+Aquarium+Krishnarajapuram+Bengaluru"
-                            target="_blank" rel="noopener" class="btn btn-outline btn-sm">
-                            View on Google Maps &rarr;
-                        </a>
-                    </div>
-
-                    <div class="reviews-slider-wrap">
-                        <div class="reviews-track" id="reviewsTrack">
-                            <!-- Review Card 1: Livestock Quality & Guidance -->
-                            <div class="review-card">
-                                <div class="review-stars">★★★★★</div>
-                                <p class="review-body">
-                                    "Customer feedback frequently commends the health and vitality of our tropical fish
-                                    and birds. Shoppers appreciate our honest, practical guidance on feeding, water
-                                    cycling, and tank setup."
-                                </p>
-                                <div class="reviewer-meta">
-                                    <div class="reviewer-avatar">⭐</div>
-                                    <div>
-                                        <strong>Healthy Livestock &amp; Expert Advice</strong>
-                                        <span>Key Customer Highlight • Google Reviews</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Review Card 2: Fair & Transparent Pricing -->
-                            <div class="review-card">
-                                <div class="review-stars">★★★★★</div>
-                                <p class="review-body">
-                                    "Reviewers consistently highlight our reasonable retail rates across Bettas,
-                                    Guppies, Budgies, imported fish foods, and custom glass tanks with clear male and
-                                    female pricing."
-                                </p>
-                                <div class="reviewer-meta">
-                                    <div class="reviewer-avatar">🏷️</div>
-                                    <div>
-                                        <strong>Affordable Retail Pricing</strong>
-                                        <span>Key Customer Highlight • Google Reviews</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Review Card 3: Convenient Evening Hours -->
-                            <div class="review-card">
-                                <div class="review-stars">★★★★★</div>
-                                <p class="review-body">
-                                    "Our evening closing time of 10:00 PM is widely praised by working professionals
-                                    across KR Puram, Mahadevapura, and Whitefield who need pet supplies after office
-                                    hours."
-                                </p>
-                                <div class="reviewer-meta">
-                                    <div class="reviewer-avatar">⏰</div>
-                                    <div>
-                                        <strong>Open Daily Until 10 PM</strong>
-                                        <span>Key Customer Highlight • Google Reviews</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Review Card 4: Bengaluru Doorstep Delivery -->
-                            <div class="review-card">
-                                <div class="review-stars">★★★★★</div>
-                                <p class="review-body">
-                                    "Customers value our doorstep delivery service across Bengaluru, featuring secure
-                                    oxygen-packed fish transport and careful bird handling so pets arrive calm and
-                                    safe."
-                                </p>
-                                <div class="reviewer-meta">
-                                    <div class="reviewer-avatar">🚚</div>
-                                    <div>
-                                        <strong>Reliable Bengaluru Delivery</strong>
-                                        <span>Key Customer Highlight • Google Reviews</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review Navigation Buttons -->
-                        <div class="reviews-nav-controls">
-                            <button class="slider-btn" id="prevReviewBtn" aria-label="Previous Review">←</button>
-                            <div class="slider-dots" id="reviewDots"></div>
-                            <button class="slider-btn" id="nextReviewBtn" aria-label="Next Review">→</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. ABOUT SECTION -->
-        <section class="section about-section" id="about">
-            <div class="container">
-                <div class="about-grid">
-                    <div class="about-text-col">
-                        <span class="section-eyebrow">KR PURAM, BENGALURU</span>
-                        <h2 class="section-title">Serving Bengaluru's Pet Community with <span
-                                class="gradient-text">Care &amp; Integrity</span></h2>
-                        <p class="about-lead">
-                            NANDITHA AQUARIUM is a trusted neighborhood retail aquarium and bird shop situated in the
-                            heart of Krishnarajapuram (KR Puram), Bengaluru.
-                        </p>
-                        <p>
-                            We started with a simple belief: keeping aquarium fish and companion birds should bring
-                            calm, beauty, and joy to your family. We maintain strict hygiene protocols, source robust
-                            livestock, and provide honest, transparent guidance on food rations, cage requirements, and
-                            water cycling.
-                        </p>
-                        <p>
-                            Whether you're looking for vibrant show-quality Bettas, active songful Budgies, wholesome
-                            millet and pellets, or custom-dimensioned glass tanks, we take pride in offering affordable
-                            prices and friendly after-sale support.
-                        </p>
-
-                        <div class="about-badges">
-                            <div class="about-badge-item">
-                                <span class="about-badge-icon">📍</span>
-                                <div>
-                                    <strong>VB Layout, KR Puram</strong>
-                                    <span>Convenient central location</span>
-                                </div>
-                            </div>
-                            <div class="about-badge-item">
-                                <span class="about-badge-icon">⏰</span>
-                                <div>
-                                    <strong>Late Night Access</strong>
-                                    <span>Open daily until 10:00 PM</span>
-                                </div>
-                            </div>
-                            <div class="about-badge-item">
-                                <span class="about-badge-icon">📦</span>
-                                <div>
-                                    <strong>Doorstep Delivery</strong>
-                                    <span>Safe transport across Bengaluru</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="about-visual-col">
-                        <div class="about-image-collage">
-                            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80"
-                                alt="Beautiful planted aquarium with schooling fish" class="about-img-main"
-                                loading="lazy">
-                            <div class="about-floating-card">
-                                <div class="floating-icon">🌿</div>
-                                <div>
-                                    <strong>Over 516+ Happy Families</strong>
-                                    <span>Bringing peaceful aquatic living to homes</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 8. CONTACT SECTION & GOOGLE MAPS -->
-        <section class="section contact-section" id="contact">
-            <div class="container">
-                <div class="section-header text-center">
-                    <span class="section-eyebrow">VISIT OUR STORE OR CALL US</span>
-                    <h2 class="section-title">Get In Touch With <span class="gradient-text">Nanditha Aquarium</span>
-                    </h2>
-                    <p class="section-subtitle">We are always ready to assist you with livestock availability, custom
-                        tank setups, delivery quotes, and dietary inquiries.</p>
-                </div>
-
-                <div class="contact-grid">
-                    <!-- Left: Contact Details & Info Cards -->
-                    <div class="contact-info-col">
-                        <div class="contact-card">
-                            <div class="contact-card-icon">📍</div>
-                            <div class="contact-card-content">
-                                <h3>Store Address</h3>
-                                <p>
-                                    136, Sri Choudeshwari Nilayam, 1, 2nd Main Rd, VB Layout, Krishnarajapuram,
-                                    Bengaluru, Karnataka 560036
-                                </p>
-                                <a href="https://maps.google.com/?q=Nanditha+Aquarium+136+Sri+Choudeshwari+Nilayam+VB+Layout+Krishnarajapuram+Bengaluru"
-                                    target="_blank" rel="noopener" class="contact-link">
-                                    Open in Google Maps &nearr;
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="contact-card">
-                            <div class="contact-card-icon">📞</div>
-                            <div class="contact-card-content">
-                                <h3>Phone &amp; Direct Enquiries</h3>
-                                <p>Call our store manager directly for live stock availability and current pricing.</p>
-                                <a href="tel:+919620935209" class="contact-phone-link">+91 96209 35209</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-card">
-                            <div class="contact-card-icon">💬</div>
-                            <div class="contact-card-content">
-                                <h3>WhatsApp Orders &amp; Inquiries</h3>
-                                <p>Message our store team with what you're looking for. We will confirm current
-                                    availability, pricing, and doorstep delivery arrangements.</p>
-                                <a href="https://wa.me/919620935209?text=Hi%20Nanditha%20Aquarium!%20I%20would%20like%20to%20order%20or%20enquire%20about%20pets%20and%20supplies."
-                                    target="_blank" rel="noopener" class="btn btn-whatsapp-card">
-                                    Message on WhatsApp (+91 96209 35209) &rarr;
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="contact-card">
-                            <div class="contact-card-icon">⏰</div>
-                            <div class="contact-card-content">
-                                <h3>Working Hours</h3>
-                                <p class="hours-highlight">Monday – Sunday: <strong>Open Daily (Closes at 10:00
-                                        PM)</strong></p>
-                                <small>Closes at 10 PM every evening. Retail shopping and delivery available.</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Google Map & Quick Inquiry Form -->
-                    <div class="contact-map-col">
-                        <div class="map-embed-wrapper">
-                            <iframe title="Nanditha Aquarium Location Map"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.394144365779!2d77.7011!3d13.0105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae111956e1b6f3%3A0x6b4efd2cefc27b87!2sKrishnarajapuram%2C%20Bengaluru%2C%20Karnataka%20560036!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                                width="100%" height="280" style="border:0; border-radius: 14px;" allowfullscreen=""
-                                loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
-
-                        <div class="quick-inquiry-box">
-                            <h3>Send a Quick Inquiry</h3>
-                            <p>Have a custom tank dimension or specific bird mutation in mind?</p>
-                            <form id="quickContactForm" class="inquiry-form">
-                                <div class="form-row">
-                                    <input type="text" id="inqName" placeholder="Your Name" required>
-                                    <input type="tel" id="inqPhone" placeholder="Your Phone Number" required>
-                                </div>
-                                <select id="inqCategory">
-                                    <option value="Aquarium Fish & Setup">Aquarium Fish &amp; Setup</option>
-                                    <option value="Cockatiel / Budgie Enquiry">Cockatiel / Budgie Birds</option>
-                                    <option value="Custom Tank Dimensions">Custom Tank Dimensions</option>
-                                    <option value="Pet Food & Supplies">Pet Food &amp; Supplies</option>
-                                    <option value="Home Delivery Across Bengaluru">Home Delivery Across Bengaluru
-                                    </option>
-                                </select>
-                                <textarea id="inqMessage" rows="3"
-                                    placeholder="Tell us what you need (e.g. 2ft rimless tank, pair of lutino budgies, delivery to Indiranagar)..."
-                                    required></textarea>
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    Send via WhatsApp Inquiry &rarr;
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="site-footer">
-        <div class="container footer-content">
-            <div class="footer-col brand-col">
-                <a href="#home" class="brand">
-                    <span class="brand-name">NANDITHA <span class="brand-highlight">AQUARIUM</span></span>
-                    <span class="brand-tagline">A World of Aquatic Beauty &amp; Feathered Friends.</span>
-                </a>
-                <p class="footer-desc">
-                    Bengaluru's go-to retail aquarium &amp; bird shop in Krishnarajapuram. Offering handpicked tropical
-                    fish, playful birds, premium feed, custom tanks, and doorstep delivery.
-                </p>
-                <div class="footer-rating-pill">
-                    ⭐ <strong>4.4 / 5</strong> on Google (516+ reviews)
-                </div>
-            </div>
-
-            <div class="footer-col">
-                <h4>Quick Categories</h4>
-                <ul class="footer-links">
-                    <li><a href="#products" data-filter="fish">Aquarium Fish</a></li>
-                    <li><a href="#products" data-filter="fish-food">Fish Food &amp; Nutrition</a></li>
-                    <li><a href="#products" data-filter="cockatiels">Cockatiels</a></li>
-                    <li><a href="#products" data-filter="budgies">Budgies (Parakeets)</a></li>
-                    <li><a href="#products" data-filter="bird-food">Bird Seeds &amp; Diet</a></li>
-                    <li><a href="#products" data-filter="tanks">Aquarium Glass Tanks</a></li>
-                    <li><a href="#accessories-section">Filters &amp; Accessories</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>Customer Information</h4>
-                <ul class="footer-links">
-                    <li><a href="#why-us">Why Choose Us</a></li>
-                    <li><a href="#reviews">Customer Reviews</a></li>
-                    <li><a href="#about">About Our Store</a></li>
-                    <li><a href="#contact">Store Timings &amp; Location</a></li>
-                    <li><a href="https://wa.me/919620935209?text=Hello%20Nanditha%20Aquarium!%20I%20have%20a%20question%20about%20delivery%20rates."
-                            target="_blank" rel="noopener">Bengaluru Delivery Rates</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col contact-col">
-                <h4>Store Visit &amp; Contact</h4>
-                <p class="footer-contact-line">
-                    <strong>📍 Address:</strong><br>
-                    136, Sri Choudeshwari Nilayam, 1, 2nd Main Rd, VB Layout, Krishnarajapuram, Bengaluru 560036
-                </p>
-                <p class="footer-contact-line">
-                    <strong>📞 Phone:</strong> <a href="tel:+919620935209">+91 96209 35209</a>
-                </p>
-                <p class="footer-contact-line">
-                    <strong>💬 WhatsApp:</strong> <a href="https://wa.me/919620935209" target="_blank"
-                        rel="noopener">+91 96209 35209</a>
-                </p>
-                <p class="footer-contact-line">
-                    <strong>⏰ Timings:</strong> Open Daily until 10:00 PM
-                </p>
-            </div>
+          </div>
         </div>
 
-        <div class="footer-bottom">
-            <div class="container footer-bottom-container">
-                <p>&copy; <span id="currentYear">2026</span> NANDITHA AQUARIUM. All Rights Reserved. Bengaluru,
-                    Karnataka.</p>
-                <div class="footer-bottom-actions">
-                    <span class="delivery-status-indicator">🚚 Delivery Available in Bengaluru</span>
-                    <a href="#home" class="back-to-top-btn" aria-label="Back to Top">Back to Top ↑</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+        <div class="hero-visual">
+          <div class="hero-visual-card">
+            <!-- Luxury Cinematic Vector Artwork -->
+            <svg class="hero-visual-img" viewBox="0 0 600 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0D1711"/>
+                  <stop offset="50%" stop-color="#14261C"/>
+                  <stop offset="100%" stop-color="#050B08"/>
+                </linearGradient>
+                <radialGradient id="greenGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#B8E64A" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="#B8E64A" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="goldGlow" cx="60%" cy="40%" r="45%">
+                  <stop offset="0%" stop-color="#D4A94D" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#D4A94D" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <rect width="600" height="380" fill="url(#heroGradient)"/>
+              <circle cx="300" cy="190" r="180" fill="url(#greenGlow)"/>
+              <circle cx="420" cy="160" r="140" fill="url(#goldGlow)"/>
+              
+              <!-- Bioactive Terrarium & Aquatic Elements -->
+              <path d="M0 340 C150 310, 320 360, 600 330 L600 380 L0 380 Z" fill="#08100B"/>
+              <path d="M0 355 C200 335, 400 370, 600 350 L600 380 L0 380 Z" fill="#040705"/>
+              
+              <!-- Natural Substrate & Botanical Foliage Silhouettes -->
+              <path d="M40 380 Q90 280 140 380" stroke="#B8E64A" stroke-opacity="0.35" stroke-width="2" fill="none"/>
+              <path d="M70 380 Q130 250 180 380" stroke="#B8E64A" stroke-opacity="0.4" stroke-width="2.5" fill="none"/>
+              <path d="M120 380 Q160 290 200 380" stroke="#B8E64A" stroke-opacity="0.25" stroke-width="1.8" fill="none"/>
+              <path d="M450 380 Q490 270 540 380" stroke="#B8E64A" stroke-opacity="0.3" stroke-width="2" fill="none"/>
+              <path d="M490 380 Q530 240 570 380" stroke="#B8E64A" stroke-opacity="0.35" stroke-width="2.5" fill="none"/>
 
-    <!-- SHOPPING CART SLIDE-OUT DRAWER -->
-    <div class="cart-drawer-backdrop" id="cartDrawerBackdrop" aria-hidden="true"></div>
-    <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart Drawer" aria-hidden="true">
-        <div class="cart-drawer-header">
-            <div>
-                <span class="drawer-eyebrow">YOUR SHOPPING BAG</span>
-                <h3 class="drawer-title">Order Summary (<span id="cartItemCountText">0 items</span>)</h3>
+              <!-- Aquatic Show Guppy Silhouette (Swimming Curve) -->
+              <g transform="translate(160, 90) scale(1.1)">
+                <!-- Tail Fin Halves -->
+                <path d="M120 60 C160 20, 220 30, 240 70 C220 110, 160 120, 120 80 Z" fill="#D4A94D" fill-opacity="0.75"/>
+                <path d="M125 65 C170 35, 215 50, 230 75 C210 100, 165 105, 125 75 Z" fill="#B8E64A" fill-opacity="0.45"/>
+                <!-- Fish Body -->
+                <ellipse cx="80" cy="70" rx="45" ry="16" fill="#F5F7F2" fill-opacity="0.9"/>
+                <path d="M35 70 Q25 68 20 72 Q25 76 35 74 Z" fill="#F5F7F2"/>
+                <!-- Big Dorsal Fin -->
+                <path d="M60 55 C65 25, 95 20, 110 35 C100 48, 85 52, 60 55 Z" fill="#D4A94D" fill-opacity="0.6"/>
+                <!-- Dumbo Ear Pectoral Fin -->
+                <ellipse cx="65" cy="74" rx="14" ry="10" fill="#B8E64A" fill-opacity="0.65" transform="rotate(-15 65 74)"/>
+                <!-- Eye -->
+                <circle cx="48" cy="68" r="3" fill="#050B08"/>
+                <circle cx="47" cy="67" r="1" fill="#FFFFFF"/>
+              </g>
+
+              <!-- Swimming Micro-bubbles -->
+              <circle cx="180" cy="220" r="4" fill="#B8E64A" fill-opacity="0.5"/>
+              <circle cx="210" cy="200" r="2.5" fill="#B8E64A" fill-opacity="0.4"/>
+              <circle cx="195" cy="180" r="3" fill="#B8E64A" fill-opacity="0.6"/>
+              <circle cx="360" cy="240" r="3" fill="#D4A94D" fill-opacity="0.5"/>
+              <circle cx="380" cy="210" r="5" fill="#D4A94D" fill-opacity="0.4"/>
+
+              <!-- Glass Vivarium / Aquarium Border Glow -->
+              <rect x="20" y="20" width="560" height="340" rx="16" stroke="rgba(184, 230, 74, 0.2)" stroke-width="1.5" fill="none"/>
+            </svg>
+            <div class="hero-visual-badge">
+              <div>
+                <strong style="color:var(--text-main); font-size:0.95rem; display:block;">Curated Exotic Livestock</strong>
+                <span style="color:var(--text-muted); font-size:0.8rem;">Bioactive Habitats &amp; Show Strains</span>
+              </div>
+              <span class="badge badge-stock">In Stock</span>
             </div>
-            <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close Shopping Bag">&times;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. CATEGORIES SECTION
+         ============================================================ -->
+    <section class="categories-section" id="categories">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 3rem;">
+          <div class="section-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Explore Specialities
+          </div>
+          <h2 class="section-title">Four Extraordinary Worlds</h2>
+          <p class="section-subtitle">Discover hand-curated collections of high-grade aquatic species, rare custodial isopods, docile tarantulas, and complete living bioactive vivariums.</p>
         </div>
 
-        <!-- Cart Items List Container -->
-        <div class="cart-drawer-body" id="cartDrawerItems">
-            <!-- Rendered dynamically -->
+        <div class="categories-grid">
+          <!-- Category 1: Aquarium & Fish -->
+          <div class="category-card" onclick="filterCategoryAndScroll('aquarium')">
+            <div class="category-card-bg">
+              <svg viewBox="0 0 280 200" fill="none">
+                <rect width="280" height="200" fill="#0D1E16"/>
+                <circle cx="140" cy="100" r="80" fill="#B8E64A" fill-opacity="0.12"/>
+                <path d="M70 100 C110 50, 170 50, 210 100 C170 150, 110 150, 70 100 Z" fill="#D4A94D" fill-opacity="0.35"/>
+              </svg>
+            </div>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <span class="category-icon">🐠</span>
+              <h3 class="category-card-title">Aquarium &amp; Fish</h3>
+              <p class="category-card-desc">13 verified VVIP show guppy pairs, desktop Betta kits, and pristine aquatic flora.</p>
+              <span class="category-card-link">
+                View 14 Products
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Category 2: Isopods -->
+          <div class="category-card" onclick="filterCategoryAndScroll('isopods')">
+            <div class="category-card-bg">
+              <svg viewBox="0 0 280 200" fill="none">
+                <rect width="280" height="200" fill="#141E12"/>
+                <circle cx="140" cy="100" r="80" fill="#D4A94D" fill-opacity="0.15"/>
+                <ellipse cx="140" cy="100" rx="60" ry="35" fill="#B8E64A" fill-opacity="0.25"/>
+              </svg>
+            </div>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <span class="category-icon">🪵</span>
+              <h3 class="category-card-title">Isopods</h3>
+              <p class="category-card-desc">7 rare Cubaris and Armadillidium strains. Nature's ultimate bioactive custodial crew.</p>
+              <span class="category-card-link">
+                View 7 Species
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Category 3: Tarantulas -->
+          <div class="category-card" onclick="filterCategoryAndScroll('tarantulas')">
+            <div class="category-card-bg">
+              <svg viewBox="0 0 280 200" fill="none">
+                <rect width="280" height="200" fill="#181313"/>
+                <circle cx="140" cy="100" r="80" fill="#E06C75" fill-opacity="0.12"/>
+                <circle cx="140" cy="100" r="30" fill="#D4A94D" fill-opacity="0.25"/>
+              </svg>
+            </div>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <span class="category-icon">🕷️</span>
+              <h3 class="category-card-title">Tarantulas</h3>
+              <p class="category-card-desc">6 iconic New World spiderlings with documented sizes from Chilean Rose to GBB.</p>
+              <span class="category-card-link">
+                View 6 Species
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Category 4: Terrarium & Kits -->
+          <div class="category-card" onclick="filterCategoryAndScroll('terrarium')">
+            <div class="category-card-bg">
+              <svg viewBox="0 0 280 200" fill="none">
+                <rect width="280" height="200" fill="#0F1B18"/>
+                <circle cx="140" cy="100" r="80" fill="#B8E64A" fill-opacity="0.15"/>
+                <rect x="90" y="60" width="100" height="90" rx="8" stroke="#B8E64A" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <span class="category-icon">🌿</span>
+              <h3 class="category-card-title">Terrarium &amp; Kits</h3>
+              <p class="category-card-desc">Complete bioactive glass houses, living botanical selections, and nutrient substrates.</p>
+              <span class="category-card-link">
+                View 3 Kits
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. PROMOTIONAL BANNERS SECTION
+         ============================================================ -->
+    <section class="promos-section" id="promotions">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 3rem;">
+          <div class="section-badge-amber">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Featured Promotions
+          </div>
+          <h2 class="section-title">Special Curated Bundles</h2>
+          <p class="section-subtitle">Take advantage of our complete bioactive kits and limited promotional livestock offers.</p>
         </div>
 
-        <!-- Cart Footer with Totals and WhatsApp Checkout -->
-        <div class="cart-drawer-footer" id="cartDrawerFooter">
-            <div class="cart-subtotal-row">
-                <span>Estimated Subtotal:</span>
-                <strong class="cart-total-price" id="cartTotalPrice">₹0</strong>
+        <div class="promos-grid">
+          <!-- Promo 1: Isopod House Kit -->
+          <article class="promo-card promo-featured">
+            <div class="promo-visual-wrap">
+              <svg viewBox="0 0 340 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="340" height="180" fill="#0D1A13"/>
+                <!-- House Silhouette -->
+                <path d="M110 90 L170 45 L230 90 L230 160 L110 160 Z" stroke="#B8E64A" stroke-width="2.5" fill="#14261C"/>
+                <path d="M110 90 L230 90" stroke="#B8E64A" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <!-- Plant Silhouette inside -->
+                <path d="M150 160 Q170 115 170 100 Q190 120 190 160" stroke="#D4A94D" stroke-width="2" fill="none"/>
+                <!-- Dim text -->
+                <text x="170" y="140" fill="#B8E64A" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">5"×5"×5" Glass</text>
+              </svg>
             </div>
-            <p class="cart-note">
-                ⚡ Enquire and order via WhatsApp. Our store team will confirm live stock availability, delivery
-                schedule, and payment details directly.
+            <div class="promo-header">
+              <span class="badge badge-kit">Complete Bioactive Kit</span>
+              <h3 class="promo-title">Isopod House Kit</h3>
+              <p class="promo-desc">
+                Glass Isopod House (5" L × 5" D × 5" H + 2.5" roof height). Complete with Fittonia albivenis, Hemigraphis sp. Pink, Sheet Moss, Substrate blend, Lotus Pod hide, Premium Food &amp; 6 Cubaris Glacier isopods!
+              </p>
+            </div>
+            <div class="promo-price-box">
+              <span class="promo-price">₹1,545</span>
+              <span class="promo-price-unit">all-inclusive kit</span>
+            </div>
+            <div class="promo-actions">
+              <button class="btn btn-primary" onclick="addToCartById('isopod-house-kit', 1)">
+                Add to Cart
+              </button>
+              <button class="btn btn-outline" onclick="openProductModal('isopod-house-kit')">
+                View Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Promo 2: Half Cube Aquarium Kit -->
+          <article class="promo-card">
+            <div class="promo-visual-wrap">
+              <svg viewBox="0 0 340 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="340" height="180" fill="#0A181E"/>
+                <!-- Half Cube Glass Silhouette -->
+                <rect x="90" y="45" width="160" height="110" rx="4" stroke="#4FB3D9" stroke-width="2.5" fill="#0F242C"/>
+                <!-- Live Plants and Betta -->
+                <path d="M110 155 Q125 100 135 85 Q145 110 155 155" stroke="#B8E64A" stroke-width="2" fill="none"/>
+                <ellipse cx="195" cy="95" rx="22" ry="10" fill="#D4A94D" fill-opacity="0.8"/>
+                <path d="M217 95 C235 80, 245 90, 240 105 C230 115, 220 105, 217 95 Z" fill="#D4A94D"/>
+              </svg>
+            </div>
+            <div class="promo-header">
+              <span class="badge badge-kit">Desktop Aquarium Bundle</span>
+              <h3 class="promo-title">Half Cube Aquarium Kit</h3>
+              <p class="promo-desc">
+                Includes premium glass Half Cube Aquarium, 1 majestic healthy Betta Fish, live aquatic plants, and premium washed sand substrate for an instant serene aquascape.
+              </p>
+            </div>
+            <div class="promo-price-box">
+              <span class="promo-price">₹999</span>
+              <span class="promo-price-unit">complete setup</span>
+            </div>
+            <div class="promo-actions">
+              <button class="btn btn-primary" onclick="addToCartById('half-cube-aquarium-kit', 1)">
+                Add to Cart
+              </button>
+              <button class="btn btn-outline" onclick="openProductModal('half-cube-aquarium-kit')">
+                View Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Promo 3: Glacier Isopods Buy 10 Get 1 Free -->
+          <article class="promo-card promo-gold">
+            <div class="promo-visual-wrap">
+              <svg viewBox="0 0 340 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="340" height="180" fill="#1C180E"/>
+                <circle cx="170" cy="90" r="70" fill="#D4A94D" fill-opacity="0.18"/>
+                <!-- Multiple Isopod dots / silhouettes -->
+                <ellipse cx="140" cy="75" rx="16" ry="10" fill="#F5F7F2" fill-opacity="0.8"/>
+                <ellipse cx="190" cy="80" rx="16" ry="10" fill="#F5F7F2" fill-opacity="0.8"/>
+                <ellipse cx="165" cy="115" rx="18" ry="11" fill="#B8E64A" fill-opacity="0.85"/>
+                <!-- 10 + 1 badge text -->
+                <text x="170" y="55" fill="#D4A94D" font-size="12" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">10 + 1 FREE DEAL</text>
+              </svg>
+            </div>
+            <div class="promo-header">
+              <span class="badge badge-amber">Exclusive Colony Offer</span>
+              <h3 class="promo-title">Glacier Isopods – 10 + 1 Free</h3>
+              <p class="promo-desc">
+                Cubaris Murina "Glacier". Striking white porcelain isopods, captive-bred and hardy. Order a colony pack of 10 and receive an extra 1 free of charge!
+              </p>
+            </div>
+            <div class="promo-price-box">
+              <span class="promo-price">₹700</span>
+              <span class="promo-price-unit">11 pcs (₹70/pc)</span>
+            </div>
+            <div class="promo-actions">
+              <button class="btn btn-amber" onclick="addToCartById('cubaris-murina-glacier', 10)">
+                Add 10-Pack (Get 1 Free)
+              </button>
+              <button class="btn btn-outline" onclick="openProductModal('cubaris-murina-glacier')">
+                View Details
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. FULL PRODUCT CATALOGUE
+         ============================================================ -->
+    <section class="catalogue-section" id="catalogue">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+          <div class="section-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Live Inventory
+          </div>
+          <h2 class="section-title">Master Product Catalogue</h2>
+          <p class="section-subtitle">Every individual species, pair, and vivarium kit with verified pricing, size specifications, and direct WhatsApp checkout.</p>
+        </div>
+
+        <!-- Catalogue Filter Toolbar -->
+        <div class="catalogue-toolbar">
+          <!-- Category Tabs -->
+          <div class="filter-tabs" role="tablist" aria-label="Product Categories">
+            <button class="filter-tab active" data-category="all" role="tab" aria-selected="true">All Products</button>
+            <button class="filter-tab" data-category="aquarium" role="tab" aria-selected="false">Aquarium &amp; Fish</button>
+            <button class="filter-tab" data-category="isopods" role="tab" aria-selected="false">Isopods</button>
+            <button class="filter-tab" data-category="tarantulas" role="tab" aria-selected="false">Tarantulas</button>
+            <button class="filter-tab" data-category="terrarium" role="tab" aria-selected="false">Terrarium &amp; Kits</button>
+          </div>
+
+          <!-- Search & Sort Controls -->
+          <div class="catalogue-controls">
+            <!-- Search Input -->
+            <div class="search-input-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input type="text" id="catalogSearch" class="search-input" placeholder="Search species or kit..." aria-label="Search catalog">
+            </div>
+
+            <!-- Sort Select -->
+            <select id="catalogSort" class="sort-select" aria-label="Sort products">
+              <option value="default">Default Order</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="name">Name: A to Z</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="catalogue-status-bar">
+          <span id="resultCount">Showing 30 products</span>
+          <button class="btn btn-outline btn-sm" onclick="resetFilters()" style="padding: 0.35rem 0.8rem; font-size: 0.8rem;">
+            Clear Filters
+          </button>
+        </div>
+
+        <!-- Dynamic Product Grid Container -->
+        <div class="product-grid" id="productGrid" aria-live="polite">
+          <!-- Populated by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. WHY CHOOSE FISH TALES
+         ============================================================ -->
+    <section class="why-section" id="why-us">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 3rem;">
+          <div class="section-badge-amber">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Our Standards
+          </div>
+          <h2 class="section-title">Why Choose Fish Tales?</h2>
+          <p class="section-subtitle">We uphold the highest ethical husbandry standards, verified captive bloodlines, and safe insulated transit.</p>
+        </div>
+
+        <div class="why-grid">
+          <!-- Card 1 -->
+          <div class="why-card">
+            <div class="why-icon">🌿</div>
+            <h3 class="why-title">Carefully Presented Collections</h3>
+            <p class="why-desc">Every species is clearly labeled with authentic scientific taxonomy, verified pricing, and true documented measurements.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="why-card">
+            <div class="why-icon">🛡️</div>
+            <h3 class="why-title">Quality Products &amp; Health</h3>
+            <p class="why-desc">All livestock undergo strict quarantine periods. Complete vivarium kits use inert, pesticide-free botanical components.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="why-card">
+            <div class="why-icon">📦</div>
+            <h3 class="why-title">Secure &amp; Insulated Packaging</h3>
+            <p class="why-desc">Thermally protected parceling with season-appropriate hot/cold packs, damp breathable containers, and shock absorption.</p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="why-card">
+            <div class="why-icon">💬</div>
+            <h3 class="why-title">Direct Customer Assistance</h3>
+            <p class="why-desc">Direct WhatsApp support (+91 96542 97430) for husbandry tips, habitat setup advice, and live order status.</p>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="why-card">
+            <div class="why-icon">🚚</div>
+            <h3 class="why-title">Live Arrival Information</h3>
+            <p class="why-desc">Clear, honest shipping schedules based on transit route climate to ensure specimens arrive vigorous and thriving.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. ABOUT FISH TALES & STATUTORY COMPLIANCE
+         ============================================================ -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-content">
+            <div class="section-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              Our Philosophy
+            </div>
+            <h2 class="section-title" style="margin-bottom: 1.5rem;">Where Nature Meets Wonder.</h2>
+            <p class="about-p">
+              Fish Tales was founded with a singular dedication: to provide enthusiasts and keepers across India with ethically sourced, healthy exotic pets, vibrant show-quality aquarium fish, and complete living bioactive terrarium setups.
             </p>
-            <div class="cart-actions-row">
-                <button class="btn btn-whatsapp-checkout" id="whatsappCheckoutBtn">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path
-                            d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z" />
-                    </svg>
-                    <span>Order via WhatsApp &rarr;</span>
-                </button>
-                <button class="btn btn-outline btn-sm" id="clearCartBtn">Clear Bag</button>
-            </div>
-            <div class="cart-store-contact">
-                <span>📍 Pickup or Delivery: KR Puram, Bengaluru | Call: <a href="tel:+919620935209">+91 96209
-                        35209</a></span>
-            </div>
-        </div>
-    </aside>
+            <p class="about-p">
+              Whether you are an experienced hobbyist curating rare Cubaris isopod varieties, an aquarist appreciating the fine genetics of Dumbo Ear guppies, or introducing a bioactive naturalistic vivarium to your living space, Fish Tales provides healthy specimens with clear guidance.
+            </p>
 
-    <!-- PRODUCT QUICK VIEW MODAL -->
-    <div class="modal-backdrop" id="productModalBackdrop" aria-hidden="true">
-        <div class="product-modal" role="dialog" aria-modal="true" aria-label="Product Details">
-            <button class="modal-close-btn" id="closeProductModalBtn"
-                aria-label="Close Product Details">&times;</button>
-            <div class="modal-grid" id="productModalContent">
-                <!-- Injected dynamically via script.js -->
+            <div class="compliance-box">
+              <div class="compliance-box-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Ethical Husbandry &amp; Legal Compliance
+              </div>
+              <p class="compliance-box-desc">
+                Fish Tales strictly complies with all Indian environmental and wildlife protection legislation, including the Wildlife Protection Act (1972/2022). We do not trade in banned native wildlife. All livestock consist solely of captive-bred exotic invertebrates and certified commercial ornamental aquarium fish.
+              </p>
             </div>
+          </div>
+
+          <div class="about-visual">
+            <div class="hero-visual-card">
+              <!-- Botanical & Aquarium Vector Graphic -->
+              <svg class="hero-visual-img" viewBox="0 0 500 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="500" height="360" fill="#0A140F"/>
+                <circle cx="250" cy="180" r="140" fill="#B8E64A" fill-opacity="0.12"/>
+                <circle cx="340" cy="140" r="90" fill="#D4A94D" fill-opacity="0.15"/>
+                
+                <!-- Terrarium Glass Vessel Outline -->
+                <path d="M170 300 L140 160 Q140 80 250 80 Q360 80 360 160 L330 300 Z" stroke="#B8E64A" stroke-width="2" fill="#0D1E16"/>
+                <ellipse cx="250" cy="80" rx="40" ry="12" stroke="#B8E64A" stroke-width="1.5" fill="#14261C"/>
+                
+                <!-- Plants inside -->
+                <path d="M210 290 Q220 200 240 180" stroke="#B8E64A" stroke-width="3" stroke-linecap="round"/>
+                <path d="M250 290 Q250 170 270 140" stroke="#B8E64A" stroke-width="3.5" stroke-linecap="round"/>
+                <path d="M280 290 Q270 210 260 190" stroke="#D4A94D" stroke-width="2.5" stroke-linecap="round"/>
+                
+                <!-- Lotus Pod Silhouette -->
+                <ellipse cx="250" cy="270" rx="25" ry="12" fill="#2E2316"/>
+                <circle cx="242" cy="268" r="2.5" fill="#181313"/>
+                <circle cx="250" cy="266" r="2.5" fill="#181313"/>
+                <circle cx="258" cy="269" r="2.5" fill="#181313"/>
+                
+                <!-- Ground Substrate -->
+                <path d="M150 290 Q250 280 350 290 L350 310 L150 310 Z" fill="#181313"/>
+              </svg>
+              <div class="hero-visual-badge">
+                <div>
+                  <strong style="color:var(--text-main); font-size:0.9rem;">Naturalistic Habitats</strong>
+                  <span style="color:var(--text-muted); font-size:0.75rem;">Self-sustaining Bioactive Living Art</span>
+                </div>
+                <span class="badge badge-kit">100% Bioactive</span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       8. FOOTER & POLICIES
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand Info -->
+        <div>
+          <a href="#hero" class="nav-brand" style="margin-bottom: 1.25rem;">
+            <div class="logo-badge" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.46-3.44 6-7 6s-7.56-2.54-8.5-6Z"/><circle cx="15" cy="12" r="1"/><path d="M2 10l4.5 2L2 14"/></svg>
+            </div>
+            <div class="logo-title">
+              <span class="logo-main">FISH <span class="logo-accent">TALES</span></span>
+              <span class="logo-sub">Exotic Living Art</span>
+            </div>
+          </a>
+          <p class="footer-desc">
+            India's premier destination for rare captive-bred isopods, show guppy collections, docile tarantulas, and handcrafted bioactive terrariums.
+          </p>
+          <div class="footer-contact-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>WhatsApp / Phone: +91 96542 97430</span>
+          </div>
+          <div class="footer-contact-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <span>Instagram: @fishtales.in</span>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#hero" onclick="scrollToSection('hero')">Home</a></li>
+            <li><a href="#catalogue" onclick="filterCategoryAndScroll('all')">Master Catalogue</a></li>
+            <li><a href="#promotions" onclick="scrollToSection('promotions')">Promotional Bundles</a></li>
+            <li><a href="#why-us" onclick="scrollToSection('why-us')">Why Choose Us</a></li>
+            <li><a href="#about" onclick="scrollToSection('about')">About Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Categories -->
+        <div>
+          <h4 class="footer-col-title">Collections</h4>
+          <ul class="footer-links">
+            <li><a href="#catalogue" onclick="filterCategoryAndScroll('aquarium')">Aquarium &amp; Show Guppies</a></li>
+            <li><a href="#catalogue" onclick="filterCategoryAndScroll('isopods')">Bioactive Isopods</a></li>
+            <li><a href="#catalogue" onclick="filterCategoryAndScroll('tarantulas')">Tarantula Spiderlings</a></li>
+            <li><a href="#catalogue" onclick="filterCategoryAndScroll('terrarium')">Terrarium &amp; Vivarium Kits</a></li>
+          </ul>
+        </div>
+
+        <!-- Direct WhatsApp Action -->
+        <div>
+          <h4 class="footer-col-title">Instant Ordering</h4>
+          <p class="footer-desc" style="margin-bottom: 1rem;">
+            Have questions about species care or need assistance with your cart? Reach our team directly via WhatsApp.
+          </p>
+          <a href="https://wa.me/919654297430?text=Hello%20Fish%20Tales!%20I%20would%20like%20to%20inquire%20about%20your%20products." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="width: 100%; text-align: center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.062-2.122-.527-1.742-.72-2.836-2.493-2.923-2.608-.086-.115-.705-.939-.705-1.791 0-.852.446-1.27.606-1.442.16-.172.348-.215.464-.215.116 0 .232.002.333.007.106.005.249-.04.389.297.144.35.491 1.199.534 1.286.043.086.072.188.014.303-.057.115-.086.187-.172.289-.086.101-.182.226-.26.304-.086.086-.176.181-.076.353.1.172.443.731.951 1.184.654.583 1.206.764 1.378.85.172.086.273.072.375-.044.101-.115.433-.504.549-.677.116-.173.232-.144.389-.086.158.058 1.002.472 1.175.558.173.086.289.13.332.202.043.072.043.418-.101.823z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- 4 Policy Cards in Footer -->
+      <div class="footer-policies">
+        <div class="policy-card">
+          <h5 class="policy-title">Shipping Policy</h5>
+          <p class="policy-text">
+            Insulated express parcel transit across India with temperature regulation. Dispatched Monday–Wednesday to prevent weekend transit delays.
+          </p>
+        </div>
+        <div class="policy-card">
+          <h5 class="policy-title">Live Arrival Guarantee</h5>
+          <p class="policy-text">
+            100% Live Arrival Guarantee on livestock when unboxing video is shared within 2 hours of delivery. In rare DOA cases, free replacement or store credit is issued.
+          </p>
+        </div>
+        <div class="policy-card">
+          <h5 class="policy-title">Returns &amp; Cancellations</h5>
+          <p class="policy-text">
+            Live animals and botanical products cannot be returned due to transit stress. Dry goods and glass vivariums can be cancelled prior to dispatch.
+          </p>
+        </div>
+        <div class="policy-card">
+          <h5 class="policy-title">Privacy &amp; Security</h5>
+          <p class="policy-text">
+            We value your privacy. Customer names, delivery addresses and order logs are strictly confidential and used solely to fulfill your order.
+          </p>
+        </div>
+      </div>
+
+      <!-- Footer Copyright Bar -->
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 <strong>FISH TALES</strong>. All rights reserved. Captive-bred &amp; legal exotic living art.
+        </div>
+        <div>
+          Order Support WhatsApp: <a href="https://wa.me/919654297430" style="color:var(--color-accent); text-decoration:none;">+91 96542 97430</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       9. SLIDE-OUT CART DRAWER & BACKDROP
+       ============================================================ -->
+  <div class="cart-backdrop" id="cartBackdrop" onclick="closeCartDrawer()" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart Drawer">
+    <div class="cart-drawer-header">
+      <h3 class="cart-drawer-title">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Shopping Cart
+      </h3>
+      <button class="cart-close-btn" onclick="closeCartDrawer()" aria-label="Close shopping cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
 
-    <!-- FLOATING WHATSAPP ACTION BUTTON -->
-    <a href="https://wa.me/919620935209?text=Hi%20Nanditha%20Aquarium!%20I%20have%20an%20enquiry%20regarding%20your%20fishes%20and%20birds."
-        class="floating-whatsapp-btn" target="_blank" rel="noopener"
-        aria-label="Direct WhatsApp Chat with Nanditha Aquarium" title="Chat on WhatsApp (+91 96209 35209)">
-        <div class="wa-ripple"></div>
-        <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
-            <path
-                d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z" />
-        </svg>
-        <span class="wa-tooltip">Order &amp; Chat on WhatsApp</span>
-    </a>
+    <!-- Scrollable Items Container (Populated by script.js) -->
+    <div class="cart-items-wrap" id="cartDrawerItems">
+      <!-- Injected by renderCartDrawerItems() -->
+    </div>
 
-    <!-- TOAST NOTIFICATION CONTAINER -->
-    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+    <!-- Cart Footer with Subtotal & WhatsApp Checkout -->
+    <div class="cart-drawer-footer">
+      <div class="cart-subtotal-row">
+        <span>Order Subtotal:</span>
+        <span class="cart-subtotal-val" id="cartDrawerSubtotal">₹0</span>
+      </div>
+      <p style="font-size:0.75rem; color:var(--text-muted); line-height:1.4; margin:0;">
+        Prices in INR. Checkout sends your formatted order directly to our official WhatsApp (+91 96542 97430) for instant stock &amp; delivery confirmation.
+      </p>
+      <a class="btn btn-whatsapp btn-large" id="cartDrawerCheckoutBtn" href="#" target="_blank" rel="noopener noreferrer" style="width: 100%; text-align: center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.062-2.122-.527-1.742-.72-2.836-2.493-2.923-2.608-.086-.115-.705-.939-.705-1.791 0-.852.446-1.27.606-1.442.16-.172.348-.215.464-.215.116 0 .232.002.333.007.106.005.249-.04.389.297.144.35.491 1.199.534 1.286.043.086.072.188.014.303-.057.115-.086.187-.172.289-.086.101-.182.226-.26.304-.086.086-.176.181-.076.353.1.172.443.731.951 1.184.654.583 1.206.764 1.378.85.172.086.273.072.375-.044.101-.115.433-.504.549-.677.116-.173.232-.144.389-.086.158.058 1.002.472 1.175.558.173.086.289.13.332.202.043.072.043.418-.101.823z"/></svg>
+        Proceed to WhatsApp Checkout
+      </a>
+      <button class="btn btn-outline btn-sm" onclick="closeCartDrawer(); scrollToSection('catalogue')" style="width: 100%;">
+        Continue Shopping
+      </button>
+    </div>
+  </aside>
 
-    <!-- JavaScript Application -->
-    <script src="script.js?v=3.6"></script>
+  <!-- ============================================================
+       10. PRODUCT DETAIL MODAL DIALOG
+       ============================================================ -->
+  <div class="modal-backdrop" id="productModal" onclick="if(event.target===this)closeProductModal()" aria-hidden="true">
+    <div class="product-modal-dialog" role="dialog" aria-modal="true" aria-label="Product Details">
+      <button class="modal-close-btn" onclick="closeProductModal()" aria-label="Close product details">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div id="modalContent">
+        <!-- Dynamically injected by openProductModal(productId) in script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       11. LIVE SEARCH OVERLAY
+       ============================================================ -->
+  <div class="search-overlay" id="searchOverlay" onclick="if(event.target===this)closeSearchOverlay()" aria-hidden="true">
+    <div class="search-overlay-box">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <span class="logo-sub" style="font-size:0.8rem;">Live Species Search</span>
+        <button class="cart-close-btn" onclick="closeSearchOverlay()" aria-label="Close search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="search-overlay-input-wrap">
+        <svg class="search-overlay-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchOverlayInput" class="search-overlay-input" placeholder="Type species name (e.g. Glacier, GBB, Betta, Cappuccino)..." autocomplete="off">
+      </div>
+
+      <div class="search-overlay-results" id="searchOverlayResults">
+        <!-- Dynamically populated by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       12. FLOATING WHATSAPP BUTTON WITH TOOLTIP
+       ============================================================ -->
+  <a href="https://wa.me/919654297430?text=Hello%20Fish%20Tales!%20I%20have%20an%20inquiry%20about%20your%20products." target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat with Fish Tales on WhatsApp">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.062-2.122-.527-1.742-.72-2.836-2.493-2.923-2.608-.086-.115-.705-.939-.705-1.791 0-.852.446-1.27.606-1.442.16-.172.348-.215.464-.215.116 0 .232.002.333.007.106.005.249-.04.389.297.144.35.491 1.199.534 1.286.043.086.072.188.014.303-.057.115-.086.187-.172.289-.086.101-.182.226-.26.304-.086.086-.176.181-.076.353.1.172.443.731.951 1.184.654.583 1.206.764 1.378.85.172.086.273.072.375-.044.101-.115.433-.504.549-.677.116-.173.232-.144.389-.086.158.058 1.002.472 1.175.558.173.086.289.13.332.202.043.072.043.418-.101.823z"/></svg>
+    <span class="whatsapp-tooltip">Chat with us on WhatsApp</span>
+  </a>
+
+  <!-- ============================================================
+       13. TOAST NOTIFICATIONS CONTAINER
+       ============================================================ -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Master JavaScript -->
+  <script src="script.js"></script>
 </body>
-
 </html>
