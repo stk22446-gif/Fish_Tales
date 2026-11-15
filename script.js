@@ -1,17 +1,23 @@
 /**
- * ============================================================
- * FISH TALES — script.js
- * Complete Single-Page Application Controller & Product Catalog
- * ============================================================
+ * FISH TALES — Master JavaScript Engine
+ * Production Ready | Vanilla JS (ES6+) | LocalStorage Persistence
+ * WhatsApp Checkout Integration (+91 96542 97430)
+ *
+ * 4 Main Product Categories:
+ * 1. Aquarium & Fish
+ * 2. Isopods
+ * 3. Tarantulas
+ * 4. Combo Packs
  */
 
 (function () {
   'use strict';
 
+  /* ── 1. Configuration & Constants ─────────────────────────── */
   const WHATSAPP_NUMBER = '919654297430';
   const STORAGE_KEY = 'fishtales_cart';
 
-  /* ── 1. Embedded Vector Visuals (Zero Asset Dependency) ─── */
+  // High-Resolution Cinematic SVG Illustrations for Instant Zero-Latency Rendering
   const ICONS = {
     aquarium: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -43,134 +49,412 @@
       <path d="M0 275 Q 150 260, 300 270 T 400 265 L 400 300 L 0 300 Z" fill="#0D1711"/>
     </svg>`,
 
+    betta: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="bettaGrad" cx="50%" cy="45%" r="65%">
+          <stop offset="0%" stop-color="#1A281E"/>
+          <stop offset="70%" stop-color="#0A140F"/>
+          <stop offset="100%" stop-color="#050B08"/>
+        </radialGradient>
+        <linearGradient id="bettaFin" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E06C75"/>
+          <stop offset="40%" stop-color="#D4A94D"/>
+          <stop offset="100%" stop-color="#B8E64A"/>
+        </linearGradient>
+      </defs>
+      <rect width="400" height="300" fill="url(#bettaGrad)"/>
+      <!-- Grand Betta Halfmoon Tail Fins -->
+      <g transform="translate(190, 140)">
+        <path d="M-20 0 C -90 -80, -120 10, -50 0 C -120 30, -90 90, -20 10 Z" fill="url(#bettaFin)" opacity="0.9"/>
+        <path d="M-10 -15 C 20 -70, -30 -60, -20 -10 Z" fill="url(#bettaFin)" opacity="0.85"/>
+        <path d="M-5 15 C 10 65, -15 60, -10 15 Z" fill="url(#bettaFin)" opacity="0.85"/>
+        <!-- Body -->
+        <ellipse cx="15" cy="0" rx="38" ry="15" fill="#D4A94D"/>
+        <!-- Pectoral Flare -->
+        <path d="M8 5 C 15 25, 25 20, 18 5 Z" fill="#B8E64A" opacity="0.8"/>
+        <circle cx="42" cy="-4" r="3" fill="#050B08"/>
+        <circle cx="43" cy="-5" r="1" fill="#FFF"/>
+      </g>
+      <circle cx="280" cy="80" r="3" fill="#B8E64A" opacity="0.4"/>
+      <circle cx="120" cy="220" r="2.5" fill="#B8E64A" opacity="0.3"/>
+    </svg>`,
+
     isopod: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <radialGradient id="isoGrad" cx="50%" cy="45%" r="65%">
           <stop offset="0%" stop-color="#182A1C"/>
-          <stop offset="65%" stop-color="#0C170F"/>
+          <stop offset="70%" stop-color="#0A150D"/>
           <stop offset="100%" stop-color="#050B08"/>
         </radialGradient>
-        <linearGradient id="shellGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#B8E64A"/>
-          <stop offset="50%" stop-color="#D4A94D"/>
-          <stop offset="100%" stop-color="#4E7037"/>
-        </linearGradient>
       </defs>
       <rect width="400" height="300" fill="url(#isoGrad)"/>
-      <path d="M30 255 C 90 225, 170 285, 250 240 C 330 280, 370 230, 400 270 L 400 300 L 0 300 Z" fill="#0A120D"/>
+      <ellipse cx="200" cy="245" rx="140" ry="25" fill="#0D1711" opacity="0.8"/>
+      <!-- Isopod Segmented Shell -->
       <g transform="translate(200, 140)">
-        <path d="M48 -12 Q 72 -28, 80 -16" stroke="#D4A94D" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M48 -4 Q 76 -8, 84 8" stroke="#D4A94D" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M36 -14 C 52 -12, 52 12, 36 14 Z" fill="#B8E64A"/>
-        <circle cx="44" cy="-6" r="1.6" fill="#050B08"/>
-        <path d="M25 -20 C 36 -17, 36 17, 25 20 L 34 16 C 40 10, 40 -10, 34 -16 Z" fill="url(#shellGrad)"/>
-        <path d="M14 -25 C 25 -22, 25 22, 14 25 L 22 20 C 28 14, 28 -14, 22 -20 Z" fill="#1E3120" stroke="#B8E64A" stroke-width="1.2"/>
-        <path d="M3 -27 C 14 -25, 14 25, 3 27 L 11 23 C 17 17, 17 -17, 11 -23 Z" fill="url(#shellGrad)"/>
-        <path d="M-8 -28 C 3 -27, 3 27, -8 28 L 0 25 C 6 17, 6 -17, 0 -25 Z" fill="#1E3120" stroke="#B8E64A" stroke-width="1.2"/>
-        <path d="M-19 -26 C -8 -27, -8 27, -19 26 L -11 23 C -5 17, -5 -17, -11 -23 Z" fill="url(#shellGrad)"/>
-        <path d="M-30 -22 C -19 -24, -19 24, -30 22 L -22 20 C -16 14, -16 -14, -22 -20 Z" fill="#1E3120" stroke="#B8E64A" stroke-width="1.2"/>
-        <path d="M-44 0 C -44 -14, -30 -19, -30 -19 C -30 19, -44 14, -44 0 Z" fill="#D4A94D"/>
+        <ellipse cx="0" cy="0" rx="55" ry="78" fill="#1A3324"/>
+        <path d="M -42 -40 Q 0 -50 42 -40" stroke="#B8E64A" stroke-width="3" fill="none"/>
+        <path d="M -50 -20 Q 0 -30 50 -20" stroke="#B8E64A" stroke-width="3" fill="none"/>
+        <path d="M -54 0 Q 0 -10 54 0" stroke="#B8E64A" stroke-width="3" fill="none"/>
+        <path d="M -52 20 Q 0 10 52 20" stroke="#B8E64A" stroke-width="3" fill="none"/>
+        <path d="M -44 40 Q 0 30 44 40" stroke="#B8E64A" stroke-width="3" fill="none"/>
+        <path d="M -30 60 Q 0 50 30 60" stroke="#B8E64A" stroke-width="2.5" fill="none"/>
+        <circle cx="-15" cy="-68" r="4" fill="#D4A94D"/>
+        <circle cx="15" cy="-68" r="4" fill="#D4A94D"/>
+        <!-- Antennae -->
+        <path d="M -15 -72 Q -35 -95 -50 -90" stroke="#D4A94D" stroke-width="2" fill="none"/>
+        <path d="M 15 -72 Q 35 -95 50 -90" stroke="#D4A94D" stroke-width="2" fill="none"/>
       </g>
-      <circle cx="110" cy="120" r="2" fill="#B8E64A" opacity="0.3"/>
-      <circle cx="310" cy="150" r="2.5" fill="#D4A94D" opacity="0.3"/>
     </svg>`,
 
     tarantula: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="tarGrad" cx="50%" cy="50%" r="60%">
-          <stop offset="0%" stop-color="#1A1712"/>
-          <stop offset="60%" stop-color="#0E120E"/>
+        <radialGradient id="tGrad" cx="50%" cy="45%" r="65%">
+          <stop offset="0%" stop-color="#241B18"/>
+          <stop offset="70%" stop-color="#0E0908"/>
           <stop offset="100%" stop-color="#050B08"/>
         </radialGradient>
-        <linearGradient id="legGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#3B82F6"/>
-          <stop offset="50%" stop-color="#1D4ED8"/>
-          <stop offset="100%" stop-color="#D4A94D"/>
-        </linearGradient>
       </defs>
-      <rect width="400" height="300" fill="url(#tarGrad)"/>
-      <path d="M80 30 L 320 270" stroke="#F5F7F2" stroke-width="0.6" opacity="0.12"/>
-      <path d="M300 40 L 100 260" stroke="#F5F7F2" stroke-width="0.6" opacity="0.12"/>
-      <g transform="translate(200, 150)">
-        <path d="M-15 -12 Q -50 -50, -80 -40" stroke="url(#legGrad)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-        <path d="M-18 -4 Q -65 -25, -95 -10" stroke="url(#legGrad)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-        <path d="M-18 8 Q -70 20, -90 48" stroke="url(#legGrad)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-        <path d="M-15 15 Q -55 55, -75 80" stroke="url(#legGrad)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-        <path d="M15 -12 Q 50 -50, 80 -40" stroke="url(#legGrad)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-        <path d="M18 -4 Q 65 -25, 95 -10" stroke="url(#legGrad)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-        <path d="M18 8 Q 70 20, 90 48" stroke="url(#legGrad)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-        <path d="M15 15 Q 55 55, 75 80" stroke="url(#legGrad)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-        <ellipse cx="0" cy="-8" rx="18" ry="16" fill="#104030" stroke="#B8E64A" stroke-width="1.5"/>
-        <ellipse cx="0" cy="26" rx="22" ry="28" fill="#D97706" stroke="#B45309" stroke-width="1.2"/>
-        <circle cx="-3" cy="-16" r="1.4" fill="#B8E64A"/>
-        <circle cx="3" cy="-16" r="1.4" fill="#B8E64A"/>
+      <rect width="400" height="300" fill="url(#tGrad)"/>
+      <ellipse cx="200" cy="240" rx="130" ry="22" fill="#000" opacity="0.6"/>
+      <!-- Spider anatomy -->
+      <g transform="translate(200, 140)">
+        <!-- Legs (left) -->
+        <path d="M -15 -10 Q -60 -50 -100 -20" stroke="#D4A94D" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M -20 0 Q -80 -25 -110 5" stroke="#B8E64A" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M -20 12 Q -80 25 -105 45" stroke="#D4A94D" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M -15 25 Q -65 65 -90 85" stroke="#B8E64A" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <!-- Legs (right) -->
+        <path d="M 15 -10 Q 60 -50 100 -20" stroke="#D4A94D" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M 20 0 Q 80 -25 110 5" stroke="#B8E64A" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M 20 12 Q 80 25 105 45" stroke="#D4A94D" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M 15 25 Q 65 65 90 85" stroke="#B8E64A" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <!-- Abdomen & Carapace -->
+        <ellipse cx="0" cy="28" rx="28" ry="36" fill="#2E1B15" stroke="#D4A94D" stroke-width="2"/>
+        <circle cx="0" cy="-8" r="22" fill="#3D291F" stroke="#B8E64A" stroke-width="2"/>
+        <!-- Chelicerae / Fangs -->
+        <path d="M -6 -28 L -4 -38 L -1 -30" stroke="#D4A94D" stroke-width="2.5" fill="none"/>
+        <path d="M 6 -28 L 4 -38 L 1 -30" stroke="#D4A94D" stroke-width="2.5" fill="none"/>
       </g>
     </svg>`,
 
-    terrarium: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    combo: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="terGrad" cx="50%" cy="45%" r="65%">
-          <stop offset="0%" stop-color="#163022"/>
-          <stop offset="65%" stop-color="#0B1A11"/>
+        <radialGradient id="comboGrad" cx="50%" cy="45%" r="65%">
+          <stop offset="0%" stop-color="#1B281B"/>
+          <stop offset="70%" stop-color="#0D1A10"/>
           <stop offset="100%" stop-color="#050B08"/>
         </radialGradient>
       </defs>
-      <rect width="400" height="300" fill="url(#terGrad)"/>
-      <g transform="translate(100, 30)">
-        <rect x="0" y="0" width="200" height="230" rx="6" fill="#0D1A12" stroke="#B8E64A" stroke-width="1.5" stroke-opacity="0.4"/>
-        <rect x="2" y="205" width="196" height="22" fill="#1A1713"/>
-        <rect x="2" y="165" width="196" height="40" fill="#141E15"/>
-        <path d="M2 170 Q 50 150, 90 162 Q 150 145, 198 168 L 198 175 L 2 175 Z" fill="#22563A"/>
-        <path d="M50 160 C 30 130, 45 95, 75 110 C 90 130, 65 160, 50 160 Z" fill="#15803D" stroke="#F43F5E" stroke-width="1.2"/>
-        <path d="M120 162 C 135 115, 175 120, 165 150 C 150 162, 130 166, 120 162 Z" fill="#581C87" stroke="#D946EF" stroke-width="1"/>
+      <rect width="400" height="300" fill="url(#comboGrad)"/>
+      <g transform="translate(200, 145)">
+        <!-- Gift / Bundle Base Box -->
+        <rect x="-65" y="-35" width="130" height="90" rx="8" fill="#13241A" stroke="#B8E64A" stroke-width="2.5"/>
+        <path d="M -72 -42 L 72 -42 L 65 -25 L -65 -25 Z" fill="#1A3324" stroke="#D4A94D" stroke-width="2"/>
+        <!-- Ribbon Bands -->
+        <line x1="0" y1="-42" x2="0" y2="55" stroke="#D4A94D" stroke-width="4"/>
+        <line x1="-65" y1="10" x2="65" y2="10" stroke="#D4A94D" stroke-width="3"/>
+        <!-- Big Bioactive Ribbon Bow -->
+        <path d="M 0 -42 C -30 -75 -40 -45 0 -42 Z" fill="#B8E64A" opacity="0.9"/>
+        <path d="M 0 -42 C 30 -75 40 -45 0 -42 Z" fill="#B8E64A" opacity="0.9"/>
+        <circle cx="0" cy="-42" r="7" fill="#D4A94D"/>
       </g>
+      <!-- Sparkle Orbs -->
+      <circle cx="120" cy="80" r="3" fill="#B8E64A" opacity="0.5"/>
+      <circle cx="280" cy="70" r="4" fill="#D4A94D" opacity="0.5"/>
+      <circle cx="310" cy="210" r="3" fill="#B8E64A" opacity="0.4"/>
     </svg>`,
 
     isopodKit: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <rect width="400" height="300" fill="#0A1810"/>
-      <g transform="translate(120, 30)">
-        <polygon points="80,10 5,50 155,50" fill="#102217" stroke="#B8E64A" stroke-width="1.5"/>
-        <rect x="5" y="50" width="150" height="170" fill="#0D1C13" stroke="#B8E64A" stroke-width="1.5" stroke-opacity="0.7"/>
-        <path d="M10 195 Q 40 160, 80 175 Q 120 155, 150 195 Z" fill="#166534"/>
-        <path d="M45 175 C 25 145, 50 115, 65 130 C 75 145, 55 175, 45 175 Z" fill="#15803D" stroke="#FB7185" stroke-width="1"/>
-        <ellipse cx="110" cy="188" rx="15" ry="9" fill="#78350F"/>
-        <ellipse cx="85" cy="192" rx="4" ry="2" fill="#E2E8F0" stroke="#B8E64A" stroke-width="0.6"/>
+      <defs>
+        <radialGradient id="kitGrad" cx="50%" cy="50%" r="65%">
+          <stop offset="0%" stop-color="#1B2B1F"/>
+          <stop offset="70%" stop-color="#0A160E"/>
+          <stop offset="100%" stop-color="#050B08"/>
+        </radialGradient>
+      </defs>
+      <rect width="400" height="300" fill="url(#kitGrad)"/>
+      <g transform="translate(200, 140)">
+        <path d="M -70 40 L 0 -20 L 70 40 L 70 120 L -70 120 Z" fill="#12251A" stroke="#B8E64A" stroke-width="2.5"/>
+        <path d="M 0 -20 L 0 120" stroke="#B8E64A" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <path d="M -25 120 Q -5 60 5 45 Q 15 65 25 120" stroke="#D4A94D" stroke-width="2.5" fill="none"/>
+        <text x="0" y="90" fill="#B8E64A" font-size="12" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">5"x5"x5" GLASS</text>
       </g>
     </svg>`,
 
     aquariumKit: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <rect width="400" height="300" fill="#08170F"/>
-      <g transform="translate(100, 40)">
-        <rect x="0" y="0" width="200" height="190" rx="6" fill="#0A1A12" stroke="#B8E64A" stroke-width="1.5"/>
-        <rect x="3" y="15" width="194" height="170" fill="#0B2418" opacity="0.6"/>
-        <path d="M30 185 Q 40 110, 60 60 Q 45 125, 50 185" fill="#22C55E" opacity="0.75"/>
-        <path d="M160 185 Q 145 100, 130 50 Q 150 120, 165 185" fill="#16A34A" opacity="0.75"/>
-        <g transform="translate(100, 95)">
-          <path d="M-8 0 C -30 -20, -40 15, -12 8 Z" fill="#D4A94D" opacity="0.8"/>
-          <ellipse cx="8" cy="4" rx="16" ry="7" fill="#B8E64A"/>
-          <circle cx="18" cy="2" r="1.5" fill="#050B08"/>
+      <defs>
+        <radialGradient id="halfCubeGrad" cx="50%" cy="50%" r="65%">
+          <stop offset="0%" stop-color="#102528"/>
+          <stop offset="70%" stop-color="#08151A"/>
+          <stop offset="100%" stop-color="#050B08"/>
+        </radialGradient>
+      </defs>
+      <rect width="400" height="300" fill="url(#halfCubeGrad)"/>
+      <g transform="translate(200, 145)">
+        <rect x="-85" y="-55" width="170" height="120" rx="6" fill="#0C2025" stroke="#38BDF8" stroke-width="2.5"/>
+        <path d="M -60 65 Q -40 10 -25 65" stroke="#B8E64A" stroke-width="2.5" fill="none"/>
+        <path d="M -30 65 Q -10 20 0 65" stroke="#22C55E" stroke-width="2.5" fill="none"/>
+        <!-- Swimming Betta Silhouette -->
+        <g transform="translate(30, 0)">
+          <path d="M -15 0 C -40 -30, -50 15, -20 5 Z" fill="#D4A94D" opacity="0.9"/>
+          <ellipse cx="0" cy="0" rx="18" ry="8" fill="#F5F7F2"/>
+          <circle cx="12" cy="-2" r="1.5" fill="#050B08"/>
         </g>
-        <rect x="3" y="170" width="194" height="16" rx="2" fill="#C2A676" opacity="0.75"/>
       </g>
     </svg>`,
 
     glacierOffer: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <rect width="400" height="300" fill="#0C1717"/>
-      <g transform="translate(200, 125)">
-        <circle cx="0" cy="0" r="70" fill="#38BDF8" opacity="0.08"/>
-        <path d="M-40 0 C -40 -24, 40 -24, 40 0 C 40 24, -40 24, -40 0 Z" fill="#E0F2FE" stroke="#38BDF8" stroke-width="1.8"/>
-        <path d="M-20 -20 L -20 20" stroke="#94A3B8" stroke-width="1.2"/>
-        <path d="M0 -23 L 0 23" stroke="#94A3B8" stroke-width="1.2"/>
-        <path d="M20 -20 L 20 20" stroke="#94A3B8" stroke-width="1.2"/>
-        <circle cx="34" cy="-8" r="2" fill="#0369A1"/>
-        <circle cx="34" cy="8" r="2" fill="#0369A1"/>
+      <defs>
+        <radialGradient id="glacierGrad" cx="50%" cy="50%" r="65%">
+          <stop offset="0%" stop-color="#242114"/>
+          <stop offset="70%" stop-color="#121008"/>
+          <stop offset="100%" stop-color="#050B08"/>
+        </radialGradient>
+      </defs>
+      <rect width="400" height="300" fill="url(#glacierGrad)"/>
+      <circle cx="200" cy="140" r="75" fill="#D4A94D" opacity="0.15"/>
+      <g transform="translate(200, 130)">
+        <ellipse cx="-30" cy="-10" rx="22" ry="14" fill="#F5F7F2" opacity="0.85"/>
+        <ellipse cx="30" cy="-5" rx="20" ry="13" fill="#F5F7F2" opacity="0.85"/>
+        <ellipse cx="0" cy="30" rx="26" ry="16" fill="#B8E64A" opacity="0.9"/>
+        <text x="0" y="-45" fill="#D4A94D" font-size="14" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">10 + 1 FREE DEAL</text>
       </g>
     </svg>`
   };
 
-  /* ── 2. Master Product Catalogue (All 30 Verified Products) ── */
+  /* ── 2. Master Product Catalogue (32 Verified Items) ───────── */
   const PRODUCTS = [
-    // --- 1. ISOPOD COLLECTION (Per Piece & Kit) ---
+    // ══════════════════════════════════════════════════════════════
+    // CATEGORY 1: AQUARIUM & FISH (13 Guppies + Betta Fish)
+    // ══════════════════════════════════════════════════════════════
+    {
+      id: 'guppy-red-lace',
+      name: 'Red Lace Guppy',
+      scientificName: 'Poecilia reticulata var. Red Lace',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 250,
+      pricingUnit: 'pair',
+      size: 'Adult Pair (Male + Female)',
+      description: 'Intricate red lace-patterned caudal fin with iridescent body tones. Captive bred and conditioned for freshwater community tanks.',
+      compliance: 'available',
+      complianceNotice: 'Pure oxygen-infused live fish transport packaging. Delivered safely across India.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: true
+    },
+    {
+      id: 'guppy-gold-dumbo-ear',
+      name: 'Gold Dumbo Ear Guppy',
+      scientificName: 'Poecilia reticulata var. Gold Dumbo Ear',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 280,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Lustrous golden body with enlarged, prominent "dumbo ear" pectoral fins creating a graceful flutter in planted tanks.',
+      compliance: 'available',
+      complianceNotice: 'Carefully acclimated show strain. Healthy live arrival guaranteed with unboxing video.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: false
+    },
+    {
+      id: 'guppy-santacruz-dumbo-ear',
+      name: 'Santacruz Dumbo Ear Guppy',
+      scientificName: 'Poecilia reticulata var. Santacruz Dumbo',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 250,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Striking Santacruz lineage showcasing oversized dumbo ears, vivid coloration, and calm schooling behavior.',
+      compliance: 'available',
+      complianceNotice: 'Ships Monday through Wednesday in insulated temperature-regulated containers.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: false
+    },
+    {
+      id: 'guppy-platinum-dumbo-halfmoon',
+      name: 'Platinum Dumbo Ear Halfmoon Guppy',
+      scientificName: 'Poecilia reticulata var. Platinum Dumbo Halfmoon',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 280,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Full 180-degree halfmoon caudal fin with gleaming platinum-white scales and grand dumbo pectoral ears.',
+      compliance: 'available',
+      complianceNotice: 'Pure oxygen pack with thermal insulation. Pre-shipment video shared on WhatsApp.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: true
+    },
+    {
+      id: 'guppy-blue-dragon-dumbo-halfmoon',
+      name: 'Blue Dragon Dumbo Ear Halfmoon Guppy',
+      scientificName: 'Poecilia reticulata var. Blue Dragon Dumbo',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 280,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Rich royal blue metallic dorsal and halfmoon tail paired with grand dumbo ear fins. Stunning centerpiece display fish.',
+      compliance: 'available',
+      complianceNotice: 'Guaranteed healthy live arrival when verified within 2 hours of delivery.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: true
+    },
+    {
+      id: 'guppy-moscow-black-dumbo',
+      name: 'Moscow Black Dumbo Ear Guppy',
+      scientificName: 'Poecilia reticulata var. Moscow Black Dumbo',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 250,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Deep velvet-black coloration spanning from snout to tail, contrasted by delicate fluttery dumbo pectoral fins.',
+      compliance: 'available',
+      complianceNotice: 'Carefully quarantined stock from disease-free lines.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: false
+    },
+    {
+      id: 'guppy-afr-big-dorsal',
+      name: 'AFR Big Dorsal Guppy',
+      scientificName: 'Poecilia reticulata var. Albino Full Red Big Dorsal',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 300,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Prized Albino Full Red (AFR) genetics with an extravagant, sail-like big dorsal fin and ruby-red eyes.',
+      compliance: 'available',
+      complianceNotice: 'Top show grade stock. Packaged in breathable thermal shipping boxes.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: true
+    },
+    {
+      id: 'guppy-dark-knight-dragon-dumbo',
+      name: 'Dark Knight Dragon Dumbo Ear Guppy',
+      scientificName: 'Poecilia reticulata var. Dark Knight Dragon',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 280,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Dark dramatic dragon scales with violet and navy undertones, complemented by fluttering dumbo ears.',
+      compliance: 'available',
+      complianceNotice: 'Insulated packaging with hot/cold packs suited to seasonal route conditions.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: false
+    },
+    {
+      id: 'guppy-red-platinum-koi-dumbo',
+      name: 'Red Platinum Koi Dumbo Ear Guppy',
+      scientificName: 'Poecilia reticulata var. Red Platinum Koi Dumbo',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 280,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Classic red and platinum koi-styled color patterns with translucent big dumbo ears. Active and very hardy.',
+      compliance: 'available',
+      complianceNotice: 'Stock verified over WhatsApp before dispatch.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: false
+    },
+    {
+      id: 'guppy-magenta-red-tiger',
+      name: 'Magenta Red Tiger Guppy',
+      scientificName: 'Poecilia reticulata var. Magenta Red Tiger',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 250,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Bold tiger bar stripes over vibrant magenta-red body. Energetic swimmer that thrives in planted aquascapes.',
+      compliance: 'available',
+      complianceNotice: 'All live specimens shipped with transit insurance & guarantee.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: false
+    },
+    {
+      id: 'guppy-white-tuxido',
+      name: 'White Tuxido Guppy',
+      scientificName: 'Poecilia reticulata var. White Tuxedo',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 250,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Crisp white caudal fin contrasted with a deep midnight tuxedo torso. Highly prolific and peaceful.',
+      compliance: 'available',
+      complianceNotice: 'Carefully packaged with oxygenated water and stress-reducing conditioner.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: false
+    },
+    {
+      id: 'guppy-silverado-red-dragon',
+      name: 'Silverado Red Dragon Guppy',
+      scientificName: 'Poecilia reticulata var. Silverado Red Dragon',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 280,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Silvery metallic chest transitioning into a fierce red dragon-patterned tail fin. Stunning light-reflective sheen.',
+      compliance: 'available',
+      complianceNotice: 'Tested water chemistry acclimation guide included with every shipment.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: false
+    },
+    {
+      id: 'guppy-green-moscow',
+      name: 'Green Moscow Guppy',
+      scientificName: 'Poecilia reticulata var. Green Moscow',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 250,
+      pricingUnit: 'pair',
+      size: 'Adult Pair',
+      description: 'Deep emerald-green metallic sheen covering head to tail. An all-time legendary strain for discerning planted tank keepers.',
+      compliance: 'available',
+      complianceNotice: 'Direct doorstep delivery via fast courier.',
+      visualKey: 'aquarium',
+      emoji: '🐟',
+      featured: false
+    },
+    {
+      id: 'show-grade-betta',
+      name: 'Show Grade Betta Fish',
+      scientificName: 'Betta splendens (Halfmoon / Plakat)',
+      category: 'aquarium',
+      categoryLabel: 'Aquarium & Fish',
+      price: 350,
+      pricingUnit: 'piece',
+      size: 'Adult (5–6 cm)',
+      description: 'Exquisite hand-selected show Betta featuring vibrant color iridescence, grand flowing fins, and robust active health. Ideal centerpiece specimen.',
+      compliance: 'available',
+      complianceNotice: 'Shipped in specialized double-layer breathable fish bags with pure medical oxygen.',
+      visualKey: 'betta',
+      emoji: '🐟',
+      featured: true
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // CATEGORY 2: ISOPODS (7 Pure Strains, Per Piece)
+    // ══════════════════════════════════════════════════════════════
     {
       id: 'armadillidium-gestroi',
       name: 'Armadillidium Gestroi',
@@ -180,9 +464,9 @@
       price: 120,
       pricingUnit: 'piece',
       size: null,
-      description: 'Striking Mediterranean pill bug known for its robust size, pronounced dorsal yellow markings, and efficient terrarium cleaning.',
-      compliance: 'check-required',
-      complianceNotice: 'Live isopod culture. Delivery requires postal transit verification under domestic transport guidelines.',
+      description: 'Striking Mediterranean pill bug known for its large size, bright yellow spotted dorsal plates, and vigorous vivarium janitorial skills.',
+      compliance: 'available',
+      complianceNotice: 'Captive-bred live culture. Packed with moist sphagnum moss and breathable enclosure.',
       visualKey: 'isopod',
       emoji: '🍂',
       featured: true
@@ -196,12 +480,12 @@
       price: 60,
       pricingUnit: 'piece',
       size: null,
-      description: 'Vibrant orange-toned morph of Cubaris murina. Highly active, loves humid tropical substrates, and reproduces reliably.',
-      compliance: 'check-required',
-      complianceNotice: 'Live isopod culture. Transit feasibility confirmed over WhatsApp before dispatch.',
+      description: 'Warm apricot-orange color morph. Hardy, highly active, and quick to establish a thriving custodial colony in humid vivariums.',
+      compliance: 'available',
+      complianceNotice: 'Captive bred non-native invertebrate. Ships safely in ventilated micro-containers.',
       visualKey: 'isopod',
-      emoji: '🍂',
-      featured: true
+      emoji: '🪵',
+      featured: false
     },
     {
       id: 'cubaris-murina-glacier',
@@ -212,27 +496,27 @@
       price: 70,
       pricingUnit: 'piece',
       size: null,
-      description: 'Frosty, pearlescent isopod with an icy white shell and subtle dark eyes. Buy 10, Get 1 Free on colony orders.',
-      compliance: 'check-required',
-      complianceNotice: 'Live isopod culture. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'glacierOffer',
-      emoji: '🍂',
+      description: 'Pristine white porcelain appearance with subtle translucent undertones. Excellent bioactive cleanup crew.',
+      compliance: 'available',
+      complianceNotice: 'Promotional offer: Buy 10, get 1 extra free! Dispatched with thermal heat/ice insulation.',
+      visualKey: 'isopod',
+      emoji: '❄️',
       featured: true
     },
     {
       id: 'porcellionides-pruinosus-orange-pied',
       name: 'Porcellionides pruinosus Orange Pied',
-      scientificName: 'Porcellionides pruinosus',
+      scientificName: 'Porcellionides pruinosus "Orange Pied"',
       category: 'isopods',
       categoryLabel: 'Isopods',
       price: 60,
       pricingUnit: 'piece',
       size: null,
-      description: 'Energetic, fast-moving cleanup crew with mottled orange and white pied patterning. Outstanding decomposers for bioactive vivariums.',
-      compliance: 'check-required',
-      complianceNotice: 'Live isopod culture. Verified transit routing required before order processing.',
+      description: 'Fast-moving, velvety powder-orange isopod with distinctive white pied patches. Superb detritivore for tropical enclosures.',
+      compliance: 'available',
+      complianceNotice: 'Prolific bioactive crew. Arrives in secure moisture-retaining deli cup.',
       visualKey: 'isopod',
-      emoji: '🍂',
+      emoji: '🍁',
       featured: false
     },
     {
@@ -244,11 +528,11 @@
       price: 600,
       pricingUnit: 'piece',
       size: null,
-      description: 'Rare collector-grade isopod featuring rich creamy brown and espresso-toned banding with duck-bill rostral geometry.',
-      compliance: 'check-required',
-      complianceNotice: 'Rare live isopod specimen. Insulated express dispatch arranged after direct verification.',
+      description: 'Ultra-rare collector isopod exhibiting warm espresso-brown skirts and a creamy dorsal stripe reminiscent of a barista cappuccino.',
+      compliance: 'available',
+      complianceNotice: 'Premium collector lineage. Verified over WhatsApp before expedited transit.',
       visualKey: 'isopod',
-      emoji: '🍂',
+      emoji: '☕',
       featured: true
     },
     {
@@ -260,11 +544,11 @@
       price: 750,
       pricingUnit: 'piece',
       size: null,
-      description: 'Exquisite luxury isopod with delicate petal-pink blush over porcelain white plates. A crown jewel of bioactive vivariums.',
-      compliance: 'check-required',
-      complianceNotice: 'Collector-grade specimen. Insulated express dispatch arranged after direct verification.',
+      description: 'Exquisite pastel pink and creamy white hues mimicking delicate sakura blossoms. A prized gem among luxury isopod enthusiasts.',
+      compliance: 'available',
+      complianceNotice: 'Priority express dispatch with custom insulated chamber.',
       visualKey: 'isopod',
-      emoji: '🍂',
+      emoji: '🌸',
       featured: true
     },
     {
@@ -276,40 +560,17 @@
       price: 150,
       pricingUnit: 'piece',
       size: null,
-      description: 'Textured Greek isopod with unique tuberculate bumps and slate-grey marbling. Tolerates moderate humidity gradients exceptionally well.',
-      compliance: 'check-required',
-      complianceNotice: 'Live isopod culture. Verified transit routing required before dispatch.',
+      description: 'Fascinating textured, bumpy slate-grey shell with high drought tolerance. Extremely resilient and fascinating to observe.',
+      compliance: 'available',
+      complianceNotice: 'Healthy live arrival guaranteed across all serviceable Indian pincodes.',
       visualKey: 'isopod',
-      emoji: '🍂',
+      emoji: '🪨',
       featured: false
     },
-    {
-      id: 'isopod-house-kit',
-      name: 'Isopod House Kit',
-      scientificName: 'Complete Bioactive Enclosure',
-      category: 'isopods',
-      categoryLabel: 'Isopods',
-      price: 1545,
-      pricingUnit: 'kit',
-      size: '5" L × 5" D × 5" H + 2.5" roof',
-      description: 'A turnkey bioactive isopod habitat complete with glass greenhouse enclosure, live plants, substrate, hides, food, and starter isopods.',
-      kitIncludes: [
-        'Fittonia albivenis (patterned nerve plant)',
-        'Hemigraphis sp. Pink (purple waffle plant)',
-        'Sheet Moss',
-        'Isopod Substrate (bioactive blend)',
-        'Lotus Pod (natural hide for isopods)',
-        'Premium Isopod Food',
-        'Isopod Culture – 6 Cubaris sp. "Glacier"'
-      ],
-      compliance: 'available',
-      complianceNotice: 'Glass enclosure & flora packed with break-safe insulation; live culture dispatched upon destination check.',
-      visualKey: 'isopodKit',
-      emoji: '🏡',
-      featured: true
-    },
 
-    // --- 2. TARANTULA COLLECTION (Sizes & Prices) ---
+    // ══════════════════════════════════════════════════════════════
+    // CATEGORY 3: TARANTULAS (6 Species, Exact Sizes & Prices)
+    // ══════════════════════════════════════════════════════════════
     {
       id: 'chilean-rose-hair',
       name: 'Chilean Rose Hair',
@@ -319,9 +580,9 @@
       price: 2199,
       pricingUnit: 'piece',
       size: '1–1.5 cm',
-      description: 'Docile, hardy New World terrestrial tarantula with soft rose-pink hairs on its carapace. Highly regarded for calm temperament.',
-      compliance: 'check-required',
-      complianceNotice: 'Live invertebrate. Buyer must confirm local keeping eligibility and recipient transit availability.',
+      description: 'Renowned for its calm, docile temperament and subtle pink carapace setae. The quintessential beginner New World tarantula.',
+      compliance: 'available',
+      complianceNotice: 'Captive-bred spiderling (1–1.5 cm). Packed in insulated, shock-absorbing vial with moisture control.',
       visualKey: 'tarantula',
       emoji: '🕷️',
       featured: true
@@ -335,12 +596,12 @@
       price: 2199,
       pricingUnit: 'piece',
       size: '1–1.5 cm',
-      description: 'Striking black terrestrial species with contrasting brilliant white bands across every leg joint. Vigorous feeder with bold display habits.',
-      compliance: 'check-required',
-      complianceNotice: 'Live invertebrate. Buyer must confirm local keeping eligibility and recipient transit availability.',
+      description: 'Bold contrast of jet-black legs adorned with striking snow-white knee bands. Highly active with an enthusiastic feeding response.',
+      compliance: 'available',
+      complianceNotice: 'Captive-bred juvenile. Temperature-safe express transit verified prior to dispatch.',
       visualKey: 'tarantula',
       emoji: '🕷️',
-      featured: false
+      featured: true
     },
     {
       id: 'mexican-red-knee',
@@ -351,9 +612,9 @@
       price: 2399,
       pricingUnit: 'piece',
       size: '1–1.5 cm',
-      description: 'World-famous iconic arachnid celebrated for vibrant flame-orange leg bands and long lifespans. Very calm and display-oriented.',
-      compliance: 'check-required',
-      complianceNotice: 'Live invertebrate. Buyer must confirm local keeping eligibility and recipient transit availability.',
+      description: 'World-famous display species showcasing fiery orange-red leg joints and deep black velvety body. Very docile and long-lived.',
+      compliance: 'available',
+      complianceNotice: 'Ethically captive-bred spiderling. Shipped safely across India with unboxing video protection.',
       visualKey: 'tarantula',
       emoji: '🕷️',
       featured: true
@@ -367,9 +628,9 @@
       price: 4799,
       pricingUnit: 'piece',
       size: '1–1.5 cm',
-      description: 'Breath-taking coloration: metallic blue legs, emerald-green carapace, and bright pumpkin-orange abdomen. Heavy webber.',
-      compliance: 'check-required',
-      complianceNotice: 'Live invertebrate. Express temperature-monitored courier arranged following verification.',
+      description: 'Spectacular electric blue legs, metallic emerald-green carapace, and vibrant tiger-striped abdomen. Prolific heavy webber.',
+      compliance: 'available',
+      complianceNotice: 'Shipped in premium padded vial with rapid express courier.',
       visualKey: 'tarantula',
       emoji: '🕷️',
       featured: true
@@ -383,9 +644,9 @@
       price: 1999,
       pricingUnit: 'piece',
       size: '1–1.5 cm',
-      description: 'Gentle giant with shimmering golden stripes running down each leg joint. Extremely docile, slow-moving, and easy to care for.',
-      compliance: 'check-required',
-      complianceNotice: 'Live invertebrate. Buyer must confirm local keeping eligibility and recipient transit availability.',
+      description: 'Gentle giant famous for golden-yellow striped knee markings and calm demeanor. Highly recommended for enthusiastic beginners.',
+      compliance: 'available',
+      complianceNotice: 'Live arrival guarantee when unboxing video is shared within 2 hours of delivery.',
       visualKey: 'tarantula',
       emoji: '🕷️',
       featured: false
@@ -399,283 +660,131 @@
       price: 3000,
       pricingUnit: 'piece',
       size: '1 inch',
-      description: 'One of the largest tarantula species on Earth. Fast growing with dense salmon-pink hairs and impressive predatory drive.',
-      compliance: 'check-required',
-      complianceNotice: 'Live invertebrate. Buyer must confirm local keeping eligibility and recipient transit availability.',
+      description: 'One of the largest tarantula species on Earth. Fast-growing spiderling with salmon-pink hairs and unmatched voracious appetite.',
+      compliance: 'available',
+      complianceNotice: '1-inch established spiderling. Securely packed in padded ventilation capsule.',
       visualKey: 'tarantula',
       emoji: '🕷️',
       featured: true
     },
 
-    // --- 3. AQUARIUM & FISH (Kit & 13 Guppy Pairs) ---
+    // ══════════════════════════════════════════════════════════════
+    // CATEGORY 4: COMBO PACKS (Complete Kits & Confirmed Bundles)
+    // ══════════════════════════════════════════════════════════════
+    {
+      id: 'isopod-house-kit',
+      name: 'Isopod House Kit',
+      scientificName: 'Complete Bioactive Isopod Habitat',
+      category: 'combos',
+      secondaryCategory: 'isopods',
+      categoryLabel: 'Combo Packs',
+      price: 1545,
+      pricingUnit: 'kit',
+      size: '5" L × 5" D × 5" H (+ 2.5" roof)',
+      description: 'All-in-one glass bioactive habitat kit. Comes complete with living tropical plants, organic substrate blend, natural lotus pod hide, nutrient food, and a starter culture of 6 Cubaris "Glacier" isopods.',
+      kitIncludes: [
+        'Glass Isopod House (5" L × 5" D × 5" H + 2.5" roof height)',
+        'Fittonia albivenis (Patterned nerve plant)',
+        'Hemigraphis sp. Pink (Purple waffle plant)',
+        'Natural Sheet Moss layer',
+        'Bioactive Isopod Substrate Blend',
+        'Lotus Pod (natural botanical hide)',
+        'Premium Isopod Food (calcium + protein pellets)',
+        'Isopod Culture: 6 Cubaris sp. "Glacier"'
+      ],
+      compliance: 'available',
+      complianceNotice: 'Complete glass habitat and live culture packed with high-grade shock-absorbent cushioning.',
+      visualKey: 'isopodKit',
+      emoji: '🏡',
+      featured: true
+    },
     {
       id: 'half-cube-aquarium-kit',
       name: 'Half Cube Aquarium Kit',
-      scientificName: 'Complete Desktop Aquascape',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
+      scientificName: 'Desktop Betta Aquascape Bundle',
+      category: 'combos',
+      secondaryCategory: 'aquarium',
+      categoryLabel: 'Combo Packs',
       price: 999,
       pricingUnit: 'kit',
       size: 'Desktop Half Cube',
-      description: 'A complete desktop planted aquarium kit designed for effortless elegance. Includes tank, live Betta, plants, and substrate.',
+      description: 'A complete desktop planted aquarium kit designed for effortless elegance. Includes glass half-cube tank, 1 healthy Betta fish, live aquatic plants, and premium washed sand substrate.',
       kitIncludes: [
-        'Half Cube Aquarium (crystal-clear glass)',
-        '1 beautiful Betta Fish',
-        'Live aquatic plants',
-        'Premium sand substrate'
+        'Half Cube Glass Desktop Aquarium',
+        '1 beautiful Show Betta Fish',
+        'Live aquatic plants for water purification',
+        'Premium washed sand substrate'
       ],
-      compliance: 'check-required',
-      complianceNotice: 'Live Betta fish and aquatic plants packed with breathable bags and oxygen; recipient location verified prior to shipment.',
+      compliance: 'available',
+      complianceNotice: 'Live Betta fish and aquatic plants packed in oxygenated breathable bags with shock insulation.',
       visualKey: 'aquariumKit',
-      emoji: '🐠',
+      emoji: '🫧',
       featured: true
     },
     {
-      id: 'guppy-red-lace',
-      name: 'Red Lace Guppy',
-      scientificName: 'Poecilia reticulata var. Red Lace',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Exquisite filigree lace patterns across crimson fins. Show-quality strain bred for symmetry and vitality. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
+      id: 'glacier-colony-pack',
+      name: 'Glacier Isopods (10 + 1 Free Colony Pack)',
+      scientificName: 'Cubaris murina "Glacier" 10+1 Special',
+      category: 'combos',
+      secondaryCategory: 'isopods',
+      categoryLabel: 'Combo Packs',
+      price: 700,
+      pricingUnit: 'kit',
+      size: '11 specimens total',
+      description: 'Exclusive colony expansion deal: Purchase 10 Cubaris Murina Glacier isopods and receive 1 additional specimen completely free of charge. Great for bioactive vivarium seed colonies.',
+      kitIncludes: [
+        '10 Cubaris Murina Glacier Isopods',
+        '1 Bonus Isopod (11 total)',
+        'Breathable starter transport culture deli cup',
+        'Starter nutritional calcium pellets'
+      ],
+      compliance: 'available',
+      complianceNotice: 'Ships safely in climate-controlled insulated transit containers.',
+      visualKey: 'glacierOffer',
+      emoji: '❄️',
       featured: true
     },
-    {
-      id: 'guppy-gold-dumbo-ear',
-      name: 'Gold Dumbo Ear Guppy',
-      scientificName: 'Poecilia reticulata var. Gold Dumbo',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Enlarged wing-like pectoral fins with lustrous metallic gold body scales. Graceful swimmers in planted setups. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: false
-    },
-    {
-      id: 'guppy-santacruz-dumbo-ear',
-      name: 'Santacruz Dumbo Ear Guppy',
-      scientificName: 'Poecilia reticulata var. Santacruz',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Signature Santacruz contrast coloring paired with expanded dumbo ear pectorals. Peaceful community fish. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: false
-    },
-    {
-      id: 'guppy-platinum-dumbo-halfmoon',
-      name: 'Platinum Dumbo Ear Halfmoon Guppy',
-      scientificName: 'Poecilia reticulata var. Platinum Halfmoon',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Pure platinum metallic shine with sweeping 180-degree halfmoon caudal fin and oversized dumbo ears. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: true
-    },
-    {
-      id: 'guppy-blue-dragon-dumbo-halfmoon',
-      name: 'Blue Dragon Dumbo Ear Halfmoon Guppy',
-      scientificName: 'Poecilia reticulata var. Blue Dragon',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Iridescent blue dragon dragonscale pattern along body with deep navy halfmoon fins and dumbo pectorals. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: true
-    },
-    {
-      id: 'guppy-moscow-black-dumbo',
-      name: 'Moscow Black Dumbo Ear Guppy',
-      scientificName: 'Poecilia reticulata var. Moscow Black',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Velvety midnight-black body and fins highlighted by majestic oversized dumbo ear pectorals. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: false
-    },
-    {
-      id: 'guppy-afr-big-dorsal',
-      name: 'AFR Big Dorsal Guppy',
-      scientificName: 'Poecilia reticulata var. Albino Full Red',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 300,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Albino Full Red (AFR) show champion strain with immense elongated dorsal fin and ruby-red eyes. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: true
-    },
-    {
-      id: 'guppy-dark-knight-dragon-dumbo',
-      name: 'Dark Knight Dragon Dumbo Ear Guppy',
-      scientificName: 'Poecilia reticulata var. Dark Knight',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Dark smoky armored scales with electric blue sheen and broad dumbo ears. Striking contrast against live green plants. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: false
-    },
-    {
-      id: 'guppy-red-platinum-koi-dumbo',
-      name: 'Red Platinum Koi Dumbo Ear Guppy',
-      scientificName: 'Poecilia reticulata var. Red Platinum Koi',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Tri-color koi pattern featuring bright red cap, platinum mid-body, and wing-like white dumbo ears. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: false
-    },
-    {
-      id: 'guppy-magenta-red-tiger',
-      name: 'Magenta Red Tiger Guppy',
-      scientificName: 'Poecilia reticulata var. Red Tiger',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Bold tiger-striped flanks overlaid with vivid magenta and vermilion highlights. Vigorous and playful. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: false
-    },
-    {
-      id: 'guppy-white-tuxido',
-      name: 'White Tuxido Guppy',
-      scientificName: 'Poecilia reticulata var. White Tuxedo',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Classic formal coloration with deep midnight-black half-body and contrasting snowy white fins. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: false
-    },
-    {
-      id: 'guppy-silverado-red-dragon',
-      name: 'Silverado Red Dragon Guppy',
-      scientificName: 'Poecilia reticulata var. Silverado Red Dragon',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Silver armor dorsal scales cascading into fire-red dragon tails. Premium show-class genetics. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: false
-    },
-    {
-      id: 'guppy-green-moscow',
-      name: 'Green Moscow Guppy',
-      scientificName: 'Poecilia reticulata var. Green Moscow',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: null,
-      description: 'Deep forest green and emerald metallic sheen that shifts with lighting. Celebrated heritage Russian strain. Priced per pair.',
-      compliance: 'check-required',
-      complianceNotice: 'Live tropical fish. Transit feasibility confirmed over WhatsApp before dispatch.',
-      visualKey: 'aquarium',
-      emoji: '🐟',
-      featured: false
-    },
-
-    // --- 4. TERRARIUM & BIOACTIVE KITS ---
     {
       id: 'bioactive-terrarium-starter',
       name: 'Bioactive Terrarium Starter Kit',
-      scientificName: 'Complete Habitat Enclosure',
-      category: 'terrarium',
-      categoryLabel: 'Terrarium Kits',
+      scientificName: 'Full Vivarium Bio-Foundation Pack',
+      category: 'combos',
+      categoryLabel: 'Combo Packs',
       price: 2499,
       pricingUnit: 'kit',
-      size: 'Starter Enclosure',
-      description: 'Complete turn-key bioactive terrarium kit with glass enclosure, bioactive drainage layer, live plants, and natural cork hides.',
+      size: 'Complete Setup Pack',
+      description: 'Everything required to establish a self-sustaining bioactive vivarium base: drainage hydro-balls, mesh divider barrier, premium ABG soil blend, magnolia leaf litter, and a starter springtail culture.',
       kitIncludes: [
-        'Glass Terrarium Enclosure',
-        'Bioactive Substrate & Drainage Mesh',
-        'Hydroballs Drainage Layer',
-        'Live Tropical Plants',
-        'Natural Cork Bark Hide'
+        'Hydro-ball drainage substrate (2L)',
+        'Custom-cut separation mesh barrier',
+        'Tropical ABG bioactive substrate blend (3L)',
+        'Sanitized botanical leaf litter pack',
+        'Active springtail seeded culture'
       ],
       compliance: 'available',
-      complianceNotice: 'Glassware and dry vivarium components ship securely packaged across India.',
-      visualKey: 'terrarium',
+      complianceNotice: 'Ships standard courier across all postal codes in India.',
+      visualKey: 'combo',
       emoji: '🌿',
-      featured: true
+      featured: false
     },
     {
-      id: 'isopod-substrate-bag',
-      name: 'Premium Isopod Substrate',
-      scientificName: 'Bioactive Substrate Mix',
-      category: 'terrarium',
-      categoryLabel: 'Terrarium Kits',
-      price: 299,
-      pricingUnit: 'piece',
-      size: '2 Litre Bag',
-      description: 'Proprietary bioactive soil formulation enriched with decaying oak flakes, calcium, crushed leaf litter, and beneficial microflora.',
+      id: 'isopod-care-combo',
+      name: 'Isopod Habitat & Care Bundle',
+      scientificName: 'Substrate & Botanical Nutrition Bundle',
+      category: 'combos',
+      categoryLabel: 'Combo Packs',
+      price: 450,
+      pricingUnit: 'kit',
+      size: 'Multi-Item Care Pack',
+      description: 'Essential bioactive sustenance package including 2L proprietary isopod substrate blend, natural dried lotus pod hide, and high-calcium protein pellet food.',
+      kitIncludes: [
+        '2 Litres Bioactive Isopod Substrate Blend',
+        'Natural Dried Lotus Pod Hide',
+        '100g High-Protein & Calcium Pellet Food'
+      ],
       compliance: 'available',
-      complianceNotice: 'Ships standard courier across all postal codes in India.',
-      visualKey: 'terrarium',
+      complianceNotice: 'Standard shipping across India via expedited courier.',
+      visualKey: 'combo',
       emoji: '🪵',
       featured: false
     }
@@ -695,8 +804,8 @@
     save(items) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-      } catch (err) {
-        console.warn('localStorage save failed:', err);
+      } catch (e) {
+        console.error('Failed to save cart to localStorage', e);
       }
       this.notify(items);
     },
@@ -769,7 +878,7 @@
       let items = this.load();
       items = items.filter(i => String(i.id) !== String(id));
       this.save(items);
-      showToast('Item removed from cart', 'error');
+      showToast('Item removed from cart', 'info');
     },
 
     clear() {
@@ -788,10 +897,13 @@
       return this.calcCount(this.load());
     },
 
-    formatPrice(amount) {
-      return '₹' + Number(amount).toLocaleString('en-IN');
+    formatPrice(num) {
+      return '₹' + Number(num).toLocaleString('en-IN');
     },
 
+    /**
+     * Exact WhatsApp Order Summary Generator (Section 10 Requirement)
+     */
     generateWhatsAppMessage() {
       const items = this.load();
       if (items.length === 0) return '';
@@ -804,22 +916,21 @@
       ];
 
       items.forEach((item, index) => {
-        let unitLabel = 'pcs';
+        const itemTotal = item.price * item.quantity;
+        let qtyLabel;
         if (item.pricingUnit === 'pair') {
-          unitLabel = 'pairs';
+          qtyLabel = item.quantity === 1 ? '1 pair' : `${item.quantity} pairs`;
         } else if (item.pricingUnit === 'kit') {
-          unitLabel = 'kit(s)';
+          qtyLabel = item.quantity === 1 ? '1 kit' : `${item.quantity} kits`;
+        } else {
+          qtyLabel = `${item.quantity} pcs`;
         }
-        const lineTotal = item.price * item.quantity;
-        let line = `${index + 1}. ${item.name} – ${item.quantity} ${unitLabel} – ${this.formatPrice(lineTotal)}`;
-        if (item.size) {
-          line += ` (${item.size})`;
-        }
-        lines.push(line);
+        lines.push(`${index + 1}. ${item.name} – ${qtyLabel} – ${this.formatPrice(itemTotal)}`);
       });
 
+      const subtotal = this.calcTotal(items);
       lines.push('');
-      lines.push(`Subtotal: ${this.formatPrice(this.getTotal())}`);
+      lines.push(`Subtotal: ${this.formatPrice(subtotal)}`);
       lines.push('');
       lines.push('Please confirm availability and delivery details.');
 
@@ -850,12 +961,12 @@
     `;
     container.appendChild(toast);
     setTimeout(() => {
-      toast.style.animation = 'toastOut 300ms forwards';
-      setTimeout(() => toast.remove(), 320);
+      toast.classList.add('fade-out');
+      setTimeout(() => toast.remove(), 300);
     }, 2800);
   }
 
-  /* ── 5. Product Grid & Filter Controller ─────────────────── */
+  /* ── 5. Product Filtering, Search & Catalogue Rendering ──── */
   let currentCategory = 'all';
   let currentSearch = '';
   let currentSort = 'default';
@@ -863,9 +974,9 @@
   function filterAndSortProducts() {
     let list = [...PRODUCTS];
 
-    // Category filter
+    // Category filter (supports primary and secondary category cross-listing)
     if (currentCategory !== 'all') {
-      list = list.filter(p => p.category === currentCategory);
+      list = list.filter(p => p.category === currentCategory || p.secondaryCategory === currentCategory);
     }
 
     // Search filter
@@ -881,17 +992,20 @@
 
     // Sort order
     switch (currentSort) {
+      case 'price-low':
       case 'price-asc':
         list.sort((a, b) => a.price - b.price);
         break;
+      case 'price-high':
       case 'price-desc':
         list.sort((a, b) => b.price - a.price);
         break;
+      case 'name':
       case 'name-asc':
         list.sort((a, b) => a.name.localeCompare(b.name));
         break;
       default:
-        // Featured first
+        // Featured items first
         list.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
         break;
     }
@@ -938,7 +1052,7 @@
               <span class="badge badge-stock">In Stock</span>
               <span class="badge ${unitBadgeClass}">${unitLabel}</span>
             </div>
-            <button class="product-quick-view" aria-label="Quick view">
+            <button class="product-quick-view" aria-label="Quick view" onclick="openProductModal('${product.id}')">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             </button>
           </div>
@@ -1024,7 +1138,7 @@
           ${kitHTML}
 
           <div class="modal-compliance-notice">
-            <strong style="color:var(--accent-secondary); display:block; margin-bottom:0.2rem;">⚖️ Compliance &amp; Shipping:</strong>
+            <strong style="color:var(--color-amber); display:block; margin-bottom:0.2rem;">⚖️ Compliance &amp; Shipping:</strong>
             ${product.complianceNotice}
           </div>
 
@@ -1075,25 +1189,33 @@
     if (!product) return;
     const qtyEl = document.getElementById('modalQty');
     const qty = qtyEl ? parseInt(qtyEl.textContent, 10) : 1;
-    const unit = product.pricingUnit === 'pair' ? 'pair(s)' : 'piece(s)';
-    const total = CartManager.formatPrice(product.price * qty);
 
+    let qtyLabel;
+    if (product.pricingUnit === 'pair') {
+      qtyLabel = qty === 1 ? '1 pair' : `${qty} pairs`;
+    } else if (product.pricingUnit === 'kit') {
+      qtyLabel = qty === 1 ? '1 kit' : `${qty} kits`;
+    } else {
+      qtyLabel = `${qty} pcs`;
+    }
+
+    const total = CartManager.formatPrice(product.price * qty);
     const msg = [
       'Hello Fish Tales!',
       '',
-      `I would like to order: ${product.name}`,
-      `Quantity: ${qty} ${unit}`,
-      `Price: ${CartManager.formatPrice(product.price)}`,
-      `Total: ${total}`,
-      product.size ? `Size: ${product.size}` : '',
+      'I would like to place an order:',
+      '',
+      `1. ${product.name} – ${qtyLabel} – ${total}`,
+      '',
+      `Subtotal: ${total}`,
       '',
       'Please confirm availability and delivery details.'
-    ].filter(Boolean).join('\n');
+    ].join('\n');
 
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
-  /* ── 7. Slide-out Cart Drawer Controller ─────────────────── */
+  /* ── 7. Cart Drawer Controller ───────────────────────────── */
   function renderCartDrawerItems(items, total) {
     const itemsWrap = document.getElementById('cartDrawerItems');
     const subtotalEl = document.getElementById('cartDrawerSubtotal');
@@ -1110,8 +1232,8 @@
       itemsWrap.innerHTML = `
         <div class="cart-empty-state">
           <div class="cart-empty-icon">🛒</div>
-          <h4 style="color:var(--text-primary); margin-bottom:0.5rem; font-family:var(--font-heading); font-size:1.25rem;">Your Cart is Empty</h4>
-          <p style="font-size:0.88rem; line-height:1.6; margin-bottom:1.5rem;">Explore our curated selection of rare exotic pets, guppy pairs, and bioactive vivarium kits.</p>
+          <h4 style="color:var(--text-main); margin-bottom:0.5rem; font-family:var(--font-serif); font-size:1.25rem;">Your Cart is Empty</h4>
+          <p style="font-size:0.88rem; line-height:1.6; margin-bottom:1.5rem; color:var(--text-muted);">Explore our curated selection of show guppy pairs, rare isopods, tarantulas, and complete combo kits.</p>
           <button class="btn btn-primary btn-sm" onclick="closeCartDrawer(); scrollToSection('catalogue')">
             Start Exploring
           </button>
@@ -1133,7 +1255,7 @@
           <div class="cart-item-info">
             <span class="cart-item-title">${item.name}</span>
             <span class="cart-item-meta">${CartManager.formatPrice(item.price)} ${unitLabel}</span>
-            ${item.size ? `<span class="cart-item-meta" style="color:var(--accent-secondary);">Size: ${item.size}</span>` : ''}
+            ${item.size ? `<span class="cart-item-meta" style="color:var(--color-amber);">Size: ${item.size}</span>` : ''}
             <div class="cart-item-stepper">
               <button class="cart-step-btn" onclick="CartManager.update('${item.id}', ${item.quantity - 1})" aria-label="Decrease">−</button>
               <span class="cart-step-val">${item.quantity}</span>
@@ -1199,8 +1321,8 @@
     const q = query.toLowerCase().trim();
     if (!q) {
       resultsWrap.innerHTML = `
-        <div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.95rem;">
-          Type any species name, category (e.g. <em>isopod</em>, <em>tarantula</em>, <em>guppy</em>), or kit to preview.
+        <div style="padding: 2rem 1rem; text-align: center; color: var(--text-muted); font-size: 0.95rem;">
+          Type to search our live stock of 32 exotic species, guppies, isopods &amp; combo kits.
         </div>
       `;
       return;
@@ -1209,44 +1331,49 @@
     const matches = PRODUCTS.filter(p =>
       p.name.toLowerCase().includes(q) ||
       (p.scientificName && p.scientificName.toLowerCase().includes(q)) ||
-      p.categoryLabel.toLowerCase().includes(q)
-    ).slice(0, 8);
+      p.categoryLabel.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q)
+    );
 
     if (matches.length === 0) {
       resultsWrap.innerHTML = `
-        <div style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.95rem;">
-          No exotic species matching "<strong>${query}</strong>".
+        <div style="padding: 2.5rem 1rem; text-align: center; color: var(--text-muted);">
+          No matching species or kits found for "<strong>${query}</strong>".
         </div>
       `;
       return;
     }
 
-    resultsWrap.innerHTML = matches.map(p => `
-      <div class="search-result-row" onclick="closeSearchOverlay(); openProductModal('${p.id}')">
-        <span style="font-size:1.75rem;">${p.emoji}</span>
-        <div style="flex:1;">
-          <div style="font-weight:600; font-size:1rem; color:var(--text-primary);">${p.name}</div>
-          <div style="font-size:0.8rem; color:var(--text-muted);">${p.categoryLabel} · ${p.pricingUnit === 'pair' ? 'Per Pair' : 'Per Piece'}</div>
+    resultsWrap.innerHTML = matches.map(p => {
+      const unitLabel = p.pricingUnit === 'pair' ? 'per pair' : (p.pricingUnit === 'kit' ? 'kit' : 'per piece');
+      return `
+        <div class="search-result-row" onclick="closeSearchOverlay(); openProductModal('${p.id}')">
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <span style="font-size:1.5rem;">${p.emoji}</span>
+            <div>
+              <div style="color:var(--text-main); font-weight:600; font-size:0.95rem;">${p.name}</div>
+              <div style="color:var(--text-muted); font-size:0.8rem;">${p.categoryLabel} ${p.scientificName ? '• ' + p.scientificName : ''}</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="color:var(--color-accent); font-weight:700;">${CartManager.formatPrice(p.price)}</div>
+            <div style="color:var(--text-muted); font-size:0.75rem;">${unitLabel}</div>
+          </div>
         </div>
-        <div style="font-family:var(--font-heading); font-weight:700; color:var(--accent-primary); font-size:1.15rem;">
-          ${CartManager.formatPrice(p.price)}
-        </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
-  /* ── 9. Smooth Scrolling & Category Navigation Helper ────── */
-  window.scrollToSection = function (sectionId) {
-    const target = document.getElementById(sectionId);
-    if (target) {
-      const headerOffset = 76;
-      const elementPosition = target.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+  /* ── 9. Smooth Scroll & Navigation Helpers ───────────────── */
+  window.scrollToSection = function (elementId) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    const headerHeight = 74;
+    const pos = el.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+    window.scrollTo({
+      top: pos,
+      behavior: 'smooth'
+    });
   };
 
   window.filterCategoryAndScroll = function (categoryKey) {
@@ -1298,7 +1425,7 @@
       });
     }
 
-    // 5. Category tabs
+    // 5. Category tabs click listeners
     document.querySelectorAll('.filter-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
