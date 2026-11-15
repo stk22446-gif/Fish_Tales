@@ -3,9 +3,9 @@
 Fish Tales is a complete, production-ready, luxury e-commerce website built for an exotic pets, aquarium fish, and bioactive terrarium business based in India.
 
 The entire website is engineered using **EXACTLY THREE MAIN FILES**:
-1. `index.html` — Single-page architecture containing all sections, hero, 4 main categories, catalogue, modal dialogs, contact desk, and slide-out cart drawer.
-2. `style.css` — Complete master styling, luxury dark green/black design tokens, responsive breakpoints, animations, and micro-interactions.
-3. `script.js` — Complete Vanilla JavaScript engine containing the 32-product master catalogue, scalable SVG graphics, `localStorage` cart manager, real-time search/filters, product detail modal, and WhatsApp checkout builder.
+1. `index.html` — Single-page architecture containing hero, 4 main categories, catalogue, modal dialogs, contact desk, and slide-out cart drawer.
+2. `style.css` — Complete master styling, luxury dark green/black design tokens, responsive breakpoints, animations, and mobile optimizations.
+3. `script.js` — Complete Vanilla JavaScript engine containing the 30-product master catalogue, individual SVG illustrations, `localStorage` cart manager, real-time search/filters, product detail modal, and WhatsApp checkout builder.
 
 ---
 
@@ -34,9 +34,14 @@ Exact 7-link responsive navigation:
 
 ---
 
-## 📦 The 4 Main Product Categories
+## ⚠️ Important Payment Notice
+**Cash on Delivery (COD) is strictly unavailable** for live animals and living habitats. All orders are confirmed and prepaid via UPI / Bank Transfer directly upon WhatsApp confirmation.
 
-### 1. AQUARIUM & FISH (13 Guppies + Betta Fish + Half Cube Kit)
+---
+
+## 📦 The 4 Main Product Categories (30 Verified Products)
+
+### 1. AQUARIUM & FISH (14 Products: 13 Guppies + Betta Fish)
 - **Show Grade Betta Fish** — ₹350 / piece (Adult 5–6 cm)
 - **Red Lace Guppy** — ₹250 / pair
 - **Gold Dumbo Ear Guppy** — ₹280 / pair
@@ -51,7 +56,8 @@ Exact 7-link responsive navigation:
 - **White Tuxido Guppy** — ₹250 / pair
 - **Silverado Red Dragon Guppy** — ₹280 / pair
 - **Green Moscow Guppy** — ₹250 / pair
-- **Half Cube Aquarium Kit** — ₹999 / kit *(Desktop glass tank, 1 Betta Fish, live plants, sand)*
+
+*(Note: Half Cube Aquarium Kit is cross-listed and accessible under both Aquarium & Fish and Combo Packs).*
 
 ### 2. ISOPODS (7 Pure Strains, Pricing strictly per piece)
 - **Armadillidium Gestroi** — ₹120 / piece
@@ -70,17 +76,13 @@ Exact 7-link responsive navigation:
 - **Chaco Golden Knee** (*Grammostola pulchripes*) — ₹1,999 (1–1.5 cm)
 - **Salmon Pink** (*Lasiodora parahybana*) — ₹3,000 (1 inch)
 
-### 4. COMBO PACKS (Complete Kits & Confirmed Bundles)
+### 4. COMBO PACKS (3 Confirmed Bundles & Kits)
 - **Isopod House Kit** — ₹1,545
   - *Glass Enclosure:* 5" L × 5" D × 5" H + 2.5" roof height
   - *Includes:* Fittonia albivenis, Hemigraphis sp. Pink, Sheet Moss, Bioactive Substrate blend, Lotus Pod hide, Premium Isopod Food, 6 Cubaris "Glacier" isopods.
 - **Half Cube Aquarium Kit** — ₹999
-  - *Includes:* Glass half-cube aquarium, 1 healthy Betta fish, live aquatic plants, sand substrate.
+  - *Includes:* Half Cube glass aquarium, 1 healthy Betta fish, live aquatic plants, sand substrate.
 - **Glacier Isopods Colony Pack (10 + 1 Free)** — ₹700 (11 specimens total)
-- **Bioactive Terrarium Starter Kit** — ₹2,499
-  - *Includes:* Hydro-ball drainage layer, mesh separator, tropical ABG substrate blend, leaf litter, and springtail culture.
-- **Isopod Habitat & Care Bundle** — ₹450
-  - *Includes:* 2L Bioactive isopod substrate, natural dried lotus pod hide, and calcium-protein feed.
 
 ---
 
@@ -96,10 +98,11 @@ I would like to place an order:
 1. Cubaris Murina Glacier – 5 pcs – ₹350
 2. Armadillidium Gestroi – 2 pcs – ₹240
 3. Red Lace Guppy – 2 pairs – ₹500
+4. Isopod House Kit – 1 kit – ₹1,545
 
-Subtotal: ₹1,090
+Subtotal: ₹2,635
 
-Please confirm availability and delivery details.
+Please confirm availability, delivery details and UPI payment info (Cash on Delivery is unavailable).
 ```
 
 - For per-piece products: calculates `price × quantity`.
@@ -110,8 +113,6 @@ Please confirm availability and delivery details.
 ---
 
 ## 🚀 Deployment Instructions (Vercel Ready)
-
-The repository deploys out-of-the-box to Vercel, Netlify, or GitHub Pages.
 
 ```bash
 vercel
