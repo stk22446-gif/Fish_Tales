@@ -1840,67 +1840,49 @@
     const { orderId, date, time, items, subtotal, customer } = orderDetails;
     const divider = '━━━━━━━━━━━━━━━━━━━━';
     const lines = [
-      '*🐠 FISH TALES*',
-      '*🛍️ NEW ORDER RECEIVED*',
-      '',
+      '🐠 FISH TALES',
+      '🛍️ *NEW ORDER RECEIVED*',
       divider,
-      '*📋 ORDER INFORMATION*',
-      '',
-      `*🆔 Order ID:* *${orderId}*`,
-      `*📅 Date:* *${date}*` + (time ? ` (*${time}*)` : ''),
-      '',
+      '📋 *ORDER INFORMATION*',
+      `🆔 Order ID: ${orderId}`,
+      `📅 Date: ${date}` + (time ? ` (${time})` : ''),
       divider,
-      '*📦 PRODUCT DETAILS*',
-      ''
+      '📦 *PRODUCT DETAILS*'
     ];
 
-    items.forEach((item, index) => {
+    items.forEach((item) => {
       const { prodName, variantName } = getProductAndVariantDisplay(item);
       const unitPriceFormatted = CartManager.formatPrice(item.price);
       const lineTotalFormatted = CartManager.formatPrice(item.price * item.quantity);
 
-      lines.push(`• *${prodName}* × *${item.quantity}*`);
-      lines.push(`  Variant: ${variantName}`);
-      lines.push(`  Unit Price: *${unitPriceFormatted}*`);
-      lines.push(`  Line Total: *${lineTotalFormatted}*`);
-      if (index < items.length - 1) {
-        lines.push('');
-      }
+      lines.push(`${prodName} × ${item.quantity}`);
+      lines.push(`Variant: ${variantName}`);
+      lines.push(`Unit Price: ${unitPriceFormatted}`);
+      lines.push(`Line Total: ${lineTotalFormatted}`);
     });
 
-    lines.push('');
     lines.push(divider);
-    lines.push('*💳 PAYMENT & ORDER SUMMARY*');
-    lines.push('');
-    lines.push(`*Subtotal:* *${CartManager.formatPrice(subtotal)}*`);
-    lines.push('*Shipping:* *To be confirmed* (Live transit fee)');
-    lines.push('*Discount:* *₹0*');
-    lines.push(`*💰 FINAL TOTAL:* *${CartManager.formatPrice(subtotal)}* *(Shipping confirmation pending)*`);
-    lines.push('');
+    lines.push('💳 *PAYMENT & ORDER SUMMARY*');
+    lines.push(`Subtotal: ${CartManager.formatPrice(subtotal)}`);
+    lines.push('Shipping: To be confirmed (Live transit fee)');
+    lines.push('Discount: ₹0');
+    lines.push(`Final Total: ${CartManager.formatPrice(subtotal)} (Shipping confirmation pending)`);
     lines.push(divider);
-    lines.push('*📍 DELIVERY INFORMATION*');
-    lines.push('');
-    lines.push(`👤 *Customer Name:* *${customer.fullName}*`);
-    lines.push(`📞 *Phone Number:* *+91 ${customer.mobile}*`);
-    lines.push(`✉️ *Email Address:* ${customer.email && customer.email.trim() ? `*${customer.email.trim()}*` : 'Not provided'}`);
-    lines.push(`🏠 *Complete Address:* *${customer.address}*`);
-    lines.push(`📍 *City:* *${customer.city}*`);
-    lines.push(`🗺️ *State:* *${customer.state}*`);
-    lines.push(`📮 *Pincode:* *${customer.pincode}*`);
-    lines.push('');
+    lines.push('📍 *DELIVERY INFORMATION*');
+    lines.push(`👤 Customer Name: ${customer.fullName}`);
+    lines.push(`📞 Phone Number: +91 ${customer.mobile}`);
+    lines.push(`✉️ Email Address: ${customer.email && customer.email.trim() ? customer.email.trim() : 'Not provided'}`);
+    lines.push(`🏠 Complete Address: ${customer.address}`);
+    lines.push(`📍 City: ${customer.city}`);
+    lines.push(`🗺️ State: ${customer.state}`);
+    lines.push(`📮 Pincode: ${customer.pincode}`);
     lines.push(divider);
-    lines.push('*⚠️ PAYMENT INSTRUCTIONS & POLICY*');
-    lines.push('');
-    lines.push('• *Cash on Delivery (COD) is strictly unavailable* for live livestock & bioactive habitats.');
-    lines.push('• Orders are prepaid via *UPI / Bank Transfer* after order & shipping confirmation.');
-    lines.push('');
+    lines.push('⚠️ *PAYMENT INSTRUCTIONS & POLICY*');
+    lines.push('Cash on Delivery (COD) is strictly unavailable for live livestock and bioactive habitats.');
+    lines.push('Orders are prepaid via UPI / Bank Transfer after order and shipping confirmation.');
     lines.push(divider);
-    lines.push('');
-    lines.push('👋 *Hello Fish Tales!*');
-    lines.push('');
+    lines.push('👋 Hello Fish Tales!');
     lines.push("I'd like to confirm my order. Please verify product availability, confirmed shipping charges, and send payment instructions before dispatch.");
-    lines.push('');
-    lines.push('*Thank you!*');
 
     return lines.join('\n');
   }

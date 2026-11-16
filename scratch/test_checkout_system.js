@@ -177,88 +177,87 @@ function getProductAndVariantDisplay(item) {
     const { orderId, date, time, items, subtotal, customer } = orderDetails;
     const divider = '━━━━━━━━━━━━━━━━━━━━';
     const lines = [
-      '*🐠 FISH TALES*',
-      '*🛍️ NEW ORDER RECEIVED*',
-      '',
+      '🐠 FISH TALES',
+      '🛍️ *NEW ORDER RECEIVED*',
       divider,
-      '*📋 ORDER INFORMATION*',
-      '',
-      `*🆔 Order ID:* *${orderId}*`,
-      `*📅 Date:* *${date}*` + (time ? ` (*${time}*)` : ''),
-      '',
+      '📋 *ORDER INFORMATION*',
+      `🆔 Order ID: ${orderId}`,
+      `📅 Date: ${date}` + (time ? ` (${time})` : ''),
       divider,
-      '*📦 PRODUCT DETAILS*',
-      ''
+      '📦 *PRODUCT DETAILS*'
     ];
 
-      items.forEach((item, index) => {
-        const { prodName, variantName } = getProductAndVariantDisplay(item);
-        const unitPriceFormatted = formatPrice(item.price);
-        const lineTotalFormatted = formatPrice(item.price * item.quantity);
+    items.forEach((item) => {
+      const { prodName, variantName } = getProductAndVariantDisplay(item);
+      const unitPriceFormatted = formatPrice(item.price);
+      const lineTotalFormatted = formatPrice(item.price * item.quantity);
 
-        lines.push(`• *${prodName}* × *${item.quantity}*`);
-        lines.push(`  Variant: ${variantName}`);
-        lines.push(`  Unit Price: *${unitPriceFormatted}*`);
-        lines.push(`  Line Total: *${lineTotalFormatted}*`);
-        if (index < items.length - 1) {
-          lines.push('');
-        }
-      });
+      lines.push(`${prodName} × ${item.quantity}`);
+      lines.push(`Variant: ${variantName}`);
+      lines.push(`Unit Price: ${unitPriceFormatted}`);
+      lines.push(`Line Total: ${lineTotalFormatted}`);
+    });
 
-      lines.push('');
-      lines.push(divider);
-      lines.push('*💳 PAYMENT & ORDER SUMMARY*');
-      lines.push('');
-      lines.push(`*Subtotal:* *${formatPrice(subtotal)}*`);
-      lines.push('*Shipping:* *To be confirmed* (Live transit fee)');
-      lines.push('*Discount:* *₹0*');
-      lines.push(`*💰 FINAL TOTAL:* *${formatPrice(subtotal)}* *(Shipping confirmation pending)*`);
-      lines.push('');
-      lines.push(divider);
-      lines.push('*📍 DELIVERY INFORMATION*');
-      lines.push('');
-      lines.push(`👤 *Customer Name:* *${customer.fullName}*`);
-      lines.push(`📞 *Phone Number:* *+91 ${customer.mobile}*`);
-      lines.push(`✉️ *Email Address:* ${customer.email && customer.email.trim() ? `*${customer.email.trim()}*` : 'Not provided'}`);
-      lines.push(`🏠 *Complete Address:* *${customer.address}*`);
-      lines.push(`📍 *City:* *${customer.city}*`);
-      lines.push(`🗺️ *State:* *${customer.state}*`);
-      lines.push(`📮 *Pincode:* *${customer.pincode}*`);
-      lines.push('');
-      lines.push(divider);
-      lines.push('*⚠️ PAYMENT INSTRUCTIONS & POLICY*');
-      lines.push('');
-      lines.push('• *Cash on Delivery (COD) is strictly unavailable* for live livestock & bioactive habitats.');
-      lines.push('• Orders are prepaid via *UPI / Bank Transfer* after order & shipping confirmation.');
-      lines.push('');
-      lines.push(divider);
-      lines.push('');
-      lines.push('👋 *Hello Fish Tales!*');
-      lines.push('');
-      lines.push("I'd like to confirm my order. Please verify product availability, confirmed shipping charges, and send payment instructions before dispatch.");
-      lines.push('');
-      lines.push('*Thank you!*');
+    lines.push(divider);
+    lines.push('💳 *PAYMENT & ORDER SUMMARY*');
+    lines.push(`Subtotal: ${formatPrice(subtotal)}`);
+    lines.push('Shipping: To be confirmed (Live transit fee)');
+    lines.push('Discount: ₹0');
+    lines.push(`Final Total: ${formatPrice(subtotal)} (Shipping confirmation pending)`);
+    lines.push(divider);
+    lines.push('📍 *DELIVERY INFORMATION*');
+    lines.push(`👤 Customer Name: ${customer.fullName}`);
+    lines.push(`📞 Phone Number: +91 ${customer.mobile}`);
+    lines.push(`✉️ Email Address: ${customer.email && customer.email.trim() ? customer.email.trim() : 'Not provided'}`);
+    lines.push(`🏠 Complete Address: ${customer.address}`);
+    lines.push(`📍 City: ${customer.city}`);
+    lines.push(`🗺️ State: ${customer.state}`);
+    lines.push(`📮 Pincode: ${customer.pincode}`);
+    lines.push(divider);
+    lines.push('⚠️ *PAYMENT INSTRUCTIONS & POLICY*');
+    lines.push('Cash on Delivery (COD) is strictly unavailable for live livestock and bioactive habitats.');
+    lines.push('Orders are prepaid via UPI / Bank Transfer after order and shipping confirmation.');
+    lines.push(divider);
+    lines.push('👋 Hello Fish Tales!');
+    lines.push("I'd like to confirm my order. Please verify product availability, confirmed shipping charges, and send payment instructions before dispatch.");
 
-      return lines.join('\n');
-    }
+    return lines.join('\n');
+  }
 
 const msg = buildWhatsAppMessage(sampleOrder);
     console.log('--- GENERATED ENHANCED WHATSAPP MESSAGE ---');
     console.log(msg);
     console.log('-------------------------------------------\n');
 
-    // Verify 10 Key Highlighted Elements
+    // Count all asterisks to verify ONLY the 6 allowed headings use bold formatting
+    const asteriskMatches = msg.match(/\*([^*]+)\*/g) || [];
+    console.log('Bold sections found:', asteriskMatches);
+
+    const allowedHeadings = [
+      '*NEW ORDER RECEIVED*',
+      '*ORDER INFORMATION*',
+      '*PRODUCT DETAILS*',
+      '*PAYMENT & ORDER SUMMARY*',
+      '*DELIVERY INFORMATION*',
+      '*PAYMENT INSTRUCTIONS & POLICY*'
+    ];
+
     const requiredChecks = [
-      { desc: '1. Business Name: *🐠 FISH TALES*', check: msg.includes('*🐠 FISH TALES*') },
-      { desc: '2. Heading: *🛍️ NEW ORDER RECEIVED*', check: msg.includes('*🛍️ NEW ORDER RECEIVED*') },
-      { desc: '3. Order ID and Date in bold', check: msg.includes('*🆔 Order ID:* *FT-20261116-001*') && msg.includes('*📅 Date:* *16/11/2026* (*10:30 PM*)') },
-      { desc: '4. Product names and quantities in bold', check: msg.includes('• *Red Lace Guppy* × *2*') && msg.includes('• *Cubaris Murina Glacier* × *5*') },
-      { desc: '5. Unit price and line totals in bold', check: msg.includes('Unit Price: *₹250*') && msg.includes('Line Total: *₹500*') },
-      { desc: '6. Subtotal, Shipping, and Discount highlighted', check: msg.includes('*Subtotal:* *₹850*') && msg.includes('*Shipping:* *To be confirmed*') && msg.includes('*Discount:* *₹0*') },
-      { desc: '7. Final Payable Total prominent with pending shipping', check: msg.includes('*💰 FINAL TOTAL:* *₹850* *(Shipping confirmation pending)*') },
-      { desc: '8. Customer Name and Phone highlighted with prefix', check: msg.includes('👤 *Customer Name:* *Rahul Sharma*') && msg.includes('📞 *Phone Number:* *+91 9876543210*') },
-      { desc: '9. Complete Address and Pincode highlighted', check: msg.includes('🏠 *Complete Address:* *123 Green Valley Street, Apartment 4B*') && msg.includes('📮 *Pincode:* *560001*') },
-      { desc: '10. Payment instructions & COD policy', check: msg.includes('*Cash on Delivery (COD) is strictly unavailable*') && msg.includes('*UPI / Bank Transfer*') }
+      { desc: '1. Brand line without bold: 🐠 FISH TALES', check: msg.includes('🐠 FISH TALES') && !msg.includes('*🐠') },
+      { desc: '2. Heading: 🛍️ *NEW ORDER RECEIVED*', check: msg.includes('🛍️ *NEW ORDER RECEIVED*') },
+      { desc: '3. Heading: 📋 *ORDER INFORMATION*', check: msg.includes('📋 *ORDER INFORMATION*') },
+      { desc: '4. Order ID without bold', check: msg.includes('🆔 Order ID: FT-20261116-001') },
+      { desc: '5. Date without bold', check: msg.includes('📅 Date: 16/11/2026 (10:30 PM)') },
+      { desc: '6. Heading: 📦 *PRODUCT DETAILS*', check: msg.includes('📦 *PRODUCT DETAILS*') },
+      { desc: '7. Products & prices without bold', check: msg.includes('Red Lace Guppy × 2') && msg.includes('Unit Price: ₹250') && msg.includes('Line Total: ₹500') },
+      { desc: '8. Heading: 💳 *PAYMENT & ORDER SUMMARY*', check: msg.includes('💳 *PAYMENT & ORDER SUMMARY*') },
+      { desc: '9. Summary lines & Final Total without bold', check: msg.includes('Subtotal: ₹850') && msg.includes('Final Total: ₹850 (Shipping confirmation pending)') },
+      { desc: '10. Heading: 📍 *DELIVERY INFORMATION*', check: msg.includes('📍 *DELIVERY INFORMATION*') },
+      { desc: '11. Customer details without bold', check: msg.includes('👤 Customer Name: Rahul Sharma') && msg.includes('📞 Phone Number: +91 9876543210') },
+      { desc: '12. Heading: ⚠️ *PAYMENT INSTRUCTIONS & POLICY*', check: msg.includes('⚠️ *PAYMENT INSTRUCTIONS & POLICY*') },
+      { desc: '13. Policy text without bold', check: msg.includes('Cash on Delivery (COD) is strictly unavailable') && msg.includes('Orders are prepaid via UPI / Bank Transfer') },
+      { desc: '14. Closing greeting without bold', check: msg.includes('👋 Hello Fish Tales!') },
+      { desc: '15. ONLY the 6 allowed headings contain asterisks', check: asteriskMatches.length === 6 && asteriskMatches.every(h => allowedHeadings.includes(h)) }
     ];
 
     requiredChecks.forEach(item => {
