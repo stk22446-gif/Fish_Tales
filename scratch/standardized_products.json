@@ -1,0 +1,1058 @@
+[
+  {
+    "id": "guppy-red-lace",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "Red Lace Guppy",
+    "subtitle": "Poecilia reticulata var. Red Lace",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Cobra_Guppy_%28Poecilia_reticulata%29.JPG",
+    "images": [],
+    "video": "",
+    "description": "Intricate red lace-patterned caudal fin with iridescent body tones. Captive bred and peaceful in planted community tanks.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair (1 Male + 1 Female)"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 250,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 500,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "guppy-gold-dumbo-ear",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "Gold Dumbo Ear Guppy",
+    "subtitle": "Poecilia reticulata var. Gold Dumbo Ear",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Poecilia_retic_090519-8688_kdBdk.jpg",
+    "images": [],
+    "video": "",
+    "description": "Lustrous golden body with enlarged, prominent \"dumbo ear\" pectoral fins creating a graceful flutter in planted tanks.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 280,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 560,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "guppy-santacruz-dumbo-ear",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "Santacruz Dumbo Ear Guppy",
+    "subtitle": "Poecilia reticulata var. Santacruz Dumbo",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Poecilia_reticulata_%28male%29.JPG",
+    "images": [],
+    "video": "",
+    "description": "Striking Santacruz lineage showcasing oversized dumbo ears, iridescent cobalt-blue coloration, and active schooling behavior.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 250,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 500,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "guppy-platinum-dumbo-halfmoon",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "Platinum Dumbo Ear Halfmoon Guppy",
+    "subtitle": "Poecilia reticulata var. Platinum Dumbo Halfmoon",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/af/Poecilia_reticulata_01.jpg",
+    "images": [],
+    "video": "",
+    "description": "Full 180-degree halfmoon caudal fin with gleaming platinum-white scales and grand dumbo pectoral ears.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 280,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 560,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "guppy-blue-dragon-dumbo-halfmoon",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "Blue Dragon Dumbo Ear Halfmoon Guppy",
+    "subtitle": "Poecilia reticulata var. Blue Dragon Dumbo",
+    "image": "https://images.unsplash.com/photo-1520989244660-118e51ae94bc?auto=format&fit=crop&w=600&q=80",
+    "images": [],
+    "video": "",
+    "description": "Rich royal blue metallic dorsal and halfmoon tail paired with grand dumbo ear fins. Centerpiece display fish.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 280,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 560,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "guppy-moscow-black-dumbo",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "Moscow Black Dumbo Ear Guppy",
+    "subtitle": "Poecilia reticulata var. Moscow Black Dumbo",
+    "image": "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=600&q=80",
+    "images": [],
+    "video": "",
+    "description": "Deep velvet-black coloration spanning from snout to tail, contrasted by delicate fluttery dumbo pectoral fins.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 250,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 500,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "guppy-afr-big-dorsal",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "AFR Big Dorsal Guppy",
+    "subtitle": "Poecilia reticulata var. Albino Full Red Big Dorsal",
+    "image": "https://images.unsplash.com/photo-1548262323-694280fdc967?auto=format&fit=crop&w=600&q=80",
+    "images": [],
+    "video": "",
+    "description": "Prized Albino Full Red (AFR) genetics with an extravagant, sail-like big dorsal fin and ruby-red eyes.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 300,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 600,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "guppy-dark-knight-dragon-dumbo",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "Dark Knight Dragon Dumbo Ear Guppy",
+    "subtitle": "Poecilia reticulata var. Dark Knight Dragon",
+    "image": "https://images.unsplash.com/photo-1553986187-9cb16fa33483?auto=format&fit=crop&w=600&q=80",
+    "images": [],
+    "video": "",
+    "description": "Dark dramatic dragon scales with violet and navy undertones, complemented by fluttering dumbo ears.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 280,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 560,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "guppy-red-platinum-koi-dumbo",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "Red Platinum Koi Dumbo Ear Guppy",
+    "subtitle": "Poecilia reticulata var. Red Platinum Koi Dumbo",
+    "image": "https://images.unsplash.com/photo-1500909001949-1fc0780d81c9?auto=format&fit=crop&w=600&q=80",
+    "images": [],
+    "video": "",
+    "description": "Classic red and platinum koi-styled color patterns with translucent big dumbo ears. Active and hardy.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 280,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 560,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "guppy-magenta-red-tiger",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "Magenta Red Tiger Guppy",
+    "subtitle": "Poecilia reticulata var. Magenta Red Tiger",
+    "image": "https://images.unsplash.com/photo-1538719501547-bc023056a8b6?auto=format&fit=crop&w=600&q=80",
+    "images": [],
+    "video": "",
+    "description": "Bold tiger bar stripes over vibrant magenta-red body. Energetic swimmer that thrives in planted aquascapes.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 250,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 500,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "guppy-white-tuxido",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "White Tuxido Guppy",
+    "subtitle": "Poecilia reticulata var. White Tuxedo",
+    "image": "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=600&q=80",
+    "images": [],
+    "video": "",
+    "description": "Crisp white caudal fin contrasted with a deep midnight tuxedo torso. Highly prolific and peaceful.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 250,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 500,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "guppy-silverado-red-dragon",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "Silverado Red Dragon Guppy",
+    "subtitle": "Poecilia reticulata var. Silverado Red Dragon",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Guppy_-_Poecilia_reticulata.jpg",
+    "images": [],
+    "video": "",
+    "description": "Silvery metallic chest transitioning into a fierce red dragon-patterned tail fin. Stunning light-reflective sheen.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 280,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 560,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "guppy-green-moscow",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "guppy",
+    "name": "Green Moscow Guppy",
+    "subtitle": "Poecilia reticulata var. Green Moscow",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Poecilia_reticulata_-_Guppy%2C_male%2C_cobra-green_morph.jpg",
+    "images": [],
+    "video": "",
+    "description": "Deep emerald-green metallic sheen covering head to tail. An all-time legendary strain for planted aquariums.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 250,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 500,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "show-grade-betta",
+    "category": "aquarium",
+    "categoryName": "Aquarium & Fish",
+    "subCategory": "betta",
+    "name": "Show Grade Betta Fish",
+    "subtitle": "Betta splendens (Halfmoon / Plakat)",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Betta-splendens-male.jpg",
+    "images": [],
+    "video": "",
+    "description": "Hand-selected healthy Betta splendens featuring vibrant color iridescence and large flowing fins. Centerpiece display specimen.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Micro-pellets & live/frozen daphnia",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult (5–6 cm)"
+    },
+    "variants": [
+      {
+        "name": "1 Specimen (Male 5–6 cm)",
+        "price": 350,
+        "label": "Piece"
+      },
+      {
+        "name": "2 Specimens (Select Males)",
+        "price": 700,
+        "label": "2 pcs"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "molly-golden",
+    "category": "aquarium",
+    "categoryName": "Molly Fish",
+    "subCategory": "molly",
+    "name": "Golden Molly",
+    "subtitle": "Poecilia sphenops var. Golden",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Gold_Molly_1.jpg",
+    "images": [],
+    "video": "",
+    "description": "Active and peaceful livebearer showcasing lustrous golden coloration. Thrives in planted community aquariums and grazes on natural biofilm.",
+    "specs": {
+      "care": "Beginner / Community",
+      "temp": "22°C – 28°C",
+      "diet": "Flakes, micro-pellets & vegetable matter",
+      "habitat": "Planted freshwater aquarium",
+      "size": "Adult Pair"
+    },
+    "variants": [
+      {
+        "name": "1 Pair (Adult Pair)",
+        "price": 180,
+        "label": "Pair"
+      },
+      {
+        "name": "2 Pairs (Colony Pack)",
+        "price": 360,
+        "label": "2 Pairs"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "shrimp-crystal-red",
+    "category": "aquarium",
+    "categoryName": "Shrimps",
+    "subCategory": "shrimps",
+    "name": "Crystal Red Shrimp",
+    "subtitle": "Caridina cf. cantonensis var. Crystal Red",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/47/Caridina-cf-cantonensis-crystal-red.jpg",
+    "images": [],
+    "video": "",
+    "description": "Prized high-grade dwarf freshwater shrimp displaying vivid red and bright white bands. Gentle algae grazer ideal for nano planted tanks.",
+    "specs": {
+      "care": "Intermediate / Peaceful",
+      "temp": "21°C – 25°C",
+      "diet": "Biofilm, specialized shrimp pellets & blanched vegetables",
+      "habitat": "Planted freshwater nano tank",
+      "size": "Adult (2–2.5 cm)"
+    },
+    "variants": [
+      {
+        "name": "Single (1 pc)",
+        "price": 150,
+        "label": "Piece"
+      },
+      {
+        "name": "Pack of 5 (5 pcs)",
+        "price": 750,
+        "label": "5 pcs"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "armadillidium-gestroi",
+    "category": "isopods",
+    "categoryName": "Isopods",
+    "subCategory": "isopods",
+    "name": "Armadillidium Gestroi",
+    "subtitle": "Armadillidium gestroi",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/95/Armadillidium_vulgare.jpg",
+    "images": [],
+    "video": "",
+    "description": "Striking Mediterranean pill bug known for its large size, bright yellow spotted dorsal plates, and vigorous vivarium janitorial skills.",
+    "specs": {
+      "care": "Bioactive Cleaners",
+      "temp": "20°C – 26°C",
+      "diet": "Leaf litter, decaying wood, calcium",
+      "habitat": "Bioactive vivarium / enclosure"
+    },
+    "variants": [
+      {
+        "name": "Single (1 pc)",
+        "price": 120,
+        "label": "Piece"
+      },
+      {
+        "name": "Starter Culture (5 pcs)",
+        "price": 600,
+        "label": "5 pcs"
+      },
+      {
+        "name": "Colony Culture (10 pcs)",
+        "price": 1200,
+        "label": "10 pcs"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "cubaris-murina-orange",
+    "category": "isopods",
+    "categoryName": "Isopods",
+    "subCategory": "isopods",
+    "name": "Cubaris Murina Orange",
+    "subtitle": "Cubaris murina \"Orange\"",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Cubaris_murinaflorida.jpg",
+    "images": [],
+    "video": "",
+    "description": "Warm apricot-orange color morph. Hardy, highly active, and quick to establish a thriving custodial colony in humid vivariums.",
+    "specs": {
+      "care": "Bioactive Cleaners",
+      "temp": "20°C – 26°C",
+      "diet": "Leaf litter, decaying wood, calcium",
+      "habitat": "Bioactive vivarium / enclosure"
+    },
+    "variants": [
+      {
+        "name": "Single (1 pc)",
+        "price": 60,
+        "label": "Piece"
+      },
+      {
+        "name": "Starter Culture (5 pcs)",
+        "price": 300,
+        "label": "5 pcs"
+      },
+      {
+        "name": "Colony Culture (10 pcs)",
+        "price": 600,
+        "label": "10 pcs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "cubaris-murina-glacier",
+    "category": "isopods",
+    "categoryName": "Isopods",
+    "subCategory": "isopods",
+    "name": "Cubaris Murina Glacier",
+    "subtitle": "Cubaris murina \"Glacier\"",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/87/Cubaris_murinafloridatop.jpg",
+    "images": [],
+    "video": "",
+    "description": "Pristine white porcelain appearance with subtle translucent undertones. Excellent bioactive cleanup crew.",
+    "specs": {
+      "care": "Bioactive Cleaners",
+      "temp": "20°C – 26°C",
+      "diet": "Leaf litter, decaying wood, calcium",
+      "habitat": "Bioactive vivarium / enclosure"
+    },
+    "variants": [
+      {
+        "name": "Single (1 pc)",
+        "price": 70,
+        "label": "Piece"
+      },
+      {
+        "name": "Starter Culture (5 pcs)",
+        "price": 350,
+        "label": "5 pcs"
+      },
+      {
+        "name": "Colony Culture (10 pcs)",
+        "price": 700,
+        "label": "10 pcs"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "porcellionides-pruinosus-orange-pied",
+    "category": "isopods",
+    "categoryName": "Isopods",
+    "subCategory": "isopods",
+    "name": "Porcellionides pruinosus Orange Pied",
+    "subtitle": "Porcellionides pruinosus \"Orange Pied\"",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Porcellionides_pruinosus_P1380341a.jpg",
+    "images": [],
+    "video": "",
+    "description": "Fast-moving, velvety powder-orange isopod with distinctive white pied patches. Superb detritivore for tropical enclosures.",
+    "specs": {
+      "care": "Bioactive Cleaners",
+      "temp": "20°C – 26°C",
+      "diet": "Leaf litter, decaying wood, calcium",
+      "habitat": "Bioactive vivarium / enclosure"
+    },
+    "variants": [
+      {
+        "name": "Single (1 pc)",
+        "price": 60,
+        "label": "Piece"
+      },
+      {
+        "name": "Starter Culture (5 pcs)",
+        "price": 300,
+        "label": "5 pcs"
+      },
+      {
+        "name": "Colony Culture (10 pcs)",
+        "price": 600,
+        "label": "10 pcs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "cubaris-sp-cappuccino",
+    "category": "isopods",
+    "categoryName": "Isopods",
+    "subCategory": "isopods",
+    "name": "Cubaris sp. Cappuccino",
+    "subtitle": "Cubaris sp. \"Cappuccino\"",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Cubaris_nigroflava_172816253.jpg",
+    "images": [],
+    "video": "",
+    "description": "Ultra-rare collector isopod exhibiting warm espresso-brown skirts and a creamy dorsal stripe reminiscent of a barista cappuccino.",
+    "specs": {
+      "care": "Bioactive Cleaners",
+      "temp": "20°C – 26°C",
+      "diet": "Leaf litter, decaying wood, calcium",
+      "habitat": "Bioactive vivarium / enclosure"
+    },
+    "variants": [
+      {
+        "name": "Single (1 pc)",
+        "price": 600,
+        "label": "Piece"
+      },
+      {
+        "name": "Starter Culture (5 pcs)",
+        "price": 3000,
+        "label": "5 pcs"
+      },
+      {
+        "name": "Colony Culture (10 pcs)",
+        "price": 6000,
+        "label": "10 pcs"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "cubaris-sp-cherry-blossom",
+    "category": "isopods",
+    "categoryName": "Isopods",
+    "subCategory": "isopods",
+    "name": "Cubaris sp. Cherry Blossom",
+    "subtitle": "Cubaris sp. \"Cherry Blossom\"",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_marmorata_171397510.jpg",
+    "images": [],
+    "video": "",
+    "description": "Exquisite pastel pink and creamy white hues mimicking delicate sakura blossoms. A prized gem among luxury isopod enthusiasts.",
+    "specs": {
+      "care": "Bioactive Cleaners",
+      "temp": "20°C – 26°C",
+      "diet": "Leaf litter, decaying wood, calcium",
+      "habitat": "Bioactive vivarium / enclosure"
+    },
+    "variants": [
+      {
+        "name": "Single (1 pc)",
+        "price": 750,
+        "label": "Piece"
+      },
+      {
+        "name": "Starter Culture (5 pcs)",
+        "price": 3750,
+        "label": "5 pcs"
+      },
+      {
+        "name": "Colony Culture (10 pcs)",
+        "price": 7500,
+        "label": "10 pcs"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "armadillidium-peraccae",
+    "category": "isopods",
+    "categoryName": "Isopods",
+    "subCategory": "isopods",
+    "name": "Armadillidium Peraccae",
+    "subtitle": "Armadillidium peraccae",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Armadillidium_vulgare_001.jpg",
+    "images": [],
+    "video": "",
+    "description": "Fascinating textured, bumpy slate-grey shell with high drought tolerance. Extremely resilient and fascinating to observe.",
+    "specs": {
+      "care": "Bioactive Cleaners",
+      "temp": "20°C – 26°C",
+      "diet": "Leaf litter, decaying wood, calcium",
+      "habitat": "Bioactive vivarium / enclosure"
+    },
+    "variants": [
+      {
+        "name": "Single (1 pc)",
+        "price": 150,
+        "label": "Piece"
+      },
+      {
+        "name": "Starter Culture (5 pcs)",
+        "price": 750,
+        "label": "5 pcs"
+      },
+      {
+        "name": "Colony Culture (10 pcs)",
+        "price": 1500,
+        "label": "10 pcs"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "chilean-rose-hair",
+    "category": "tarantulas",
+    "categoryName": "Tarantulas",
+    "subCategory": "tarantulas",
+    "name": "Chilean Rose Hair",
+    "subtitle": "Grammostola rosea",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/22/Grammostola_rosea_adult_weiblich.jpg",
+    "images": [],
+    "video": "",
+    "description": "Renowned for its calm, docile temperament and subtle pink carapace setae. The quintessential beginner New World tarantula.",
+    "specs": {
+      "care": "Low Maintenance",
+      "temp": "23°C – 28°C",
+      "diet": "Pinhead crickets & roach nymphs",
+      "habitat": "Ventilated sling vial / enclosure",
+      "size": "1–1.5 cm"
+    },
+    "variants": [
+      {
+        "name": "1 Specimen (1–1.5 cm)",
+        "price": 2199,
+        "label": "Specimen"
+      },
+      {
+        "name": "Pair of Slings (2 specimens)",
+        "price": 4398,
+        "label": "2 specimens"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "brazilian-whiteknee",
+    "category": "tarantulas",
+    "categoryName": "Tarantulas",
+    "subCategory": "tarantulas",
+    "name": "Brazilian Whiteknee",
+    "subtitle": "Acanthoscurria geniculata",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/60/Acanthoscurria_geniculata%2C_female.jpg",
+    "images": [],
+    "video": "",
+    "description": "Bold contrast of jet-black legs adorned with striking snow-white knee bands. Highly active with an enthusiastic feeding response.",
+    "specs": {
+      "care": "Low Maintenance",
+      "temp": "23°C – 28°C",
+      "diet": "Pinhead crickets & roach nymphs",
+      "habitat": "Ventilated sling vial / enclosure",
+      "size": "1–1.5 cm"
+    },
+    "variants": [
+      {
+        "name": "1 Specimen (1–1.5 cm)",
+        "price": 2199,
+        "label": "Specimen"
+      },
+      {
+        "name": "Pair of Slings (2 specimens)",
+        "price": 4398,
+        "label": "2 specimens"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "mexican-red-knee",
+    "category": "tarantulas",
+    "categoryName": "Tarantulas",
+    "subCategory": "tarantulas",
+    "name": "Mexican Red Knee",
+    "subtitle": "Brachypelma hamorii",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Brachypelma_edit.jpg",
+    "images": [],
+    "video": "",
+    "description": "World-famous display species showcasing fiery orange-red leg joints and deep black velvety body. Very docile and long-lived.",
+    "specs": {
+      "care": "Low Maintenance",
+      "temp": "23°C – 28°C",
+      "diet": "Pinhead crickets & roach nymphs",
+      "habitat": "Ventilated sling vial / enclosure",
+      "size": "1–1.5 cm"
+    },
+    "variants": [
+      {
+        "name": "1 Specimen (1–1.5 cm)",
+        "price": 2399,
+        "label": "Specimen"
+      },
+      {
+        "name": "Pair of Slings (2 specimens)",
+        "price": 4798,
+        "label": "2 specimens"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "green-bottle-blue",
+    "category": "tarantulas",
+    "categoryName": "Tarantulas",
+    "subCategory": "tarantulas",
+    "name": "Green Bottle Blue (GBB)",
+    "subtitle": "Chromatopelma cyaneopubescens",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Chromatopelma_cyaneopubescens.jpg",
+    "images": [],
+    "video": "",
+    "description": "Spectacular electric blue legs, metallic emerald-green carapace, and vibrant tiger-striped abdomen. Prolific heavy webber.",
+    "specs": {
+      "care": "Low Maintenance",
+      "temp": "23°C – 28°C",
+      "diet": "Pinhead crickets & roach nymphs",
+      "habitat": "Ventilated sling vial / enclosure",
+      "size": "1–1.5 cm"
+    },
+    "variants": [
+      {
+        "name": "1 Specimen (1–1.5 cm)",
+        "price": 4799,
+        "label": "Specimen"
+      },
+      {
+        "name": "Pair of Slings (2 specimens)",
+        "price": 9598,
+        "label": "2 specimens"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "chaco-golden-knee",
+    "category": "tarantulas",
+    "categoryName": "Tarantulas",
+    "subCategory": "tarantulas",
+    "name": "Chaco Golden Knee",
+    "subtitle": "Grammostola pulchripes",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/64/Grammostola_pulchripes_top_view.jpg",
+    "images": [],
+    "video": "",
+    "description": "Gentle giant famous for golden-yellow striped knee markings and calm demeanor. Highly recommended for enthusiastic beginners.",
+    "specs": {
+      "care": "Low Maintenance",
+      "temp": "23°C – 28°C",
+      "diet": "Pinhead crickets & roach nymphs",
+      "habitat": "Ventilated sling vial / enclosure",
+      "size": "1–1.5 cm"
+    },
+    "variants": [
+      {
+        "name": "1 Specimen (1–1.5 cm)",
+        "price": 1999,
+        "label": "Specimen"
+      },
+      {
+        "name": "Pair of Slings (2 specimens)",
+        "price": 3998,
+        "label": "2 specimens"
+      }
+    ],
+    "featured": false
+  },
+  {
+    "id": "salmon-pink",
+    "category": "tarantulas",
+    "categoryName": "Tarantulas",
+    "subCategory": "tarantulas",
+    "name": "Salmon Pink",
+    "subtitle": "Lasiodora parahybana",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/89/Brazilian_Salmon_Pink_Birdeater.jpg",
+    "images": [],
+    "video": "",
+    "description": "One of the largest tarantula species in the world. Fast-growing established spiderling with salmon-pink hairs.",
+    "specs": {
+      "care": "Low Maintenance",
+      "temp": "23°C – 28°C",
+      "diet": "Pinhead crickets & roach nymphs",
+      "habitat": "Ventilated sling vial / enclosure",
+      "size": "1 inch"
+    },
+    "variants": [
+      {
+        "name": "1 Specimen (1 inch)",
+        "price": 3000,
+        "label": "Specimen"
+      },
+      {
+        "name": "Pair of Slings (2 specimens)",
+        "price": 6000,
+        "label": "2 specimens"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "isopod-house-kit",
+    "category": "combo",
+    "categoryName": "Combo Packs",
+    "subCategory": "isopod-kit",
+    "name": "Isopod House Kit",
+    "subtitle": "Complete Bioactive Isopod Habitat",
+    "image": "https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=800&q=80",
+    "images": [],
+    "video": "",
+    "description": "Complete glass bioactive habitat setup. Includes glass isopod house, live plants, substrate blend, lotus pod hide, food, and a starter culture of 6 Cubaris Glacier isopods.",
+    "specs": {
+      "care": "Complete Bioactive Setup",
+      "temp": "Ambient Room Temp",
+      "diet": "Included in starter pack",
+      "habitat": "High-clarity glass enclosure",
+      "kitIncludes": [
+        "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height)",
+        "Fittonia albivenis (Patterned nerve plant)",
+        "Hemigraphis sp. Pink (Purple waffle plant)",
+        "Sheet Moss layer",
+        "Bioactive Isopod Substrate Blend",
+        "Lotus Pod (natural hide for isopods)",
+        "Premium Isopod Food",
+        "Isopod Culture: 6 Cubaris sp. \"Glacier\""
+      ]
+    },
+    "variants": [
+      {
+        "name": "Complete Kit",
+        "price": 1545,
+        "label": "Kit"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "half-cube-aquarium-kit",
+    "category": "combo",
+    "categoryName": "Combo Packs",
+    "subCategory": "aquarium-kit",
+    "name": "Half Cube Aquarium Kit",
+    "subtitle": "Desktop Betta Aquascape Bundle",
+    "image": "https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=800&q=80",
+    "images": [],
+    "video": "",
+    "description": "Desktop planted aquarium kit. Includes Half Cube aquarium, 1 healthy Betta fish, live aquatic plants, and premium sand substrate.",
+    "specs": {
+      "care": "Complete Bioactive Setup",
+      "temp": "Ambient Room Temp",
+      "diet": "Included in starter pack",
+      "habitat": "High-clarity glass enclosure",
+      "kitIncludes": [
+        "Half Cube Aquarium",
+        "1 beautiful Betta Fish",
+        "Live aquatic plants",
+        "Premium sand substrate"
+      ]
+    },
+    "variants": [
+      {
+        "name": "Complete Kit",
+        "price": 999,
+        "label": "Kit"
+      }
+    ],
+    "featured": true
+  },
+  {
+    "id": "glacier-colony-pack",
+    "category": "combo",
+    "categoryName": "Combo Packs",
+    "subCategory": "isopod-kit",
+    "name": "Glacier Isopods (Buy 10, Get 1 Free)",
+    "subtitle": "Cubaris murina \"Glacier\" 10+1 Special",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_tarangensis_190481013.jpg",
+    "images": [],
+    "video": "",
+    "description": "Promotional colony pack: Purchase 10 Cubaris Murina Glacier isopods and receive 1 bonus isopod free of charge (11 specimens total).",
+    "specs": {
+      "care": "Complete Bioactive Setup",
+      "temp": "Ambient Room Temp",
+      "diet": "Included in starter pack",
+      "habitat": "High-clarity glass enclosure",
+      "kitIncludes": [
+        "10 Cubaris Murina Glacier Isopods",
+        "1 Bonus Isopod (11 specimens total)",
+        "Ventilated transport culture cup",
+        "Starter food blend"
+      ]
+    },
+    "variants": [
+      {
+        "name": "10 + 1 Free Deal (11 specimens)",
+        "price": 700,
+        "label": "11 Pieces"
+      }
+    ],
+    "featured": true
+  }
+]

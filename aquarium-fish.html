@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aquarium & Fish — Pure Guppy Strains & Betta Fish | Fish Tales</title>
-  <meta name="description" content="Explore all 13 pure strain show guppy varieties and Show Grade Betta fish at Fish Tales. Verified prices, acclimatized pairs, and live arrival guarantee.">
+  <title>Aquarium & Fish — Pure Guppy Strains, Betta & Aquariums | Fish Tales</title>
+  <meta name="description" content="Explore pure strain show guppy varieties, Show Grade Betta fish, and planted desktop aquarium kits at Fish Tales. Verified prices and live arrival guarantee.">
   <meta name="theme-color" content="#174B32">
 
   <!-- Favicon / Official Mascot Logo -->
@@ -95,36 +95,42 @@
 
         <!-- Centred Catalogue Header -->
         <header class="catalogue-header text-center">
-          <div class="catalogue-eyebrow-pill">14 VERIFIED AQUATIC SPECIMENS</div>
+          <div class="catalogue-eyebrow-pill">17 VERIFIED AQUATIC SPECIMENS</div>
           <h1 class="catalogue-title">Aquarium &amp; Fish Collection</h1>
-          <p class="catalogue-subtitle">Browse all 13 pure-strain show guppy breeding pairs and show grade Betta fish, conditioned for planted community tanks.</p>
+          <p class="catalogue-subtitle">Explore pure-strain show guppy breeding pairs, show grade Betta fish, molly fish, freshwater shrimps, and planted aquarium kits.</p>
         </header>
 
-        <!-- Category Filter Pills Switcher -->
-        <div class="filter-pills-row" role="tablist" aria-label="Product Categories">
-          <a href="index.html#catalogue" class="filter-pill category-pill-link">
+        <!-- Category Filter Pills Switcher (Aquarium & Fish Filters) -->
+        <div class="filter-pills-row" role="tablist" aria-label="Aquarium &amp; Fish Categories">
+          <button type="button" class="filter-pill filter-tab active" data-filter="all" data-category="all" onclick="filterAquariumCategory('all')">
             All Products
-          </a>
-          <a href="aquarium-fish.html" class="filter-pill category-pill-link active">
-            Aquarium &amp; Fish (14)
-          </a>
-          <a href="isopods.html" class="filter-pill category-pill-link ">
-            Isopods (7)
-          </a>
-          <a href="tarantulas.html" class="filter-pill category-pill-link ">
-            Tarantulas (6)
-          </a>
-          <a href="combo-packs.html" class="filter-pill category-pill-link ">
-            Combo Packs (3)
-          </a>
+          </button>
+          <button type="button" class="filter-pill filter-tab" data-filter="aquarium" data-category="aquarium" onclick="filterAquariumCategory('aquarium')">
+            Aquarium
+          </button>
+          <button type="button" class="filter-pill filter-tab" data-filter="betta" data-category="betta" onclick="filterAquariumCategory('betta')">
+            Betta Fish
+          </button>
+          <button type="button" class="filter-pill filter-tab" data-filter="guppy" data-category="guppy" onclick="filterAquariumCategory('guppy')">
+            Guppy
+          </button>
+          <button type="button" class="filter-pill filter-tab" data-filter="molly" data-category="molly" onclick="filterAquariumCategory('molly')">
+            Molly
+          </button>
+          <button type="button" class="filter-pill filter-tab" data-filter="shrimps" data-category="shrimps" onclick="filterAquariumCategory('shrimps')">
+            Shrimps
+          </button>
+          <button type="button" class="filter-pill filter-tab" data-filter="combos" data-category="combos" onclick="filterAquariumCategory('combos')">
+            Combo Packs
+          </button>
         </div>
 
         <!-- Full-Width Horizontal Catalogue Toolbar -->
         <div class="catalogue-toolbar">
           <!-- LEFT SIDE: Product Count + Active Category Indicator -->
           <div class="toolbar-left">
-            <span id="resultCount" class="results-count">Showing <strong>14</strong> of <strong>14</strong> products</span>
-            <span class="active-category-badge" id="activeCategoryIndicator">Aquarium & Fish</span>
+            <span id="resultCount" class="results-count">Showing <strong>17</strong> of <strong>17</strong> products</span>
+            <span class="active-category-badge" id="activeCategoryIndicator">All Products</span>
           </div>
 
           <!-- RIGHT SIDE: Search Input with Icon + Sort Dropdown -->

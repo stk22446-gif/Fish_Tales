@@ -60,6 +60,15 @@
     if (p.specs && p.specs.kitIncludes && !p.kitIncludes) {
       p.kitIncludes = p.specs.kitIncludes;
     }
+    if (!p.subCategory) {
+      const id = (p.id || '').toLowerCase();
+      const name = (p.name || '').toLowerCase();
+      if (id.includes('guppy') || name.includes('guppy')) p.subCategory = 'guppy';
+      else if (id.includes('betta') || name.includes('betta')) p.subCategory = 'betta';
+      else if (id.includes('aquarium') || name.includes('aquarium') || id.includes('tank') || name.includes('tank')) p.subCategory = 'aquarium';
+      else if (id.includes('molly') || name.includes('molly')) p.subCategory = 'molly';
+      else if (id.includes('shrimp') || name.includes('shrimp')) p.subCategory = 'shrimp';
+    }
     if (p.variants) {
       p.variants.forEach(v => {
         if (!v.unit) v.unit = (v.label || 'item').toLowerCase();
@@ -73,13 +82,13 @@
     return product.variants[idx] || product.variants[0];
   }
 
-  /* ── 3. Master Product Catalogue (Exactly 30 Verified Items) ─ */
+  /* ── 3. Master Product Catalogue (Standardized Schema) ───── */
   const PRODUCTS = [
-    // AQUARIUM & FISH
     {
       id: "guppy-red-lace",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "Red Lace Guppy",
       subtitle: "Poecilia reticulata var. Red Lace",
       image: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Cobra_Guppy_%28Poecilia_reticulata%29.JPG",
@@ -95,14 +104,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
         }
       ],
       featured: true
@@ -111,6 +120,7 @@
       id: "guppy-gold-dumbo-ear",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "Gold Dumbo Ear Guppy",
       subtitle: "Poecilia reticulata var. Gold Dumbo Ear",
       image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Poecilia_retic_090519-8688_kdBdk.jpg",
@@ -126,14 +136,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
         }
       ],
       featured: false
@@ -142,6 +152,7 @@
       id: "guppy-santacruz-dumbo-ear",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "Santacruz Dumbo Ear Guppy",
       subtitle: "Poecilia reticulata var. Santacruz Dumbo",
       image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Poecilia_reticulata_%28male%29.JPG",
@@ -157,14 +168,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
         }
       ],
       featured: false
@@ -173,6 +184,7 @@
       id: "guppy-platinum-dumbo-halfmoon",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "Platinum Dumbo Ear Halfmoon Guppy",
       subtitle: "Poecilia reticulata var. Platinum Dumbo Halfmoon",
       image: "https://upload.wikimedia.org/wikipedia/commons/a/af/Poecilia_reticulata_01.jpg",
@@ -188,14 +200,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
         }
       ],
       featured: true
@@ -204,6 +216,7 @@
       id: "guppy-blue-dragon-dumbo-halfmoon",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "Blue Dragon Dumbo Ear Halfmoon Guppy",
       subtitle: "Poecilia reticulata var. Blue Dragon Dumbo",
       image: "https://images.unsplash.com/photo-1520989244660-118e51ae94bc?auto=format&fit=crop&w=600&q=80",
@@ -219,14 +232,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
         }
       ],
       featured: true
@@ -235,6 +248,7 @@
       id: "guppy-moscow-black-dumbo",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "Moscow Black Dumbo Ear Guppy",
       subtitle: "Poecilia reticulata var. Moscow Black Dumbo",
       image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=600&q=80",
@@ -250,14 +264,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
         }
       ],
       featured: false
@@ -266,6 +280,7 @@
       id: "guppy-afr-big-dorsal",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "AFR Big Dorsal Guppy",
       subtitle: "Poecilia reticulata var. Albino Full Red Big Dorsal",
       image: "https://images.unsplash.com/photo-1548262323-694280fdc967?auto=format&fit=crop&w=600&q=80",
@@ -281,14 +296,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 300,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 300,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 600,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 600,
+                "label": "2 Pairs"
         }
       ],
       featured: true
@@ -297,6 +312,7 @@
       id: "guppy-dark-knight-dragon-dumbo",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "Dark Knight Dragon Dumbo Ear Guppy",
       subtitle: "Poecilia reticulata var. Dark Knight Dragon",
       image: "https://images.unsplash.com/photo-1553986187-9cb16fa33483?auto=format&fit=crop&w=600&q=80",
@@ -312,14 +328,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
         }
       ],
       featured: false
@@ -328,6 +344,7 @@
       id: "guppy-red-platinum-koi-dumbo",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "Red Platinum Koi Dumbo Ear Guppy",
       subtitle: "Poecilia reticulata var. Red Platinum Koi Dumbo",
       image: "https://images.unsplash.com/photo-1500909001949-1fc0780d81c9?auto=format&fit=crop&w=600&q=80",
@@ -343,14 +360,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
         }
       ],
       featured: false
@@ -359,6 +376,7 @@
       id: "guppy-magenta-red-tiger",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "Magenta Red Tiger Guppy",
       subtitle: "Poecilia reticulata var. Magenta Red Tiger",
       image: "https://images.unsplash.com/photo-1538719501547-bc023056a8b6?auto=format&fit=crop&w=600&q=80",
@@ -374,14 +392,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
         }
       ],
       featured: false
@@ -390,6 +408,7 @@
       id: "guppy-white-tuxido",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "White Tuxido Guppy",
       subtitle: "Poecilia reticulata var. White Tuxedo",
       image: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=600&q=80",
@@ -405,14 +424,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
         }
       ],
       featured: false
@@ -421,6 +440,7 @@
       id: "guppy-silverado-red-dragon",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "Silverado Red Dragon Guppy",
       subtitle: "Poecilia reticulata var. Silverado Red Dragon",
       image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Guppy_-_Poecilia_reticulata.jpg",
@@ -436,14 +456,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
         }
       ],
       featured: false
@@ -452,6 +472,7 @@
       id: "guppy-green-moscow",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "guppy",
       name: "Green Moscow Guppy",
       subtitle: "Poecilia reticulata var. Green Moscow",
       image: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Poecilia_reticulata_-_Guppy%2C_male%2C_cobra-green_morph.jpg",
@@ -467,14 +488,14 @@
       },
       variants: [
         {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
         },
         {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
         }
       ],
       featured: false
@@ -483,6 +504,7 @@
       id: "show-grade-betta",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
+      subCategory: "betta",
       name: "Show Grade Betta Fish",
       subtitle: "Betta splendens (Halfmoon / Plakat)",
       image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Betta-splendens-male.jpg",
@@ -498,24 +520,87 @@
       },
       variants: [
         {
-          "name": "1 Specimen (Male 5–6 cm)",
-          "price": 350,
-          "label": "Piece"
+                "name": "1 Specimen (Male 5–6 cm)",
+                "price": 350,
+                "label": "Piece"
         },
         {
-          "name": "2 Specimens (Select Males)",
-          "price": 700,
-          "label": "2 pcs"
+                "name": "2 Specimens (Select Males)",
+                "price": 700,
+                "label": "2 pcs"
         }
       ],
       featured: true
     },
-
-    // ISOPODS
+    {
+      id: "molly-golden",
+      category: "aquarium",
+      categoryName: "Molly Fish",
+      subCategory: "molly",
+      name: "Golden Molly",
+      subtitle: "Poecilia sphenops var. Golden",
+      image: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Gold_Molly_1.jpg",
+      images: [],
+      video: "",
+      description: "Active and peaceful livebearer showcasing lustrous golden coloration. Thrives in planted community aquariums and grazes on natural biofilm.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Flakes, micro-pellets & vegetable matter",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 180,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 360,
+                "label": "2 Pairs"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "shrimp-crystal-red",
+      category: "aquarium",
+      categoryName: "Shrimps",
+      subCategory: "shrimps",
+      name: "Crystal Red Shrimp",
+      subtitle: "Caridina cf. cantonensis var. Crystal Red",
+      image: "https://upload.wikimedia.org/wikipedia/commons/4/47/Caridina-cf-cantonensis-crystal-red.jpg",
+      images: [],
+      video: "",
+      description: "Prized high-grade dwarf freshwater shrimp displaying vivid red and bright white bands. Gentle algae grazer ideal for nano planted tanks.",
+      specs: {
+        "care": "Intermediate / Peaceful",
+        "temp": "21°C – 25°C",
+        "diet": "Biofilm, specialized shrimp pellets & blanched vegetables",
+        "habitat": "Planted freshwater nano tank",
+        "size": "Adult (2–2.5 cm)"
+      },
+      variants: [
+        {
+                "name": "Single (1 pc)",
+                "price": 150,
+                "label": "Piece"
+        },
+        {
+                "name": "Pack of 5 (5 pcs)",
+                "price": 750,
+                "label": "5 pcs"
+        }
+      ],
+      featured: true
+    },
     {
       id: "armadillidium-gestroi",
       category: "isopods",
       categoryName: "Isopods",
+      subCategory: "isopods",
       name: "Armadillidium Gestroi",
       subtitle: "Armadillidium gestroi",
       image: "https://upload.wikimedia.org/wikipedia/commons/9/95/Armadillidium_vulgare.jpg",
@@ -530,19 +615,19 @@
       },
       variants: [
         {
-          "name": "Single (1 pc)",
-          "price": 120,
-          "label": "Piece"
+                "name": "Single (1 pc)",
+                "price": 120,
+                "label": "Piece"
         },
         {
-          "name": "Starter Culture (5 pcs)",
-          "price": 600,
-          "label": "5 pcs"
+                "name": "Starter Culture (5 pcs)",
+                "price": 600,
+                "label": "5 pcs"
         },
         {
-          "name": "Colony Culture (10 pcs)",
-          "price": 1200,
-          "label": "10 pcs"
+                "name": "Colony Culture (10 pcs)",
+                "price": 1200,
+                "label": "10 pcs"
         }
       ],
       featured: true
@@ -551,6 +636,7 @@
       id: "cubaris-murina-orange",
       category: "isopods",
       categoryName: "Isopods",
+      subCategory: "isopods",
       name: "Cubaris Murina Orange",
       subtitle: "Cubaris murina \"Orange\"",
       image: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Cubaris_murinaflorida.jpg",
@@ -565,19 +651,19 @@
       },
       variants: [
         {
-          "name": "Single (1 pc)",
-          "price": 60,
-          "label": "Piece"
+                "name": "Single (1 pc)",
+                "price": 60,
+                "label": "Piece"
         },
         {
-          "name": "Starter Culture (5 pcs)",
-          "price": 300,
-          "label": "5 pcs"
+                "name": "Starter Culture (5 pcs)",
+                "price": 300,
+                "label": "5 pcs"
         },
         {
-          "name": "Colony Culture (10 pcs)",
-          "price": 600,
-          "label": "10 pcs"
+                "name": "Colony Culture (10 pcs)",
+                "price": 600,
+                "label": "10 pcs"
         }
       ],
       featured: false
@@ -586,6 +672,7 @@
       id: "cubaris-murina-glacier",
       category: "isopods",
       categoryName: "Isopods",
+      subCategory: "isopods",
       name: "Cubaris Murina Glacier",
       subtitle: "Cubaris murina \"Glacier\"",
       image: "https://upload.wikimedia.org/wikipedia/commons/8/87/Cubaris_murinafloridatop.jpg",
@@ -600,19 +687,19 @@
       },
       variants: [
         {
-          "name": "Single (1 pc)",
-          "price": 70,
-          "label": "Piece"
+                "name": "Single (1 pc)",
+                "price": 70,
+                "label": "Piece"
         },
         {
-          "name": "Starter Culture (5 pcs)",
-          "price": 350,
-          "label": "5 pcs"
+                "name": "Starter Culture (5 pcs)",
+                "price": 350,
+                "label": "5 pcs"
         },
         {
-          "name": "Colony Culture (10 pcs)",
-          "price": 700,
-          "label": "10 pcs"
+                "name": "Colony Culture (10 pcs)",
+                "price": 700,
+                "label": "10 pcs"
         }
       ],
       featured: true
@@ -621,6 +708,7 @@
       id: "porcellionides-pruinosus-orange-pied",
       category: "isopods",
       categoryName: "Isopods",
+      subCategory: "isopods",
       name: "Porcellionides pruinosus Orange Pied",
       subtitle: "Porcellionides pruinosus \"Orange Pied\"",
       image: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Porcellionides_pruinosus_P1380341a.jpg",
@@ -635,19 +723,19 @@
       },
       variants: [
         {
-          "name": "Single (1 pc)",
-          "price": 60,
-          "label": "Piece"
+                "name": "Single (1 pc)",
+                "price": 60,
+                "label": "Piece"
         },
         {
-          "name": "Starter Culture (5 pcs)",
-          "price": 300,
-          "label": "5 pcs"
+                "name": "Starter Culture (5 pcs)",
+                "price": 300,
+                "label": "5 pcs"
         },
         {
-          "name": "Colony Culture (10 pcs)",
-          "price": 600,
-          "label": "10 pcs"
+                "name": "Colony Culture (10 pcs)",
+                "price": 600,
+                "label": "10 pcs"
         }
       ],
       featured: false
@@ -656,6 +744,7 @@
       id: "cubaris-sp-cappuccino",
       category: "isopods",
       categoryName: "Isopods",
+      subCategory: "isopods",
       name: "Cubaris sp. Cappuccino",
       subtitle: "Cubaris sp. \"Cappuccino\"",
       image: "https://upload.wikimedia.org/wikipedia/commons/1/18/Cubaris_nigroflava_172816253.jpg",
@@ -670,19 +759,19 @@
       },
       variants: [
         {
-          "name": "Single (1 pc)",
-          "price": 600,
-          "label": "Piece"
+                "name": "Single (1 pc)",
+                "price": 600,
+                "label": "Piece"
         },
         {
-          "name": "Starter Culture (5 pcs)",
-          "price": 3000,
-          "label": "5 pcs"
+                "name": "Starter Culture (5 pcs)",
+                "price": 3000,
+                "label": "5 pcs"
         },
         {
-          "name": "Colony Culture (10 pcs)",
-          "price": 6000,
-          "label": "10 pcs"
+                "name": "Colony Culture (10 pcs)",
+                "price": 6000,
+                "label": "10 pcs"
         }
       ],
       featured: true
@@ -691,6 +780,7 @@
       id: "cubaris-sp-cherry-blossom",
       category: "isopods",
       categoryName: "Isopods",
+      subCategory: "isopods",
       name: "Cubaris sp. Cherry Blossom",
       subtitle: "Cubaris sp. \"Cherry Blossom\"",
       image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_marmorata_171397510.jpg",
@@ -705,19 +795,19 @@
       },
       variants: [
         {
-          "name": "Single (1 pc)",
-          "price": 750,
-          "label": "Piece"
+                "name": "Single (1 pc)",
+                "price": 750,
+                "label": "Piece"
         },
         {
-          "name": "Starter Culture (5 pcs)",
-          "price": 3750,
-          "label": "5 pcs"
+                "name": "Starter Culture (5 pcs)",
+                "price": 3750,
+                "label": "5 pcs"
         },
         {
-          "name": "Colony Culture (10 pcs)",
-          "price": 7500,
-          "label": "10 pcs"
+                "name": "Colony Culture (10 pcs)",
+                "price": 7500,
+                "label": "10 pcs"
         }
       ],
       featured: true
@@ -726,6 +816,7 @@
       id: "armadillidium-peraccae",
       category: "isopods",
       categoryName: "Isopods",
+      subCategory: "isopods",
       name: "Armadillidium Peraccae",
       subtitle: "Armadillidium peraccae",
       image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Armadillidium_vulgare_001.jpg",
@@ -740,29 +831,28 @@
       },
       variants: [
         {
-          "name": "Single (1 pc)",
-          "price": 150,
-          "label": "Piece"
+                "name": "Single (1 pc)",
+                "price": 150,
+                "label": "Piece"
         },
         {
-          "name": "Starter Culture (5 pcs)",
-          "price": 750,
-          "label": "5 pcs"
+                "name": "Starter Culture (5 pcs)",
+                "price": 750,
+                "label": "5 pcs"
         },
         {
-          "name": "Colony Culture (10 pcs)",
-          "price": 1500,
-          "label": "10 pcs"
+                "name": "Colony Culture (10 pcs)",
+                "price": 1500,
+                "label": "10 pcs"
         }
       ],
       featured: false
     },
-
-    // TARANTULAS
     {
       id: "chilean-rose-hair",
       category: "tarantulas",
       categoryName: "Tarantulas",
+      subCategory: "tarantulas",
       name: "Chilean Rose Hair",
       subtitle: "Grammostola rosea",
       image: "https://upload.wikimedia.org/wikipedia/commons/2/22/Grammostola_rosea_adult_weiblich.jpg",
@@ -778,14 +868,14 @@
       },
       variants: [
         {
-          "name": "1 Specimen (1–1.5 cm)",
-          "price": 2199,
-          "label": "Specimen"
+                "name": "1 Specimen (1–1.5 cm)",
+                "price": 2199,
+                "label": "Specimen"
         },
         {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 4398,
-          "label": "2 specimens"
+                "name": "Pair of Slings (2 specimens)",
+                "price": 4398,
+                "label": "2 specimens"
         }
       ],
       featured: true
@@ -794,6 +884,7 @@
       id: "brazilian-whiteknee",
       category: "tarantulas",
       categoryName: "Tarantulas",
+      subCategory: "tarantulas",
       name: "Brazilian Whiteknee",
       subtitle: "Acanthoscurria geniculata",
       image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Acanthoscurria_geniculata%2C_female.jpg",
@@ -809,14 +900,14 @@
       },
       variants: [
         {
-          "name": "1 Specimen (1–1.5 cm)",
-          "price": 2199,
-          "label": "Specimen"
+                "name": "1 Specimen (1–1.5 cm)",
+                "price": 2199,
+                "label": "Specimen"
         },
         {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 4398,
-          "label": "2 specimens"
+                "name": "Pair of Slings (2 specimens)",
+                "price": 4398,
+                "label": "2 specimens"
         }
       ],
       featured: true
@@ -825,6 +916,7 @@
       id: "mexican-red-knee",
       category: "tarantulas",
       categoryName: "Tarantulas",
+      subCategory: "tarantulas",
       name: "Mexican Red Knee",
       subtitle: "Brachypelma hamorii",
       image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Brachypelma_edit.jpg",
@@ -840,14 +932,14 @@
       },
       variants: [
         {
-          "name": "1 Specimen (1–1.5 cm)",
-          "price": 2399,
-          "label": "Specimen"
+                "name": "1 Specimen (1–1.5 cm)",
+                "price": 2399,
+                "label": "Specimen"
         },
         {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 4798,
-          "label": "2 specimens"
+                "name": "Pair of Slings (2 specimens)",
+                "price": 4798,
+                "label": "2 specimens"
         }
       ],
       featured: true
@@ -856,6 +948,7 @@
       id: "green-bottle-blue",
       category: "tarantulas",
       categoryName: "Tarantulas",
+      subCategory: "tarantulas",
       name: "Green Bottle Blue (GBB)",
       subtitle: "Chromatopelma cyaneopubescens",
       image: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Chromatopelma_cyaneopubescens.jpg",
@@ -871,14 +964,14 @@
       },
       variants: [
         {
-          "name": "1 Specimen (1–1.5 cm)",
-          "price": 4799,
-          "label": "Specimen"
+                "name": "1 Specimen (1–1.5 cm)",
+                "price": 4799,
+                "label": "Specimen"
         },
         {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 9598,
-          "label": "2 specimens"
+                "name": "Pair of Slings (2 specimens)",
+                "price": 9598,
+                "label": "2 specimens"
         }
       ],
       featured: true
@@ -887,6 +980,7 @@
       id: "chaco-golden-knee",
       category: "tarantulas",
       categoryName: "Tarantulas",
+      subCategory: "tarantulas",
       name: "Chaco Golden Knee",
       subtitle: "Grammostola pulchripes",
       image: "https://upload.wikimedia.org/wikipedia/commons/6/64/Grammostola_pulchripes_top_view.jpg",
@@ -902,14 +996,14 @@
       },
       variants: [
         {
-          "name": "1 Specimen (1–1.5 cm)",
-          "price": 1999,
-          "label": "Specimen"
+                "name": "1 Specimen (1–1.5 cm)",
+                "price": 1999,
+                "label": "Specimen"
         },
         {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 3998,
-          "label": "2 specimens"
+                "name": "Pair of Slings (2 specimens)",
+                "price": 3998,
+                "label": "2 specimens"
         }
       ],
       featured: false
@@ -918,6 +1012,7 @@
       id: "salmon-pink",
       category: "tarantulas",
       categoryName: "Tarantulas",
+      subCategory: "tarantulas",
       name: "Salmon Pink",
       subtitle: "Lasiodora parahybana",
       image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Brazilian_Salmon_Pink_Birdeater.jpg",
@@ -933,24 +1028,23 @@
       },
       variants: [
         {
-          "name": "1 Specimen (1 inch)",
-          "price": 3000,
-          "label": "Specimen"
+                "name": "1 Specimen (1 inch)",
+                "price": 3000,
+                "label": "Specimen"
         },
         {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 6000,
-          "label": "2 specimens"
+                "name": "Pair of Slings (2 specimens)",
+                "price": 6000,
+                "label": "2 specimens"
         }
       ],
       featured: true
     },
-
-    // COMBO PACKS
     {
       id: "isopod-house-kit",
-      category: "combos",
+      category: "combo",
       categoryName: "Combo Packs",
+      subCategory: "isopod-kit",
       name: "Isopod House Kit",
       subtitle: "Complete Bioactive Isopod Habitat",
       image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=800&q=80",
@@ -963,29 +1057,30 @@
         "diet": "Included in starter pack",
         "habitat": "High-clarity glass enclosure",
         "kitIncludes": [
-          "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height)",
-          "Fittonia albivenis (Patterned nerve plant)",
-          "Hemigraphis sp. Pink (Purple waffle plant)",
-          "Sheet Moss layer",
-          "Bioactive Isopod Substrate Blend",
-          "Lotus Pod (natural hide for isopods)",
-          "Premium Isopod Food",
-          "Isopod Culture: 6 Cubaris sp. \"Glacier\""
+                "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height)",
+                "Fittonia albivenis (Patterned nerve plant)",
+                "Hemigraphis sp. Pink (Purple waffle plant)",
+                "Sheet Moss layer",
+                "Bioactive Isopod Substrate Blend",
+                "Lotus Pod (natural hide for isopods)",
+                "Premium Isopod Food",
+                "Isopod Culture: 6 Cubaris sp. \"Glacier\""
         ]
       },
       variants: [
         {
-          "name": "Complete Kit",
-          "price": 1545,
-          "label": "Kit"
+                "name": "Complete Kit",
+                "price": 1545,
+                "label": "Kit"
         }
       ],
       featured: true
     },
     {
       id: "half-cube-aquarium-kit",
-      category: "combos",
+      category: "combo",
       categoryName: "Combo Packs",
+      subCategory: "aquarium-kit",
       name: "Half Cube Aquarium Kit",
       subtitle: "Desktop Betta Aquascape Bundle",
       image: "https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=800&q=80",
@@ -998,25 +1093,26 @@
         "diet": "Included in starter pack",
         "habitat": "High-clarity glass enclosure",
         "kitIncludes": [
-          "Half Cube Aquarium",
-          "1 beautiful Betta Fish",
-          "Live aquatic plants",
-          "Premium sand substrate"
+                "Half Cube Aquarium",
+                "1 beautiful Betta Fish",
+                "Live aquatic plants",
+                "Premium sand substrate"
         ]
       },
       variants: [
         {
-          "name": "Complete Kit",
-          "price": 999,
-          "label": "Kit"
+                "name": "Complete Kit",
+                "price": 999,
+                "label": "Kit"
         }
       ],
       featured: true
     },
     {
       id: "glacier-colony-pack",
-      category: "combos",
+      category: "combo",
       categoryName: "Combo Packs",
+      subCategory: "isopod-kit",
       name: "Glacier Isopods (Buy 10, Get 1 Free)",
       subtitle: "Cubaris murina \"Glacier\" 10+1 Special",
       image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_tarangensis_190481013.jpg",
@@ -1029,17 +1125,17 @@
         "diet": "Included in starter pack",
         "habitat": "High-clarity glass enclosure",
         "kitIncludes": [
-          "10 Cubaris Murina Glacier Isopods",
-          "1 Bonus Isopod (11 specimens total)",
-          "Ventilated transport culture cup",
-          "Starter food blend"
+                "10 Cubaris Murina Glacier Isopods",
+                "1 Bonus Isopod (11 specimens total)",
+                "Ventilated transport culture cup",
+                "Starter food blend"
         ]
       },
       variants: [
         {
-          "name": "10 + 1 Free Deal (11 specimens)",
-          "price": 700,
-          "label": "11 Pieces"
+                "name": "10 + 1 Free Deal (11 specimens)",
+                "price": 700,
+                "label": "11 Pieces"
         }
       ],
       featured: true
@@ -1219,6 +1315,7 @@
   window.PRODUCTS = PRODUCTS;
   window.CartManager = CartManager;
   window.addToCartById = (id, qty = 1) => CartManager.addById(id, qty);
+  window.renderProductGrid = renderProductGrid;
 
   /* ── 5. Toast Notification Controller ────────────────────── */
   function showToast(message, type = 'success') {
@@ -1239,6 +1336,59 @@
 
   /* ── 6. Product Filtering, Search & Catalogue Rendering ──── */
   let currentCategory = 'all';
+  let currentAquariumFilter = 'all';
+
+  const AQUARIUM_FILTER_NAMES = {
+    all: 'All Products',
+    aquarium: 'Aquarium',
+    betta: 'Betta Fish',
+    guppy: 'Guppy',
+    molly: 'Molly',
+    shrimps: 'Shrimps',
+    combos: 'Combo Packs'
+  };
+
+  function isAquariumProduct(p) {
+    if (!p) return false;
+    initProductVariantsAndSpecs(p);
+    return p.category === 'aquarium' || p.subCategory === 'aquarium-kit' || p.subCategory === 'aquarium';
+  }
+
+  function matchesAquariumSubFilter(p, filterKey) {
+    if (!p) return false;
+    initProductVariantsAndSpecs(p);
+    if (!isAquariumProduct(p)) return false;
+
+    switch (filterKey) {
+      case 'all':
+        return true;
+      case 'aquarium':
+        return p.subCategory === 'aquarium' || p.subCategory === 'aquarium-kit';
+      case 'betta':
+        return p.subCategory === 'betta';
+      case 'guppy':
+        return p.subCategory === 'guppy';
+      case 'molly':
+        return p.subCategory === 'molly';
+      case 'shrimps':
+      case 'shrimp':
+        return p.subCategory === 'shrimps' || p.subCategory === 'shrimp';
+      case 'combos':
+      case 'combo':
+        return (p.category === 'combo' || p.category === 'combos' || p.subCategory === 'aquarium-kit') && isAquariumProduct(p);
+      default:
+        return true;
+    }
+  }
+
+  window.filterAquariumCategory = function (filterKey) {
+    currentAquariumFilter = filterKey || 'all';
+    document.querySelectorAll('.filter-tab, .filter-pill').forEach(pill => {
+      const pillFilter = pill.dataset.filter || pill.dataset.category;
+      pill.classList.toggle('active', pillFilter === currentAquariumFilter);
+    });
+    renderProductGrid();
+  };
 
   function getCurrentPageCategory() {
     const pageCat = (document.body && document.body.dataset && document.body.dataset.pageCategory) ||
@@ -1323,16 +1473,50 @@
     if (!grid) return;
 
     const pageCategory = getCurrentPageCategory();
-    let activeCat = pageCategory !== 'all' ? pageCategory : currentCategory;
+    const isAquariumPage = pageCategory === 'aquarium';
 
     let list = [...PRODUCTS];
 
     // Ensure all products have variants and specs initialized
     list.forEach(p => initProductVariantsAndSpecs(p));
 
-    // 1. Filter by category
-    if (activeCat !== 'all') {
-      list = list.filter(p => p.category === activeCat);
+    let totalInCategory = PRODUCTS.length;
+
+    // 1. Filter by category & subcategory
+    if (isAquariumPage) {
+      // Base pool for Aquarium & Fish page includes all aquarium/fish items & cross-listed kits
+      const aquariumPool = list.filter(p => isAquariumProduct(p));
+      totalInCategory = aquariumPool.length;
+
+      if (currentAquariumFilter && currentAquariumFilter !== 'all') {
+        list = aquariumPool.filter(p => matchesAquariumSubFilter(p, currentAquariumFilter));
+      } else {
+        list = aquariumPool;
+      }
+    } else if (pageCategory !== 'all') {
+      // Dedicated category pages (isopods, tarantulas, combo packs)
+      list = list.filter(p => p.category === pageCategory || ((pageCategory === 'combos' || pageCategory === 'combo') && (p.category === 'combo' || p.category === 'combos')));
+      totalInCategory = list.length;
+    } else {
+      // Home page (index.html)
+      if (currentCategory === 'aquarium') {
+        list = list.filter(p => isAquariumProduct(p));
+        totalInCategory = list.length;
+      } else if (currentCategory === 'isopods') {
+        list = list.filter(p => p.category === 'isopods');
+        totalInCategory = list.length;
+      } else if (currentCategory === 'tarantulas') {
+        list = list.filter(p => p.category === 'tarantulas');
+        totalInCategory = list.length;
+      } else if (currentCategory === 'combos' || currentCategory === 'combo') {
+        list = list.filter(p => p.category === 'combo' || p.category === 'combos');
+        totalInCategory = list.length;
+      } else if (currentCategory !== 'all') {
+        list = list.filter(p => p.category === currentCategory);
+        totalInCategory = list.length;
+      } else {
+        totalInCategory = PRODUCTS.length;
+      }
     }
 
     // 2. Filter by search query
@@ -1356,23 +1540,30 @@
 
     // Update Showing X of Y products counter
     if (countEl) {
-      const totalInCategory = (activeCat !== 'all')
-        ? PRODUCTS.filter(p => p.category === activeCat).length
-        : PRODUCTS.length;
       countEl.innerHTML = `Showing <strong>${list.length}</strong> of <strong>${totalInCategory}</strong> products`;
     }
 
     const indicatorEl = document.getElementById('activeCategoryIndicator');
     if (indicatorEl) {
-      indicatorEl.textContent = CATEGORY_NAMES[activeCat] || 'All Products';
+      if (isAquariumPage) {
+        indicatorEl.textContent = AQUARIUM_FILTER_NAMES[currentAquariumFilter] || 'All Products';
+      } else {
+        indicatorEl.textContent = CATEGORY_NAMES[currentCategory] || 'All Products';
+      }
     }
 
     if (list.length === 0) {
+      const filterLabel = isAquariumPage ? (AQUARIUM_FILTER_NAMES[currentAquariumFilter] || currentAquariumFilter) : '';
+      const emptyMsg = currentSearch.trim()
+        ? `We couldn't find any living specimens matching "${currentSearch}". Try refining your search or resetting category filters.`
+        : (isAquariumPage && filterLabel)
+          ? `We currently have no specimens available in "${filterLabel}". Explore our other aquarium collections or check back soon.`
+          : `We couldn't find any living specimens matching your selection. Try resetting category filters.`;
       grid.innerHTML = `
         <div class="catalogue-empty-state">
           <div class="empty-state-icon">🔍</div>
           <h3 class="empty-state-title">No Products Found</h3>
-          <p class="empty-state-desc">We couldn't find any living specimens matching "${currentSearch}". Try refining your search or resetting category filters.</p>
+          <p class="empty-state-desc">${emptyMsg}</p>
           <button class="btn btn-outline btn-sm" onclick="resetFilters()">Reset All Filters</button>
         </div>
       `;
@@ -1382,69 +1573,50 @@
     grid.innerHTML = list.map(product => {
       initProductVariantsAndSpecs(product);
       const activeVariant = getProductSelectedVariant(product);
-      const activeVariantIdx = selectedVariants[product.id] || 0;
       const displayPrice = CartManager.formatPrice(activeVariant.price);
       const displayUnit = '/ ' + activeVariant.unit;
-      const priceLabel = getProductPriceLabel(activeVariant, product.category);
-      const hasMultipleVariants = product.variants && product.variants.length > 1;
-
-      const variantSelectorHTML = hasMultipleVariants
-        ? `
-          <div class="card-variant-box">
-            <div class="card-variant-hdr">
-              <span class="variant-hdr-text">CHOOSE VARIANT:</span>
-              <span class="variant-hdr-price" id="cardVarPrice_${product.id}">${displayPrice}</span>
-            </div>
-            <div class="card-variant-select-wrap">
-              <select id="cardVar_${product.id}" class="card-variant-select" onchange="onCardVariantChange('${product.id}', this.value)" title="Choose variant">
-                ${product.variants.map((v, i) => `
-                  <option value="${i}" ${i === activeVariantIdx ? 'selected' : ''}>${v.name}</option>
-                `).join('')}
-              </select>
-            </div>
-          </div>
-        `
-        : '';
 
       return `
         <article class="product-card" data-id="${product.id}">
-          <!-- SECTION A – PRODUCT IMAGE -->
+          <!-- 1. Product image -->
           <div class="product-card-thumb" onclick="openProductModal('${product.id}')" title="View ${product.name} details">
             <img src="${product.image || PLACEHOLDER_IMG}" alt="${product.name}" class="product-card-img" loading="lazy" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
           </div>
 
-          <!-- SECTION B, C, D, E – CARD BODY -->
+          <!-- Card Body -->
           <div class="product-card-body">
-            <!-- Small category label -->
+            <!-- 2. Product category label -->
             <div class="product-card-cat">${(product.categoryName || product.categoryLabel)}</div>
 
-            <!-- Product name with consistent typography (2 lines clamped) -->
+            <!-- 3. Product name -->
             <h3 class="product-card-name" onclick="openProductModal('${product.id}')" title="${product.name}">${product.name}</h3>
 
-            <!-- Scientific name or short description (2 lines clamped) -->
+            <!-- 4. Product subtitle or short description -->
             <div class="product-card-sub" title="${product.scientificName || product.description}">${product.scientificName || product.description}</div>
 
-            <!-- SECTION C – VARIANT SELECTOR (Only rendered when product has variants) -->
-            ${variantSelectorHTML}
-
-            <!-- SECTION D & E – FOOTER PINNED TO BOTTOM -->
+            <!-- Footer area pinned to bottom -->
             <div class="product-card-footer">
+              <!-- 5. Divider line -->
               <div class="card-divider"></div>
-              <div class="product-card-pricing-row product-card-pricing">
-                <span class="card-price-label" id="cardPriceLabel_${product.id}">${priceLabel}</span>
-                <div class="card-price-display">
-                  <span class="product-card-price" id="cardPrice_${product.id}">${displayPrice}</span>
-                  <span class="product-card-unit" id="cardUnit_${product.id}">${displayUnit}</span>
-                </div>
+
+              <!-- 6. Price -->
+              <div class="product-card-pricing">
+                <span class="product-card-price" id="cardPrice_${product.id}">${displayPrice}</span>
+                <span class="product-card-unit" id="cardUnit_${product.id}">${displayUnit}</span>
               </div>
 
-              <!-- SECTION E – ACTION BUTTONS -->
+              <!-- 7 & 8. Action buttons (Full-width stacked: 7. View Details, 8. Add to Cart) -->
               <div class="product-card-actions">
-                <button class="btn btn-outline card-btn-view" onclick="openProductModal('${product.id}')">
+                <button type="button" class="btn card-btn-view" onclick="openProductModal('${product.id}')">
                   View Details
                 </button>
-                <button class="btn btn-primary card-btn-add" onclick="addCardVariantToCart('${product.id}')">
-                  Add to Cart
+                <button type="button" class="btn card-btn-add" onclick="addCardVariantToCart('${product.id}')">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;">
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                    <path d="M3 6h18" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                  </svg>
+                  <span>Add to Cart</span>
                 </button>
               </div>
             </div>
@@ -1456,6 +1628,7 @@
 
   window.resetFilters = function () {
     currentCategory = 'all';
+    currentAquariumFilter = 'all';
     currentSearch = '';
     currentSort = 'default';
     const searchInput = document.getElementById('catalogSearch');
@@ -1463,21 +1636,31 @@
     const sortSelect = document.getElementById('catalogSort');
     if (sortSelect) sortSelect.value = 'default';
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
-      tab.classList.toggle('active', tab.dataset.category === 'all');
+      const val = tab.dataset.filter || tab.dataset.category;
+      tab.classList.toggle('active', val === 'all');
     });
     renderProductGrid();
   };
 
   window.filterByCategory = function (categoryKey) {
+    const pageCat = getCurrentPageCategory();
+    if (pageCat === 'aquarium') {
+      filterAquariumCategory(categoryKey);
+      return;
+    }
+
     const targetMap = {
       aquarium: 'aquarium-fish.html',
       isopods: 'isopods.html',
       tarantulas: 'tarantulas.html',
-      combos: 'combo-packs.html'
+      combos: 'combo-packs.html',
+      combo: 'combo-packs.html'
     };
 
-    const pageCat = getCurrentPageCategory();
-    if (pageCat !== 'all' && pageCat !== categoryKey) {
+    const isMatch = (pageCat === categoryKey) ||
+      ((pageCat === 'combos' || pageCat === 'combo') && (categoryKey === 'combos' || categoryKey === 'combo'));
+
+    if (pageCat !== 'all' && !isMatch) {
       if (categoryKey === 'all') {
         window.location.href = 'index.html#catalogue';
       } else if (targetMap[categoryKey]) {
@@ -1488,7 +1671,10 @@
 
     currentCategory = categoryKey;
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
-      tab.classList.toggle('active', tab.dataset.category === categoryKey);
+      const val = tab.dataset.category || tab.dataset.filter;
+      const active = (val === categoryKey) ||
+        ((val === 'combos' || val === 'combo') && (categoryKey === 'combos' || categoryKey === 'combo'));
+      tab.classList.toggle('active', active);
     });
     renderProductGrid();
   };
@@ -2771,10 +2957,13 @@
     // 5. Category tabs click listeners
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
       tab.addEventListener('click', () => {
-        document.querySelectorAll('.filter-tab, .filter-pill').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentCategory = tab.dataset.category;
-        renderProductGrid();
+        const key = tab.dataset.filter || tab.dataset.category;
+        const pageCat = getCurrentPageCategory();
+        if (pageCat === 'aquarium') {
+          filterAquariumCategory(key);
+        } else {
+          filterByCategory(key);
+        }
       });
     });
 

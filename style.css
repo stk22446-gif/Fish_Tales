@@ -17,33 +17,54 @@
 /* ── 1. Official Design Tokens ─────────────────────────────── */
 :root {
   /* Official Fish Tales Palette */
-  --color-primary: #174B32;        /* Primary Forest Green */
-  --color-primary-dark: #103823;   /* Deep Green */
-  --color-mint: #DCEBCB;           /* Light Mint */
-  --color-cream: #F8F6E9;          /* Natural Cream */
-  --color-leaf: #75A65A;           /* Leaf Green */
-  --color-leaf-hover: #639249;     /* Deep Leaf */
-  --color-orange: #E89B35;         /* Warm Orange Accent */
-  --color-orange-hover: #D68723;   /* Deeper Warm Orange */
-  --color-white: #FFFFFF;          /* Pure White */
+  --color-primary: #174B32;
+  /* Primary Forest Green */
+  --color-primary-dark: #103823;
+  /* Deep Green */
+  --color-mint: #DCEBCB;
+  /* Light Mint */
+  --color-cream: #F8F6E9;
+  /* Natural Cream */
+  --color-leaf: #75A65A;
+  /* Leaf Green */
+  --color-leaf-hover: #639249;
+  /* Deep Leaf */
+  --color-orange: #E89B35;
+  /* Warm Orange Accent */
+  --color-orange-hover: #D68723;
+  /* Deeper Warm Orange */
+  --color-white: #FFFFFF;
+  /* Pure White */
 
   /* Semantic UI Tokens */
-  --bg-page: #F8F6E9;              /* Natural Cream Body */
-  --bg-surface: #FFFFFF;           /* Crisp White Content Containers */
-  --bg-surface-alt: #F1EFE0;       /* Warm Cream for secondary sections */
-  --bg-mint-tint: #EEF6E6;         /* Soft Mint background */
+  --bg-page: #F8F6E9;
+  /* Natural Cream Body */
+  --bg-surface: #FFFFFF;
+  /* Crisp White Content Containers */
+  --bg-surface-alt: #F1EFE0;
+  /* Warm Cream for secondary sections */
+  --bg-mint-tint: #EEF6E6;
+  /* Soft Mint background */
   --bg-mint-light: rgba(220, 235, 203, 0.45);
-  --bg-forest: #174B32;            /* Forest Green */
-  --bg-deep: #103823;              /* Deep Green for Footer */
+  --bg-forest: #174B32;
+  /* Forest Green */
+  --bg-deep: #103823;
+  /* Deep Green for Footer */
 
   /* Typography Colors */
-  --text-main: #103823;            /* Deep Green for main headings */
+  --text-main: #103823;
+  /* Deep Green for main headings */
   --text-primary: #103823;
-  --text-body: #26382D;            /* Rich botanical charcoal for easy reading */
-  --text-muted: #536E5D;           /* Muted botanical sage */
-  --text-dim: #7B9384;             /* Subtle muted green */
-  --text-inverse: #FFFFFF;         /* White text on dark green surfaces */
-  --text-inverse-muted: #DCEBCB;   /* Mint text on dark green surfaces */
+  --text-body: #26382D;
+  /* Rich botanical charcoal for easy reading */
+  --text-muted: #536E5D;
+  /* Muted botanical sage */
+  --text-dim: #7B9384;
+  /* Subtle muted green */
+  --text-inverse: #FFFFFF;
+  /* White text on dark green surfaces */
+  --text-inverse-muted: #DCEBCB;
+  /* Mint text on dark green surfaces */
 
   /* Accents & Highlights */
   --accent-orange: #E89B35;
@@ -92,7 +113,9 @@
 }
 
 /* ── 2. Reset & Document Setup ────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -143,7 +166,9 @@ button {
   color: inherit;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -557,135 +582,255 @@ input, select, textarea {
   margin-right: auto;
 }
 
-/* ── 7. Nature-Inspired Hero Section ──────────────────────── */
-.hero-editorial {
+/* ── 7. Cinematic Aquatic & Exotic Hero Section ──────────────── */
+.hero-cinematic {
   position: relative;
-  background: linear-gradient(180deg, #F8F6E9 0%, #EEF6E6 100%);
-  border-bottom: 1px solid var(--border-leaf);
+  width: 100%;
+  background-color: #000000;
+  background-repeat: no-repeat;
   overflow: hidden;
-  padding: 4.5rem 0 5rem;
-}
-
-.hero-editorial-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 3.5rem;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+  box-sizing: border-box;
 }
 
-.hero-editorial-content {
+/* Atmospheric Ambient Lighting Glows */
+.hero-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(65px);
+  will-change: transform, opacity;
+  background-repeat: no-repeat;
+}
+
+.hero-glow-left {
+  top: 15%;
+  left: -8%;
+  width: 44vw;
+  height: 55vh;
+  max-width: 580px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(6, 95, 70, 0.1) 45%, rgba(0, 0, 0, 0) 75%);
+  z-index: 1;
+}
+
+.hero-glow-right {
+  top: 18%;
+  right: -8%;
+  width: 44vw;
+  height: 55vh;
+  max-width: 580px;
+  background: radial-gradient(circle, rgba(46, 125, 82, 0.24) 0%, rgba(20, 83, 45, 0.1) 45%, rgba(0, 0, 0, 0) 75%);
+  z-index: 1;
+}
+
+.hero-glow-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  height: 60vh;
+  background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.06) 0%, rgba(0, 0, 0, 0) 65%);
+  z-index: 1;
+}
+
+/* Main Visual Stage: Cloudinary Artwork Framing the Content (Desktop) */
+.hero-visual-stage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+  background-repeat: no-repeat;
+}
+
+.hero-artwork-img {
+  width: 100%;
+  height: auto;
+  max-height: 680px;
+  object-fit: contain;
+  object-position: center center;
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  background-repeat: no-repeat;
+}
+
+/* Mobile portrait artwork hidden on desktop (>=768px) */
+.hero-artwork-mobile,
+.hero-artwork-mobile-picture,
+.hero-mobile-portrait {
+  display: none !important;
+}
+
+.hero-artwork-desktop {
+  display: block !important;
+}
+
+/* Centered Content Overlay */
+.hero-cinematic-container {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.hero-cinematic-content {
+  max-width: 740px;
+  width: 100%;
+  text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 2rem;
+  border-radius: 24px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.48) 55%, rgba(0, 0, 0, 0) 80%);
 }
 
-.hero-heading {
-  font-family: var(--font-serif);
-  font-size: clamp(2.3rem, 4.2vw, 3.35rem);
-  font-weight: 700;
-  color: var(--color-primary-dark);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+/* Eyebrow with decorative lines */
+.hero-cinematic-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
   margin-bottom: 1.25rem;
 }
 
-.hero-heading em {
+.hero-eyebrow-line {
+  display: inline-block;
+  width: 36px;
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(52, 211, 153, 0.2), #10B981);
+  border-radius: 2px;
+}
+
+.hero-eyebrow-line:last-child {
+  background: linear-gradient(90deg, #10B981, rgba(52, 211, 153, 0.2));
+}
+
+.hero-eyebrow-text {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #34D399;
+  text-shadow: 0 0 14px rgba(52, 211, 153, 0.45);
+}
+
+/* Main Heading */
+.hero-cinematic-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5.2vw, 4.1rem);
+  line-height: 1.15;
+  margin-bottom: 1.35rem;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.hero-heading-destination {
+  display: block;
+  font-weight: 800;
+  color: #FFFFFF;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95);
+}
+
+.hero-heading-accent {
+  display: block;
   font-style: italic;
   font-weight: 500;
-  color: var(--color-primary);
+  color: #34D399;
+  margin-top: 0.25rem;
+  text-shadow: 0 0 25px rgba(52, 211, 153, 0.4), 0 2px 10px rgba(0, 0, 0, 0.9);
 }
 
-.hero-lead {
-  font-size: 1.05rem;
-  color: var(--text-body);
-  line-height: 1.65;
-  margin-bottom: 2rem;
-  max-width: 560px;
+/* Description */
+.hero-cinematic-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.8vw, 1.125rem);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  max-width: 680px;
+  margin: 0 auto 2.25rem;
+  text-align: center;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
 }
 
-.hero-actions {
+/* Call-To-Action Buttons */
+.hero-cinematic-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  gap: 1.25rem;
   flex-wrap: wrap;
-  margin-bottom: 2.75rem;
-}
-
-.hero-specs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.spec-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.spec-val {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--color-primary-dark);
-  line-height: 1.1;
-}
-
-.spec-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  font-weight: 600;
-  margin-top: 0.35rem;
-}
-
-/* Hero Photography Frame */
-.hero-photo-frame {
-  position: relative;
-  border: 4px solid #FFFFFF;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background-color: var(--bg-surface);
-  box-shadow: var(--shadow-hover);
-}
-
-.hero-photo-img {
   width: 100%;
-  height: 480px;
-  object-fit: cover;
-  transition: transform var(--trans-smooth);
 }
 
-.hero-photo-frame:hover .hero-photo-img {
-  transform: scale(1.02);
-}
-
-.hero-photo-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.25rem 1.5rem;
-  background: linear-gradient(180deg, rgba(16, 56, 35, 0) 0%, rgba(16, 56, 35, 0.92) 100%);
-  display: flex;
+.btn-hero-cinematic {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  color: #FFFFFF;
-}
-
-.hero-caption-title {
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #FFFFFF;
-}
-
-.hero-caption-sub {
-  font-size: 0.75rem;
-  color: var(--color-mint);
-  letter-spacing: 0.04em;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  padding: 0.95rem 2rem;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+  min-height: 48px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Primary CTA Button */
+.btn-hero-cinematic.btn-hero-primary {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: #FFFFFF !important;
+  border: 1.5px solid rgba(52, 211, 153, 0.6);
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.45);
+}
+
+.btn-hero-cinematic.btn-hero-primary:hover {
+  background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(16, 185, 129, 0.65);
+  color: #FFFFFF !important;
+}
+
+/* Secondary CTA Button */
+.btn-hero-cinematic.btn-hero-secondary {
+  background: transparent;
+  color: #FFFFFF !important;
+  border: 1.5px solid #FFFFFF;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.btn-hero-cinematic.btn-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #FFFFFF;
+  transform: translateY(-2px);
+  color: #FFFFFF !important;
 }
 
 /* ── 8. Category Showcase (4 Pillars) ─────────────────────── */
@@ -747,21 +892,6 @@ input, select, textarea {
 
 .category-card:hover .category-card-img {
   transform: scale(1.05);
-}
-
-.category-number {
-  position: absolute;
-  top: 0.85rem;
-  left: 0.85rem;
-  font-family: var(--font-sans);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--color-primary-dark);
-  background-color: rgba(255, 255, 255, 0.92);
-  padding: 0.25rem 0.55rem;
-  border-radius: var(--radius-xs);
-  border: 1px solid var(--border-leaf);
 }
 
 .category-card-body {
@@ -1243,58 +1373,6 @@ input, select, textarea {
   text-overflow: ellipsis;
 }
 
-/* SECTION C – VARIANT SELECTOR (Only rendered when product has multiple variants) */
-.card-variant-box {
-  background-color: rgba(220, 235, 203, 0.3);
-  border: 1px solid var(--border-leaf);
-  border-radius: 8px;
-  padding: 0.45rem 0.65rem;
-  margin-bottom: 0.5rem;
-}
-
-.card-variant-hdr {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.25rem;
-}
-
-.variant-hdr-text {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #6B7280;
-}
-
-.variant-hdr-price {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-leaf);
-}
-
-.card-variant-select-wrap {
-  position: relative;
-}
-
-.card-variant-select {
-  width: 100%;
-  background-color: #FFFFFF;
-  border: 1px solid var(--border-leaf);
-  border-radius: 6px;
-  padding: 0.35rem 0.55rem;
-  font-size: 0.785rem;
-  font-weight: 600;
-  color: var(--color-primary-dark);
-  cursor: pointer;
-  transition: all var(--trans-fast);
-}
-
-.card-variant-select:focus {
-  border-color: var(--color-primary);
-  outline: none;
-}
-
 /* SECTION D & E – FOOTER PINNED TO BOTTOM VIA margin-top: auto */
 .product-card-footer {
   margin-top: auto;
@@ -1305,102 +1383,96 @@ input, select, textarea {
 
 .card-divider {
   height: 1px;
-  background-color: rgba(23, 75, 50, 0.1);
+  background-color: rgba(23, 75, 50, 0.12);
   margin: 0.65rem 0 0.65rem;
 }
 
-.product-card-pricing-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  margin-bottom: 0.85rem;
-}
-
-.card-price-label {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #6B7280;
-}
-
-.card-price-display {
+.product-card-pricing {
   display: flex;
   align-items: baseline;
   gap: 0.35rem;
+  margin-bottom: 0.85rem;
 }
 
-.card-price-val {
+.product-card-price {
   font-family: var(--font-sans);
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: var(--color-primary-dark);
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
-.card-price-unit {
-  font-size: 0.75rem;
+.product-card-unit {
+  font-size: 0.785rem;
   font-weight: 600;
   color: var(--text-muted);
 }
 
-/* SECTION E – ACTION BUTTONS (Horizontal side-by-side, equal width) */
+/* SECTION E – ACTION BUTTONS (Stacked full-width: 7. View Details, 8. Add to Cart) */
 .product-card-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
   width: 100%;
 }
 
 .card-btn-view {
   width: 100%;
-  height: 40px;
-  min-height: 40px;
-  padding: 0 0.5rem;
-  font-size: 0.8125rem;
+  height: 42px;
+  min-height: 42px;
+  padding: 0 1rem;
+  font-size: 0.85rem;
   font-weight: 600;
   background-color: #FFFFFF;
   border: 1.5px solid var(--border-leaf);
   color: var(--color-primary-dark);
   border-radius: 8px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   white-space: nowrap;
+  text-decoration: none;
+  box-sizing: border-box;
   transition: all var(--trans-fast);
 }
 
-.card-btn-view:hover {
+.card-btn-view:hover,
+.card-btn-view:active {
   background-color: var(--color-mint);
   border-color: var(--color-primary);
   color: var(--color-primary-dark);
+  box-shadow: 0 2px 8px rgba(23, 75, 50, 0.1);
 }
 
 .card-btn-add {
   width: 100%;
-  height: 40px;
-  min-height: 40px;
-  padding: 0 0.5rem;
-  font-size: 0.8125rem;
+  height: 42px;
+  min-height: 42px;
+  padding: 0 1rem;
+  font-size: 0.85rem;
   font-weight: 700;
   background-color: var(--color-primary);
   border: 1.5px solid var(--color-primary);
   color: #FFFFFF;
   border-radius: 8px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.45rem;
   cursor: pointer;
   white-space: nowrap;
+  text-decoration: none;
+  box-sizing: border-box;
   transition: all var(--trans-fast);
 }
 
-.card-btn-add:hover {
+.card-btn-add:hover,
+.card-btn-add:active {
   background-color: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
-  box-shadow: 0 4px 12px rgba(23, 75, 50, 0.2);
+  box-shadow: 0 4px 14px rgba(23, 75, 50, 0.22);
   transform: translateY(-1px);
 }
 
@@ -1981,8 +2053,15 @@ input, select, textarea {
 }
 
 @keyframes modalPopIn {
-  from { opacity: 0; transform: scale(0.97) translateY(8px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 /* 4. Small Circular Close Button at top-right */
@@ -2034,7 +2113,8 @@ input, select, textarea {
   min-height: 380px;
   max-height: 500px;
   border-radius: 14px;
-  background-color: var(--color-cream); /* #F8F6E9 theme match: removes harsh black space! */
+  background-color: var(--color-cream);
+  /* #F8F6E9 theme match: removes harsh black space! */
   border: 1px solid var(--border-leaf);
   overflow: hidden;
   display: flex;
@@ -2408,8 +2488,15 @@ input, select, textarea {
 }
 
 @keyframes toastIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── 19. Floating WhatsApp Desk Button ────────────────────── */
@@ -2452,7 +2539,10 @@ body {
   position: relative;
 }
 
-button, a, select, input {
+button,
+a,
+select,
+input {
   touch-action: manipulation;
 }
 
@@ -2478,29 +2568,28 @@ button, a, select, input {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
   }
+
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
   }
+
   .promos-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+
   .principles-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
-  .hero-editorial-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-  .hero-photo-img {
-    height: 380px;
-  }
+
+
   .about-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
+
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
@@ -2548,10 +2637,16 @@ button, a, select, input {
     box-shadow: 0 4px 18px rgba(16, 56, 35, 0.14);
   }
 
+  /* Three-element header layout: LEFT: Hamburger | CENTER: Brand | RIGHT: Cart */
   .nav-container {
-    padding: 0 1rem;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
     height: var(--header-height);
-    position: static;
+    padding: 0 clamp(0.75rem, 3vw, 1rem);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   .mobile-nav-backdrop.active {
@@ -2564,41 +2659,109 @@ button, a, select, input {
     overflow: hidden;
   }
 
+  /* CENTER: Perfectly centered Fish Tales logo + brand name + tagline */
   .nav-brand {
-    gap: 0.65rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    z-index: 100;
+    max-width: calc(100% - 110px);
+    pointer-events: auto;
   }
 
   .brand-logo-img {
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(23, 75, 50, 0.15);
+    border: 1px solid var(--border-mint);
+  }
+
+  .logo-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.1;
+    min-width: 0;
   }
 
   .logo-main {
-    font-size: 1.15rem;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--color-primary);
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .logo-accent {
+    color: var(--color-leaf);
   }
 
   .logo-sub {
-    font-size: 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.52rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 1px;
+    white-space: nowrap;
   }
 
+  /* RIGHT: Controls container containing only the Shopping Cart */
   .nav-actions {
-    gap: 0.5rem;
-  }
-
-  .nav-action-btn {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
-    overflow: visible;
-  }
-
-  .hamburger-btn {
     display: flex;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0;
+    margin-left: auto;
+  }
+
+  /* Completely remove search icon from mobile header */
+  .nav-actions button[onclick*="openSearchOverlay"],
+  .nav-actions [onclick*="openSearchOverlay"] {
+    display: none !important;
+  }
+
+  /* Shopping Cart action button */
+  .nav-action-btn {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    background-color: var(--bg-surface);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+    cursor: pointer;
+  }
+
+  /* LEFT: Hamburger menu icon */
+  .hamburger-btn {
+    position: absolute;
+    left: clamp(0.75rem, 3vw, 1rem);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
     align-items: center;
     justify-content: center;
     background-color: var(--bg-surface);
@@ -2710,66 +2873,188 @@ button, a, select, input {
     display: none !important;
   }
 
-  /* 2. Nature-Inspired Hero Section */
-  .hero-editorial {
-    padding: 2.25rem 0 3.25rem;
+  /* 2. Cinematic Compact Hero Section (Mobile < 768px) */
+  .hero-glow {
+    display: none !important;
   }
 
-  .hero-editorial-grid {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
-  }
-
-  .hero-editorial-content {
-    order: 1;
-  }
-
-  .hero-heading {
-    font-size: clamp(1.75rem, 6.5vw, 2.35rem);
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    word-break: break-word;
-  }
-
-  .hero-lead {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-actions {
+  .hero-cinematic {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    height: auto;
+    background-color: #000000;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+    display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Desktop single image hidden on mobile (<768px) */
+  .hero-artwork-desktop {
+    display: none !important;
+  }
+
+  /* Mobile Visual Stage framing Betta (upper-right) and terrarium animals (lower) */
+  .hero-visual-stage {
+    position: relative;
     width: 100%;
-    gap: 0.75rem;
-    margin-bottom: 1.75rem;
+    margin: 0;
+    padding: 0;
+    display: block;
+    pointer-events: none;
+    z-index: 1;
+    background-color: #000000;
+    background-repeat: no-repeat;
+    line-height: 0;
   }
 
-  .hero-actions .btn {
+  .hero-artwork-mobile {
+    display: block !important;
     width: 100%;
-    min-height: 48px;
-    font-size: 0.95rem;
+    height: auto;
+    object-fit: contain;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    background-repeat: no-repeat;
   }
 
-  .hero-specs {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    padding-top: 1.25rem;
+  /* Compact Content Overlay layered over clear black area of artwork */
+  .hero-cinematic-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    padding: clamp(1rem, 3.5vw, 1.4rem) clamp(0.85rem, 3vw, 1.25rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background: transparent;
+    pointer-events: none;
   }
 
-  .hero-photo-frame {
-    order: 2;
-    margin-top: 0.5rem;
-    border-width: 3px;
+  .hero-cinematic-content {
+    width: 100%;
+    max-width: clamp(210px, 58vw, 290px);
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    pointer-events: auto;
   }
 
-  .hero-photo-img {
-    height: 260px;
-    max-height: 280px;
-    object-fit: cover;
+  /* Eyebrow: small uppercase green/cyan with letter spacing */
+  .hero-cinematic-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.45rem;
+    margin-bottom: 0.4rem;
   }
 
-  .hero-photo-caption {
-    padding: 0.85rem 1rem;
+  .hero-eyebrow-line {
+    width: 18px;
+    height: 1.5px;
+    background: #10B981;
+    flex-shrink: 0;
+  }
+
+  .hero-eyebrow-text {
+    font-size: clamp(0.65rem, 2.2vw, 0.72rem);
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    color: #34D399;
+    text-transform: uppercase;
+  }
+
+  /* Main Heading: bold white sans-serif + elegant italic green/cyan */
+  .hero-cinematic-heading {
+    font-size: clamp(1.4rem, 5.2vw, 1.85rem);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-heading-destination {
+    display: block;
+    font-weight: 800;
+    color: #FFFFFF;
+    font-family: var(--font-sans);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+  }
+
+  .hero-heading-accent {
+    display: block;
+    font-style: italic;
+    font-weight: 600;
+    color: #34D399;
+    font-family: var(--font-serif);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+  }
+
+  /* Description: readable white/light-grey text */
+  .hero-cinematic-desc {
+    font-size: clamp(0.72rem, 2.4vw, 0.8rem);
+    line-height: 1.45;
+    margin-bottom: 0.75rem;
+    color: rgba(255, 255, 255, 0.92);
+    text-align: left;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95);
+    max-width: 100%;
+  }
+
+  /* CTA Buttons: Compact stacked buttons */
+  .hero-cinematic-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    width: 100%;
+  }
+
+  .btn-hero-cinematic {
+    width: auto;
+    min-width: 170px;
+    max-width: 220px;
+    min-height: 38px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.55rem 0.9rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-hero-primary {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: #022013;
+    border: none;
+    box-shadow: 0 3px 12px rgba(16, 185, 129, 0.35);
+  }
+
+  .btn-hero-secondary {
+    background: rgba(0, 0, 0, 0.6);
+    color: #FFFFFF;
+    border: 1.5px solid rgba(52, 211, 153, 0.6);
+    backdrop-filter: blur(4px);
   }
 
   /* 3. Category Cards: Responsive 2-Column Grid on Mobile */
@@ -2836,36 +3121,55 @@ button, a, select, input {
     margin-bottom: 0.2rem;
   }
 
-  .product-card-scientific {
+  .product-card-sub {
     font-size: 0.7rem;
-    margin-bottom: 0.4rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .product-card-size {
-    font-size: 0.6875rem;
-    padding: 0.2rem 0.4rem;
-    margin-bottom: 0.5rem;
+    line-height: 1.35;
+    min-height: 1.9rem;
+    margin-bottom: 0.35rem;
   }
 
   .product-card-footer {
+    margin-top: auto;
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
-    gap: 0.5rem;
-    padding-top: 0.65rem;
+    width: 100%;
+  }
+
+  .card-divider {
+    height: 1px;
+    background-color: rgba(23, 75, 50, 0.1);
+    margin: 0.45rem 0 0.45rem;
+  }
+
+  .product-card-pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    margin-bottom: 0.65rem;
   }
 
   .product-card-price {
     font-size: 1.2rem;
   }
 
-  .product-card-footer .btn {
+  .product-card-unit {
+    font-size: 0.7rem;
+  }
+
+  .product-card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
     width: 100%;
-    min-height: 44px;
-    padding: 0.5rem;
-    font-size: 0.8125rem;
+  }
+
+  .card-btn-view,
+  .card-btn-add {
+    width: 100%;
+    height: 38px;
+    min-height: 38px;
+    padding: 0 0.4rem;
+    font-size: 0.75rem;
   }
 
   .product-quick-view {
@@ -3178,21 +3482,72 @@ button, a, select, input {
     min-height: 48px;
   }
 
-  /* 9. Site Footer: Bottom Clearance for Floating WhatsApp */
+  /* 9. Site Footer: Mobile Spacing & Compact Navigation */
   .site-footer {
-    padding: 3.25rem 0 6.5rem;
+    padding: 2.25rem 0 5.25rem;
   }
 
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
   }
 
-  .footer-links a {
-    padding: 0.4rem 0;
-    display: inline-block;
+  .footer-desc {
+    margin-top: 0.5rem;
+    line-height: 1.5;
+    font-size: 0.84rem;
+    max-width: 100%;
+  }
+
+  .footer-col-title {
+    margin-bottom: 0.45rem;
+  }
+
+  .footer-links {
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-links li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-links a,
+  .footer-links .footer-link {
+    display: flex;
+    align-items: center;
     min-height: 44px;
-    line-height: 44px;
+    padding: 11px 0;
+    margin: 0;
+    line-height: 1.3;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+  }
+
+  .footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 40px;
+    padding: 6px 0;
+  }
+
+  .footer-policy-box {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .footer-bottom {
+    padding-top: 1.25rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    font-size: 0.775rem;
+    line-height: 1.45;
   }
 
   /* 10. Floating WhatsApp Desk Button */
@@ -3224,6 +3579,10 @@ button, a, select, input {
    Maintain 2-column grids down to 360px
    ───────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
+  .hero-cinematic-content {
+    max-width: clamp(210px, 66vw, 290px);
+  }
+
   .container {
     padding: 0 0.75rem;
   }
@@ -3254,51 +3613,51 @@ button, a, select, input {
     margin-bottom: 0.45rem;
   }
 
-  .card-variant-box {
-    padding: 0.35rem 0.45rem;
-    margin-bottom: 0.45rem;
-  }
-
-  .variant-hdr-text,
-  .variant-hdr-price {
-    font-size: 0.625rem;
-  }
-
-  .card-variant-select {
-    font-size: 0.7rem;
-    padding: 0.25rem 0.35rem;
-  }
-
   .card-divider {
     margin: 0.45rem 0 0.45rem;
   }
 
-  .card-price-label {
-    font-size: 0.625rem;
+  .product-card-pricing {
+    margin-bottom: 0.55rem;
+    gap: 0.25rem;
   }
 
-  .card-price-val {
+  .product-card-price {
     font-size: 1.15rem;
   }
 
-  .card-price-unit {
+  .product-card-unit {
     font-size: 0.6875rem;
   }
 
   .product-card-actions {
-    gap: 0.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
   }
 
   .card-btn-view,
   .card-btn-add {
-    height: 36px;
-    min-height: 36px;
-    font-size: 0.7rem;
-    padding: 0 0.2rem;
+    width: 100%;
+    height: 38px;
+    min-height: 38px;
+    font-size: 0.75rem;
+    padding: 0 0.4rem;
   }
 }
 
 @media (max-width: 359px) {
+  .hero-cinematic-content {
+    max-width: 200px;
+  }
+
+  .btn-hero-cinematic {
+    min-width: 155px;
+    font-size: 0.68rem;
+    padding: 0.5rem 0.8rem;
+  }
+
   .container {
     padding: 0 0.65rem;
   }
@@ -3322,12 +3681,13 @@ button, a, select, input {
     height: 2rem;
   }
 
-  .card-price-val {
+  .product-card-price {
     font-size: 1.35rem;
   }
 
   .card-btn-view,
   .card-btn-add {
+    width: 100%;
     height: 40px;
     min-height: 40px;
     font-size: 0.8125rem;
@@ -3836,22 +4196,27 @@ button, a, select, input {
     padding: 1.25rem;
     max-height: 92vh;
   }
+
   .checkout-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
   }
+
   .checkout-form-row {
     grid-template-columns: 1fr;
     gap: 0;
   }
+
   .checkout-review-cards-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
   .checkout-actions-row {
     flex-direction: column-reverse;
     gap: 0.75rem;
   }
+
   .checkout-actions-row button,
   .checkout-actions-row a {
     width: 100%;
