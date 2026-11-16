@@ -1782,12 +1782,19 @@
     const month = String(now.getMonth() + 1).padStart(2, '0');
     const day = String(now.getDate()).padStart(2, '0');
     const dateStr = `${year}${month}${day}`;
-    const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
-    let rand = '';
-    for (let i = 0; i < 4; i++) {
-      rand += chars.charAt(Math.floor(Math.random() * chars.length));
+
+    let seq = 1;
+    try {
+      const stored = localStorage.getItem('fishtales_order_seq');
+      if (stored) {
+        seq = parseInt(stored, 10) + 1;
+      }
+      localStorage.setItem('fishtales_order_seq', String(seq));
+    } catch {
+      seq = Math.floor(1 + Math.random() * 999);
     }
-    return `FT-${dateStr}-${rand}`;
+    const seqStr = String(seq).padStart(3, '0');
+    return `FT-${dateStr}-${seqStr}`;
   }
 
   function formatOrderDateTime(d = new Date()) {
@@ -1822,7 +1829,7 @@
       } else if (item.size) {
         variantName = `Single (${item.size})`;
       } else {
-        variantName = 'Standard / Individual Specimen';
+        variantName = 'Single (1 pc)';
       }
     }
 
@@ -1830,23 +1837,16 @@
   }
 
   function buildWhatsAppOrderMessage(orderDetails) {
-    const { orderId, date, time, items, subtotal, customer } = orderDetails;
-    const divider = '━━━━━━━━━━━━━━━━━━';
+    const { orderId, date, items, subtotal, customer } = orderDetails;
+    const divider = '━━━━━━━━━━━━━━━━━━━━';
     const lines = [
-      '🐠 FISH TALES',
-      'NEW ORDER REQUEST',
+      '🛍️ NEW ORDER – FISH TALES',
+      '',
+      `🆔 Order ID: ${orderId}`,
+      `📅 Date: ${date}`,
       '',
       divider,
-      '',
-      'ORDER INFORMATION',
-      '',
-      `Order ID: ${orderId}`,
-      `Date: ${date}`,
-      `Time: ${time}`,
-      '',
-      divider,
-      '',
-      'PRODUCT DETAILS',
+      '📦 ORDER SUMMARY',
       ''
     ];
 
@@ -1855,46 +1855,37 @@
       const unitPriceFormatted = CartManager.formatPrice(item.price);
       const lineTotalFormatted = CartManager.formatPrice(item.price * item.quantity);
 
-      lines.push(`• ${prodName}`);
-      lines.push(`  Variant: ${variantName}`);
-      lines.push(`  Qty: ${item.quantity}`);
-      lines.push(`  Unit Price: ${unitPriceFormatted}`);
-      lines.push(`  Line Total: ${lineTotalFormatted}`);
+      lines.push(`${prodName} × ${item.quantity}`);
+      lines.push(`Variant: ${variantName}`);
+      lines.push(`Unit Price: ${unitPriceFormatted}`);
+      lines.push(`Line Total: ${lineTotalFormatted}`);
       if (index < items.length - 1) {
         lines.push('');
       }
     });
 
     lines.push('');
-    lines.push(divider);
-    lines.push('');
-    lines.push('PAYMENT SUMMARY');
-    lines.push('');
     lines.push(`Subtotal: ${CartManager.formatPrice(subtotal)}`);
     lines.push('Shipping: To be confirmed');
-    lines.push(`Estimated Total: ${CartManager.formatPrice(subtotal)}`);
+    lines.push('Discount: ₹0');
+    lines.push(`💰 TOTAL: ${CartManager.formatPrice(subtotal)} (Shipping confirmation pending)`);
+    lines.push('');
+    lines.push(divider);
+    lines.push('📍 DELIVERY DETAILS');
+    lines.push('');
+    lines.push(`👤 Name: ${customer.fullName}`);
+    lines.push(`📞 Phone: ${customer.mobile}`);
+    lines.push(`✉️ Email: ${customer.email && customer.email.trim() ? customer.email.trim() : 'Not provided'}`);
+    lines.push(`🏠 Address: ${customer.address}`);
+    lines.push(`📍 City: ${customer.city}`);
+    lines.push(`🗺️ State: ${customer.state}`);
+    lines.push(`📮 Pincode: ${customer.pincode}`);
     lines.push('');
     lines.push(divider);
     lines.push('');
-    lines.push('DELIVERY INFORMATION');
+    lines.push('👋 Hello Fish Tales!');
     lines.push('');
-    lines.push(`Customer Name: ${customer.fullName}`);
-    lines.push(`Mobile Number: ${customer.mobile}`);
-    lines.push(`Email: ${customer.email ? customer.email : 'N/A'}`);
-    lines.push(`Complete Address: ${customer.address}`);
-    lines.push(`City: ${customer.city}`);
-    lines.push(`State: ${customer.state}`);
-    lines.push(`Pincode: ${customer.pincode}`);
-    lines.push('');
-    lines.push(divider);
-    lines.push('');
-    lines.push('CUSTOMER MESSAGE');
-    lines.push('');
-    lines.push('Hello Fish Tales!');
-    lines.push('');
-    lines.push('I would like to place this order. Please confirm product availability, final shipping charges and payment instructions before dispatch.');
-    lines.push('');
-    lines.push('Thank you!');
+    lines.push("I'd like to confirm my order. Please verify the order details and proceed with dispatch.");
 
     return lines.join('\n');
   }
@@ -2094,24 +2085,28 @@
 
           <div class="checkout-cost-breakdown">
             <div class="checkout-cost-row">
-              <span>Items Subtotal</span>
+              <span>Product Subtotal</span>
               <span style="font-weight:600;">${CartManager.formatPrice(subtotal)}</span>
             </div>
             <div class="checkout-cost-row">
-              <span>Livestock Shipping</span>
+              <span>Shipping Charges</span>
               <span class="badge-tbc">To be confirmed</span>
             </div>
-            <div class="checkout-cost-row total">
-              <span>Estimated Total</span>
-              <span style="color:var(--color-primary-dark);">${CartManager.formatPrice(subtotal)}</span>
+            <div class="checkout-cost-row">
+              <span>Discount</span>
+              <span style="color:var(--text-muted); font-weight:600;">₹0</span>
             </div>
-            <div style="font-size:0.75rem; color:var(--text-muted); text-align:right;">
-              + Actual courier transit fee confirmed on WhatsApp
+            <div class="checkout-cost-row total">
+              <span>Final Total</span>
+              <span style="color:var(--color-primary-dark); font-weight:700; text-align:right;">
+                ${CartManager.formatPrice(subtotal)}
+                <span style="font-size:0.75rem; font-weight:500; color:var(--text-muted); display:block;">(Shipping confirmation pending)</span>
+              </span>
             </div>
           </div>
 
           <div class="checkout-cod-banner">
-            ⚠️ <strong>Strict Payment Policy:</strong> Cash on Delivery (COD) is unavailable for live livestock and delicate vivariums. Orders are prepaid via UPI/Bank transfer confirmed on WhatsApp.
+            ⚠️ <strong>Payment Notice:</strong> Cash on Delivery (COD) is strictly unavailable for live livestock and bioactive habitats. Prepaid orders only via UPI/Bank Transfer after WhatsApp confirmation.
           </div>
         </div>
       </div>
@@ -2329,16 +2324,23 @@
                 <span>Shipping:</span>
                 <span class="badge-tbc">To be confirmed</span>
               </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span>Discount:</span>
+                <strong>₹0</strong>
+              </div>
               <div style="display:flex; justify-content:space-between; font-size:1.05rem; font-weight:700; color:var(--color-primary-dark); border-top:1px solid var(--border-leaf); padding-top:0.45rem; margin-top:0.25rem;">
-                <span>Estimated Total:</span>
-                <span>${CartManager.formatPrice(subtotal)}</span>
+                <span>TOTAL:</span>
+                <span style="text-align:right;">
+                  ${CartManager.formatPrice(subtotal)}
+                  <small style="font-size:0.75rem; font-weight:500; color:var(--text-muted); display:block;">(Shipping confirmation pending)</small>
+                </span>
               </div>
             </div>
           </div>
         </div>
 
         <div class="checkout-callout-box">
-          💬 <strong>Next Step on WhatsApp:</strong> Clicking Continue will open official WhatsApp chat with <strong>Fish Tales (+91 96542 97430)</strong> with this exact order request pre-filled. We will confirm specimen availability, shipping schedule, and provide secure UPI payment details.
+          ⚠️ <strong>Payment Notice:</strong> Cash on Delivery (COD) is strictly unavailable for live livestock and bioactive habitats. Prepaid orders only via UPI/Bank Transfer after WhatsApp confirmation.
         </div>
 
         <div class="checkout-actions-row">

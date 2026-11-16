@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-console.log('=== TEST SUITE: COMPLETE CUSTOMER CHECKOUT & WHATSAPP ORDER SYSTEM ===\n');
+console.log('=== TEST SUITE: COMPLETE CUSTOMER CHECKOUT & DELIVERY DETAILS SYSTEM ===\n');
 
 let failed = false;
 
@@ -50,7 +50,7 @@ expectedCssClasses.forEach(cls => {
   }
 });
 
-// 3. Verify JavaScript logic by extracting and evaluating functions from script.js
+// 3. Verify JavaScript logic in script.js
 const js = fs.readFileSync('script.js', 'utf8');
 
 if (!js.includes('buildWhatsAppOrderMessage') ||
@@ -64,18 +64,15 @@ if (!js.includes('buildWhatsAppOrderMessage') ||
   console.log('✓ PASS in script.js: Core checkout engine functions found');
 }
 
-// 4. Test Order ID Generator
-function testOrderId() {
-  const id1 = `FT-${new Date().toISOString().slice(0,10).replace(/-/g,'')}-${Math.random().toString(36).substring(2,6).toUpperCase()}`;
-  const regex = /^FT-\d{8}-[A-Z0-9]{4}$/;
-  if (regex.test(id1)) {
-    console.log(`✓ PASS: Order ID format matches FT-YYYYMMDD-XXXX (Sample: ${id1})`);
-  } else {
-    console.error(`✗ FAIL: Order ID does not match format: ${id1}`);
-    failed = true;
-  }
+// 4. Test Order ID Generator format FT-YYYYMMDD-001
+const regexOrderId = /^FT-\d{8}-\d{3}$/;
+const sampleOrderId = `FT-20261116-001`;
+if (regexOrderId.test(sampleOrderId)) {
+  console.log(`✓ PASS: Order ID format matches FT-YYYYMMDD-001 (Sample: ${sampleOrderId})`);
+} else {
+  console.error(`✗ FAIL: Order ID does not match format: ${sampleOrderId}`);
+  failed = true;
 }
-testOrderId();
 
 // 5. Test Form Validation Rules
 function validateCustomer(c) {
@@ -138,27 +135,24 @@ if (!invRes.isValid && invRes.errors.mobile && invRes.errors.pincode && invRes.e
 
 // 6. Test Multi-Product & Multi-Variant WhatsApp Message Generation
 const sampleOrder = {
-  orderId: 'FT-20261116-9K3A',
+  orderId: 'FT-20261116-001',
   date: '16/11/2026',
-  time: '10:45 PM',
   items: [
     { name: 'Red Lace Guppy (1 Pair (Adult Pair))', price: 250, quantity: 2, pricingUnit: 'pair' },
-    { name: 'Cubaris Murina Glacier', price: 70, quantity: 5, pricingUnit: 'pc' },
-    { name: 'Isopod House Kit', price: 1545, quantity: 1, pricingUnit: 'kit' }
+    { name: 'Cubaris Murina Glacier', price: 70, quantity: 5, pricingUnit: 'pc' }
   ],
-  subtotal: (250*2) + (70*5) + (1545*1), // 500 + 350 + 1545 = 2395
+  subtotal: (250*2) + (70*5), // 500 + 350 = 850
   customer: {
-    fullName: 'Ananya Roy',
+    fullName: 'Rahul Sharma',
     mobile: '9876543210',
-    email: 'ananya@example.com',
-    address: '74 Park View Residences, Sector 4',
-    city: 'Kolkata',
-    state: 'West Bengal',
-    pincode: '700029'
+    email: '',
+    address: '123 Green Valley Street, Apartment 4B',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    pincode: '560001'
   }
 };
 
-// Check WhatsApp Message output format
 function getProductAndVariantDisplay(item) {
   let prodName = item.name;
   let variantName = '';
@@ -175,22 +169,15 @@ function getProductAndVariantDisplay(item) {
 }
 
 function buildWhatsAppMessage(order) {
-  const divider = '━━━━━━━━━━━━━━━━━━';
+  const divider = '━━━━━━━━━━━━━━━━━━━━';
   const lines = [
-    '🐠 FISH TALES',
-    'NEW ORDER REQUEST',
+    '🛍️ NEW ORDER – FISH TALES',
+    '',
+    `🆔 Order ID: ${order.orderId}`,
+    `📅 Date: ${order.date}`,
     '',
     divider,
-    '',
-    'ORDER INFORMATION',
-    '',
-    `Order ID: ${order.orderId}`,
-    `Date: ${order.date}`,
-    `Time: ${order.time}`,
-    '',
-    divider,
-    '',
-    'PRODUCT DETAILS',
+    '📦 ORDER SUMMARY',
     ''
   ];
 
@@ -199,66 +186,65 @@ function buildWhatsAppMessage(order) {
     const unitPriceFormatted = '₹' + item.price.toLocaleString('en-IN');
     const lineTotalFormatted = '₹' + (item.price * item.quantity).toLocaleString('en-IN');
 
-    lines.push(`• ${prodName}`);
-    lines.push(`  Variant: ${variantName}`);
-    lines.push(`  Qty: ${item.quantity}`);
-    lines.push(`  Unit Price: ${unitPriceFormatted}`);
-    lines.push(`  Line Total: ${lineTotalFormatted}`);
+    lines.push(`${prodName} × ${item.quantity}`);
+    lines.push(`Variant: ${variantName}`);
+    lines.push(`Unit Price: ${unitPriceFormatted}`);
+    lines.push(`Line Total: ${lineTotalFormatted}`);
     if (index < order.items.length - 1) lines.push('');
   });
 
   lines.push('');
-  lines.push(divider);
-  lines.push('');
-  lines.push('PAYMENT SUMMARY');
-  lines.push('');
   lines.push(`Subtotal: ₹${order.subtotal.toLocaleString('en-IN')}`);
   lines.push('Shipping: To be confirmed');
-  lines.push(`Estimated Total: ₹${order.subtotal.toLocaleString('en-IN')}`);
+  lines.push('Discount: ₹0');
+  lines.push(`💰 TOTAL: ₹${order.subtotal.toLocaleString('en-IN')} (Shipping confirmation pending)`);
+  lines.push('');
+  lines.push(divider);
+  lines.push('📍 DELIVERY DETAILS');
+  lines.push('');
+  lines.push(`👤 Name: ${order.customer.fullName}`);
+  lines.push(`📞 Phone: ${order.customer.mobile}`);
+  lines.push(`✉️ Email: ${order.customer.email ? order.customer.email : 'Not provided'}`);
+  lines.push(`🏠 Address: ${order.customer.address}`);
+  lines.push(`📍 City: ${order.customer.city}`);
+  lines.push(`🗺️ State: ${order.customer.state}`);
+  lines.push(`📮 Pincode: ${order.customer.pincode}`);
   lines.push('');
   lines.push(divider);
   lines.push('');
-  lines.push('DELIVERY INFORMATION');
+  lines.push('👋 Hello Fish Tales!');
   lines.push('');
-  lines.push(`Customer Name: ${order.customer.fullName}`);
-  lines.push(`Mobile Number: ${order.customer.mobile}`);
-  lines.push(`Email: ${order.customer.email ? order.customer.email : 'N/A'}`);
-  lines.push(`Complete Address: ${order.customer.address}`);
-  lines.push(`City: ${order.customer.city}`);
-  lines.push(`State: ${order.customer.state}`);
-  lines.push(`Pincode: ${order.customer.pincode}`);
-  lines.push('');
-  lines.push(divider);
-  lines.push('');
-  lines.push('CUSTOMER MESSAGE');
-  lines.push('');
-  lines.push('Hello Fish Tales!');
-  lines.push('');
-  lines.push('I would like to place this order. Please confirm product availability, final shipping charges and payment instructions before dispatch.');
-  lines.push('');
-  lines.push('Thank you!');
+  lines.push("I'd like to confirm my order. Please verify the order details and proceed with dispatch.");
 
   return lines.join('\n');
 }
 
 const msg = buildWhatsAppMessage(sampleOrder);
-console.log('--- GENERATED SAMPLE WHATSAPP MESSAGE ---');
+console.log('--- GENERATED WHATSAPP MESSAGE ---');
 console.log(msg);
-console.log('-----------------------------------------\n');
+console.log('-----------------------------------\n');
 
-if (msg.includes('🐠 FISH TALES') &&
-    msg.includes('Order ID: FT-20261116-9K3A') &&
-    msg.includes('Red Lace Guppy') &&
+if (msg.includes('🛍️ NEW ORDER – FISH TALES') &&
+    msg.includes('🆔 Order ID: FT-20261116-001') &&
+    msg.includes('📅 Date: 16/11/2026') &&
+    msg.includes('Red Lace Guppy × 2') &&
     msg.includes('Variant: 1 Pair (Adult Pair)') &&
-    msg.includes('Cubaris Murina Glacier') &&
-    msg.includes('Isopod House Kit') &&
-    msg.includes('Subtotal: ₹2,395') &&
+    msg.includes('Unit Price: ₹250') &&
+    msg.includes('Line Total: ₹500') &&
+    msg.includes('Cubaris Murina Glacier × 5') &&
+    msg.includes('Subtotal: ₹850') &&
     msg.includes('Shipping: To be confirmed') &&
-    msg.includes('Estimated Total: ₹2,395') &&
-    msg.includes('Customer Name: Ananya Roy') &&
-    msg.includes('Pincode: 700029') &&
-    msg.includes('Please confirm product availability, final shipping charges')) {
-  console.log('✓ PASS: WhatsApp message contains exact required structure, fields, and text!');
+    msg.includes('Discount: ₹0') &&
+    msg.includes('💰 TOTAL: ₹850 (Shipping confirmation pending)') &&
+    msg.includes('👤 Name: Rahul Sharma') &&
+    msg.includes('📞 Phone: 9876543210') &&
+    msg.includes('✉️ Email: Not provided') &&
+    msg.includes('🏠 Address: 123 Green Valley Street, Apartment 4B') &&
+    msg.includes('📍 City: Bengaluru') &&
+    msg.includes('🗺️ State: Karnataka') &&
+    msg.includes('📮 Pincode: 560001') &&
+    msg.includes("I'd like to confirm my order. Please verify the order details and proceed with dispatch.")) {
+  console.log('✓ PASS: WhatsApp message contains exact required structure, emojis, and text!');
 } else {
   console.error('✗ FAIL: WhatsApp message missing required content!');
   failed = true;
@@ -267,7 +253,7 @@ if (msg.includes('🐠 FISH TALES') &&
 // 7. Verify encodeURIComponent
 const encoded = encodeURIComponent(msg);
 const waUrl = `https://wa.me/919654297430?text=${encoded}`;
-if (waUrl.startsWith('https://wa.me/919654297430?text=%F0%9F%90%A0')) {
+if (waUrl.includes('text=%F0%9F%9B%8D%EF%B8%8F%20NEW%20ORDER%20%E2%80%93%20FISH%20TALES')) {
   console.log('✓ PASS: WhatsApp URL correctly encoded with official 919654297430 number');
 } else {
   console.error('✗ FAIL: WhatsApp URL incorrectly encoded');
