@@ -95,14 +95,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: true
@@ -126,14 +126,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -157,14 +157,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -188,14 +188,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: true
@@ -219,14 +219,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: true
@@ -250,14 +250,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -281,14 +281,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 300,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 300,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 600,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 600,
+          "label": "2 Pairs"
         }
       ],
       featured: true
@@ -312,14 +312,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -343,14 +343,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -374,14 +374,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -405,14 +405,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -436,14 +436,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -467,14 +467,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -498,14 +498,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (Male 5–6 cm)",
-                "price": 350,
-                "label": "Piece"
+          "name": "1 Specimen (Male 5–6 cm)",
+          "price": 350,
+          "label": "Piece"
         },
         {
-                "name": "2 Specimens (Select Males)",
-                "price": 700,
-                "label": "2 pcs"
+          "name": "2 Specimens (Select Males)",
+          "price": 700,
+          "label": "2 pcs"
         }
       ],
       featured: true
@@ -530,19 +530,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 120,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 120,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 600,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 600,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 1200,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 1200,
+          "label": "10 pcs"
         }
       ],
       featured: true
@@ -565,19 +565,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 60,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 60,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 300,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 300,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 600,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 600,
+          "label": "10 pcs"
         }
       ],
       featured: false
@@ -600,19 +600,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 70,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 70,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 350,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 350,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 700,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 700,
+          "label": "10 pcs"
         }
       ],
       featured: true
@@ -635,19 +635,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 60,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 60,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 300,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 300,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 600,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 600,
+          "label": "10 pcs"
         }
       ],
       featured: false
@@ -670,19 +670,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 600,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 600,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 3000,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 3000,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 6000,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 6000,
+          "label": "10 pcs"
         }
       ],
       featured: true
@@ -705,19 +705,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 750,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 750,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 3750,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 3750,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 7500,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 7500,
+          "label": "10 pcs"
         }
       ],
       featured: true
@@ -740,19 +740,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 150,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 150,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 750,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 750,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 1500,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 1500,
+          "label": "10 pcs"
         }
       ],
       featured: false
@@ -778,14 +778,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1–1.5 cm)",
-                "price": 2199,
-                "label": "Specimen"
+          "name": "1 Specimen (1–1.5 cm)",
+          "price": 2199,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 4398,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 4398,
+          "label": "2 specimens"
         }
       ],
       featured: true
@@ -809,14 +809,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1–1.5 cm)",
-                "price": 2199,
-                "label": "Specimen"
+          "name": "1 Specimen (1–1.5 cm)",
+          "price": 2199,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 4398,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 4398,
+          "label": "2 specimens"
         }
       ],
       featured: true
@@ -840,14 +840,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1–1.5 cm)",
-                "price": 2399,
-                "label": "Specimen"
+          "name": "1 Specimen (1–1.5 cm)",
+          "price": 2399,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 4798,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 4798,
+          "label": "2 specimens"
         }
       ],
       featured: true
@@ -871,14 +871,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1–1.5 cm)",
-                "price": 4799,
-                "label": "Specimen"
+          "name": "1 Specimen (1–1.5 cm)",
+          "price": 4799,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 9598,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 9598,
+          "label": "2 specimens"
         }
       ],
       featured: true
@@ -902,14 +902,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1–1.5 cm)",
-                "price": 1999,
-                "label": "Specimen"
+          "name": "1 Specimen (1–1.5 cm)",
+          "price": 1999,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 3998,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 3998,
+          "label": "2 specimens"
         }
       ],
       featured: false
@@ -933,14 +933,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1 inch)",
-                "price": 3000,
-                "label": "Specimen"
+          "name": "1 Specimen (1 inch)",
+          "price": 3000,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 6000,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 6000,
+          "label": "2 specimens"
         }
       ],
       featured: true
@@ -963,21 +963,21 @@
         "diet": "Included in starter pack",
         "habitat": "High-clarity glass enclosure",
         "kitIncludes": [
-                "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height)",
-                "Fittonia albivenis (Patterned nerve plant)",
-                "Hemigraphis sp. Pink (Purple waffle plant)",
-                "Sheet Moss layer",
-                "Bioactive Isopod Substrate Blend",
-                "Lotus Pod (natural hide for isopods)",
-                "Premium Isopod Food",
-                "Isopod Culture: 6 Cubaris sp. \"Glacier\""
+          "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height)",
+          "Fittonia albivenis (Patterned nerve plant)",
+          "Hemigraphis sp. Pink (Purple waffle plant)",
+          "Sheet Moss layer",
+          "Bioactive Isopod Substrate Blend",
+          "Lotus Pod (natural hide for isopods)",
+          "Premium Isopod Food",
+          "Isopod Culture: 6 Cubaris sp. \"Glacier\""
         ]
       },
       variants: [
         {
-                "name": "Complete Kit",
-                "price": 1545,
-                "label": "Kit"
+          "name": "Complete Kit",
+          "price": 1545,
+          "label": "Kit"
         }
       ],
       featured: true
@@ -998,17 +998,17 @@
         "diet": "Included in starter pack",
         "habitat": "High-clarity glass enclosure",
         "kitIncludes": [
-                "Half Cube Aquarium",
-                "1 beautiful Betta Fish",
-                "Live aquatic plants",
-                "Premium sand substrate"
+          "Half Cube Aquarium",
+          "1 beautiful Betta Fish",
+          "Live aquatic plants",
+          "Premium sand substrate"
         ]
       },
       variants: [
         {
-                "name": "Complete Kit",
-                "price": 999,
-                "label": "Kit"
+          "name": "Complete Kit",
+          "price": 999,
+          "label": "Kit"
         }
       ],
       featured: true
@@ -1029,17 +1029,17 @@
         "diet": "Included in starter pack",
         "habitat": "High-clarity glass enclosure",
         "kitIncludes": [
-                "10 Cubaris Murina Glacier Isopods",
-                "1 Bonus Isopod (11 specimens total)",
-                "Ventilated transport culture cup",
-                "Starter food blend"
+          "10 Cubaris Murina Glacier Isopods",
+          "1 Bonus Isopod (11 specimens total)",
+          "Ventilated transport culture cup",
+          "Starter food blend"
         ]
       },
       variants: [
         {
-                "name": "10 + 1 Free Deal (11 specimens)",
-                "price": 700,
-                "label": "11 Pieces"
+          "name": "10 + 1 Free Deal (11 specimens)",
+          "price": 700,
+          "label": "11 Pieces"
         }
       ],
       featured: true
@@ -1242,7 +1242,7 @@
 
   function getCurrentPageCategory() {
     const pageCat = (document.body && document.body.dataset && document.body.dataset.pageCategory) ||
-                    (document.querySelector('main') && document.querySelector('main').dataset && document.querySelector('main').dataset.pageCategory);
+      (document.querySelector('main') && document.querySelector('main').dataset && document.querySelector('main').dataset.pageCategory);
     if (pageCat && pageCat !== 'home' && pageCat !== 'all') {
       return pageCat;
     }
@@ -1837,16 +1837,20 @@
   }
 
   function buildWhatsAppOrderMessage(orderDetails) {
-    const { orderId, date, items, subtotal, customer } = orderDetails;
+    const { orderId, date, time, items, subtotal, customer } = orderDetails;
     const divider = '━━━━━━━━━━━━━━━━━━━━';
     const lines = [
-      '🛍️ NEW ORDER – FISH TALES',
-      '',
-      `🆔 Order ID: ${orderId}`,
-      `📅 Date: ${date}`,
+      '*🐠 FISH TALES*',
+      '*🛍️ NEW ORDER RECEIVED*',
       '',
       divider,
-      '📦 ORDER SUMMARY',
+      '*📋 ORDER INFORMATION*',
+      '',
+      `*🆔 Order ID:* *${orderId}*`,
+      `*📅 Date:* *${date}*` + (time ? ` (*${time}*)` : ''),
+      '',
+      divider,
+      '*📦 PRODUCT DETAILS*',
       ''
     ];
 
@@ -1855,37 +1859,48 @@
       const unitPriceFormatted = CartManager.formatPrice(item.price);
       const lineTotalFormatted = CartManager.formatPrice(item.price * item.quantity);
 
-      lines.push(`${prodName} × ${item.quantity}`);
-      lines.push(`Variant: ${variantName}`);
-      lines.push(`Unit Price: ${unitPriceFormatted}`);
-      lines.push(`Line Total: ${lineTotalFormatted}`);
+      lines.push(`• *${prodName}* × *${item.quantity}*`);
+      lines.push(`  Variant: ${variantName}`);
+      lines.push(`  Unit Price: *${unitPriceFormatted}*`);
+      lines.push(`  Line Total: *${lineTotalFormatted}*`);
       if (index < items.length - 1) {
         lines.push('');
       }
     });
 
     lines.push('');
-    lines.push(`Subtotal: ${CartManager.formatPrice(subtotal)}`);
-    lines.push('Shipping: To be confirmed');
-    lines.push('Discount: ₹0');
-    lines.push(`💰 TOTAL: ${CartManager.formatPrice(subtotal)} (Shipping confirmation pending)`);
+    lines.push(divider);
+    lines.push('*💳 PAYMENT & ORDER SUMMARY*');
+    lines.push('');
+    lines.push(`*Subtotal:* *${CartManager.formatPrice(subtotal)}*`);
+    lines.push('*Shipping:* *To be confirmed* (Live transit fee)');
+    lines.push('*Discount:* *₹0*');
+    lines.push(`*💰 FINAL TOTAL:* *${CartManager.formatPrice(subtotal)}* *(Shipping confirmation pending)*`);
     lines.push('');
     lines.push(divider);
-    lines.push('📍 DELIVERY DETAILS');
+    lines.push('*📍 DELIVERY INFORMATION*');
     lines.push('');
-    lines.push(`👤 Name: ${customer.fullName}`);
-    lines.push(`📞 Phone: ${customer.mobile}`);
-    lines.push(`✉️ Email: ${customer.email && customer.email.trim() ? customer.email.trim() : 'Not provided'}`);
-    lines.push(`🏠 Address: ${customer.address}`);
-    lines.push(`📍 City: ${customer.city}`);
-    lines.push(`🗺️ State: ${customer.state}`);
-    lines.push(`📮 Pincode: ${customer.pincode}`);
+    lines.push(`👤 *Customer Name:* *${customer.fullName}*`);
+    lines.push(`📞 *Phone Number:* *+91 ${customer.mobile}*`);
+    lines.push(`✉️ *Email Address:* ${customer.email && customer.email.trim() ? `*${customer.email.trim()}*` : 'Not provided'}`);
+    lines.push(`🏠 *Complete Address:* *${customer.address}*`);
+    lines.push(`📍 *City:* *${customer.city}*`);
+    lines.push(`🗺️ *State:* *${customer.state}*`);
+    lines.push(`📮 *Pincode:* *${customer.pincode}*`);
+    lines.push('');
+    lines.push(divider);
+    lines.push('*⚠️ PAYMENT INSTRUCTIONS & POLICY*');
+    lines.push('');
+    lines.push('• *Cash on Delivery (COD) is strictly unavailable* for live livestock & bioactive habitats.');
+    lines.push('• Orders are prepaid via *UPI / Bank Transfer* after order & shipping confirmation.');
     lines.push('');
     lines.push(divider);
     lines.push('');
-    lines.push('👋 Hello Fish Tales!');
+    lines.push('👋 *Hello Fish Tales!*');
     lines.push('');
-    lines.push("I'd like to confirm my order. Please verify the order details and proceed with dispatch.");
+    lines.push("I'd like to confirm my order. Please verify product availability, confirmed shipping charges, and send payment instructions before dispatch.");
+    lines.push('');
+    lines.push('*Thank you!*');
 
     return lines.join('\n');
   }
@@ -1899,13 +1914,13 @@
           Object.assign(checkoutState.customer, saved);
         }
       }
-    } catch {}
+    } catch { }
   }
 
   function saveCustomerToStorage(customer) {
     try {
       localStorage.setItem('fishtales_customer', JSON.stringify(customer));
-    } catch {}
+    } catch { }
   }
 
   function escapeHtml(str) {
@@ -2117,12 +2132,12 @@
     const errEl = document.getElementById(`err-${fieldKey}`);
     const inputEl = document.getElementById(
       fieldKey === 'fullName' ? 'checkoutFullName' :
-      fieldKey === 'mobile' ? 'checkoutMobile' :
-      fieldKey === 'email' ? 'checkoutEmail' :
-      fieldKey === 'address' ? 'checkoutAddress' :
-      fieldKey === 'city' ? 'checkoutCity' :
-      fieldKey === 'state' ? 'checkoutState' :
-      'checkoutPincode'
+        fieldKey === 'mobile' ? 'checkoutMobile' :
+          fieldKey === 'email' ? 'checkoutEmail' :
+            fieldKey === 'address' ? 'checkoutAddress' :
+              fieldKey === 'city' ? 'checkoutCity' :
+                fieldKey === 'state' ? 'checkoutState' :
+                  'checkoutPincode'
     );
     if (errEl) errEl.classList.remove('show');
     if (inputEl) inputEl.classList.remove('is-invalid');
@@ -2500,7 +2515,7 @@
     }).join('');
   }
 
-  
+
   /* ── Mobile Menu Handlers ────────────────────────────────── */
   window.toggleMobileMenu = function () {
     const navMenu = document.getElementById('navMenu');
