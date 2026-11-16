@@ -1239,6 +1239,20 @@
 
   /* ── 6. Product Filtering, Search & Catalogue Rendering ──── */
   let currentCategory = 'all';
+
+  function getCurrentPageCategory() {
+    const pageCat = (document.body && document.body.dataset && document.body.dataset.pageCategory) ||
+                    (document.querySelector('main') && document.querySelector('main').dataset && document.querySelector('main').dataset.pageCategory);
+    if (pageCat && pageCat !== 'home' && pageCat !== 'all') {
+      return pageCat;
+    }
+    const path = (window.location && window.location.pathname) ? window.location.pathname.toLowerCase() : '';
+    if (path.includes('aquarium-fish')) return 'aquarium';
+    if (path.includes('isopods')) return 'isopods';
+    if (path.includes('tarantulas')) return 'tarantulas';
+    if (path.includes('combo-packs')) return 'combos';
+    return 'all';
+  }
   let currentSearch = '';
   let currentSort = 'default';
 
@@ -1308,14 +1322,17 @@
     const countEl = document.getElementById('resultCount');
     if (!grid) return;
 
+    const pageCategory = getCurrentPageCategory();
+    let activeCat = pageCategory !== 'all' ? pageCategory : currentCategory;
+
     let list = [...PRODUCTS];
 
     // Ensure all products have variants and specs initialized
     list.forEach(p => initProductVariantsAndSpecs(p));
 
     // 1. Filter by category
-    if (currentCategory !== 'all') {
-      list = list.filter(p => p.category === currentCategory);
+    if (activeCat !== 'all') {
+      list = list.filter(p => p.category === activeCat);
     }
 
     // 2. Filter by search query
@@ -1339,12 +1356,15 @@
 
     // Update Showing X of Y products counter
     if (countEl) {
-      countEl.innerHTML = `Showing <strong>${list.length}</strong> of <strong>${PRODUCTS.length}</strong> products`;
+      const totalInCategory = (activeCat !== 'all')
+        ? PRODUCTS.filter(p => p.category === activeCat).length
+        : PRODUCTS.length;
+      countEl.innerHTML = `Showing <strong>${list.length}</strong> of <strong>${totalInCategory}</strong> products`;
     }
 
     const indicatorEl = document.getElementById('activeCategoryIndicator');
     if (indicatorEl) {
-      indicatorEl.textContent = CATEGORY_NAMES[currentCategory] || 'All Products';
+      indicatorEl.textContent = CATEGORY_NAMES[activeCat] || 'All Products';
     }
 
     if (list.length === 0) {
@@ -1449,6 +1469,23 @@
   };
 
   window.filterByCategory = function (categoryKey) {
+    const targetMap = {
+      aquarium: 'aquarium-fish.html',
+      isopods: 'isopods.html',
+      tarantulas: 'tarantulas.html',
+      combos: 'combo-packs.html'
+    };
+
+    const pageCat = getCurrentPageCategory();
+    if (pageCat !== 'all' && pageCat !== categoryKey) {
+      if (categoryKey === 'all') {
+        window.location.href = 'index.html#catalogue';
+      } else if (targetMap[categoryKey]) {
+        window.location.href = targetMap[categoryKey];
+      }
+      return;
+    }
+
     currentCategory = categoryKey;
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
       tab.classList.toggle('active', tab.dataset.category === categoryKey);
@@ -1644,7 +1681,10 @@
     subtotalEl.textContent = CartManager.formatPrice(total);
 
     if (checkoutBtn) {
-      checkoutBtn.href = CartManager.getWhatsAppCheckoutURL();
+      checkoutBtn.onclick = function (e) {
+        if (e) e.preventDefault();
+        window.openCheckoutModal();
+      };
     }
 
     if (items.length === 0) {
@@ -1718,13 +1758,671 @@
     }
   };
 
-  window.toggleCartDrawer = function () {
-    const drawer = document.getElementById('cartDrawer');
-    if (drawer && drawer.classList.contains('active')) {
-      window.closeCartDrawer();
-    } else {
-      window.openCartDrawer();
+  /* ── 8b. Customer Checkout & WhatsApp Order Engine ─────────── */
+  const checkoutState = {
+    step: 1,
+    orderId: '',
+    orderDate: '',
+    orderTime: '',
+    isSubmitting: false,
+    customer: {
+      fullName: '',
+      mobile: '',
+      email: '',
+      address: '',
+      city: '',
+      state: '',
+      pincode: ''
     }
+  };
+
+  function generateOrderId() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const dateStr = `${year}${month}${day}`;
+    const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+    let rand = '';
+    for (let i = 0; i < 4; i++) {
+      rand += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return `FT-${dateStr}-${rand}`;
+  }
+
+  function formatOrderDateTime(d = new Date()) {
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    const dateStr = `${day}/${month}/${year}`;
+
+    let hours = d.getHours();
+    const minutes = String(d.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    const timeStr = `${hours}:${minutes} ${ampm}`;
+
+    return { date: dateStr, time: timeStr };
+  }
+
+  function getProductAndVariantDisplay(item) {
+    let prodName = item.name;
+    let variantName = '';
+
+    const match = item.name.match(/^(.*?)\s*\((.*?)\)$/);
+    if (match) {
+      prodName = match[1].trim();
+      variantName = match[2].trim();
+    } else {
+      if (item.pricingUnit === 'pair') {
+        variantName = '1 Pair (Adult Pair)';
+      } else if (item.pricingUnit === 'kit') {
+        variantName = 'Complete Kit';
+      } else if (item.size) {
+        variantName = `Single (${item.size})`;
+      } else {
+        variantName = 'Standard / Individual Specimen';
+      }
+    }
+
+    return { prodName, variantName };
+  }
+
+  function buildWhatsAppOrderMessage(orderDetails) {
+    const { orderId, date, time, items, subtotal, customer } = orderDetails;
+    const divider = '━━━━━━━━━━━━━━━━━━';
+    const lines = [
+      '🐠 FISH TALES',
+      'NEW ORDER REQUEST',
+      '',
+      divider,
+      '',
+      'ORDER INFORMATION',
+      '',
+      `Order ID: ${orderId}`,
+      `Date: ${date}`,
+      `Time: ${time}`,
+      '',
+      divider,
+      '',
+      'PRODUCT DETAILS',
+      ''
+    ];
+
+    items.forEach((item, index) => {
+      const { prodName, variantName } = getProductAndVariantDisplay(item);
+      const unitPriceFormatted = CartManager.formatPrice(item.price);
+      const lineTotalFormatted = CartManager.formatPrice(item.price * item.quantity);
+
+      lines.push(`• ${prodName}`);
+      lines.push(`  Variant: ${variantName}`);
+      lines.push(`  Qty: ${item.quantity}`);
+      lines.push(`  Unit Price: ${unitPriceFormatted}`);
+      lines.push(`  Line Total: ${lineTotalFormatted}`);
+      if (index < items.length - 1) {
+        lines.push('');
+      }
+    });
+
+    lines.push('');
+    lines.push(divider);
+    lines.push('');
+    lines.push('PAYMENT SUMMARY');
+    lines.push('');
+    lines.push(`Subtotal: ${CartManager.formatPrice(subtotal)}`);
+    lines.push('Shipping: To be confirmed');
+    lines.push(`Estimated Total: ${CartManager.formatPrice(subtotal)}`);
+    lines.push('');
+    lines.push(divider);
+    lines.push('');
+    lines.push('DELIVERY INFORMATION');
+    lines.push('');
+    lines.push(`Customer Name: ${customer.fullName}`);
+    lines.push(`Mobile Number: ${customer.mobile}`);
+    lines.push(`Email: ${customer.email ? customer.email : 'N/A'}`);
+    lines.push(`Complete Address: ${customer.address}`);
+    lines.push(`City: ${customer.city}`);
+    lines.push(`State: ${customer.state}`);
+    lines.push(`Pincode: ${customer.pincode}`);
+    lines.push('');
+    lines.push(divider);
+    lines.push('');
+    lines.push('CUSTOMER MESSAGE');
+    lines.push('');
+    lines.push('Hello Fish Tales!');
+    lines.push('');
+    lines.push('I would like to place this order. Please confirm product availability, final shipping charges and payment instructions before dispatch.');
+    lines.push('');
+    lines.push('Thank you!');
+
+    return lines.join('\n');
+  }
+
+  function loadSavedCustomer() {
+    try {
+      const raw = localStorage.getItem('fishtales_customer');
+      if (raw) {
+        const saved = JSON.parse(raw);
+        if (saved && typeof saved === 'object') {
+          Object.assign(checkoutState.customer, saved);
+        }
+      }
+    } catch {}
+  }
+
+  function saveCustomerToStorage(customer) {
+    try {
+      localStorage.setItem('fishtales_customer', JSON.stringify(customer));
+    } catch {}
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  window.openCheckoutModal = function () {
+    const items = CartManager.load();
+    if (items.length === 0) {
+      showToast('Your cart is empty! Add items to continue.', 'error');
+      return;
+    }
+
+    if (typeof window.closeCartDrawer === 'function') {
+      window.closeCartDrawer();
+    }
+
+    loadSavedCustomer();
+    checkoutState.orderId = generateOrderId();
+    const dt = formatOrderDateTime();
+    checkoutState.orderDate = dt.date;
+    checkoutState.orderTime = dt.time;
+    checkoutState.step = 1;
+    checkoutState.isSubmitting = false;
+
+    window.renderCheckoutStep1();
+
+    const modal = document.getElementById('checkoutModal');
+    if (modal) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  window.closeCheckoutModal = function () {
+    const modal = document.getElementById('checkoutModal');
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  };
+
+  window.handleCheckoutModalBackdropClick = function (e) {
+    if (e.target && e.target.id === 'checkoutModal') {
+      window.closeCheckoutModal();
+    }
+  };
+
+  window.renderCheckoutStep1 = function () {
+    checkoutState.step = 1;
+    const content = document.getElementById('checkoutContent');
+    if (!content) return;
+
+    const items = CartManager.load();
+    const subtotal = CartManager.getTotal();
+    const c = checkoutState.customer;
+
+    const itemsHtml = items.map(item => {
+      const { prodName, variantName } = getProductAndVariantDisplay(item);
+      const lineTotal = CartManager.formatPrice(item.price * item.quantity);
+      const unitPrice = CartManager.formatPrice(item.price);
+      const img = item.image || PLACEHOLDER_IMG;
+
+      return `
+        <div class="checkout-item-row">
+          <div class="checkout-item-thumb">
+            <img src="${img}" alt="${prodName}" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
+          </div>
+          <div class="checkout-item-info">
+            <div class="checkout-item-name" title="${prodName}">${prodName}</div>
+            <div class="checkout-item-variant">${variantName}</div>
+            <div class="checkout-item-submeta">Qty: ${item.quantity} &times; ${unitPrice}</div>
+          </div>
+          <div class="checkout-item-price">${lineTotal}</div>
+        </div>
+      `;
+    }).join('');
+
+    content.innerHTML = `
+      <div class="checkout-header">
+        <div class="checkout-title-wrap">
+          <h2 id="checkoutModalTitle">Customer Checkout</h2>
+          <div class="checkout-subtitle">Enter your delivery address to prepare your official order.</div>
+        </div>
+        <div class="checkout-steps-badge">
+          <span class="checkout-step-pill active">1. Delivery Info</span>
+          <span style="color:var(--text-dim);">&rarr;</span>
+          <span class="checkout-step-pill">2. Review &amp; WhatsApp</span>
+        </div>
+      </div>
+
+      <div class="checkout-grid">
+        <!-- Left: Delivery Form -->
+        <div class="checkout-form-container">
+          <div class="checkout-form-section-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Recipient &amp; Delivery Address
+          </div>
+
+          <form id="checkoutForm" onsubmit="event.preventDefault(); window.validateAndProceedToReview();" novalidate>
+            <div class="checkout-form-row">
+              <div class="checkout-form-group">
+                <label class="checkout-label" for="checkoutFullName">Full Name <span class="required-star">*</span></label>
+                <input type="text" id="checkoutFullName" class="checkout-input" placeholder="e.g. Rahul Sharma" value="${escapeHtml(c.fullName)}" required autocomplete="name" oninput="clearFieldError('fullName')">
+                <div class="checkout-field-error" id="err-fullName">Please enter your full name</div>
+              </div>
+
+              <div class="checkout-form-group">
+                <label class="checkout-label" for="checkoutMobile">WhatsApp Mobile Number <span class="required-star">*</span></label>
+                <div class="checkout-phone-wrap">
+                  <span class="checkout-phone-prefix">+91</span>
+                  <input type="tel" id="checkoutMobile" class="checkout-input" placeholder="10-digit number" value="${escapeHtml(c.mobile)}" maxlength="14" required autocomplete="tel" oninput="clearFieldError('mobile')">
+                </div>
+                <div class="checkout-field-error" id="err-mobile">Please enter a valid 10-digit Indian mobile number</div>
+              </div>
+            </div>
+
+            <div class="checkout-form-group">
+              <label class="checkout-label" for="checkoutEmail">Email Address <span style="font-weight:400; color:var(--text-muted);">(Optional)</span></label>
+              <input type="email" id="checkoutEmail" class="checkout-input" placeholder="e.g. name@example.com" value="${escapeHtml(c.email)}" autocomplete="email" oninput="clearFieldError('email')">
+              <div class="checkout-field-error" id="err-email">Please enter a valid email address or leave blank</div>
+            </div>
+
+            <div class="checkout-form-group">
+              <label class="checkout-label" for="checkoutAddress">Complete Delivery Address <span class="required-star">*</span></label>
+              <textarea id="checkoutAddress" class="checkout-textarea" placeholder="Flat / House No., Building Name, Street, Landmark" required autocomplete="street-address" oninput="clearFieldError('address')">${escapeHtml(c.address)}</textarea>
+              <div class="checkout-field-error" id="err-address">Please enter your complete delivery address</div>
+            </div>
+
+            <div class="checkout-form-row">
+              <div class="checkout-form-group">
+                <label class="checkout-label" for="checkoutCity">City <span class="required-star">*</span></label>
+                <input type="text" id="checkoutCity" class="checkout-input" placeholder="e.g. Bengaluru" value="${escapeHtml(c.city)}" required autocomplete="address-level2" oninput="clearFieldError('city')">
+                <div class="checkout-field-error" id="err-city">Please enter your city</div>
+              </div>
+
+              <div class="checkout-form-group">
+                <label class="checkout-label" for="checkoutState">State <span class="required-star">*</span></label>
+                <input type="text" id="checkoutState" class="checkout-input" placeholder="e.g. Karnataka" value="${escapeHtml(c.state)}" required autocomplete="address-level1" oninput="clearFieldError('state')">
+                <div class="checkout-field-error" id="err-state">Please enter your state</div>
+              </div>
+            </div>
+
+            <div class="checkout-form-group" style="max-width: 240px;">
+              <label class="checkout-label" for="checkoutPincode">Postal Pincode <span class="required-star">*</span></label>
+              <input type="text" id="checkoutPincode" class="checkout-input" placeholder="6 digits (e.g. 560001)" value="${escapeHtml(c.pincode)}" maxlength="6" required autocomplete="postal-code" oninput="clearFieldError('pincode')">
+              <div class="checkout-field-error" id="err-pincode">Please enter a valid 6-digit postal pincode</div>
+            </div>
+
+            <div class="checkout-actions-row">
+              <button type="button" class="btn btn-outline" onclick="closeCheckoutModal(); openCartDrawer();">
+                &larr; Back to Cart
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Review Order &rarr;
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Order Summary Box -->
+        <div class="checkout-summary-box">
+          <div class="checkout-summary-title">
+            <span>Order Summary (${CartManager.getCount()} items)</span>
+            <span style="font-size:0.75rem; color:var(--text-muted); font-weight:500;">Live Cart</span>
+          </div>
+
+          <div class="checkout-items-list">
+            ${itemsHtml}
+          </div>
+
+          <div class="checkout-cost-breakdown">
+            <div class="checkout-cost-row">
+              <span>Items Subtotal</span>
+              <span style="font-weight:600;">${CartManager.formatPrice(subtotal)}</span>
+            </div>
+            <div class="checkout-cost-row">
+              <span>Livestock Shipping</span>
+              <span class="badge-tbc">To be confirmed</span>
+            </div>
+            <div class="checkout-cost-row total">
+              <span>Estimated Total</span>
+              <span style="color:var(--color-primary-dark);">${CartManager.formatPrice(subtotal)}</span>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted); text-align:right;">
+              + Actual courier transit fee confirmed on WhatsApp
+            </div>
+          </div>
+
+          <div class="checkout-cod-banner">
+            ⚠️ <strong>Strict Payment Policy:</strong> Cash on Delivery (COD) is unavailable for live livestock and delicate vivariums. Orders are prepaid via UPI/Bank transfer confirmed on WhatsApp.
+          </div>
+        </div>
+      </div>
+    `;
+  };
+
+  window.clearFieldError = function (fieldKey) {
+    const errEl = document.getElementById(`err-${fieldKey}`);
+    const inputEl = document.getElementById(
+      fieldKey === 'fullName' ? 'checkoutFullName' :
+      fieldKey === 'mobile' ? 'checkoutMobile' :
+      fieldKey === 'email' ? 'checkoutEmail' :
+      fieldKey === 'address' ? 'checkoutAddress' :
+      fieldKey === 'city' ? 'checkoutCity' :
+      fieldKey === 'state' ? 'checkoutState' :
+      'checkoutPincode'
+    );
+    if (errEl) errEl.classList.remove('show');
+    if (inputEl) inputEl.classList.remove('is-invalid');
+  };
+
+  window.validateAndProceedToReview = function () {
+    const nameInput = document.getElementById('checkoutFullName');
+    const mobileInput = document.getElementById('checkoutMobile');
+    const emailInput = document.getElementById('checkoutEmail');
+    const addressInput = document.getElementById('checkoutAddress');
+    const cityInput = document.getElementById('checkoutCity');
+    const stateInput = document.getElementById('checkoutState');
+    const pincodeInput = document.getElementById('checkoutPincode');
+
+    if (!nameInput || !mobileInput || !addressInput || !cityInput || !stateInput || !pincodeInput) {
+      return;
+    }
+
+    const fullName = nameInput.value.trim();
+    let rawMobile = mobileInput.value.trim().replace(/[\s\-\(\)]/g, '');
+    if (rawMobile.startsWith('+91')) rawMobile = rawMobile.substring(3);
+    else if (rawMobile.startsWith('91') && rawMobile.length === 12) rawMobile = rawMobile.substring(2);
+    else if (rawMobile.startsWith('0') && rawMobile.length === 11) rawMobile = rawMobile.substring(1);
+
+    const email = emailInput ? emailInput.value.trim() : '';
+    const address = addressInput.value.trim();
+    const city = cityInput.value.trim();
+    const state = stateInput.value.trim();
+    const pincode = pincodeInput.value.trim();
+
+    let isValid = true;
+    let firstInvalidInput = null;
+
+    function markError(fieldKey, inputEl) {
+      isValid = false;
+      const errEl = document.getElementById(`err-${fieldKey}`);
+      if (errEl) errEl.classList.add('show');
+      if (inputEl) inputEl.classList.add('is-invalid');
+      if (!firstInvalidInput && inputEl) firstInvalidInput = inputEl;
+    }
+
+    // 1. Name validation
+    if (!fullName || fullName.length < 2) {
+      markError('fullName', nameInput);
+    } else {
+      window.clearFieldError('fullName');
+    }
+
+    // 2. Mobile validation: 10 digits starting with 6-9
+    const mobileRegex = /^[6-9]\d{9}$/;
+    if (!mobileRegex.test(rawMobile)) {
+      markError('mobile', mobileInput);
+    } else {
+      window.clearFieldError('mobile');
+    }
+
+    // 3. Email validation (only if provided)
+    if (email && email.length > 0) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        markError('email', emailInput);
+      } else {
+        window.clearFieldError('email');
+      }
+    } else {
+      window.clearFieldError('email');
+    }
+
+    // 4. Address validation
+    if (!address || address.length < 5) {
+      markError('address', addressInput);
+    } else {
+      window.clearFieldError('address');
+    }
+
+    // 5. City validation
+    if (!city || city.length < 2) {
+      markError('city', cityInput);
+    } else {
+      window.clearFieldError('city');
+    }
+
+    // 6. State validation
+    if (!state || state.length < 2) {
+      markError('state', stateInput);
+    } else {
+      window.clearFieldError('state');
+    }
+
+    // 7. Pincode validation: exactly 6 digits
+    const pincodeRegex = /^\d{6}$/;
+    if (!pincodeRegex.test(pincode)) {
+      markError('pincode', pincodeInput);
+    } else {
+      window.clearFieldError('pincode');
+    }
+
+    if (!isValid) {
+      if (firstInvalidInput) firstInvalidInput.focus();
+      showToast('Please check and correct highlighted fields', 'error');
+      return;
+    }
+
+    // Save customer details
+    checkoutState.customer = {
+      fullName,
+      mobile: rawMobile,
+      email,
+      address,
+      city,
+      state,
+      pincode
+    };
+    saveCustomerToStorage(checkoutState.customer);
+
+    window.renderCheckoutStep2();
+  };
+
+  window.renderCheckoutStep2 = function () {
+    checkoutState.step = 2;
+    const content = document.getElementById('checkoutContent');
+    if (!content) return;
+
+    const items = CartManager.load();
+    const subtotal = CartManager.getTotal();
+    const c = checkoutState.customer;
+
+    const itemsSummaryHtml = items.map(item => {
+      const { prodName, variantName } = getProductAndVariantDisplay(item);
+      const lineTotal = CartManager.formatPrice(item.price * item.quantity);
+      const unitPrice = CartManager.formatPrice(item.price);
+
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; font-size:0.85rem;">
+          <div>
+            <strong>${escapeHtml(prodName)}</strong>
+            <div style="font-size:0.775rem; color:var(--text-muted);">${escapeHtml(variantName)} &bull; Qty: ${item.quantity} &times; ${unitPrice}</div>
+          </div>
+          <div style="font-weight:700; color:var(--color-primary-dark); margin-left:0.75rem;">${lineTotal}</div>
+        </div>
+      `;
+    }).join('');
+
+    content.innerHTML = `
+      <div class="checkout-header">
+        <div class="checkout-title-wrap">
+          <h2 id="checkoutModalTitle">Review Your Order</h2>
+          <div class="checkout-subtitle">Verify your delivery details before connecting to WhatsApp.</div>
+        </div>
+        <div class="checkout-steps-badge">
+          <span class="checkout-step-pill" onclick="window.renderCheckoutStep1()" style="cursor:pointer;" title="Click to edit delivery info">1. Delivery Info</span>
+          <span style="color:var(--text-dim);">&rarr;</span>
+          <span class="checkout-step-pill active">2. Review &amp; WhatsApp</span>
+        </div>
+      </div>
+
+      <div class="checkout-review-wrap">
+        <!-- Order ID & Timestamp Banner -->
+        <div class="checkout-order-badge-row">
+          <div>
+            <div class="checkout-order-ref-label">Order Reference ID</div>
+            <div class="checkout-order-ref-num">${checkoutState.orderId}</div>
+          </div>
+          <div class="checkout-order-timestamp text-right">
+            <div><strong>Date:</strong> ${checkoutState.orderDate}</div>
+            <div><strong>Time:</strong> ${checkoutState.orderTime}</div>
+          </div>
+        </div>
+
+        <div class="checkout-review-cards-grid">
+          <!-- Card 1: Customer & Delivery Info -->
+          <div class="checkout-review-card">
+            <h4>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Delivery Destination
+            </h4>
+            <div class="checkout-review-item-line"><strong>Name:</strong> ${escapeHtml(c.fullName)}</div>
+            <div class="checkout-review-item-line"><strong>Mobile:</strong> +91 ${escapeHtml(c.mobile)}</div>
+            <div class="checkout-review-item-line"><strong>Email:</strong> ${c.email ? escapeHtml(c.email) : '<em>Not provided</em>'}</div>
+            <div class="checkout-review-item-line" style="margin-top:0.4rem;"><strong>Address:</strong><br>${escapeHtml(c.address)}</div>
+            <div class="checkout-review-item-line">${escapeHtml(c.city)}, ${escapeHtml(c.state)} – <strong>${escapeHtml(c.pincode)}</strong></div>
+          </div>
+
+          <!-- Card 2: Items & Payment Breakdown -->
+          <div class="checkout-review-card">
+            <h4>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/></svg>
+              Selected Items (${CartManager.getCount()})
+            </h4>
+            <div style="max-height:160px; overflow-y:auto; margin-bottom:0.75rem; padding-right:0.35rem;">
+              ${itemsSummaryHtml}
+            </div>
+            <div style="border-top:1px solid var(--border-subtle); padding-top:0.6rem; font-size:0.85rem; display:flex; flex-direction:column; gap:0.35rem;">
+              <div style="display:flex; justify-content:space-between;">
+                <span>Subtotal:</span>
+                <strong>${CartManager.formatPrice(subtotal)}</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span>Shipping:</span>
+                <span class="badge-tbc">To be confirmed</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:1.05rem; font-weight:700; color:var(--color-primary-dark); border-top:1px solid var(--border-leaf); padding-top:0.45rem; margin-top:0.25rem;">
+                <span>Estimated Total:</span>
+                <span>${CartManager.formatPrice(subtotal)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-callout-box">
+          💬 <strong>Next Step on WhatsApp:</strong> Clicking Continue will open official WhatsApp chat with <strong>Fish Tales (+91 96542 97430)</strong> with this exact order request pre-filled. We will confirm specimen availability, shipping schedule, and provide secure UPI payment details.
+        </div>
+
+        <div class="checkout-actions-row">
+          <button type="button" class="btn btn-outline" onclick="window.renderCheckoutStep1();">
+            &larr; Edit Details
+          </button>
+          <button type="button" id="btnContinueWhatsApp" class="btn-whatsapp-order" onclick="window.proceedToWhatsApp();">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+            </svg>
+            Continue to WhatsApp &rarr;
+          </button>
+        </div>
+
+        <div id="checkoutPostActions" style="display:none;" class="checkout-post-actions">
+          <div style="font-weight:700; color:var(--color-primary-dark); font-size:0.95rem;">
+            ✓ WhatsApp Chat Opened in New Tab!
+          </div>
+          <div style="font-size:0.825rem; color:var(--text-muted); max-width:440px;">
+            Your order reference <code>${checkoutState.orderId}</code> is ready to send. Your cart is preserved safely in case you need to return.
+          </div>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center; margin-top:0.25rem;">
+            <button type="button" class="btn btn-outline btn-sm" onclick="closeCheckoutModal();">
+              Keep Cart Saved &amp; Close
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="CartManager.clear(); closeCheckoutModal(); showToast('Cart cleared. Thank you for ordering with Fish Tales!', 'success');">
+              Order Confirmed? Clear Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  };
+
+  window.proceedToWhatsApp = function () {
+    if (checkoutState.isSubmitting) return;
+
+    const items = CartManager.load();
+    if (items.length === 0) {
+      showToast('Your cart is empty!', 'error');
+      return;
+    }
+
+    checkoutState.isSubmitting = true;
+    const btn = document.getElementById('btnContinueWhatsApp');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spin"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Connecting to WhatsApp...
+      `;
+    }
+
+    const orderDetails = {
+      orderId: checkoutState.orderId,
+      date: checkoutState.orderDate,
+      time: checkoutState.orderTime,
+      items: items,
+      subtotal: CartManager.getTotal(),
+      customer: checkoutState.customer
+    };
+
+    const message = buildWhatsAppOrderMessage(orderDetails);
+    const encoded = encodeURIComponent(message);
+    const waUrl = `https://wa.me/919654297430?text=${encoded}`;
+
+    window.open(waUrl, '_blank');
+
+    setTimeout(() => {
+      checkoutState.isSubmitting = false;
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+          </svg>
+          Re-open on WhatsApp &rarr;
+        `;
+      }
+      const postActions = document.getElementById('checkoutPostActions');
+      if (postActions) {
+        postActions.style.display = 'flex';
+      }
+    }, 1000);
   };
 
   /* ── 9. Live Search Overlay ──────────────────────────────── */
@@ -1832,6 +2530,67 @@
   };
 
   /* ── 10. Smooth Scroll & Navigation Helpers ──────────────── */
+  window.setActiveNavKey = function (targetKey) {
+    const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+    if (!navLinks || navLinks.length === 0) return;
+
+    navLinks.forEach(link => {
+      const text = (link.textContent || '').trim().toLowerCase();
+      const href = (link.getAttribute('href') || '').toLowerCase();
+
+      let isMatch = false;
+      if (targetKey === 'home' && text === 'home') {
+        isMatch = true;
+      } else if (targetKey === 'aquarium' && (text.includes('aquarium') || href.includes('aquarium-fish.html'))) {
+        isMatch = true;
+      } else if (targetKey === 'isopods' && (text === 'isopods' || href.includes('isopods.html'))) {
+        isMatch = true;
+      } else if (targetKey === 'tarantulas' && (text === 'tarantulas' || href.includes('tarantulas.html'))) {
+        isMatch = true;
+      } else if (targetKey === 'combos' && (text.includes('combo') || href.includes('combo-packs.html'))) {
+        isMatch = true;
+      } else if (targetKey === 'about' && (text.includes('about') || href.endsWith('#about'))) {
+        isMatch = true;
+      } else if (targetKey === 'contact' && (text.includes('contact') || href.endsWith('#contact'))) {
+        isMatch = true;
+      }
+
+      if (isMatch) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  };
+
+  window.updateActiveNavLink = function () {
+    let rawPath = window.location.pathname.toLowerCase().replace(/\\/g, '/');
+    let page = rawPath.split('/').pop();
+    if (!page || page === '') {
+      page = 'index.html';
+    }
+
+    if (page.includes('aquarium-fish')) {
+      window.setActiveNavKey('aquarium');
+    } else if (page.includes('isopods')) {
+      window.setActiveNavKey('isopods');
+    } else if (page.includes('tarantulas')) {
+      window.setActiveNavKey('tarantulas');
+    } else if (page.includes('combo-packs')) {
+      window.setActiveNavKey('combos');
+    } else {
+      // index.html / root
+      const hash = (window.location.hash || '').toLowerCase();
+      if (hash === '#about') {
+        window.setActiveNavKey('about');
+      } else if (hash === '#contact') {
+        window.setActiveNavKey('contact');
+      } else {
+        window.setActiveNavKey('home');
+      }
+    }
+  };
+
   window.scrollToSection = function (elementId) {
     if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
     const el = document.getElementById(elementId);
@@ -1842,10 +2601,36 @@
       top: pos,
       behavior: 'smooth'
     });
+
+    if (elementId === 'about') {
+      window.setActiveNavKey('about');
+    } else if (elementId === 'contact') {
+      window.setActiveNavKey('contact');
+    } else if (elementId === 'hero' || elementId === 'catalogue' || elementId === 'categories') {
+      window.setActiveNavKey('home');
+    }
   };
 
   window.filterCategoryAndScroll = function (categoryKey) {
     if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
+    const targetMap = {
+      aquarium: 'aquarium-fish.html',
+      isopods: 'isopods.html',
+      tarantulas: 'tarantulas.html',
+      combos: 'combo-packs.html'
+    };
+
+    const pageCat = getCurrentPageCategory();
+    if (pageCat === categoryKey) {
+      scrollToSection('catalogue');
+      return;
+    }
+
+    if (targetMap[categoryKey]) {
+      window.location.href = targetMap[categoryKey];
+      return;
+    }
+
     currentCategory = categoryKey;
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
       tab.classList.toggle('active', tab.dataset.category === categoryKey);
@@ -1860,17 +2645,47 @@
     const initialItems = CartManager.load();
     CartManager.notify(initialItems);
 
-    // 2. Render initial product catalogue
+    // 2. Sync category with dedicated page if applicable
+    const initialPageCat = getCurrentPageCategory();
+    if (initialPageCat !== 'all') {
+      currentCategory = initialPageCat;
+    }
+
+    // Render initial product catalogue
     renderProductGrid();
 
-    // 3. Header scroll effect
+    // 2b. Automatically apply EXACTLY ONE active class based on current page
+    window.updateActiveNavLink();
+    window.addEventListener('hashchange', () => {
+      window.updateActiveNavLink();
+    });
+
+    // 3. Header scroll effect and index.html section scroll spy
     const header = document.getElementById('siteHeader');
+    const aboutSection = document.getElementById('about');
+    const contactSection = document.getElementById('contact');
+
     window.addEventListener('scroll', () => {
       if (header) {
         if (window.scrollY > 20) {
           header.classList.add('scrolled');
         } else {
           header.classList.remove('scrolled');
+        }
+      }
+
+      // On index.html only: dynamically update active nav when scrolling into About or Contact
+      if (aboutSection && contactSection) {
+        const scrollPos = window.scrollY + 120;
+        const contactTop = contactSection.offsetTop;
+        const aboutTop = aboutSection.offsetTop;
+
+        if (scrollPos >= contactTop) {
+          window.setActiveNavKey('contact');
+        } else if (scrollPos >= aboutTop) {
+          window.setActiveNavKey('about');
+        } else {
+          window.setActiveNavKey('home');
         }
       }
     }, { passive: true });
@@ -1946,6 +2761,7 @@
       if (e.key === 'Escape') {
         if (typeof window.closeCartDrawer === 'function') window.closeCartDrawer();
         if (typeof window.closeProductModal === 'function') window.closeProductModal();
+        if (typeof window.closeCheckoutModal === 'function') window.closeCheckoutModal();
         if (typeof window.closeSearchOverlay === 'function') window.closeSearchOverlay();
         if (typeof window.closeMobileMenu === 'function') window.closeMobileMenu();
       }
@@ -1958,14 +2774,16 @@
       }
     });
 
-    // 10. WhatsApp Checkout button in cart drawer
+    // 10. Proceed to Checkout button in cart drawer
     const checkoutBtn = document.getElementById('cartDrawerCheckoutBtn');
     if (checkoutBtn) {
       checkoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         if (CartManager.getCount() === 0) {
-          e.preventDefault();
-          showToast('Your cart is empty!', 'error');
+          showToast('Your cart is empty! Add items to continue.', 'error');
+          return;
         }
+        window.openCheckoutModal();
       });
     }
   });

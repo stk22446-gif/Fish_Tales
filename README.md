@@ -112,3 +112,15 @@ Captive-bred spiderlings with documented sizes:
   }
   ```
   Organized with clear category sections: `// AQUARIUM & FISH`, `// ISOPODS`, `// TARANTULAS`, `// COMBO PACKS`.
+
+## Multi-Page Dedicated Category Architecture
+
+The catalogue is organized across 5 dedicated HTML pages sharing one `style.css` and one `script.js`:
+
+1. **Home (`index.html`):** Brand hero, living realms category cards (fully clickable native anchor cards linking directly to dedicated category pages with hover lift and image zoom), curated bundle offers, featured living collection, and full brand story.
+2. **Aquarium & Fish (`aquarium-fish.html`):** All 14 verified aquatic specimens (13 show guppy breeding pairs + Show Grade Betta fish).
+3. **Bioactive Isopods (`isopods.html`):** All 7 rare isopod varieties (*Armadillidium* and *Cubaris*) with individual piece and culture pricing.
+4. **Exotic Tarantulas (`tarantulas.html`):** All 6 captive-bred New World / Old World tarantula varieties with verified sling/juvenile specimen sizes.
+5. **Curated Combo Packs (`combo-packs.html`):** Complete turnkey habitat setups (Isopod House Kit ₹1,545, Half Cube Aquarium Kit ₹999, Glacier Colony Pack ₹700).
+
+All pages share the exact same website header (dark forest green COD notice bar with leaf icon, sticky header with official circular mascot logo, 7 center navigation links with active page highlighting, live search trigger, and persistent cart drawer with dynamic item counter), unified `fishtales_cart` in `localStorage`, product detail modal, live search overlay, complete 2-step customer checkout system (with delivery validation, unique `FT-YYYYMMDD-XXXX` Order IDs, shipping fee transparency "To be confirmed", and structured WhatsApp order messaging), and direct WhatsApp checkout (+91 96542 97430).
