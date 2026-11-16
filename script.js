@@ -18,870 +18,1030 @@
   const WHATSAPP_NUMBER = '919654297430';
   const STORAGE_KEY = 'fishtales_cart';
 
-  /* ── 2. Vector Illustration Suite (Individual Product Art) ── */
-  const ICONS = {
-    // Guppy Generator
-    guppy(id, name, colors) {
-      const { body, finStart, finEnd, dumbo, extra, dorsal } = colors;
-      return `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="bg_${id}" cx="50%" cy="40%" r="65%">
-            <stop offset="0%" stop-color="#12241A"/>
-            <stop offset="70%" stop-color="#08140D"/>
-            <stop offset="100%" stop-color="#050B08"/>
-          </radialGradient>
-          <linearGradient id="fin_${id}" x1="0%" y1="0%" x2="100%" y2="80%">
-            <stop offset="0%" stop-color="${finStart}"/>
-            <stop offset="100%" stop-color="${finEnd}"/>
-          </linearGradient>
-        </defs>
-        <rect width="400" height="300" fill="url(#bg_${id})"/>
-        <!-- Background Aquatic Flora -->
-        <path d="M-20 60 Q 100 30, 220 50 T 420 40" stroke="#B8E64A" stroke-width="1.2" opacity="0.15" fill="none"/>
-        <path d="M50 300 Q 60 190, 90 140 Q 65 210, 75 300" fill="#1A3D2A" opacity="0.5"/>
-        <path d="M335 300 Q 315 185, 295 130 Q 325 210, 345 300" fill="#22563A" opacity="0.5"/>
-        <g transform="translate(180, 130)">
-          <!-- Large Caudal Fin -->
-          <path d="M-15 8 C -85 -60, -120 20, -25 18 C -100 65, -75 105, -12 28 Z" fill="url(#fin_${id})" opacity="0.95"/>
-          ${extra || ''}
-          <!-- Dorsal Fin -->
-          <path d="M-2 -8 C ${dorsal || '15 -55, -25 -45, -18 -10'} Z" fill="url(#fin_${id})" opacity="0.9"/>
-          <!-- Pectoral / Dumbo Ear -->
-          <ellipse cx="14" cy="12" rx="14" ry="9" fill="${dumbo || '#B8E64A'}" opacity="0.85" transform="rotate(-15 14 12)"/>
-          <!-- Body -->
-          <ellipse cx="12" cy="10" rx="38" ry="14" fill="${body}"/>
-          <!-- Eye -->
-          <circle cx="38" cy="7" r="3" fill="#050B08"/>
-          <circle cx="39" cy="6" r="1" fill="#FFF"/>
-        </g>
-        <circle cx="160" cy="210" r="3" fill="#B8E64A" opacity="0.3"/>
-        <circle cx="280" cy="80" r="2.5" fill="#B8E64A" opacity="0.25"/>
-        <text x="20" y="280" fill="#A6B2A8" font-size="10" font-weight="600" font-family="Inter, sans-serif" letter-spacing="1">${name.toUpperCase()}</text>
-      </svg>`;
-    },
+  /* ── 2. Clean Neutral Placeholder (No Vector Animal Art) ────── */
+  const PLACEHOLDER_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23F8F6E9'/%3E%3Crect x='130' y='80' width='140' height='100' rx='8' fill='%23FFFFFF' stroke='%23DCEBCB' stroke-width='2'/%3E%3Ccircle cx='165' cy='115' r='10' fill='%23DCEBCB'/%3E%3Cpath d='M135 165 l35 -25 l30 20 l35 -25 l25 20' stroke='%2375A65A' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ctext x='200' y='215' font-family='sans-serif' font-size='12' font-weight='600' fill='%23174B32' text-anchor='middle' letter-spacing='0.08em'%3EFISH TALES%3C/text%3E%3Ctext x='200' y='235' font-family='sans-serif' font-size='10' fill='%2375A65A' text-anchor='middle'%3EPhoto Reference%3C/text%3E%3C/svg%3E";
 
-    // Isopod Generator
-    isopod(id, name, colors) {
-      const { shell, spots, accent, texture } = colors;
-      return `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="bg_${id}" cx="50%" cy="45%" r="65%">
-            <stop offset="0%" stop-color="#19281C"/>
-            <stop offset="70%" stop-color="#0A140F"/>
-            <stop offset="100%" stop-color="#050B08"/>
-          </radialGradient>
-        </defs>
-        <rect width="400" height="300" fill="url(#bg_${id})"/>
-        <ellipse cx="200" cy="245" rx="130" ry="24" fill="#0D1711" opacity="0.8"/>
-        <!-- Segmented Shell -->
-        <g transform="translate(200, 140)">
-          <ellipse cx="0" cy="0" rx="54" ry="76" fill="${shell}"/>
-          <!-- Dorsal Segment Lines -->
-          <path d="M -42 -38 Q 0 -48 42 -38" stroke="${accent || '#B8E64A'}" stroke-width="2.5" fill="none"/>
-          <path d="M -50 -18 Q 0 -28 50 -18" stroke="${accent || '#B8E64A'}" stroke-width="2.5" fill="none"/>
-          <path d="M -54 2 Q 0 -8 54 2" stroke="${accent || '#B8E64A'}" stroke-width="2.5" fill="none"/>
-          <path d="M -52 22 Q 0 12 52 22" stroke="${accent || '#B8E64A'}" stroke-width="2.5" fill="none"/>
-          <path d="M -44 42 Q 0 32 44 42" stroke="${accent || '#B8E64A'}" stroke-width="2.5" fill="none"/>
-          <path d="M -30 62 Q 0 52 30 62" stroke="${accent || '#B8E64A'}" stroke-width="2" fill="none"/>
-          ${spots || ''}
-          ${texture || ''}
-          <!-- Eyes -->
-          <circle cx="-14" cy="-66" r="3.5" fill="#D4A94D"/>
-          <circle cx="14" cy="-66" r="3.5" fill="#D4A94D"/>
-          <!-- Antennae -->
-          <path d="M -14 -70 Q -35 -92 -48 -88" stroke="#D4A94D" stroke-width="2" fill="none"/>
-          <path d="M 14 -70 Q 35 -92 48 -88" stroke="#D4A94D" stroke-width="2" fill="none"/>
-        </g>
-        <text x="20" y="280" fill="#A6B2A8" font-size="10" font-weight="600" font-family="Inter, sans-serif" letter-spacing="1">${name.toUpperCase()}</text>
-      </svg>`;
-    },
+  // Selected variant state tracker: productId -> variantIndex
+  const selectedVariants = {};
 
-    // Tarantula Generator
-    tarantula(id, name, colors) {
-      const { body, leg, knee, carapace, abdomen } = colors;
-      return `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="bg_${id}" cx="50%" cy="45%" r="65%">
-            <stop offset="0%" stop-color="#241B18"/>
-            <stop offset="70%" stop-color="#0E0908"/>
-            <stop offset="100%" stop-color="#050B08"/>
-          </radialGradient>
-        </defs>
-        <rect width="400" height="300" fill="url(#bg_${id})"/>
-        <ellipse cx="200" cy="240" rx="130" ry="22" fill="#000" opacity="0.6"/>
-        <g transform="translate(200, 140)">
-          <!-- Legs (left) -->
-          <path d="M -15 -10 Q -60 -50 -100 -20" stroke="${leg}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-          <path d="M -20 0 Q -80 -25 -110 5" stroke="${leg}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-          <path d="M -20 12 Q -80 25 -105 45" stroke="${leg}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-          <path d="M -15 25 Q -65 65 -90 85" stroke="${leg}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-          <!-- Knee highlights (left) -->
-          <circle cx="-55" cy="-28" r="4.5" fill="${knee}"/>
-          <circle cx="-65" cy="-8" r="4.5" fill="${knee}"/>
-          <circle cx="-62" cy="18" r="4.5" fill="${knee}"/>
-          <circle cx="-50" cy="48" r="4.5" fill="${knee}"/>
-          <!-- Legs (right) -->
-          <path d="M 15 -10 Q 60 -50 100 -20" stroke="${leg}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-          <path d="M 20 0 Q 80 -25 110 5" stroke="${leg}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-          <path d="M 20 12 Q 80 25 105 45" stroke="${leg}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-          <path d="M 15 25 Q 65 65 90 85" stroke="${leg}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-          <!-- Knee highlights (right) -->
-          <circle cx="55" cy="-28" r="4.5" fill="${knee}"/>
-          <circle cx="65" cy="-8" r="4.5" fill="${knee}"/>
-          <circle cx="62" cy="18" r="4.5" fill="${knee}"/>
-          <circle cx="50" cy="48" r="4.5" fill="${knee}"/>
-          <!-- Abdomen -->
-          <ellipse cx="0" cy="28" rx="27" ry="35" fill="${abdomen || '#2E1B15'}" stroke="${knee}" stroke-width="1.5"/>
-          <!-- Carapace -->
-          <circle cx="0" cy="-8" r="22" fill="${carapace || '#3D291F'}" stroke="${knee}" stroke-width="2"/>
-          <!-- Fangs -->
-          <path d="M -5 -28 L -3 -36 L -1 -29" stroke="${knee}" stroke-width="2.2" fill="none"/>
-          <path d="M 5 -28 L 3 -36 L 1 -29" stroke="${knee}" stroke-width="2.2" fill="none"/>
-        </g>
-        <text x="20" y="280" fill="#A6B2A8" font-size="10" font-weight="600" font-family="Inter, sans-serif" letter-spacing="1">${name.toUpperCase()}</text>
-      </svg>`;
-    },
-
-    // Betta Fish Art
-    betta: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="bettaGrad" cx="50%" cy="45%" r="65%">
-          <stop offset="0%" stop-color="#1A281E"/>
-          <stop offset="70%" stop-color="#0A140F"/>
-          <stop offset="100%" stop-color="#050B08"/>
-        </radialGradient>
-        <linearGradient id="bettaFinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E06C75"/>
-          <stop offset="50%" stop-color="#D4A94D"/>
-          <stop offset="100%" stop-color="#B8E64A"/>
-        </linearGradient>
-      </defs>
-      <rect width="400" height="300" fill="url(#bettaGrad)"/>
-      <g transform="translate(190, 140)">
-        <path d="M-20 0 C -95 -85, -125 15, -55 0 C -125 35, -95 95, -20 10 Z" fill="url(#bettaFinGrad)" opacity="0.95"/>
-        <path d="M-10 -15 C 20 -70, -30 -60, -20 -10 Z" fill="url(#bettaFinGrad)" opacity="0.85"/>
-        <path d="M-5 15 C 10 65, -15 60, -10 15 Z" fill="url(#bettaFinGrad)" opacity="0.85"/>
-        <ellipse cx="15" cy="0" rx="38" ry="15" fill="#D4A94D"/>
-        <path d="M8 5 C 15 25, 25 20, 18 5 Z" fill="#B8E64A" opacity="0.8"/>
-        <circle cx="42" cy="-4" r="3" fill="#050B08"/>
-        <circle cx="43" cy="-5" r="1" fill="#FFF"/>
-      </g>
-      <circle cx="280" cy="80" r="3" fill="#B8E64A" opacity="0.4"/>
-      <circle cx="120" cy="220" r="2.5" fill="#B8E64A" opacity="0.3"/>
-      <text x="20" y="280" fill="#A6B2A8" font-size="10" font-weight="600" font-family="Inter, sans-serif" letter-spacing="1">SHOW GRADE BETTA</text>
-    </svg>`,
-
-    // Combo Packs Art
-    isopodKit: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="kitGrad" cx="50%" cy="50%" r="65%">
-          <stop offset="0%" stop-color="#1B2B1F"/>
-          <stop offset="70%" stop-color="#0A160E"/>
-          <stop offset="100%" stop-color="#050B08"/>
-        </radialGradient>
-      </defs>
-      <rect width="400" height="300" fill="url(#kitGrad)"/>
-      <g transform="translate(200, 140)">
-        <path d="M -70 40 L 0 -20 L 70 40 L 70 120 L -70 120 Z" fill="#12251A" stroke="#B8E64A" stroke-width="2.5"/>
-        <path d="M 0 -20 L 0 120" stroke="#B8E64A" stroke-width="1.2" stroke-dasharray="3,3"/>
-        <path d="M -25 120 Q -5 60 5 45 Q 15 65 25 120" stroke="#D4A94D" stroke-width="2.5" fill="none"/>
-        <text x="0" y="90" fill="#B8E64A" font-size="12" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">5"x5"x5" GLASS</text>
-      </g>
-      <text x="20" y="280" fill="#A6B2A8" font-size="10" font-weight="600" font-family="Inter, sans-serif" letter-spacing="1">ISOPOD HOUSE KIT</text>
-    </svg>`,
-
-    aquariumKit: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="halfCubeGrad" cx="50%" cy="50%" r="65%">
-          <stop offset="0%" stop-color="#102528"/>
-          <stop offset="70%" stop-color="#08151A"/>
-          <stop offset="100%" stop-color="#050B08"/>
-        </radialGradient>
-      </defs>
-      <rect width="400" height="300" fill="url(#halfCubeGrad)"/>
-      <g transform="translate(200, 145)">
-        <rect x="-85" y="-55" width="170" height="120" rx="6" fill="#0C2025" stroke="#38BDF8" stroke-width="2.5"/>
-        <path d="M -60 65 Q -40 10 -25 65" stroke="#B8E64A" stroke-width="2.5" fill="none"/>
-        <path d="M -30 65 Q -10 20 0 65" stroke="#22C55E" stroke-width="2.5" fill="none"/>
-        <g transform="translate(30, 0)">
-          <path d="M -15 0 C -40 -30, -50 15, -20 5 Z" fill="#D4A94D" opacity="0.9"/>
-          <ellipse cx="0" cy="0" rx="18" ry="8" fill="#F5F7F2"/>
-          <circle cx="12" cy="-2" r="1.5" fill="#050B08"/>
-        </g>
-      </g>
-      <text x="20" y="280" fill="#A6B2A8" font-size="10" font-weight="600" font-family="Inter, sans-serif" letter-spacing="1">HALF CUBE AQUARIUM</text>
-    </svg>`,
-
-    glacierOffer: `<svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="glacierGrad" cx="50%" cy="50%" r="65%">
-          <stop offset="0%" stop-color="#242114"/>
-          <stop offset="70%" stop-color="#121008"/>
-          <stop offset="100%" stop-color="#050B08"/>
-        </radialGradient>
-      </defs>
-      <rect width="400" height="300" fill="url(#glacierGrad)"/>
-      <circle cx="200" cy="140" r="75" fill="#D4A94D" opacity="0.15"/>
-      <g transform="translate(200, 130)">
-        <ellipse cx="-30" cy="-10" rx="22" ry="14" fill="#F5F7F2" opacity="0.85"/>
-        <ellipse cx="30" cy="-5" rx="20" ry="13" fill="#F5F7F2" opacity="0.85"/>
-        <ellipse cx="0" cy="30" rx="26" ry="16" fill="#B8E64A" opacity="0.9"/>
-        <text x="0" y="-45" fill="#D4A94D" font-size="14" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">10 + 1 FREE DEAL</text>
-      </g>
-      <text x="20" y="280" fill="#A6B2A8" font-size="10" font-weight="600" font-family="Inter, sans-serif" letter-spacing="1">GLACIER COLONY PACK</text>
-    </svg>`
+  const CATEGORY_NAMES = {
+    all: 'All Products',
+    aquarium: 'Aquarium & Fish',
+    isopods: 'Isopods',
+    tarantulas: 'Tarantulas',
+    combos: 'Combo Packs'
   };
 
-  /* Helper to fetch correct SVG for any product */
-  function getProductSVG(product) {
-    if (product.id === 'show-grade-betta') return ICONS.betta;
-    if (product.id === 'isopod-house-kit') return ICONS.isopodKit;
-    if (product.id === 'half-cube-aquarium-kit') return ICONS.aquariumKit;
-    if (product.id === 'glacier-colony-pack') return ICONS.glacierOffer;
+  function getProductPriceLabel(variant, category) {
+    const u = (variant && variant.unit ? variant.unit.toLowerCase() : '');
+    if (u.includes('pair')) return 'PRICE (PAIR):';
+    if (u.includes('10 pcs') || u.includes('colony')) return 'PRICE (10 PCS):';
+    if (u.includes('5 pcs') || u.includes('starter')) return 'PRICE (5 PCS):';
+    if (u.includes('piece') || u.includes('pc')) return 'PRICE (PIECE):';
+    if (u.includes('specimen')) return 'PRICE (SPECIMEN):';
+    if (u.includes('kit') || category === 'combos') return 'PRICE (KIT):';
+    return 'PRICE:';
+  }
 
-    if (product.category === 'aquarium' && product.customColors) {
-      return ICONS.guppy(product.id, product.name, product.customColors);
+  function initProductVariantsAndSpecs(p) {
+    if (!p) return;
+    // Backward-compatibility aliases for legacy templates and test suites
+    if (!p.categoryLabel) p.categoryLabel = p.categoryName || '';
+    if (!p.scientificName) p.scientificName = p.subtitle || '';
+    if (p.price === undefined && p.variants && p.variants.length > 0) {
+      p.price = p.variants[0].price;
     }
-    if (product.category === 'isopods' && product.customColors) {
-      return ICONS.isopod(product.id, product.name, product.customColors);
+    if (!p.pricingUnit && p.variants && p.variants.length > 0) {
+      p.pricingUnit = (p.variants[0].label || 'item').toLowerCase();
     }
-    if (product.category === 'tarantulas' && product.customColors) {
-      return ICONS.tarantula(product.id, product.name, product.customColors);
+    if (p.specs && p.specs.size && !p.size) {
+      p.size = p.specs.size;
     }
+    if (p.specs && p.specs.kitIncludes && !p.kitIncludes) {
+      p.kitIncludes = p.specs.kitIncludes;
+    }
+    if (p.variants) {
+      p.variants.forEach(v => {
+        if (!v.unit) v.unit = (v.label || 'item').toLowerCase();
+      });
+    }
+  }
 
-    return ICONS.betta;
+  function getProductSelectedVariant(product) {
+    initProductVariantsAndSpecs(product);
+    const idx = selectedVariants[product.id] || 0;
+    return product.variants[idx] || product.variants[0];
   }
 
   /* ── 3. Master Product Catalogue (Exactly 30 Verified Items) ─ */
   const PRODUCTS = [
-    // ══════════════════════════════════════════════════════════════
-    // CATEGORY 1: AQUARIUM & FISH (14 Products: 13 Guppies + Betta)
-    // ══════════════════════════════════════════════════════════════
+    // AQUARIUM & FISH
     {
-      id: 'guppy-red-lace',
-      image: 'https://images.unsplash.com/photo-1535591273668-578e31182c4f?auto=format&fit=crop&w=600&q=80',
-      name: 'Red Lace Guppy',
-      scientificName: 'Poecilia reticulata var. Red Lace',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: 'Adult Pair (1 Male + 1 Female)',
-      description: 'Intricate red lace-patterned caudal fin with iridescent body tones. Captive bred and peaceful in planted community tanks.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: true,
-      customColors: {
-        body: '#D4A94D',
-        finStart: '#DC2626',
-        finEnd: '#F87171',
-        dumbo: '#F59E0B',
-        extra: '<path d="M-15 8 Q -60 10 -85 -20" stroke="#FEE2E2" stroke-width="1.5" stroke-dasharray="2 2" fill="none"/>'
-      }
-    },
-    {
-      id: 'guppy-gold-dumbo-ear',
-      image: 'https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=600&q=80',
-      name: 'Gold Dumbo Ear Guppy',
-      scientificName: 'Poecilia reticulata var. Gold Dumbo Ear',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Lustrous golden body with enlarged, prominent "dumbo ear" pectoral fins creating a graceful flutter in planted tanks.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: false,
-      customColors: {
-        body: '#F59E0B',
-        finStart: '#FBBF24',
-        finEnd: '#FDE68A',
-        dumbo: '#FCD34D'
-      }
-    },
-    {
-      id: 'guppy-santacruz-dumbo-ear',
-      image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80',
-      name: 'Santacruz Dumbo Ear Guppy',
-      scientificName: 'Poecilia reticulata var. Santacruz Dumbo',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Striking Santacruz lineage showcasing oversized dumbo ears, iridescent cobalt-blue coloration, and active schooling behavior.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: false,
-      customColors: {
-        body: '#2563EB',
-        finStart: '#60A5FA',
-        finEnd: '#93C5FD',
-        dumbo: '#C084FC'
-      }
-    },
-    {
-      id: 'guppy-platinum-dumbo-halfmoon',
-      image: 'https://images.unsplash.com/photo-1520302630591-fd1c66edc19d?auto=format&fit=crop&w=600&q=80',
-      name: 'Platinum Dumbo Ear Halfmoon Guppy',
-      scientificName: 'Poecilia reticulata var. Platinum Dumbo Halfmoon',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Full 180-degree halfmoon caudal fin with gleaming platinum-white scales and grand dumbo pectoral ears.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: true,
-      customColors: {
-        body: '#E2E8F0',
-        finStart: '#F8FAFC',
-        finEnd: '#CBD5E1',
-        dumbo: '#FFFFFF',
-        dorsal: '25 -65, -35 -55, -20 -10'
-      }
-    },
-    {
-      id: 'guppy-blue-dragon-dumbo-halfmoon',
-      image: 'https://images.unsplash.com/photo-1576806021992-d41a877d9c66?auto=format&fit=crop&w=600&q=80',
-      name: 'Blue Dragon Dumbo Ear Halfmoon Guppy',
-      scientificName: 'Poecilia reticulata var. Blue Dragon Dumbo',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Rich royal blue metallic dorsal and halfmoon tail paired with grand dumbo ear fins. Centerpiece display fish.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: true,
-      customColors: {
-        body: '#1E3A8A',
-        finStart: '#2563EB',
-        finEnd: '#06B6D4',
-        dumbo: '#38BDF8',
-        dorsal: '22 -62, -30 -50, -18 -10'
-      }
-    },
-    {
-      id: 'guppy-moscow-black-dumbo',
-      image: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=600&q=80',
-      name: 'Moscow Black Dumbo Ear Guppy',
-      scientificName: 'Poecilia reticulata var. Moscow Black Dumbo',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Deep velvet-black coloration spanning from snout to tail, contrasted by delicate fluttery dumbo pectoral fins.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: false,
-      customColors: {
-        body: '#0F172A',
-        finStart: '#1E1B4B',
-        finEnd: '#312E81',
-        dumbo: '#4C1D95'
-      }
-    },
-    {
-      id: 'guppy-afr-big-dorsal',
-      name: 'AFR Big Dorsal Guppy',
-      scientificName: 'Poecilia reticulata var. Albino Full Red Big Dorsal',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 300,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Prized Albino Full Red (AFR) genetics with an extravagant, sail-like big dorsal fin and ruby-red eyes.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: true,
-      customColors: {
-        body: '#DC2626',
-        finStart: '#EF4444',
-        finEnd: '#F87171',
-        dumbo: '#F87171',
-        dorsal: '35 -75, -45 -65, -25 -10'
-      }
-    },
-    {
-      id: 'guppy-dark-knight-dragon-dumbo',
-      name: 'Dark Knight Dragon Dumbo Ear Guppy',
-      scientificName: 'Poecilia reticulata var. Dark Knight Dragon',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Dark dramatic dragon scales with violet and navy undertones, complemented by fluttering dumbo ears.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: false,
-      customColors: {
-        body: '#18181B',
-        finStart: '#581C87',
-        finEnd: '#7C3AED',
-        dumbo: '#A855F7'
-      }
-    },
-    {
-      id: 'guppy-red-platinum-koi-dumbo',
-      name: 'Red Platinum Koi Dumbo Ear Guppy',
-      scientificName: 'Poecilia reticulata var. Red Platinum Koi Dumbo',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Classic red and platinum koi-styled color patterns with translucent big dumbo ears. Active and hardy.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: false,
-      customColors: {
-        body: '#F1F5F9',
-        finStart: '#EA580C',
-        finEnd: '#FB923C',
-        dumbo: '#F8FAFC',
-        extra: '<circle cx="35" cy="5" r="7" fill="#DC2626"/>'
-      }
-    },
-    {
-      id: 'guppy-magenta-red-tiger',
-      name: 'Magenta Red Tiger Guppy',
-      scientificName: 'Poecilia reticulata var. Magenta Red Tiger',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Bold tiger bar stripes over vibrant magenta-red body. Energetic swimmer that thrives in planted aquascapes.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: false,
-      customColors: {
-        body: '#BE185D',
-        finStart: '#E11D48',
-        finEnd: '#F43F5E',
-        dumbo: '#FB7185',
-        extra: '<path d="M5 0 L5 20 M15 -2 L15 22 M25 0 L25 20" stroke="#000" stroke-width="2"/>'
-      }
-    },
-    {
-      id: 'guppy-white-tuxido',
-      name: 'White Tuxido Guppy',
-      scientificName: 'Poecilia reticulata var. White Tuxedo',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Crisp white caudal fin contrasted with a deep midnight tuxedo torso. Highly prolific and peaceful.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: false,
-      customColors: {
-        body: '#0F172A',
-        finStart: '#F8FAFC',
-        finEnd: '#E2E8F0',
-        dumbo: '#FFFFFF'
-      }
-    },
-    {
-      id: 'guppy-silverado-red-dragon',
-      name: 'Silverado Red Dragon Guppy',
-      scientificName: 'Poecilia reticulata var. Silverado Red Dragon',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 280,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Silvery metallic chest transitioning into a fierce red dragon-patterned tail fin. Stunning light-reflective sheen.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: false,
-      customColors: {
-        body: '#94A3B8',
-        finStart: '#EA580C',
-        finEnd: '#DC2626',
-        dumbo: '#CBD5E1'
-      }
-    },
-    {
-      id: 'guppy-green-moscow',
-      name: 'Green Moscow Guppy',
-      scientificName: 'Poecilia reticulata var. Green Moscow',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 250,
-      pricingUnit: 'pair',
-      size: 'Adult Pair',
-      description: 'Deep emerald-green metallic sheen covering head to tail. An all-time legendary strain for planted aquariums.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: false,
-      customColors: {
-        body: '#064E3B',
-        finStart: '#059669',
-        finEnd: '#10B981',
-        dumbo: '#34D399'
-      }
-    },
-    {
-      id: 'show-grade-betta',
-      name: 'Show Grade Betta Fish',
-      scientificName: 'Betta splendens (Halfmoon / Plakat)',
-      category: 'aquarium',
-      categoryLabel: 'Aquarium & Fish',
-      price: 350,
-      pricingUnit: 'piece',
-      size: 'Adult (5–6 cm)',
-      description: 'Hand-selected healthy Betta splendens featuring vibrant color iridescence and large flowing fins. Centerpiece display specimen.',
-      notice: 'Transit feasibility and delivery schedule confirmed on WhatsApp prior to order acceptance. Cash on Delivery is strictly unavailable.',
-      emoji: '🐟',
-      featured: true
-    },
-
-    // ══════════════════════════════════════════════════════════════
-    // CATEGORY 2: ISOPODS (7 Pure Strains, Pricing Per Piece)
-    // ══════════════════════════════════════════════════════════════
-    {
-      id: 'armadillidium-gestroi',
-      image: 'https://images.unsplash.com/photo-1598880940080-ff9a29891b85?auto=format&fit=crop&w=600&q=80',
-      name: 'Armadillidium Gestroi',
-      scientificName: 'Armadillidium gestroi',
-      category: 'isopods',
-      categoryLabel: 'Isopods',
-      price: 120,
-      pricingUnit: 'piece',
-      size: null,
-      description: 'Striking Mediterranean pill bug known for its large size, bright yellow spotted dorsal plates, and vigorous vivarium janitorial skills.',
-      notice: 'Packed in ventilated containers with moisture control. Transit feasibility confirmed on WhatsApp. Cash on Delivery is unavailable.',
-      emoji: '🍂',
-      featured: true,
-      customColors: {
-        shell: '#1E293B',
-        accent: '#F59E0B',
-        spots: '<circle cx="-18" cy="-25" r="4" fill="#FCD34D"/><circle cx="18" cy="-25" r="4" fill="#FCD34D"/><circle cx="-22" cy="0" r="4" fill="#FCD34D"/><circle cx="22" cy="0" r="4" fill="#FCD34D"/><circle cx="-16" cy="25" r="4" fill="#FCD34D"/><circle cx="16" cy="25" r="4" fill="#FCD34D"/>'
-      }
-    },
-    {
-      id: 'cubaris-murina-orange',
-      image: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=600&q=80',
-      name: 'Cubaris Murina Orange',
-      scientificName: 'Cubaris murina "Orange"',
-      category: 'isopods',
-      categoryLabel: 'Isopods',
-      price: 60,
-      pricingUnit: 'piece',
-      size: null,
-      description: 'Warm apricot-orange color morph. Hardy, highly active, and quick to establish a thriving custodial colony in humid vivariums.',
-      notice: 'Packed in ventilated containers with moisture control. Transit feasibility confirmed on WhatsApp. Cash on Delivery is unavailable.',
-      emoji: '🪵',
-      featured: false,
-      customColors: {
-        shell: '#EA580C',
-        accent: '#FED7AA'
-      }
-    },
-    {
-      id: 'cubaris-murina-glacier',
-      name: 'Cubaris Murina Glacier',
-      scientificName: 'Cubaris murina "Glacier"',
-      category: 'isopods',
-      categoryLabel: 'Isopods',
-      price: 70,
-      pricingUnit: 'piece',
-      size: null,
-      description: 'Pristine white porcelain appearance with subtle translucent undertones. Excellent bioactive cleanup crew.',
-      notice: 'Promotional offer: Buy 10, get 1 extra free! Transit feasibility confirmed on WhatsApp. Cash on Delivery is unavailable.',
-      emoji: '❄️',
-      featured: true,
-      customColors: {
-        shell: '#F8FAFC',
-        accent: '#94A3B8'
-      }
-    },
-    {
-      id: 'porcellionides-pruinosus-orange-pied',
-      name: 'Porcellionides pruinosus Orange Pied',
-      scientificName: 'Porcellionides pruinosus "Orange Pied"',
-      category: 'isopods',
-      categoryLabel: 'Isopods',
-      price: 60,
-      pricingUnit: 'piece',
-      size: null,
-      description: 'Fast-moving, velvety powder-orange isopod with distinctive white pied patches. Superb detritivore for tropical enclosures.',
-      notice: 'Packed in ventilated containers with moisture control. Transit feasibility confirmed on WhatsApp. Cash on Delivery is unavailable.',
-      emoji: '🍁',
-      featured: false,
-      customColors: {
-        shell: '#FB923C',
-        accent: '#FED7AA',
-        spots: '<path d="M-15 -10 Q -5 -25 15 -15 Q 10 5 -15 -10 Z" fill="#FFF" opacity="0.85"/><circle cx="12" cy="20" r="8" fill="#FFF" opacity="0.85"/>'
-      }
-    },
-    {
-      id: 'cubaris-sp-cappuccino',
-      name: 'Cubaris sp. Cappuccino',
-      scientificName: 'Cubaris sp. "Cappuccino"',
-      category: 'isopods',
-      categoryLabel: 'Isopods',
-      price: 600,
-      pricingUnit: 'piece',
-      size: null,
-      description: 'Ultra-rare collector isopod exhibiting warm espresso-brown skirts and a creamy dorsal stripe reminiscent of a barista cappuccino.',
-      notice: 'Priority dispatch. Transit feasibility confirmed on WhatsApp prior to order acceptance. Cash on Delivery is unavailable.',
-      emoji: '☕',
-      featured: true,
-      customColors: {
-        shell: '#3E2723',
-        accent: '#D7CCC8',
-        texture: '<ellipse cx="0" cy="0" rx="14" ry="60" fill="#EFEBE9"/>'
-      }
-    },
-    {
-      id: 'cubaris-sp-cherry-blossom',
-      name: 'Cubaris sp. Cherry Blossom',
-      scientificName: 'Cubaris sp. "Cherry Blossom"',
-      category: 'isopods',
-      categoryLabel: 'Isopods',
-      price: 750,
-      pricingUnit: 'piece',
-      size: null,
-      description: 'Exquisite pastel pink and creamy white hues mimicking delicate sakura blossoms. A prized gem among luxury isopod enthusiasts.',
-      notice: 'Priority dispatch. Transit feasibility confirmed on WhatsApp prior to order acceptance. Cash on Delivery is unavailable.',
-      emoji: '🌸',
-      featured: true,
-      customColors: {
-        shell: '#FCE7F3',
-        accent: '#F472B6',
-        texture: '<ellipse cx="0" cy="0" rx="20" ry="65" fill="#FBCFE8" opacity="0.7"/>'
-      }
-    },
-    {
-      id: 'armadillidium-peraccae',
-      name: 'Armadillidium Peraccae',
-      scientificName: 'Armadillidium peraccae',
-      category: 'isopods',
-      categoryLabel: 'Isopods',
-      price: 150,
-      pricingUnit: 'piece',
-      size: null,
-      description: 'Fascinating textured, bumpy slate-grey shell with high drought tolerance. Extremely resilient and fascinating to observe.',
-      notice: 'Packed in ventilated containers with moisture control. Transit feasibility confirmed on WhatsApp. Cash on Delivery is unavailable.',
-      emoji: '🪨',
-      featured: false,
-      customColors: {
-        shell: '#475569',
-        accent: '#94A3B8',
-        texture: '<circle cx="-12" cy="-10" r="2" fill="#CBD5E1"/><circle cx="12" cy="-10" r="2" fill="#CBD5E1"/><circle cx="0" cy="15" r="2.5" fill="#CBD5E1"/>'
-      }
-    },
-
-    // ══════════════════════════════════════════════════════════════
-    // CATEGORY 3: TARANTULAS (6 Species, Exact Sizes & Prices)
-    // ══════════════════════════════════════════════════════════════
-    {
-      id: 'chilean-rose-hair',
-      image: 'https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?auto=format&fit=crop&w=600&q=80',
-      name: 'Chilean Rose Hair',
-      scientificName: 'Grammostola rosea',
-      category: 'tarantulas',
-      categoryLabel: 'Tarantulas',
-      price: 2199,
-      pricingUnit: 'piece',
-      size: '1–1.5 cm',
-      description: 'Renowned for its calm, docile temperament and subtle pink carapace setae. The quintessential beginner New World tarantula.',
-      notice: 'Captive-bred spiderling (1–1.5 cm). Packed in insulated, shock-absorbing vial. Cash on Delivery is unavailable.',
-      emoji: '🕷️',
-      featured: true,
-      customColors: {
-        body: '#3E2723',
-        leg: '#5D4037',
-        knee: '#F472B6',
-        carapace: '#831843',
-        abdomen: '#4A0E2E'
-      }
-    },
-    {
-      id: 'brazilian-whiteknee',
-      image: 'https://images.unsplash.com/photo-1584589167171-541ce45f1eea?auto=format&fit=crop&w=600&q=80',
-      name: 'Brazilian Whiteknee',
-      scientificName: 'Acanthoscurria geniculata',
-      category: 'tarantulas',
-      categoryLabel: 'Tarantulas',
-      price: 2199,
-      pricingUnit: 'piece',
-      size: '1–1.5 cm',
-      description: 'Bold contrast of jet-black legs adorned with striking snow-white knee bands. Highly active with an enthusiastic feeding response.',
-      notice: 'Captive-bred spiderling (1–1.5 cm). Transit feasibility confirmed on WhatsApp. Cash on Delivery is unavailable.',
-      emoji: '🕷️',
-      featured: true,
-      customColors: {
-        body: '#0F172A',
-        leg: '#1E293B',
-        knee: '#FFFFFF',
-        carapace: '#334155',
-        abdomen: '#0F172A'
-      }
-    },
-    {
-      id: 'mexican-red-knee',
-      name: 'Mexican Red Knee',
-      scientificName: 'Brachypelma hamorii',
-      category: 'tarantulas',
-      categoryLabel: 'Tarantulas',
-      price: 2399,
-      pricingUnit: 'piece',
-      size: '1–1.5 cm',
-      description: 'World-famous display species showcasing fiery orange-red leg joints and deep black velvety body. Very docile and long-lived.',
-      notice: 'Captive-bred spiderling (1–1.5 cm). Transit feasibility confirmed on WhatsApp. Cash on Delivery is unavailable.',
-      emoji: '🕷️',
-      featured: true,
-      customColors: {
-        body: '#18181B',
-        leg: '#27272A',
-        knee: '#EA580C',
-        carapace: '#451A03',
-        abdomen: '#18181B'
-      }
-    },
-    {
-      id: 'green-bottle-blue',
-      name: 'Green Bottle Blue (GBB)',
-      scientificName: 'Chromatopelma cyaneopubescens',
-      category: 'tarantulas',
-      categoryLabel: 'Tarantulas',
-      price: 4799,
-      pricingUnit: 'piece',
-      size: '1–1.5 cm',
-      description: 'Spectacular electric blue legs, metallic emerald-green carapace, and vibrant tiger-striped abdomen. Prolific heavy webber.',
-      notice: 'Captive-bred spiderling (1–1.5 cm). Transit feasibility confirmed on WhatsApp. Cash on Delivery is unavailable.',
-      emoji: '🕷️',
-      featured: true,
-      customColors: {
-        body: '#047857',
-        leg: '#2563EB',
-        knee: '#38BDF8',
-        carapace: '#059669',
-        abdomen: '#C2410C'
-      }
-    },
-    {
-      id: 'chaco-golden-knee',
-      name: 'Chaco Golden Knee',
-      scientificName: 'Grammostola pulchripes',
-      category: 'tarantulas',
-      categoryLabel: 'Tarantulas',
-      price: 1999,
-      pricingUnit: 'piece',
-      size: '1–1.5 cm',
-      description: 'Gentle giant famous for golden-yellow striped knee markings and calm demeanor. Highly recommended for enthusiastic beginners.',
-      notice: 'Captive-bred spiderling (1–1.5 cm). Transit feasibility confirmed on WhatsApp. Cash on Delivery is unavailable.',
-      emoji: '🕷️',
-      featured: false,
-      customColors: {
-        body: '#292524',
-        leg: '#44403C',
-        knee: '#EAB308',
-        carapace: '#78350F',
-        abdomen: '#292524'
-      }
-    },
-    {
-      id: 'salmon-pink',
-      name: 'Salmon Pink',
-      scientificName: 'Lasiodora parahybana',
-      category: 'tarantulas',
-      categoryLabel: 'Tarantulas',
-      price: 3000,
-      pricingUnit: 'piece',
-      size: '1 inch',
-      description: 'One of the largest tarantula species in the world. Fast-growing established spiderling with salmon-pink hairs.',
-      notice: 'Established juvenile (1 inch). Padded ventilation capsule. Cash on Delivery is unavailable.',
-      emoji: '🕷️',
-      featured: true,
-      customColors: {
-        body: '#1C1917',
-        leg: '#292524',
-        knee: '#FB7185',
-        carapace: '#44403C',
-        abdomen: '#2E1065'
-      }
-    },
-
-    // ══════════════════════════════════════════════════════════════
-    // CATEGORY 4: COMBO PACKS (3 Confirmed Bundles & Kits)
-    // ══════════════════════════════════════════════════════════════
-    {
-      id: 'isopod-house-kit',
-      image: 'https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=600&q=80',
-      name: 'Isopod House Kit',
-      scientificName: 'Complete Bioactive Isopod Habitat',
-      category: 'combos',
-      secondaryCategory: 'isopods',
-      categoryLabel: 'Combo Packs',
-      price: 1545,
-      pricingUnit: 'kit',
-      size: '5" L × 5" D × 5" H (+ 2.5" roof)',
-      description: 'Complete glass bioactive habitat setup. Includes glass isopod house, live plants, substrate blend, lotus pod hide, food, and a starter culture of 6 Cubaris Glacier isopods.',
-      kitIncludes: [
-        'Glass Isopod House (5" L × 5" D × 5" H + 2.5" roof height)',
-        'Fittonia albivenis (Patterned nerve plant)',
-        'Hemigraphis sp. Pink (Purple waffle plant)',
-        'Sheet Moss layer',
-        'Bioactive Isopod Substrate Blend',
-        'Lotus Pod (natural hide for isopods)',
-        'Premium Isopod Food',
-        'Isopod Culture: 6 Cubaris sp. "Glacier"'
+      id: "guppy-red-lace",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Red Lace Guppy",
+      subtitle: "Poecilia reticulata var. Red Lace",
+      image: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Cobra_Guppy_%28Poecilia_reticulata%29.JPG",
+      images: [],
+      video: "",
+      description: "Intricate red lace-patterned caudal fin with iridescent body tones. Captive bred and peaceful in planted community tanks.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair (1 Male + 1 Female)"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
+        }
       ],
-      notice: 'Glass habitat and live culture packed with high-grade shock-absorbent cushioning. Cash on Delivery is unavailable.',
-      emoji: '🏡',
       featured: true
     },
     {
-      id: 'half-cube-aquarium-kit',
-      name: 'Half Cube Aquarium Kit',
-      scientificName: 'Desktop Betta Aquascape Bundle',
-      category: 'combos',
-      secondaryCategory: 'aquarium',
-      categoryLabel: 'Combo Packs',
-      price: 999,
-      pricingUnit: 'kit',
-      size: 'Desktop Half Cube',
-      description: 'Desktop planted aquarium kit. Includes Half Cube aquarium, 1 healthy Betta fish, live aquatic plants, and premium sand substrate.',
-      kitIncludes: [
-        'Half Cube Aquarium',
-        '1 beautiful Betta Fish',
-        'Live aquatic plants',
-        'Premium sand substrate'
+      id: "guppy-gold-dumbo-ear",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Gold Dumbo Ear Guppy",
+      subtitle: "Poecilia reticulata var. Gold Dumbo Ear",
+      image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Poecilia_retic_090519-8688_kdBdk.jpg",
+      images: [],
+      video: "",
+      description: "Lustrous golden body with enlarged, prominent \"dumbo ear\" pectoral fins creating a graceful flutter in planted tanks.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
+        }
       ],
-      notice: 'Live Betta fish and aquatic plants packed in oxygenated bags with shock insulation. Cash on Delivery is unavailable.',
-      emoji: '🫧',
+      featured: false
+    },
+    {
+      id: "guppy-santacruz-dumbo-ear",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Santacruz Dumbo Ear Guppy",
+      subtitle: "Poecilia reticulata var. Santacruz Dumbo",
+      image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Poecilia_reticulata_%28male%29.JPG",
+      images: [],
+      video: "",
+      description: "Striking Santacruz lineage showcasing oversized dumbo ears, iridescent cobalt-blue coloration, and active schooling behavior.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
+        }
+      ],
+      featured: false
+    },
+    {
+      id: "guppy-platinum-dumbo-halfmoon",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Platinum Dumbo Ear Halfmoon Guppy",
+      subtitle: "Poecilia reticulata var. Platinum Dumbo Halfmoon",
+      image: "https://upload.wikimedia.org/wikipedia/commons/a/af/Poecilia_reticulata_01.jpg",
+      images: [],
+      video: "",
+      description: "Full 180-degree halfmoon caudal fin with gleaming platinum-white scales and grand dumbo pectoral ears.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
+        }
+      ],
       featured: true
     },
     {
-      id: 'glacier-colony-pack',
-      name: 'Glacier Isopods (Buy 10, Get 1 Free)',
-      scientificName: 'Cubaris murina "Glacier" 10+1 Special',
-      category: 'combos',
-      secondaryCategory: 'isopods',
-      categoryLabel: 'Combo Packs',
-      price: 700,
-      pricingUnit: 'kit',
-      size: '11 specimens total',
-      description: 'Promotional colony pack: Purchase 10 Cubaris Murina Glacier isopods and receive 1 bonus isopod free of charge (11 specimens total).',
-      kitIncludes: [
-        '10 Cubaris Murina Glacier Isopods',
-        '1 Bonus Isopod (11 specimens total)',
-        'Ventilated transport culture cup',
-        'Starter food blend'
+      id: "guppy-blue-dragon-dumbo-halfmoon",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Blue Dragon Dumbo Ear Halfmoon Guppy",
+      subtitle: "Poecilia reticulata var. Blue Dragon Dumbo",
+      image: "https://images.unsplash.com/photo-1520989244660-118e51ae94bc?auto=format&fit=crop&w=600&q=80",
+      images: [],
+      video: "",
+      description: "Rich royal blue metallic dorsal and halfmoon tail paired with grand dumbo ear fins. Centerpiece display fish.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
+        }
       ],
-      notice: 'Promotional bundle. Transit feasibility confirmed on WhatsApp prior to dispatch. Cash on Delivery is unavailable.',
-      emoji: '❄️',
+      featured: true
+    },
+    {
+      id: "guppy-moscow-black-dumbo",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Moscow Black Dumbo Ear Guppy",
+      subtitle: "Poecilia reticulata var. Moscow Black Dumbo",
+      image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=600&q=80",
+      images: [],
+      video: "",
+      description: "Deep velvet-black coloration spanning from snout to tail, contrasted by delicate fluttery dumbo pectoral fins.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
+        }
+      ],
+      featured: false
+    },
+    {
+      id: "guppy-afr-big-dorsal",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "AFR Big Dorsal Guppy",
+      subtitle: "Poecilia reticulata var. Albino Full Red Big Dorsal",
+      image: "https://images.unsplash.com/photo-1548262323-694280fdc967?auto=format&fit=crop&w=600&q=80",
+      images: [],
+      video: "",
+      description: "Prized Albino Full Red (AFR) genetics with an extravagant, sail-like big dorsal fin and ruby-red eyes.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 300,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 600,
+                "label": "2 Pairs"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "guppy-dark-knight-dragon-dumbo",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Dark Knight Dragon Dumbo Ear Guppy",
+      subtitle: "Poecilia reticulata var. Dark Knight Dragon",
+      image: "https://images.unsplash.com/photo-1553986187-9cb16fa33483?auto=format&fit=crop&w=600&q=80",
+      images: [],
+      video: "",
+      description: "Dark dramatic dragon scales with violet and navy undertones, complemented by fluttering dumbo ears.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
+        }
+      ],
+      featured: false
+    },
+    {
+      id: "guppy-red-platinum-koi-dumbo",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Red Platinum Koi Dumbo Ear Guppy",
+      subtitle: "Poecilia reticulata var. Red Platinum Koi Dumbo",
+      image: "https://images.unsplash.com/photo-1500909001949-1fc0780d81c9?auto=format&fit=crop&w=600&q=80",
+      images: [],
+      video: "",
+      description: "Classic red and platinum koi-styled color patterns with translucent big dumbo ears. Active and hardy.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
+        }
+      ],
+      featured: false
+    },
+    {
+      id: "guppy-magenta-red-tiger",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Magenta Red Tiger Guppy",
+      subtitle: "Poecilia reticulata var. Magenta Red Tiger",
+      image: "https://images.unsplash.com/photo-1538719501547-bc023056a8b6?auto=format&fit=crop&w=600&q=80",
+      images: [],
+      video: "",
+      description: "Bold tiger bar stripes over vibrant magenta-red body. Energetic swimmer that thrives in planted aquascapes.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
+        }
+      ],
+      featured: false
+    },
+    {
+      id: "guppy-white-tuxido",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "White Tuxido Guppy",
+      subtitle: "Poecilia reticulata var. White Tuxedo",
+      image: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=600&q=80",
+      images: [],
+      video: "",
+      description: "Crisp white caudal fin contrasted with a deep midnight tuxedo torso. Highly prolific and peaceful.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
+        }
+      ],
+      featured: false
+    },
+    {
+      id: "guppy-silverado-red-dragon",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Silverado Red Dragon Guppy",
+      subtitle: "Poecilia reticulata var. Silverado Red Dragon",
+      image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Guppy_-_Poecilia_reticulata.jpg",
+      images: [],
+      video: "",
+      description: "Silvery metallic chest transitioning into a fierce red dragon-patterned tail fin. Stunning light-reflective sheen.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 280,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 560,
+                "label": "2 Pairs"
+        }
+      ],
+      featured: false
+    },
+    {
+      id: "guppy-green-moscow",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Green Moscow Guppy",
+      subtitle: "Poecilia reticulata var. Green Moscow",
+      image: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Poecilia_reticulata_-_Guppy%2C_male%2C_cobra-green_morph.jpg",
+      images: [],
+      video: "",
+      description: "Deep emerald-green metallic sheen covering head to tail. An all-time legendary strain for planted aquariums.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult Pair"
+      },
+      variants: [
+        {
+                "name": "1 Pair (Adult Pair)",
+                "price": 250,
+                "label": "Pair"
+        },
+        {
+                "name": "2 Pairs (Colony Pack)",
+                "price": 500,
+                "label": "2 Pairs"
+        }
+      ],
+      featured: false
+    },
+    {
+      id: "show-grade-betta",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      name: "Show Grade Betta Fish",
+      subtitle: "Betta splendens (Halfmoon / Plakat)",
+      image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Betta-splendens-male.jpg",
+      images: [],
+      video: "",
+      description: "Hand-selected healthy Betta splendens featuring vibrant color iridescence and large flowing fins. Centerpiece display specimen.",
+      specs: {
+        "care": "Beginner / Community",
+        "temp": "22°C – 28°C",
+        "diet": "Micro-pellets & live/frozen daphnia",
+        "habitat": "Planted freshwater aquarium",
+        "size": "Adult (5–6 cm)"
+      },
+      variants: [
+        {
+                "name": "1 Specimen (Male 5–6 cm)",
+                "price": 350,
+                "label": "Piece"
+        },
+        {
+                "name": "2 Specimens (Select Males)",
+                "price": 700,
+                "label": "2 pcs"
+        }
+      ],
+      featured: true
+    },
+
+    // ISOPODS
+    {
+      id: "armadillidium-gestroi",
+      category: "isopods",
+      categoryName: "Isopods",
+      name: "Armadillidium Gestroi",
+      subtitle: "Armadillidium gestroi",
+      image: "https://upload.wikimedia.org/wikipedia/commons/9/95/Armadillidium_vulgare.jpg",
+      images: [],
+      video: "",
+      description: "Striking Mediterranean pill bug known for its large size, bright yellow spotted dorsal plates, and vigorous vivarium janitorial skills.",
+      specs: {
+        "care": "Bioactive Cleaners",
+        "temp": "20°C – 26°C",
+        "diet": "Leaf litter, decaying wood, calcium",
+        "habitat": "Bioactive vivarium / enclosure"
+      },
+      variants: [
+        {
+                "name": "Single (1 pc)",
+                "price": 120,
+                "label": "Piece"
+        },
+        {
+                "name": "Starter Culture (5 pcs)",
+                "price": 600,
+                "label": "5 pcs"
+        },
+        {
+                "name": "Colony Culture (10 pcs)",
+                "price": 1200,
+                "label": "10 pcs"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "cubaris-murina-orange",
+      category: "isopods",
+      categoryName: "Isopods",
+      name: "Cubaris Murina Orange",
+      subtitle: "Cubaris murina \"Orange\"",
+      image: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Cubaris_murinaflorida.jpg",
+      images: [],
+      video: "",
+      description: "Warm apricot-orange color morph. Hardy, highly active, and quick to establish a thriving custodial colony in humid vivariums.",
+      specs: {
+        "care": "Bioactive Cleaners",
+        "temp": "20°C – 26°C",
+        "diet": "Leaf litter, decaying wood, calcium",
+        "habitat": "Bioactive vivarium / enclosure"
+      },
+      variants: [
+        {
+                "name": "Single (1 pc)",
+                "price": 60,
+                "label": "Piece"
+        },
+        {
+                "name": "Starter Culture (5 pcs)",
+                "price": 300,
+                "label": "5 pcs"
+        },
+        {
+                "name": "Colony Culture (10 pcs)",
+                "price": 600,
+                "label": "10 pcs"
+        }
+      ],
+      featured: false
+    },
+    {
+      id: "cubaris-murina-glacier",
+      category: "isopods",
+      categoryName: "Isopods",
+      name: "Cubaris Murina Glacier",
+      subtitle: "Cubaris murina \"Glacier\"",
+      image: "https://upload.wikimedia.org/wikipedia/commons/8/87/Cubaris_murinafloridatop.jpg",
+      images: [],
+      video: "",
+      description: "Pristine white porcelain appearance with subtle translucent undertones. Excellent bioactive cleanup crew.",
+      specs: {
+        "care": "Bioactive Cleaners",
+        "temp": "20°C – 26°C",
+        "diet": "Leaf litter, decaying wood, calcium",
+        "habitat": "Bioactive vivarium / enclosure"
+      },
+      variants: [
+        {
+                "name": "Single (1 pc)",
+                "price": 70,
+                "label": "Piece"
+        },
+        {
+                "name": "Starter Culture (5 pcs)",
+                "price": 350,
+                "label": "5 pcs"
+        },
+        {
+                "name": "Colony Culture (10 pcs)",
+                "price": 700,
+                "label": "10 pcs"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "porcellionides-pruinosus-orange-pied",
+      category: "isopods",
+      categoryName: "Isopods",
+      name: "Porcellionides pruinosus Orange Pied",
+      subtitle: "Porcellionides pruinosus \"Orange Pied\"",
+      image: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Porcellionides_pruinosus_P1380341a.jpg",
+      images: [],
+      video: "",
+      description: "Fast-moving, velvety powder-orange isopod with distinctive white pied patches. Superb detritivore for tropical enclosures.",
+      specs: {
+        "care": "Bioactive Cleaners",
+        "temp": "20°C – 26°C",
+        "diet": "Leaf litter, decaying wood, calcium",
+        "habitat": "Bioactive vivarium / enclosure"
+      },
+      variants: [
+        {
+                "name": "Single (1 pc)",
+                "price": 60,
+                "label": "Piece"
+        },
+        {
+                "name": "Starter Culture (5 pcs)",
+                "price": 300,
+                "label": "5 pcs"
+        },
+        {
+                "name": "Colony Culture (10 pcs)",
+                "price": 600,
+                "label": "10 pcs"
+        }
+      ],
+      featured: false
+    },
+    {
+      id: "cubaris-sp-cappuccino",
+      category: "isopods",
+      categoryName: "Isopods",
+      name: "Cubaris sp. Cappuccino",
+      subtitle: "Cubaris sp. \"Cappuccino\"",
+      image: "https://upload.wikimedia.org/wikipedia/commons/1/18/Cubaris_nigroflava_172816253.jpg",
+      images: [],
+      video: "",
+      description: "Ultra-rare collector isopod exhibiting warm espresso-brown skirts and a creamy dorsal stripe reminiscent of a barista cappuccino.",
+      specs: {
+        "care": "Bioactive Cleaners",
+        "temp": "20°C – 26°C",
+        "diet": "Leaf litter, decaying wood, calcium",
+        "habitat": "Bioactive vivarium / enclosure"
+      },
+      variants: [
+        {
+                "name": "Single (1 pc)",
+                "price": 600,
+                "label": "Piece"
+        },
+        {
+                "name": "Starter Culture (5 pcs)",
+                "price": 3000,
+                "label": "5 pcs"
+        },
+        {
+                "name": "Colony Culture (10 pcs)",
+                "price": 6000,
+                "label": "10 pcs"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "cubaris-sp-cherry-blossom",
+      category: "isopods",
+      categoryName: "Isopods",
+      name: "Cubaris sp. Cherry Blossom",
+      subtitle: "Cubaris sp. \"Cherry Blossom\"",
+      image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_marmorata_171397510.jpg",
+      images: [],
+      video: "",
+      description: "Exquisite pastel pink and creamy white hues mimicking delicate sakura blossoms. A prized gem among luxury isopod enthusiasts.",
+      specs: {
+        "care": "Bioactive Cleaners",
+        "temp": "20°C – 26°C",
+        "diet": "Leaf litter, decaying wood, calcium",
+        "habitat": "Bioactive vivarium / enclosure"
+      },
+      variants: [
+        {
+                "name": "Single (1 pc)",
+                "price": 750,
+                "label": "Piece"
+        },
+        {
+                "name": "Starter Culture (5 pcs)",
+                "price": 3750,
+                "label": "5 pcs"
+        },
+        {
+                "name": "Colony Culture (10 pcs)",
+                "price": 7500,
+                "label": "10 pcs"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "armadillidium-peraccae",
+      category: "isopods",
+      categoryName: "Isopods",
+      name: "Armadillidium Peraccae",
+      subtitle: "Armadillidium peraccae",
+      image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Armadillidium_vulgare_001.jpg",
+      images: [],
+      video: "",
+      description: "Fascinating textured, bumpy slate-grey shell with high drought tolerance. Extremely resilient and fascinating to observe.",
+      specs: {
+        "care": "Bioactive Cleaners",
+        "temp": "20°C – 26°C",
+        "diet": "Leaf litter, decaying wood, calcium",
+        "habitat": "Bioactive vivarium / enclosure"
+      },
+      variants: [
+        {
+                "name": "Single (1 pc)",
+                "price": 150,
+                "label": "Piece"
+        },
+        {
+                "name": "Starter Culture (5 pcs)",
+                "price": 750,
+                "label": "5 pcs"
+        },
+        {
+                "name": "Colony Culture (10 pcs)",
+                "price": 1500,
+                "label": "10 pcs"
+        }
+      ],
+      featured: false
+    },
+
+    // TARANTULAS
+    {
+      id: "chilean-rose-hair",
+      category: "tarantulas",
+      categoryName: "Tarantulas",
+      name: "Chilean Rose Hair",
+      subtitle: "Grammostola rosea",
+      image: "https://upload.wikimedia.org/wikipedia/commons/2/22/Grammostola_rosea_adult_weiblich.jpg",
+      images: [],
+      video: "",
+      description: "Renowned for its calm, docile temperament and subtle pink carapace setae. The quintessential beginner New World tarantula.",
+      specs: {
+        "care": "Low Maintenance",
+        "temp": "23°C – 28°C",
+        "diet": "Pinhead crickets & roach nymphs",
+        "habitat": "Ventilated sling vial / enclosure",
+        "size": "1–1.5 cm"
+      },
+      variants: [
+        {
+                "name": "1 Specimen (1–1.5 cm)",
+                "price": 2199,
+                "label": "Specimen"
+        },
+        {
+                "name": "Pair of Slings (2 specimens)",
+                "price": 4398,
+                "label": "2 specimens"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "brazilian-whiteknee",
+      category: "tarantulas",
+      categoryName: "Tarantulas",
+      name: "Brazilian Whiteknee",
+      subtitle: "Acanthoscurria geniculata",
+      image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Acanthoscurria_geniculata%2C_female.jpg",
+      images: [],
+      video: "",
+      description: "Bold contrast of jet-black legs adorned with striking snow-white knee bands. Highly active with an enthusiastic feeding response.",
+      specs: {
+        "care": "Low Maintenance",
+        "temp": "23°C – 28°C",
+        "diet": "Pinhead crickets & roach nymphs",
+        "habitat": "Ventilated sling vial / enclosure",
+        "size": "1–1.5 cm"
+      },
+      variants: [
+        {
+                "name": "1 Specimen (1–1.5 cm)",
+                "price": 2199,
+                "label": "Specimen"
+        },
+        {
+                "name": "Pair of Slings (2 specimens)",
+                "price": 4398,
+                "label": "2 specimens"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "mexican-red-knee",
+      category: "tarantulas",
+      categoryName: "Tarantulas",
+      name: "Mexican Red Knee",
+      subtitle: "Brachypelma hamorii",
+      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Brachypelma_edit.jpg",
+      images: [],
+      video: "",
+      description: "World-famous display species showcasing fiery orange-red leg joints and deep black velvety body. Very docile and long-lived.",
+      specs: {
+        "care": "Low Maintenance",
+        "temp": "23°C – 28°C",
+        "diet": "Pinhead crickets & roach nymphs",
+        "habitat": "Ventilated sling vial / enclosure",
+        "size": "1–1.5 cm"
+      },
+      variants: [
+        {
+                "name": "1 Specimen (1–1.5 cm)",
+                "price": 2399,
+                "label": "Specimen"
+        },
+        {
+                "name": "Pair of Slings (2 specimens)",
+                "price": 4798,
+                "label": "2 specimens"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "green-bottle-blue",
+      category: "tarantulas",
+      categoryName: "Tarantulas",
+      name: "Green Bottle Blue (GBB)",
+      subtitle: "Chromatopelma cyaneopubescens",
+      image: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Chromatopelma_cyaneopubescens.jpg",
+      images: [],
+      video: "",
+      description: "Spectacular electric blue legs, metallic emerald-green carapace, and vibrant tiger-striped abdomen. Prolific heavy webber.",
+      specs: {
+        "care": "Low Maintenance",
+        "temp": "23°C – 28°C",
+        "diet": "Pinhead crickets & roach nymphs",
+        "habitat": "Ventilated sling vial / enclosure",
+        "size": "1–1.5 cm"
+      },
+      variants: [
+        {
+                "name": "1 Specimen (1–1.5 cm)",
+                "price": 4799,
+                "label": "Specimen"
+        },
+        {
+                "name": "Pair of Slings (2 specimens)",
+                "price": 9598,
+                "label": "2 specimens"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "chaco-golden-knee",
+      category: "tarantulas",
+      categoryName: "Tarantulas",
+      name: "Chaco Golden Knee",
+      subtitle: "Grammostola pulchripes",
+      image: "https://upload.wikimedia.org/wikipedia/commons/6/64/Grammostola_pulchripes_top_view.jpg",
+      images: [],
+      video: "",
+      description: "Gentle giant famous for golden-yellow striped knee markings and calm demeanor. Highly recommended for enthusiastic beginners.",
+      specs: {
+        "care": "Low Maintenance",
+        "temp": "23°C – 28°C",
+        "diet": "Pinhead crickets & roach nymphs",
+        "habitat": "Ventilated sling vial / enclosure",
+        "size": "1–1.5 cm"
+      },
+      variants: [
+        {
+                "name": "1 Specimen (1–1.5 cm)",
+                "price": 1999,
+                "label": "Specimen"
+        },
+        {
+                "name": "Pair of Slings (2 specimens)",
+                "price": 3998,
+                "label": "2 specimens"
+        }
+      ],
+      featured: false
+    },
+    {
+      id: "salmon-pink",
+      category: "tarantulas",
+      categoryName: "Tarantulas",
+      name: "Salmon Pink",
+      subtitle: "Lasiodora parahybana",
+      image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Brazilian_Salmon_Pink_Birdeater.jpg",
+      images: [],
+      video: "",
+      description: "One of the largest tarantula species in the world. Fast-growing established spiderling with salmon-pink hairs.",
+      specs: {
+        "care": "Low Maintenance",
+        "temp": "23°C – 28°C",
+        "diet": "Pinhead crickets & roach nymphs",
+        "habitat": "Ventilated sling vial / enclosure",
+        "size": "1 inch"
+      },
+      variants: [
+        {
+                "name": "1 Specimen (1 inch)",
+                "price": 3000,
+                "label": "Specimen"
+        },
+        {
+                "name": "Pair of Slings (2 specimens)",
+                "price": 6000,
+                "label": "2 specimens"
+        }
+      ],
+      featured: true
+    },
+
+    // COMBO PACKS
+    {
+      id: "isopod-house-kit",
+      category: "combos",
+      categoryName: "Combo Packs",
+      name: "Isopod House Kit",
+      subtitle: "Complete Bioactive Isopod Habitat",
+      image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=800&q=80",
+      images: [],
+      video: "",
+      description: "Complete glass bioactive habitat setup. Includes glass isopod house, live plants, substrate blend, lotus pod hide, food, and a starter culture of 6 Cubaris Glacier isopods.",
+      specs: {
+        "care": "Complete Bioactive Setup",
+        "temp": "Ambient Room Temp",
+        "diet": "Included in starter pack",
+        "habitat": "High-clarity glass enclosure",
+        "kitIncludes": [
+                "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height)",
+                "Fittonia albivenis (Patterned nerve plant)",
+                "Hemigraphis sp. Pink (Purple waffle plant)",
+                "Sheet Moss layer",
+                "Bioactive Isopod Substrate Blend",
+                "Lotus Pod (natural hide for isopods)",
+                "Premium Isopod Food",
+                "Isopod Culture: 6 Cubaris sp. \"Glacier\""
+        ]
+      },
+      variants: [
+        {
+                "name": "Complete Kit",
+                "price": 1545,
+                "label": "Kit"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "half-cube-aquarium-kit",
+      category: "combos",
+      categoryName: "Combo Packs",
+      name: "Half Cube Aquarium Kit",
+      subtitle: "Desktop Betta Aquascape Bundle",
+      image: "https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=800&q=80",
+      images: [],
+      video: "",
+      description: "Desktop planted aquarium kit. Includes Half Cube aquarium, 1 healthy Betta fish, live aquatic plants, and premium sand substrate.",
+      specs: {
+        "care": "Complete Bioactive Setup",
+        "temp": "Ambient Room Temp",
+        "diet": "Included in starter pack",
+        "habitat": "High-clarity glass enclosure",
+        "kitIncludes": [
+                "Half Cube Aquarium",
+                "1 beautiful Betta Fish",
+                "Live aquatic plants",
+                "Premium sand substrate"
+        ]
+      },
+      variants: [
+        {
+                "name": "Complete Kit",
+                "price": 999,
+                "label": "Kit"
+        }
+      ],
+      featured: true
+    },
+    {
+      id: "glacier-colony-pack",
+      category: "combos",
+      categoryName: "Combo Packs",
+      name: "Glacier Isopods (Buy 10, Get 1 Free)",
+      subtitle: "Cubaris murina \"Glacier\" 10+1 Special",
+      image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_tarangensis_190481013.jpg",
+      images: [],
+      video: "",
+      description: "Promotional colony pack: Purchase 10 Cubaris Murina Glacier isopods and receive 1 bonus isopod free of charge (11 specimens total).",
+      specs: {
+        "care": "Complete Bioactive Setup",
+        "temp": "Ambient Room Temp",
+        "diet": "Included in starter pack",
+        "habitat": "High-clarity glass enclosure",
+        "kitIncludes": [
+                "10 Cubaris Murina Glacier Isopods",
+                "1 Bonus Isopod (11 specimens total)",
+                "Ventilated transport culture cup",
+                "Starter food blend"
+        ]
+      },
+      variants: [
+        {
+                "name": "10 + 1 Free Deal (11 specimens)",
+                "price": 700,
+                "label": "11 Pieces"
+        }
+      ],
       featured: true
     }
   ];
@@ -923,36 +1083,52 @@
       return items.reduce((sum, item) => sum + item.quantity, 0);
     },
 
-    add(product, qty = 1) {
+    add(product, qty = 1, variant = null) {
       if (!product || !product.id) return;
+      initProductVariantsAndSpecs(product);
       qty = Math.max(1, Math.floor(qty));
+      const activeVariant = variant || getProductSelectedVariant(product);
+      const isBaseOption = !activeVariant || activeVariant.name === '1 Pair (Adult Pair)' || activeVariant.name === 'Single (1 pc)' || activeVariant.name === 'Complete Kit';
+      const variantKey = isBaseOption ? String(product.id) : String(product.id) + '__var_' + encodeURIComponent(activeVariant.name);
+      const displayName = isBaseOption ? product.name : product.name + ' (' + activeVariant.name + ')';
+      const activePrice = activeVariant ? activeVariant.price : product.price;
+      const activeUnit = activeVariant ? activeVariant.unit : product.pricingUnit;
+
       const items = this.load();
-      const idx = items.findIndex(i => String(i.id) === String(product.id));
+      const idx = items.findIndex(i => String(i.id) === variantKey);
       if (idx >= 0) {
         items[idx].quantity += qty;
       } else {
         items.push({
-          id: String(product.id),
-          name: product.name,
-          price: Number(product.price),
-          pricingUnit: product.pricingUnit || 'piece',
+          id: variantKey,
+          baseId: String(product.id),
+          name: displayName,
+          price: Number(activePrice),
+          pricingUnit: activeUnit,
           size: product.size || null,
-          categoryLabel: product.categoryLabel || '',
-          emoji: product.emoji || '🐟',
+          categoryLabel: (product.categoryName || product.categoryLabel) || '',
+          image: product.image || PLACEHOLDER_IMG,
           quantity: qty
         });
       }
       this.save(items);
-      showToast(`Added ${product.name} to cart!`, 'success');
+      showToast(`Added ${displayName} to cart!`, 'success');
     },
 
-    addById(id, qty = 1) {
+    addById(id, qty = 1, variantIndex = null) {
       const product = PRODUCTS.find(p => String(p.id) === String(id));
       if (!product) {
         console.warn('Product not found for id:', id);
         return;
       }
-      this.add(product, qty);
+      initProductVariantsAndSpecs(product);
+      let variant = null;
+      if (variantIndex !== null && product.variants && product.variants[variantIndex]) {
+        variant = product.variants[variantIndex];
+      } else {
+        variant = getProductSelectedVariant(product);
+      }
+      this.add(product, qty, variant);
     },
 
     update(id, qty) {
@@ -1066,105 +1242,191 @@
   let currentSearch = '';
   let currentSort = 'default';
 
-  function filterAndSortProducts() {
-    let list = [...PRODUCTS];
+  window.onCardVariantChange = function (productId, variantIndex) {
+    selectedVariants[productId] = Number(variantIndex);
+    const product = PRODUCTS.find(p => String(p.id) === String(productId));
+    if (!product) return;
+    initProductVariantsAndSpecs(product);
+    const variant = product.variants[Number(variantIndex)] || product.variants[0];
 
-    // Category filter (supports primary and secondary category cross-listing)
-    if (currentCategory !== 'all') {
-      list = list.filter(p => p.category === currentCategory || p.secondaryCategory === currentCategory);
+    const priceEl = document.getElementById('cardPrice_' + productId);
+    const unitEl = document.getElementById('cardUnit_' + productId);
+    const varPriceEl = document.getElementById('cardVarPrice_' + productId);
+    const labelEl = document.getElementById('cardPriceLabel_' + productId);
+
+    if (priceEl) priceEl.textContent = CartManager.formatPrice(variant.price);
+    if (unitEl) unitEl.textContent = '/ ' + variant.unit;
+    if (varPriceEl) varPriceEl.textContent = CartManager.formatPrice(variant.price);
+    if (labelEl) labelEl.textContent = getProductPriceLabel(variant, product.category);
+
+    // Sync with modal if currently open for this product
+    const modalSelect = document.getElementById('modalVariantSelect');
+    if (modalSelect) {
+      modalSelect.value = variantIndex;
+      const modalPriceEl = document.getElementById('modalPrice');
+      const modalVariantPriceEl = document.getElementById('modalVariantPrice');
+      const modalUnitEl = document.getElementById('modalUnit');
+      if (modalPriceEl) modalPriceEl.textContent = CartManager.formatPrice(variant.price);
+      if (modalVariantPriceEl) modalVariantPriceEl.textContent = CartManager.formatPrice(variant.price);
+      if (modalUnitEl) modalUnitEl.textContent = '/ ' + variant.unit;
     }
+  };
 
-    // Search filter
-    if (currentSearch.trim().length > 0) {
-      const q = currentSearch.toLowerCase().trim();
-      list = list.filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        (p.scientificName && p.scientificName.toLowerCase().includes(q)) ||
-        p.categoryLabel.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q)
-      );
-    }
+  window.onModalVariantChange = function (productId, variantIndex) {
+    selectedVariants[productId] = Number(variantIndex);
+    const product = PRODUCTS.find(p => String(p.id) === String(productId));
+    if (!product) return;
+    initProductVariantsAndSpecs(product);
+    const variant = product.variants[Number(variantIndex)] || product.variants[0];
 
-    // Sort order
-    switch (currentSort) {
-      case 'price-low':
-      case 'price-asc':
-        list.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-high':
-      case 'price-desc':
-        list.sort((a, b) => b.price - a.price);
-        break;
-      case 'name':
-      case 'name-asc':
-        list.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      default:
-        // Featured items first
-        list.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
-        break;
-    }
+    const modalPriceEl = document.getElementById('modalPrice');
+    const modalVariantPriceEl = document.getElementById('modalVariantPrice');
+    const modalUnitEl = document.getElementById('modalUnit');
+    if (modalPriceEl) modalPriceEl.textContent = CartManager.formatPrice(variant.price);
+    if (modalVariantPriceEl) modalVariantPriceEl.textContent = CartManager.formatPrice(variant.price);
+    if (modalUnitEl) modalUnitEl.textContent = '/ ' + variant.unit;
 
-    return list;
-  }
+    // Sync corresponding product card if visible
+    const cardSelect = document.getElementById('cardVar_' + productId);
+    if (cardSelect) cardSelect.value = variantIndex;
+    const priceEl = document.getElementById('cardPrice_' + productId);
+    const unitEl = document.getElementById('cardUnit_' + productId);
+    const varPriceEl = document.getElementById('cardVarPrice_' + productId);
+    const labelEl = document.getElementById('cardPriceLabel_' + productId);
+    if (priceEl) priceEl.textContent = CartManager.formatPrice(variant.price);
+    if (unitEl) unitEl.textContent = '/ ' + variant.unit;
+    if (varPriceEl) varPriceEl.textContent = CartManager.formatPrice(variant.price);
+    if (labelEl) labelEl.textContent = getProductPriceLabel(variant, product.category);
+  };
+
+  window.addCardVariantToCart = function (productId) {
+    CartManager.addById(productId, 1);
+  };
 
   function renderProductGrid() {
     const grid = document.getElementById('productGrid');
     const countEl = document.getElementById('resultCount');
     if (!grid) return;
 
-    const list = filterAndSortProducts();
+    let list = [...PRODUCTS];
 
+    // Ensure all products have variants and specs initialized
+    list.forEach(p => initProductVariantsAndSpecs(p));
+
+    // 1. Filter by category
+    if (currentCategory !== 'all') {
+      list = list.filter(p => p.category === currentCategory);
+    }
+
+    // 2. Filter by search query
+    if (currentSearch.trim()) {
+      const q = currentSearch.toLowerCase().trim();
+      list = list.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        (p.scientificName && p.scientificName.toLowerCase().includes(q)) ||
+        (p.description && p.description.toLowerCase().includes(q))
+      );
+    }
+
+    // 3. Sort list (Featured, Price Low to High, Price High to Low, Name)
+    if (currentSort === 'price-asc') {
+      list.sort((a, b) => a.price - b.price);
+    } else if (currentSort === 'price-desc') {
+      list.sort((a, b) => b.price - a.price);
+    } else if (currentSort === 'name-asc') {
+      list.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    // Update Showing X of Y products counter
     if (countEl) {
-      countEl.innerHTML = `Showing <strong>${list.length}</strong> product${list.length !== 1 ? 's' : ''}`;
+      countEl.innerHTML = `Showing <strong>${list.length}</strong> of <strong>${PRODUCTS.length}</strong> products`;
+    }
+
+    const indicatorEl = document.getElementById('activeCategoryIndicator');
+    if (indicatorEl) {
+      indicatorEl.textContent = CATEGORY_NAMES[currentCategory] || 'All Products';
     }
 
     if (list.length === 0) {
       grid.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1.5rem; color: var(--text-muted);">
-          <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
-          <h3 style="color: var(--text-main); font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 0.5rem;">No Products Found</h3>
-          <p style="font-size: 0.95rem;">Try adjusting your search query or switching category filters.</p>
-          <button class="btn btn-outline btn-sm" style="margin-top: 1.25rem;" onclick="resetFilters()">Reset All Filters</button>
+        <div class="catalogue-empty-state">
+          <div class="empty-state-icon">🔍</div>
+          <h3 class="empty-state-title">No Products Found</h3>
+          <p class="empty-state-desc">We couldn't find any living specimens matching "${currentSearch}". Try refining your search or resetting category filters.</p>
+          <button class="btn btn-outline btn-sm" onclick="resetFilters()">Reset All Filters</button>
         </div>
       `;
       return;
     }
 
     grid.innerHTML = list.map(product => {
-      const unitLabel = product.pricingUnit === 'pair' ? 'Per Pair' : (product.pricingUnit === 'kit' ? 'Complete Kit' : 'Per Piece');
-      const unitBadgeClass = product.pricingUnit === 'pair' ? 'badge-pair' : (product.pricingUnit === 'kit' ? 'badge-kit' : 'badge-piece');
-      const sizeTag = product.size
-        ? `<div class="product-card-size">Size: ${product.size}</div>`
+      initProductVariantsAndSpecs(product);
+      const activeVariant = getProductSelectedVariant(product);
+      const activeVariantIdx = selectedVariants[product.id] || 0;
+      const displayPrice = CartManager.formatPrice(activeVariant.price);
+      const displayUnit = '/ ' + activeVariant.unit;
+      const priceLabel = getProductPriceLabel(activeVariant, product.category);
+      const hasMultipleVariants = product.variants && product.variants.length > 1;
+
+      const variantSelectorHTML = hasMultipleVariants
+        ? `
+          <div class="card-variant-box">
+            <div class="card-variant-hdr">
+              <span class="variant-hdr-text">CHOOSE VARIANT:</span>
+              <span class="variant-hdr-price" id="cardVarPrice_${product.id}">${displayPrice}</span>
+            </div>
+            <div class="card-variant-select-wrap">
+              <select id="cardVar_${product.id}" class="card-variant-select" onchange="onCardVariantChange('${product.id}', this.value)" title="Choose variant">
+                ${product.variants.map((v, i) => `
+                  <option value="${i}" ${i === activeVariantIdx ? 'selected' : ''}>${v.name}</option>
+                `).join('')}
+              </select>
+            </div>
+          </div>
+        `
         : '';
-      const svgGraphic = getProductSVG(product);
 
       return `
         <article class="product-card" data-id="${product.id}">
+          <!-- SECTION A – PRODUCT IMAGE -->
           <div class="product-card-thumb" onclick="openProductModal('${product.id}')" title="View ${product.name} details">
-            <img src="${product.image}" alt="${product.name}" class="product-card-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <div class="product-fallback-svg" style="display:none; width:100%; height:100%;">${svgGraphic}</div>
-            <div class="product-badges-overlay">
-              <span class="badge badge-stock">In Stock</span>
-              <span class="badge ${unitBadgeClass}">${unitLabel}</span>
-            </div>
-            <button class="product-quick-view" aria-label="Quick view" onclick="openProductModal('${product.id}')">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            </button>
+            <img src="${product.image || PLACEHOLDER_IMG}" alt="${product.name}" class="product-card-img" loading="lazy" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
           </div>
+
+          <!-- SECTION B, C, D, E – CARD BODY -->
           <div class="product-card-body">
-            <div class="product-card-cat">${product.categoryLabel}</div>
-            <h3 class="product-card-name" onclick="openProductModal('${product.id}')">${product.name}</h3>
-            ${product.scientificName ? `<div class="product-card-scientific">${product.scientificName}</div>` : ''}
-            ${sizeTag}
+            <!-- Small category label -->
+            <div class="product-card-cat">${(product.categoryName || product.categoryLabel)}</div>
+
+            <!-- Product name with consistent typography (2 lines clamped) -->
+            <h3 class="product-card-name" onclick="openProductModal('${product.id}')" title="${product.name}">${product.name}</h3>
+
+            <!-- Scientific name or short description (2 lines clamped) -->
+            <div class="product-card-sub" title="${product.scientificName || product.description}">${product.scientificName || product.description}</div>
+
+            <!-- SECTION C – VARIANT SELECTOR (Only rendered when product has variants) -->
+            ${variantSelectorHTML}
+
+            <!-- SECTION D & E – FOOTER PINNED TO BOTTOM -->
             <div class="product-card-footer">
-              <div class="product-card-price-box">
-                <span class="product-card-price">${CartManager.formatPrice(product.price)}</span>
-                <span class="product-card-unit">${unitLabel}</span>
+              <div class="card-divider"></div>
+              <div class="product-card-pricing-row product-card-pricing">
+                <span class="card-price-label" id="cardPriceLabel_${product.id}">${priceLabel}</span>
+                <div class="card-price-display">
+                  <span class="product-card-price" id="cardPrice_${product.id}">${displayPrice}</span>
+                  <span class="product-card-unit" id="cardUnit_${product.id}">${displayUnit}</span>
+                </div>
               </div>
-              <button class="btn btn-primary btn-sm" onclick="CartManager.addById('${product.id}', 1)">
-                Add to Cart
-              </button>
+
+              <!-- SECTION E – ACTION BUTTONS -->
+              <div class="product-card-actions">
+                <button class="btn btn-outline card-btn-view" onclick="openProductModal('${product.id}')">
+                  View Details
+                </button>
+                <button class="btn btn-primary card-btn-add" onclick="addCardVariantToCart('${product.id}')">
+                  Add to Cart
+                </button>
+              </div>
             </div>
           </div>
         </article>
@@ -1180,9 +1442,27 @@
     if (searchInput) searchInput.value = '';
     const sortSelect = document.getElementById('catalogSort');
     if (sortSelect) sortSelect.value = 'default';
-    document.querySelectorAll('.filter-tab').forEach(tab => {
+    document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
       tab.classList.toggle('active', tab.dataset.category === 'all');
     });
+    renderProductGrid();
+  };
+
+  window.filterByCategory = function (categoryKey) {
+    currentCategory = categoryKey;
+    document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.category === categoryKey);
+    });
+    renderProductGrid();
+  };
+
+  window.handleCatalogSearch = function (query) {
+    currentSearch = query;
+    renderProductGrid();
+  };
+
+  window.handleCatalogSort = function (sortValue) {
+    currentSort = sortValue;
     renderProductGrid();
   };
 
@@ -1190,18 +1470,21 @@
   window.openProductModal = function (productId) {
     const product = PRODUCTS.find(p => String(p.id) === String(productId));
     if (!product) return;
+    initProductVariantsAndSpecs(product);
 
     const modalBackdrop = document.getElementById('productModal');
     const modalContent = document.getElementById('modalContent');
     if (!modalBackdrop || !modalContent) return;
 
-    const unitLabel = product.pricingUnit === 'pair' ? 'Per Pair' : (product.pricingUnit === 'kit' ? 'Complete Kit' : 'Per Piece');
-    const svgGraphic = getProductSVG(product);
+    const activeVariant = getProductSelectedVariant(product);
+    const activeVariantIdx = selectedVariants[product.id] || 0;
+    const displayPrice = CartManager.formatPrice(activeVariant.price);
+    const displayUnit = '/ ' + activeVariant.unit;
 
     const kitHTML = (product.kitIncludes && product.kitIncludes.length)
       ? `
         <div class="modal-kit-list">
-          <strong>Kit Contents:</strong>
+          <strong class="modal-kit-heading">Included in Kit:</strong>
           <ul>
             ${product.kitIncludes.map(item => `<li>${item}</li>`).join('')}
           </ul>
@@ -1209,47 +1492,84 @@
       `
       : '';
 
-    const sizeHTML = product.size
-      ? `<div class="modal-size-tag"><strong>Verified Size:</strong> <span>${product.size}</span></div>`
-      : '';
+    const specs = product.specs || {};
 
     modalContent.innerHTML = `
       <div class="modal-layout">
+        <!-- LEFT COLUMN: ~50% width, large photograph, object-fit: contain, theme-matched background, no black empty space -->
         <div class="modal-media-col">
-          <img src="${product.image}" alt="${product.name}" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-          <div style="display:none; width:100%; height:100%;">${svgGraphic}</div>
+          <div class="modal-image-container">
+            <img src="${product.image || PLACEHOLDER_IMG}" alt="${product.name}" class="modal-product-img" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
+          </div>
         </div>
-        <div class="modal-info">
-          <div class="modal-cat">${product.categoryLabel}</div>
-          <h2 class="modal-title">${product.name}</h2>
-          ${product.scientificName ? `<div class="modal-scientific">${product.scientificName}</div>` : ''}
 
-          <div class="modal-price-row">
-            <span class="modal-price">${CartManager.formatPrice(product.price)}</span>
-            <span class="modal-price-unit">${unitLabel}</span>
-            <span class="badge badge-stock" style="margin-left: 0.5rem;">In Stock</span>
+        <!-- RIGHT COLUMN: ~50% width, exact reference layout -->
+        <div class="modal-info-col">
+          <!-- Category label at top -->
+          <div class="modal-cat-tag">${(product.categoryName || product.categoryLabel).toUpperCase()}</div>
+
+          <!-- Product name in prominent typography -->
+          <h2 class="modal-title">${product.name}</h2>
+
+          <!-- Scientific name below product name -->
+          <div class="modal-subtitle">${product.scientificName ? product.scientificName + (product.size ? ' • ' + product.size : '') : (product.size || 'Verified Healthy Specimen')}</div>
+
+          <!-- Large clearly visible price -->
+          <div class="modal-price-box">
+            <span class="modal-price" id="modalPrice">${displayPrice}</span>
+            <span class="modal-price-unit" id="modalUnit">${displayUnit}</span>
           </div>
 
-          ${sizeHTML}
+          <!-- Product description -->
           <p class="modal-desc">${product.description}</p>
+
+          <!-- Variant selector with selected price (SELECT VARIANT header row + dropdown) -->
+          <div class="modal-variant-section">
+            <div class="modal-variant-header">
+              <span class="variant-hdr-label">SELECT VARIANT:</span>
+              <span class="variant-hdr-price" id="modalVariantPrice">${displayPrice}</span>
+            </div>
+            <div class="modal-variant-dropdown-wrap">
+              <select id="modalVariantSelect" class="modal-variant-dropdown" onchange="onModalVariantChange('${product.id}', this.value)" title="Choose variant">
+                ${product.variants.map((v, idx) => `
+                  <option value="${idx}" ${idx === activeVariantIdx ? 'selected' : ''}>${v.name} (${CartManager.formatPrice(v.price)})</option>
+                `).join('')}
+              </select>
+            </div>
+          </div>
+
+          <!-- Product specifications in a clean bordered section -->
+          <div class="modal-specs-card">
+            <div class="spec-entry">
+              <span class="spec-k">Care Level:</span>
+              <span class="spec-v">${specs.care || 'Moderate'}</span>
+            </div>
+            <div class="spec-entry">
+              <span class="spec-k">Water Temp:</span>
+              <span class="spec-v">${specs.temp || '22°C – 28°C'}</span>
+            </div>
+            <div class="spec-entry">
+              <span class="spec-k">Diet:</span>
+              <span class="spec-v">${specs.diet || 'Micro-pellets & live/frozen foods'}</span>
+            </div>
+            <div class="spec-entry">
+              <span class="spec-k">Specimen Size:</span>
+              <span class="spec-v">${product.size || 'Adult Pair / Verified Mature'}</span>
+            </div>
+          </div>
+
           ${kitHTML}
 
-          <div class="modal-compliance-notice">
-            <strong style="color:var(--color-amber); display:block; margin-bottom:0.2rem;">📦 Delivery &amp; Payment Notice:</strong>
-            ${product.notice || 'Transit feasibility confirmed on WhatsApp before dispatch. Cash on Delivery is strictly unavailable.'}
-          </div>
-
-          <div class="modal-actions-row">
-            <div class="modal-qty-stepper">
-              <button class="modal-qty-btn" onclick="updateModalQty(-1)" aria-label="Decrease quantity">−</button>
-              <span class="modal-qty-val" id="modalQty">1</span>
-              <button class="modal-qty-btn" onclick="updateModalQty(1)" aria-label="Increase quantity">+</button>
-            </div>
-            <button class="btn btn-primary" id="modalAddBtn" onclick="addModalItemToCart('${product.id}')">
-              Add to Cart
+          <!-- 3. Bottom Action Buttons: Two large horizontal buttons, equal width, comfortable height, aligned at bottom -->
+          <div class="modal-bottom-actions">
+            <button class="btn btn-primary modal-action-btn" onclick="addModalCurrentToCart('${product.id}')">
+              Add to Cart →
             </button>
-            <button class="btn btn-whatsapp" onclick="directModalWhatsAppOrder('${product.id}')">
-              WhatsApp Order
+            <button class="btn btn-whatsapp-modal modal-action-btn" onclick="directModalWhatsAppEnquire('${product.id}')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.16C10.57 20.16 9.12 19.76 7.85 19.01L7.55 18.83L4.44 19.65L5.27 16.62L5.07 16.31C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.05 3.68C14.25 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.28 11.92C20.28 16.46 16.59 20.16 12.05 20.16Z"/>
+              </svg>
+              <span>WhatsApp Enquire</span>
             </button>
           </div>
         </div>
@@ -1266,47 +1586,49 @@
     document.body.style.overflow = '';
   };
 
+  window.handleModalBackdropClick = function (e) {
+    if (e.target && e.target.id === 'productModal') {
+      window.closeProductModal();
+    }
+  };
+
   window.updateModalQty = function (delta) {
     const qtyEl = document.getElementById('modalQty');
     if (!qtyEl) return;
-    let qty = parseInt(qtyEl.textContent, 10) + delta;
+    let current = parseInt(qtyEl.textContent, 10);
+    if (isNaN(current)) current = 1;
+    let qty = current + delta;
     if (qty < 1) qty = 1;
     qtyEl.textContent = qty;
   };
 
-  window.addModalItemToCart = function (productId) {
+  window.addModalCurrentToCart = function (productId) {
     const qtyEl = document.getElementById('modalQty');
-    const qty = qtyEl ? parseInt(qtyEl.textContent, 10) : 1;
+    const parsed = qtyEl ? parseInt(qtyEl.textContent, 10) : 1;
+    const qty = isNaN(parsed) ? 1 : Math.max(1, parsed);
     CartManager.addById(productId, qty);
-    closeProductModal();
+    if (typeof window.closeProductModal === 'function') window.closeProductModal();
   };
 
-  window.directModalWhatsAppOrder = function (productId) {
+  window.directModalWhatsAppEnquire = function (productId) {
     const product = PRODUCTS.find(p => String(p.id) === String(productId));
     if (!product) return;
+    initProductVariantsAndSpecs(product);
+    const activeVariant = getProductSelectedVariant(product);
     const qtyEl = document.getElementById('modalQty');
-    const qty = qtyEl ? parseInt(qtyEl.textContent, 10) : 1;
+    const parsed = qtyEl ? parseInt(qtyEl.textContent, 10) : 1;
+    const qty = isNaN(parsed) ? 1 : Math.max(1, parsed);
 
-    let qtyLabel;
-    if (product.pricingUnit === 'pair') {
-      qtyLabel = qty === 1 ? '1 pair' : `${qty} pairs`;
-    } else if (product.pricingUnit === 'kit') {
-      qtyLabel = qty === 1 ? '1 kit' : `${qty} kits`;
-    } else {
-      qtyLabel = `${qty} pcs`;
-    }
-
-    const total = CartManager.formatPrice(product.price * qty);
+    const total = CartManager.formatPrice(activeVariant.price * qty);
     const msg = [
       'Hello Fish Tales!',
       '',
-      'I would like to place an order:',
+      `I would like to enquire about:`,
+      `• ${product.name} (${activeVariant.name})`,
+      `• Quantity: ${qty}`,
+      `• Total Value: ${total}`,
       '',
-      `1. ${product.name} – ${qtyLabel} – ${total}`,
-      '',
-      `Subtotal: ${total}`,
-      '',
-      'Please confirm availability, delivery details and UPI payment info (Cash on Delivery is unavailable).'
+      'Please confirm specimen availability, shipping schedule and payment info (Cash on Delivery is unavailable).'
     ].join('\n');
 
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -1343,13 +1665,10 @@
       const lineTotal = CartManager.formatPrice(item.price * item.quantity);
       const unitLabel = item.pricingUnit === 'pair' ? 'per pair' : (item.pricingUnit === 'kit' ? 'kit' : 'per piece');
       const productObj = PRODUCTS.find(p => String(p.id) === String(item.id)) || item;
-      const svgThumb = getProductSVG(productObj);
-
       return `
         <div class="cart-item" data-id="${item.id}">
           <div class="cart-item-thumb">
-            <img src="${productObj.image || ''}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <div style="display:none; width:100%; height:100%;">${svgThumb}</div>
+            <img src="${productObj.image || PLACEHOLDER_IMG}" alt="${item.name}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
           </div>
           <div class="cart-item-info">
             <span class="cart-item-title">${item.name}</span>
@@ -1387,6 +1706,24 @@
       drawer.classList.remove('active');
       backdrop.classList.remove('active');
       document.body.style.overflow = '';
+    }
+  };
+
+  window.toggleCartDrawer = function () {
+    const drawer = document.getElementById('cartDrawer');
+    if (drawer && drawer.classList.contains('active')) {
+      window.closeCartDrawer();
+    } else {
+      window.openCartDrawer();
+    }
+  };
+
+  window.toggleCartDrawer = function () {
+    const drawer = document.getElementById('cartDrawer');
+    if (drawer && drawer.classList.contains('active')) {
+      window.closeCartDrawer();
+    } else {
+      window.openCartDrawer();
     }
   };
 
@@ -1430,7 +1767,7 @@
     const matches = PRODUCTS.filter(p =>
       p.name.toLowerCase().includes(q) ||
       (p.scientificName && p.scientificName.toLowerCase().includes(q)) ||
-      p.categoryLabel.toLowerCase().includes(q) ||
+      (p.categoryName || p.categoryLabel).toLowerCase().includes(q) ||
       p.description.toLowerCase().includes(q)
     );
 
@@ -1451,7 +1788,7 @@
             <span style="font-size:1.5rem;">${p.emoji}</span>
             <div>
               <div style="color:var(--text-main); font-weight:600; font-size:0.95rem;">${p.name}</div>
-              <div style="color:var(--text-muted); font-size:0.8rem;">${p.categoryLabel} ${p.scientificName ? '• ' + p.scientificName : ''}</div>
+              <div style="color:var(--text-muted); font-size:0.8rem;">${(p.categoryName || p.categoryLabel)} ${p.scientificName ? '• ' + p.scientificName : ''}</div>
             </div>
           </div>
           <div style="text-align:right;">
@@ -1463,8 +1800,40 @@
     }).join('');
   }
 
+  
+  /* ── Mobile Menu Handlers ────────────────────────────────── */
+  window.toggleMobileMenu = function () {
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.getElementById('hamburger');
+    if (!navMenu) return;
+    const isOpen = navMenu.classList.toggle('active');
+    if (hamburger) {
+      hamburger.classList.toggle('active', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      hamburger.innerHTML = isOpen
+        ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+        : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    }
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  };
+
+  window.closeMobileMenu = function () {
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.getElementById('hamburger');
+    if (navMenu && navMenu.classList.contains('active')) {
+      navMenu.classList.remove('active');
+      if (hamburger) {
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      }
+      document.body.style.overflow = '';
+    }
+  };
+
   /* ── 10. Smooth Scroll & Navigation Helpers ──────────────── */
   window.scrollToSection = function (elementId) {
+    if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
     const el = document.getElementById(elementId);
     if (!el) return;
     const headerHeight = 74;
@@ -1476,8 +1845,9 @@
   };
 
   window.filterCategoryAndScroll = function (categoryKey) {
+    if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
     currentCategory = categoryKey;
-    document.querySelectorAll('.filter-tab').forEach(tab => {
+    document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
       tab.classList.toggle('active', tab.dataset.category === categoryKey);
     });
     renderProductGrid();
@@ -1505,6 +1875,13 @@
       }
     }, { passive: true });
 
+    // 4. Mobile resize listener to reset overflow
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
+      }
+    }, { passive: true });
+
     // 4. Mobile hamburger menu
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
@@ -1525,9 +1902,9 @@
     }
 
     // 5. Category tabs click listeners
-    document.querySelectorAll('.filter-tab').forEach(tab => {
+    document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
       tab.addEventListener('click', () => {
-        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.filter-tab, .filter-pill').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         currentCategory = tab.dataset.category;
         renderProductGrid();
@@ -1567,9 +1944,17 @@
     // 9. Keyboard Esc to close overlays/modals
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeCartDrawer();
-        closeProductModal();
-        closeSearchOverlay();
+        if (typeof window.closeCartDrawer === 'function') window.closeCartDrawer();
+        if (typeof window.closeProductModal === 'function') window.closeProductModal();
+        if (typeof window.closeSearchOverlay === 'function') window.closeSearchOverlay();
+        if (typeof window.closeMobileMenu === 'function') window.closeMobileMenu();
+      }
+    });
+
+    // Auto close mobile menu on resize to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && typeof window.closeMobileMenu === 'function') {
+        window.closeMobileMenu();
       }
     });
 
