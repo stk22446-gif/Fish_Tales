@@ -2502,6 +2502,23 @@ button, a, select, input {
 /* ─────────────────────────────────────────────────────────────
    Tablet & Mobile Master Breakpoint (<= 768px)
    ───────────────────────────────────────────────────────────── */
+/* Mobile Navigation Backdrop */
+.mobile-nav-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 53, 35, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 104;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
 @media (max-width: 768px) {
   :root {
     --header-height: 64px;
@@ -2510,11 +2527,25 @@ button, a, select, input {
   /* 1. Mobile Header & Sticky Navigation */
   .site-header {
     height: var(--header-height);
+    position: sticky;
+    top: 0;
+    z-index: 105;
   }
 
   .nav-container {
     padding: 0 1rem;
     height: var(--header-height);
+    position: static;
+  }
+
+  .mobile-nav-backdrop.active {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body.mobile-nav-open {
+    overflow: hidden;
   }
 
   .nav-brand {
@@ -2558,66 +2589,87 @@ button, a, select, input {
     border-radius: var(--radius-sm);
     color: var(--color-primary);
     cursor: pointer;
-    transition: background-color var(--trans-fast);
+    transition: background-color var(--trans-fast), border-color var(--trans-fast), color var(--trans-fast);
+    z-index: 106;
   }
 
   .hamburger-btn:hover,
-  .hamburger-btn:active {
+  .hamburger-btn:active,
+  .hamburger-btn.active {
     background-color: var(--color-mint);
+    border-color: var(--color-leaf);
+    color: var(--color-primary-dark);
   }
 
   .nav-menu {
-    position: fixed;
-    top: var(--header-height);
+    position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 2px solid var(--border-leaf);
-    padding: 1.5rem 1.25rem;
+    background-color: #FFFFFF;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 3px solid var(--color-leaf);
+    padding: 1rem 1.25rem 1.5rem;
+    display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 0.5rem;
-    transform: translateY(-120%);
-    opacity: 0;
-    pointer-events: none;
+    gap: 0.35rem;
+    max-height: calc(100vh - var(--header-height));
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    transition: transform var(--trans-smooth), opacity var(--trans-base);
-    box-shadow: var(--shadow-hover);
-    z-index: 100;
+    box-shadow: 0 16px 36px rgba(16, 56, 35, 0.16);
+    z-index: 105;
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, visibility 0.2s ease;
   }
 
   .nav-menu.active {
     transform: translateY(0);
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
   }
 
   .nav-menu li {
     width: 100%;
+    list-style: none;
   }
 
-  .nav-link {
+  .nav-menu .nav-link {
     display: flex;
     align-items: center;
     min-height: 48px;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
+    padding: 0.75rem 1.15rem;
+    font-size: 0.95rem;
+    font-weight: 600;
     border-radius: var(--radius-sm);
     color: var(--text-main);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: background-color var(--trans-fast), color var(--trans-fast), border-color var(--trans-fast), padding-left var(--trans-fast);
   }
 
-  .nav-link:hover,
-  .nav-link.active {
+  .nav-menu .nav-link:hover,
+  .nav-menu .nav-link:active {
+    background-color: var(--bg-cream);
+    color: var(--color-primary);
+    border-left-color: var(--color-mint);
+    padding-left: 1.35rem;
+  }
+
+  .nav-menu .nav-link.active {
     background-color: var(--color-mint);
     color: var(--color-primary-dark);
+    font-weight: 700;
+    border-left-color: var(--color-leaf);
+    padding-left: 1.35rem;
   }
 
   /* Suppress desktop horizontal underline bar in mobile vertical stack */
-  .nav-link::after {
+  .nav-menu .nav-link::after {
     display: none !important;
   }
 

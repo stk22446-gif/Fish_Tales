@@ -1858,7 +1858,6 @@
       lines.push(`${prodName} × ${item.quantity}`);
       lines.push(`Variant: ${variantName}`);
       lines.push(`Unit Price: ${unitPriceFormatted}`);
-      lines.push(`Line Total: ${lineTotalFormatted}`);
     });
 
     lines.push(divider);
@@ -2498,11 +2497,17 @@
 
 
   /* ── Mobile Menu Handlers ────────────────────────────────── */
-  window.toggleMobileMenu = function () {
+  window.toggleMobileMenu = function (e) {
+    if (e && typeof e.stopPropagation === 'function') {
+      e.stopPropagation();
+    }
     const navMenu = document.getElementById('navMenu');
     const hamburger = document.getElementById('hamburger');
+    const backdrop = document.getElementById('mobileNavBackdrop');
     if (!navMenu) return;
+
     const isOpen = navMenu.classList.toggle('active');
+
     if (hamburger) {
       hamburger.classList.toggle('active', isOpen);
       hamburger.setAttribute('aria-expanded', String(isOpen));
@@ -2510,12 +2515,17 @@
         ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
         : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
     }
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+
+    if (backdrop) {
+      backdrop.classList.toggle('active', isOpen);
+    }
+    document.body.classList.toggle('mobile-nav-open', isOpen);
   };
 
   window.closeMobileMenu = function () {
     const navMenu = document.getElementById('navMenu');
     const hamburger = document.getElementById('hamburger');
+    const backdrop = document.getElementById('mobileNavBackdrop');
     if (navMenu && navMenu.classList.contains('active')) {
       navMenu.classList.remove('active');
       if (hamburger) {
@@ -2523,7 +2533,10 @@
         hamburger.setAttribute('aria-expanded', 'false');
         hamburger.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
       }
-      document.body.style.overflow = '';
+      if (backdrop) {
+        backdrop.classList.remove('active');
+      }
+      document.body.classList.remove('mobile-nav-open');
     }
   };
 
@@ -2695,24 +2708,42 @@
       }
     }, { passive: true });
 
-    // 4. Mobile hamburger menu
+    // 4. Mobile hamburger menu setup
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
-    if (hamburger && navMenu) {
-      hamburger.addEventListener('click', () => {
-        const isOpen = navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active', isOpen);
-        hamburger.setAttribute('aria-expanded', String(isOpen));
+    
+    // Wire fallback click listener only if inline onclick is not present
+    if (hamburger && !hamburger.getAttribute('onclick')) {
+      hamburger.addEventListener('click', (e) => {
+        if (typeof window.toggleMobileMenu === 'function') {
+          window.toggleMobileMenu(e);
+        }
       });
+    }
 
+    // Close menu when tapping any navigation link
+    if (navMenu) {
       navMenu.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
-          navMenu.classList.remove('active');
-          hamburger.classList.remove('active');
-          hamburger.setAttribute('aria-expanded', 'false');
+          if (typeof window.closeMobileMenu === 'function') {
+            window.closeMobileMenu();
+          }
         });
       });
     }
+
+    // Close menu when tapping outside of navMenu and hamburger
+    document.addEventListener('click', (e) => {
+      const nm = document.getElementById('navMenu');
+      const hb = document.getElementById('hamburger');
+      if (!nm || !nm.classList.contains('active')) return;
+      if (nm.contains(e.target) || (hb && hb.contains(e.target))) {
+        return;
+      }
+      if (typeof window.closeMobileMenu === 'function') {
+        window.closeMobileMenu();
+      }
+    });
 
     // 5. Category tabs click listeners
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
