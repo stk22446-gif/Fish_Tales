@@ -1862,17 +1862,16 @@
     });
 
     lines.push(divider);
-    lines.push('💳 *PAYMENT & ORDER SUMMARY*');
-    lines.push(`Subtotal: ${CartManager.formatPrice(subtotal)}`);
+    lines.push('💳 *ORDER SUMMARY*');
+    lines.push(`Product Subtotal: ${CartManager.formatPrice(subtotal)}`);
     lines.push('Shipping: To be confirmed (Live transit fee)');
-    lines.push('Discount: ₹0');
     lines.push(`Final Total: ${CartManager.formatPrice(subtotal)} (Shipping confirmation pending)`);
     lines.push(divider);
     lines.push('📍 *DELIVERY INFORMATION*');
     lines.push(`👤 Customer Name: ${customer.fullName}`);
-    lines.push(`📞 Phone Number: +91 ${customer.mobile}`);
-    lines.push(`✉️ Email Address: ${customer.email && customer.email.trim() ? customer.email.trim() : 'Not provided'}`);
-    lines.push(`🏠 Complete Address: ${customer.address}`);
+    lines.push(`📞 Phone: +91 ${customer.mobile}`);
+    lines.push(`✉️ Email: ${customer.email && customer.email.trim() ? customer.email.trim() : 'Not provided'}`);
+    lines.push(`🏠 Address: ${customer.address}`);
     lines.push(`📍 City: ${customer.city}`);
     lines.push(`🗺️ State: ${customer.state}`);
     lines.push(`📮 Pincode: ${customer.pincode}`);
