@@ -1878,8 +1878,8 @@
     lines.push(`📮 Pincode: ${customer.pincode}`);
     lines.push(divider);
     lines.push('⚠️ *PAYMENT INSTRUCTIONS & POLICY*');
-    lines.push('Cash on Delivery (COD) is strictly unavailable for live livestock and bioactive habitats.');
-    lines.push('Orders are prepaid via UPI / Bank Transfer after order and shipping confirmation.');
+    lines.push('*• Cash on Delivery (COD) is strictly unavailable* for live livestock & bioactive habitats.');
+    lines.push('• Orders are prepaid via *UPI / Bank Transfer* after order & shipping confirmation.');
     lines.push(divider);
     lines.push('👋 Hello Fish Tales!');
     lines.push("I'd like to confirm my order. Please verify product availability, confirmed shipping charges, and send payment instructions before dispatch.");

@@ -215,8 +215,8 @@ function getProductAndVariantDisplay(item) {
     lines.push(`📮 Pincode: ${customer.pincode}`);
     lines.push(divider);
     lines.push('⚠️ *PAYMENT INSTRUCTIONS & POLICY*');
-    lines.push('Cash on Delivery (COD) is strictly unavailable for live livestock and bioactive habitats.');
-    lines.push('Orders are prepaid via UPI / Bank Transfer after order and shipping confirmation.');
+    lines.push('*• Cash on Delivery (COD) is strictly unavailable* for live livestock & bioactive habitats.');
+    lines.push('• Orders are prepaid via *UPI / Bank Transfer* after order & shipping confirmation.');
     lines.push(divider);
     lines.push('👋 Hello Fish Tales!');
     lines.push("I'd like to confirm my order. Please verify product availability, confirmed shipping charges, and send payment instructions before dispatch.");
@@ -229,17 +229,19 @@ const msg = buildWhatsAppMessage(sampleOrder);
     console.log(msg);
     console.log('-------------------------------------------\n');
 
-    // Count all asterisks to verify ONLY the 6 allowed headings use bold formatting
+    // Count bold sections
     const asteriskMatches = msg.match(/\*([^*]+)\*/g) || [];
     console.log('Bold sections found:', asteriskMatches);
 
-    const allowedHeadings = [
+    const allowedBoldSections = [
       '*NEW ORDER RECEIVED*',
       '*ORDER INFORMATION*',
       '*PRODUCT DETAILS*',
       '*PAYMENT & ORDER SUMMARY*',
       '*DELIVERY INFORMATION*',
-      '*PAYMENT INSTRUCTIONS & POLICY*'
+      '*PAYMENT INSTRUCTIONS & POLICY*',
+      '*• Cash on Delivery (COD) is strictly unavailable*',
+      '*UPI / Bank Transfer*'
     ];
 
     const requiredChecks = [
@@ -255,9 +257,10 @@ const msg = buildWhatsAppMessage(sampleOrder);
       { desc: '10. Heading: 📍 *DELIVERY INFORMATION*', check: msg.includes('📍 *DELIVERY INFORMATION*') },
       { desc: '11. Customer details without bold', check: msg.includes('👤 Customer Name: Rahul Sharma') && msg.includes('📞 Phone Number: +91 9876543210') },
       { desc: '12. Heading: ⚠️ *PAYMENT INSTRUCTIONS & POLICY*', check: msg.includes('⚠️ *PAYMENT INSTRUCTIONS & POLICY*') },
-      { desc: '13. Policy text without bold', check: msg.includes('Cash on Delivery (COD) is strictly unavailable') && msg.includes('Orders are prepaid via UPI / Bank Transfer') },
-      { desc: '14. Closing greeting without bold', check: msg.includes('👋 Hello Fish Tales!') },
-      { desc: '15. ONLY the 6 allowed headings contain asterisks', check: asteriskMatches.length === 6 && asteriskMatches.every(h => allowedHeadings.includes(h)) }
+      { desc: '13. Statement 1 bold: *• Cash on Delivery (COD) is strictly unavailable* for live livestock & bioactive habitats.', check: msg.includes('*• Cash on Delivery (COD) is strictly unavailable* for live livestock & bioactive habitats.') },
+      { desc: '14. Statement 2 bold: • Orders are prepaid via *UPI / Bank Transfer* after order & shipping confirmation.', check: msg.includes('• Orders are prepaid via *UPI / Bank Transfer* after order & shipping confirmation.') },
+      { desc: '15. Closing greeting without bold', check: msg.includes('👋 Hello Fish Tales!') },
+      { desc: '16. Exactly the expected bold segments exist', check: asteriskMatches.length === 8 && asteriskMatches.every(h => allowedBoldSections.includes(h)) }
     ];
 
     requiredChecks.forEach(item => {
