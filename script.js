@@ -2511,33 +2511,90 @@
     if (hamburger) {
       hamburger.classList.toggle('active', isOpen);
       hamburger.setAttribute('aria-expanded', String(isOpen));
-      hamburger.innerHTML = isOpen
-        ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
-        : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      // Fallback for single-SVG markups
+      const closeIcon = hamburger.querySelector('.icon-close');
+      const burgerIcon = hamburger.querySelector('.icon-hamburger');
+      if (!closeIcon || !burgerIcon) {
+        hamburger.innerHTML = isOpen
+          ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+          : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      }
     }
 
     if (backdrop) {
       backdrop.classList.toggle('active', isOpen);
     }
     document.body.classList.toggle('mobile-nav-open', isOpen);
+    return isOpen;
   };
 
   window.closeMobileMenu = function () {
     const navMenu = document.getElementById('navMenu');
     const hamburger = document.getElementById('hamburger');
     const backdrop = document.getElementById('mobileNavBackdrop');
-    if (navMenu && navMenu.classList.contains('active')) {
-      navMenu.classList.remove('active');
-      if (hamburger) {
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
+    if (!navMenu) return;
+
+    navMenu.classList.remove('active');
+
+    if (hamburger) {
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      const closeIcon = hamburger.querySelector('.icon-close');
+      const burgerIcon = hamburger.querySelector('.icon-hamburger');
+      if (!closeIcon || !burgerIcon) {
         hamburger.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
       }
-      if (backdrop) {
-        backdrop.classList.remove('active');
-      }
-      document.body.classList.remove('mobile-nav-open');
     }
+
+    if (backdrop) {
+      backdrop.classList.remove('active');
+    }
+    document.body.classList.remove('mobile-nav-open');
+  };
+
+  window.initMobileMenu = function () {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    if (!hamburger || !navMenu) return;
+
+    if (hamburger.dataset.menuInitialized === 'true') return;
+    hamburger.dataset.menuInitialized = 'true';
+
+    // Remove inline onclick to guarantee only this single listener handles clicks
+    hamburger.removeAttribute('onclick');
+
+    // Single dedicated click handler for hamburger
+    hamburger.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.toggleMobileMenu(e);
+    });
+
+    // Tapping on the backdrop closes the menu
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    if (backdrop) {
+      backdrop.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.closeMobileMenu();
+      });
+    }
+
+    // Tapping any navigation link closes the menu
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        window.closeMobileMenu();
+      });
+    });
+
+    // Tapping anywhere outside of navMenu and hamburger closes the menu
+    document.addEventListener('click', (e) => {
+      const nm = document.getElementById('navMenu');
+      if (!nm || !nm.classList.contains('active')) return;
+      if (e.target && (e.target.closest('#hamburger') || e.target.closest('#navMenu'))) {
+        return;
+      }
+      window.closeMobileMenu();
+    });
   };
 
   /* ── 10. Smooth Scroll & Navigation Helpers ──────────────── */
@@ -2709,41 +2766,7 @@
     }, { passive: true });
 
     // 4. Mobile hamburger menu setup
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-    
-    // Wire fallback click listener only if inline onclick is not present
-    if (hamburger && !hamburger.getAttribute('onclick')) {
-      hamburger.addEventListener('click', (e) => {
-        if (typeof window.toggleMobileMenu === 'function') {
-          window.toggleMobileMenu(e);
-        }
-      });
-    }
-
-    // Close menu when tapping any navigation link
-    if (navMenu) {
-      navMenu.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          if (typeof window.closeMobileMenu === 'function') {
-            window.closeMobileMenu();
-          }
-        });
-      });
-    }
-
-    // Close menu when tapping outside of navMenu and hamburger
-    document.addEventListener('click', (e) => {
-      const nm = document.getElementById('navMenu');
-      const hb = document.getElementById('hamburger');
-      if (!nm || !nm.classList.contains('active')) return;
-      if (nm.contains(e.target) || (hb && hb.contains(e.target))) {
-        return;
-      }
-      if (typeof window.closeMobileMenu === 'function') {
-        window.closeMobileMenu();
-      }
-    });
+    window.initMobileMenu();
 
     // 5. Category tabs click listeners
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
@@ -2816,5 +2839,12 @@
       });
     }
   });
+
+  // Self-initialize if DOM is already ready
+  if (document.readyState !== 'loading') {
+    if (typeof window.initMobileMenu === 'function') {
+      window.initMobileMenu();
+    }
+  }
 
 })();
