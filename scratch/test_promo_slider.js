@@ -179,10 +179,10 @@ vm.runInContext(scriptCode, sandbox);
 // Initialize promo slider
 sandbox.window.initPromoSlider();
 
-// Verify Autoplay timer set to 5000ms
-assert.strictEqual(intervalTime, 5000, 'Autoplay interval must be 5000ms');
+// Verify Autoplay timer set to 3000ms
+assert.strictEqual(intervalTime, 3000, 'Autoplay interval must be 3000ms');
 assert(intervalCallback !== null, 'Autoplay timer must be active');
-console.log('  ✓ Autoplay timer successfully initialized to 5000ms (5 seconds)');
+console.log('  ✓ Autoplay timer successfully initialized to 3000ms (3 seconds)');
 
 // Test Autoplay step: 0 -> 1
 intervalCallback();
@@ -219,7 +219,7 @@ console.log('  ✓ Desktop hover pause verified');
 // Test Desktop Mouseleave: mouseleave resumes autoplay
 mockContainer.dispatchEvent('mouseleave');
 assert(intervalCallback !== null, 'Mouseleave must resume autoplay timer');
-assert.strictEqual(intervalTime, 5000, 'Resumed autoplay timer interval must be 5000ms');
+assert.strictEqual(intervalTime, 3000, 'Resumed autoplay timer interval must be 3000ms');
 console.log('  ✓ Desktop mouseleave autoplay resume verified');
 
 // Test Mobile Swipe Gesture: Swipe Left (next slide: 2 -> 0)

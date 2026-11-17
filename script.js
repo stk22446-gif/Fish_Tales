@@ -16,6 +16,7 @@
 
   /* ── 1. Configuration & Constants ─────────────────────────── */
   const WHATSAPP_NUMBER = '919654297430';
+  const CONTACT_EMAIL = 'fishtales.exotic@gmail.com';
   const STORAGE_KEY = 'fishtales_cart';
 
   /* ── 2. Clean Neutral Placeholder (No Vector Animal Art) ────── */
@@ -1905,6 +1906,7 @@
   };
 
   // Expose global convenience helpers
+  window.CONTACT_EMAIL = CONTACT_EMAIL;
   window.PRODUCTS = PRODUCTS;
   window.CartManager = CartManager;
   window.addToCartById = (id, qty = 1) => CartManager.addById(id, qty);
@@ -4161,6 +4163,10 @@
     const track = document.getElementById('promoSliderTrack');
     if (!container || !track) return;
 
+    // Prevent duplicate initialization across DOMContentLoaded and readyState hooks
+    if (container.dataset.sliderInitialized === 'true') return;
+    container.dataset.sliderInitialized = 'true';
+
     const slides = container.querySelectorAll('.promo-slide');
     const dots = container.querySelectorAll('.promo-dot');
     if (slides.length <= 1) return;
@@ -4168,7 +4174,7 @@
     let currentIndex = 0;
     let autoplayTimer = null;
     let isHovered = false;
-    const AUTOPLAY_INTERVAL = 5000;
+    const AUTOPLAY_INTERVAL = 3000;
 
     function goToSlide(index) {
       if (index < 0) {
@@ -4199,35 +4205,40 @@
       goToSlide(currentIndex - 1);
     }
 
-    function startAutoplay() {
-      stopAutoplay();
-      if (!isHovered) {
-        autoplayTimer = setInterval(() => {
-          nextSlide();
-        }, AUTOPLAY_INTERVAL);
-      }
-    }
-
     function stopAutoplay() {
-      if (autoplayTimer) {
+      if (autoplayTimer !== null) {
         clearInterval(autoplayTimer);
         autoplayTimer = null;
       }
     }
 
-    // Clickable navigation dots
+    function startAutoplay() {
+      stopAutoplay();
+      if (document.hidden) return;
+      if (isHovered) return;
+
+      autoplayTimer = setInterval(() => {
+        nextSlide();
+      }, AUTOPLAY_INTERVAL);
+    }
+
+    // Clickable navigation dots: manual navigation restarts autoplay cycle
     dots.forEach(dot => {
       dot.addEventListener('click', () => {
         const targetIdx = parseInt(dot.dataset.slide, 10);
         if (!isNaN(targetIdx) && targetIdx !== currentIndex) {
           goToSlide(targetIdx);
-          startAutoplay(); // Reset timer on manual navigation
+        }
+        // Resume autoplay if not currently hovered (e.g. touch or keyboard navigation)
+        if (!isHovered) {
+          startAutoplay();
         }
       });
     });
 
     // Pause autoplay on desktop hover and resume when hover ends
-    container.addEventListener('mouseenter', () => {
+    container.addEventListener('mouseenter', (e) => {
+      if (e && e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
       isHovered = true;
       stopAutoplay();
     });
@@ -4237,6 +4248,21 @@
       startAutoplay();
     });
 
+    // Window focus/blur safety handlers to prevent stuck hover states
+    if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+      window.addEventListener('blur', () => {
+        isHovered = false;
+        stopAutoplay();
+      });
+
+      window.addEventListener('focus', () => {
+        isHovered = false;
+        if (!document.hidden) {
+          startAutoplay();
+        }
+      });
+    }
+
     // Mobile Swipe Gestures
     let touchStartX = 0;
     let touchStartY = 0;
@@ -4245,6 +4271,7 @@
     const SWIPE_THRESHOLD = 40;
 
     track.addEventListener('touchstart', (e) => {
+      isHovered = false; // Touch interactions must never engage hover state
       if (e.touches && e.touches.length === 1) {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
@@ -4280,6 +4307,7 @@
       if (document.hidden) {
         stopAutoplay();
       } else {
+        isHovered = false;
         startAutoplay();
       }
     });
