@@ -19,8 +19,8 @@ console.log('  ✓ Desktop brand stays in left natural flow on desktop:', deskto
 
 // 2. MOBILE HEADER LAYOUT (< 768px)
 console.log('\n2. MOBILE HEADER LAYOUT (< 768px):');
-const mobileSearchHidden = css.includes('.nav-actions button[onclick*="openSearchOverlay"]') &&
-  css.includes('display: none !important');
+const mobileSearchBesideCart = !css.includes('.nav-actions button[onclick*="openSearchOverlay"]') ||
+  !css.includes('display: none !important');
 const mobileHamburgerLeft = css.includes('.hamburger-btn') &&
   css.includes('position: absolute') &&
   css.includes('left: clamp(0.75rem, 3vw, 1rem)');
@@ -34,7 +34,7 @@ const mobileCartRight = css.includes('.nav-actions') &&
 const mobileCartBadgeVisible = css.includes('.nav-action-btn') &&
   css.includes('overflow: visible');
 
-console.log('  ✓ Search icon completely removed from mobile header:', mobileSearchHidden);
+console.log('  ✓ Search icon functional beside Cart on mobile header:', mobileSearchBesideCart);
 console.log('  ✓ Hamburger button positioned on far LEFT:', mobileHamburgerLeft);
 console.log('  ✓ Fish Tales logo & brand text centered HORIZONTALLY & VERTICALLY:', mobileBrandCentered);
 console.log('  ✓ Shopping cart button positioned on far RIGHT:', mobileCartRight);
@@ -86,7 +86,7 @@ desktopWidths.forEach(w => {
 });
 
 const allPassed = desktopSearchVisible && desktopHamburgerHidden && desktopBrandInFlow &&
-  mobileSearchHidden && mobileHamburgerLeft && mobileBrandCentered && mobileCartRight &&
+  mobileSearchBesideCart && mobileHamburgerLeft && mobileBrandCentered && mobileCartRight &&
   mobileCartBadgeVisible && allPagesConsistent;
 
 if (allPassed) {

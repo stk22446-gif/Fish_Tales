@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exotic Tarantulas — Captive-Bred Slings & Juveniles | Fish Tales</title>
-  <meta name="description" content="Explore all 6 captive-bred New World and Old World tarantula varieties at Fish Tales with verified sizes, pricing, and care details.">
+  <meta name="description"
+    content="Explore all 6 captive-bred New World and Old World tarantula varieties at Fish Tales with verified sizes, pricing, and care details.">
   <meta name="theme-color" content="#174B32">
 
   <!-- Favicon / Official Mascot Logo -->
-  <link rel="icon" type="image/png" href="https://res.cloudinary.com/pv8lnpft/image/upload/v1794776392/40e097e2-b06a-4e06-add4-0ffa7c8e154d.png">
+  <link rel="icon" type="image/png"
+    href="https://res.cloudinary.com/pv8lnpft/image/upload/v1794776392/40e097e2-b06a-4e06-add4-0ffa7c8e154d.png">
 
   <!-- Google Fonts: Playfair Display + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
 
   <!-- Shared Botanical Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body data-page-category="tarantulas">
 
   <!-- Top Announcement Bar: COD Notice -->
   <aside class="cod-banner" role="alert">
     <span>🌿</span>
-    <span><strong>Notice:</strong> Cash on Delivery (COD) is strictly unavailable for live livestock &amp; bioactive habitats. Prepaid orders only via UPI/Bank transfer on WhatsApp confirmation.</span>
+    <span><strong>Notice:</strong> Cash on Delivery (COD) is strictly unavailable for live livestock &amp; bioactive
+      habitats. Prepaid orders only via UPI/Bank transfer on WhatsApp confirmation.</span>
   </aside>
 
   <!-- ============================================================
@@ -33,7 +40,8 @@
     <nav class="nav-container" aria-label="Main Navigation">
       <!-- Official Brand Logo -->
       <a href="index.html" class="nav-brand" aria-label="Fish Tales Home">
-        <img src="https://res.cloudinary.com/pv8lnpft/image/upload/v1794776392/40e097e2-b06a-4e06-add4-0ffa7c8e154d.png" alt="Fish Tales Official Mascot Logo" class="brand-logo-img">
+        <img src="https://res.cloudinary.com/pv8lnpft/image/upload/v1794776392/40e097e2-b06a-4e06-add4-0ffa7c8e154d.png"
+          alt="Fish Tales Official Mascot Logo" class="brand-logo-img">
         <div class="logo-title">
           <span class="logo-main">FISH <span class="logo-accent">TALES</span></span>
           <span class="logo-sub">Aquatic &amp; Exotic Life</span>
@@ -54,27 +62,39 @@
       <!-- Right Action Controls -->
       <div class="nav-actions">
         <!-- Live Search Trigger -->
-        <button class="nav-action-btn" onclick="openSearchOverlay()" aria-label="Search catalogue" title="Search catalogue">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        <button class="nav-action-btn" onclick="openSearchOverlay()" aria-label="Search catalogue"
+          title="Search catalogue">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
           </svg>
         </button>
 
         <!-- Cart Drawer Trigger -->
         <button class="nav-action-btn" onclick="toggleCartDrawer()" aria-label="Shopping Cart" title="Shopping Cart">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
           </svg>
           <span class="cart-counter" id="cartCount">0</span>
         </button>
 
         <!-- Mobile Hamburger Toggle -->
-        <button type="button" class="hamburger-btn" id="hamburger" aria-label="Toggle navigation menu" aria-controls="navMenu" aria-expanded="false">
-          <svg class="icon-hamburger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
+        <button type="button" class="hamburger-btn" id="hamburger" aria-label="Toggle navigation menu"
+          aria-controls="navMenu" aria-expanded="false">
+          <svg class="icon-hamburger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
           </svg>
-          <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
       </div>
@@ -97,7 +117,8 @@
         <header class="catalogue-header text-center">
           <div class="catalogue-eyebrow-pill">6 CAPTIVE-BRED EXOTIC SPECIMENS</div>
           <h1 class="catalogue-title">Exotic Tarantulas Collection</h1>
-          <p class="catalogue-subtitle">Discover 6 healthy captive-bred New World and Old World tarantula slings and juveniles with verified specimen sizes.</p>
+          <p class="catalogue-subtitle">Discover 6 healthy captive-bred New World and Old World tarantula slings and
+            juveniles with verified specimen sizes.</p>
         </header>
 
         <!-- Category Filter Pills Switcher -->
@@ -123,17 +144,21 @@
         <div class="catalogue-toolbar">
           <!-- LEFT SIDE: Product Count + Active Category Indicator -->
           <div class="toolbar-left">
-            <span id="resultCount" class="results-count">Showing <strong>6</strong> of <strong>6</strong> products</span>
+            <span id="resultCount" class="results-count">Showing <strong>6</strong> of <strong>6</strong>
+              products</span>
             <span class="active-category-badge" id="activeCategoryIndicator">Tarantulas</span>
           </div>
 
           <!-- RIGHT SIDE: Search Input with Icon + Sort Dropdown -->
           <div class="toolbar-right">
             <div class="search-input-wrap">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
               </svg>
-              <input type="text" id="catalogSearch" class="search-input-pill" placeholder="Search in Tarantulas..." oninput="handleCatalogSearch(this.value)">
+              <input type="text" id="catalogSearch" class="search-input-pill" placeholder="Search in Tarantulas..."
+                oninput="handleCatalogSearch(this.value)">
             </div>
 
             <div class="sort-select-wrap">
@@ -153,11 +178,16 @@
         </div>
 
         <!-- Livestock Quality & Policy Card -->
-        <div style="margin-top: 3.5rem; padding: 1.5rem 1.75rem; background: #FFFFFF; border: 1px solid var(--border-leaf); border-radius: 14px; display: flex; align-items: flex-start; gap: 1.25rem; box-shadow: var(--shadow-sm);">
+        <div
+          style="margin-top: 3.5rem; padding: 1.5rem 1.75rem; background: #FFFFFF; border: 1px solid var(--border-leaf); border-radius: 14px; display: flex; align-items: flex-start; gap: 1.25rem; box-shadow: var(--shadow-sm);">
           <div style="font-size: 1.75rem; line-height: 1;">🛡️</div>
           <div style="font-size: 0.875rem; line-height: 1.6; color: var(--text-body);">
-            <strong style="color: var(--color-primary-dark); font-size: 0.95rem; display: block; margin-bottom: 0.25rem;">Fish Tales Living Arrival &amp; Quality Commitment</strong>
-            Every specimen in this category is acclimated and verified healthy prior to dispatch. Transit route feasibility is individually assessed on WhatsApp before order confirmation. <em>Cash on Delivery is strictly unavailable for live livestock and delicate habitat kits.</em>
+            <strong
+              style="color: var(--color-primary-dark); font-size: 0.95rem; display: block; margin-bottom: 0.25rem;">Fish
+              Tales Living Arrival &amp; Quality Commitment</strong>
+            Every specimen in this category is acclimated and verified healthy prior to dispatch. Transit route
+            feasibility is individually assessed on WhatsApp before order confirmation. <em>Cash on Delivery is strictly
+              unavailable for live livestock and delicate habitat kits.</em>
           </div>
         </div>
       </div>
@@ -170,15 +200,48 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo-wrap">
-            <img src="https://res.cloudinary.com/pv8lnpft/image/upload/v1794776392/40e097e2-b06a-4e06-add4-0ffa7c8e154d.png" alt="Fish Tales Official Mascot Logo" class="footer-logo-img">
+            <img
+              src="https://res.cloudinary.com/pv8lnpft/image/upload/v1794776392/40e097e2-b06a-4e06-add4-0ffa7c8e154d.png"
+              alt="Fish Tales Official Mascot Logo" class="footer-logo-img">
             <div class="logo-title">
-              <span class="logo-main" style="color:#FFFFFF;">FISH <span class="logo-accent" style="color:var(--color-mint);">TALES</span></span>
+              <span class="logo-main" style="color:#FFFFFF;">FISH <span class="logo-accent"
+                  style="color:var(--color-mint);">TALES</span></span>
               <span class="logo-sub" style="color:var(--color-mint);">Aquatic &amp; Exotic Life</span>
             </div>
           </div>
           <p class="footer-desc">
-            Boutique exotic livestock studio dedicated to pure show guppy pairs, Betta fish, bioactive custodial isopods, tarantulas, and living terrarium kits.
+            Boutique exotic livestock studio dedicated to pure show guppy pairs, Betta fish, bioactive custodial
+            isopods, tarantulas, and living terrarium kits.
           </p>
+          <div class="footer-social-section">
+            <h4 class="footer-col-title footer-social-title">Follow Fish Tales</h4>
+            <div class="footer-social-links">
+              <a href="https://youtube.com/@fishtales__1?si=zSvzHKCZ6J3ARKKo" target="_blank" rel="noopener noreferrer"
+                class="footer-social-btn" aria-label="Follow Fish Tales on YouTube" title="Fish Tales on YouTube">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/fishtalesssss?psln=MWVmMjZsdDJxejEwMQ==" target="_blank"
+                rel="noopener noreferrer" class="footer-social-btn" aria-label="Follow Fish Tales on Instagram"
+                title="Fish Tales on Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+              </a>
+              <a href="https://www.facebook.com/share/1QX5z9KkRQ/" target="_blank" rel="noopener noreferrer"
+                class="footer-social-btn" aria-label="Follow Fish Tales on Facebook" title="Fish Tales on Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
 
         <div>
@@ -205,15 +268,22 @@
         <div>
           <h4 class="footer-col-title">Direct Desk</h4>
           <div class="footer-contact-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.16C10.57 20.16 9.12 19.76 7.85 19.01L7.55 18.83L4.44 19.65L5.27 16.62L5.07 16.31C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.05 3.68C14.25 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.28 11.92C20.28 16.46 16.59 20.16 12.05 20.16Z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.16C10.57 20.16 9.12 19.76 7.85 19.01L7.55 18.83L4.44 19.65L5.27 16.62L5.07 16.31C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.68 12.05 3.68C14.25 3.68 16.31 4.54 17.87 6.1C19.42 7.66 20.28 9.72 20.28 11.92C20.28 16.46 16.59 20.16 12.05 20.16Z" />
+            </svg>
             <a href="https://wa.me/919654297430" target="_blank" rel="noopener" class="footer-link">+91 96542 97430</a>
           </div>
           <div class="footer-contact-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
             <span>Bengaluru, Karnataka, India</span>
           </div>
           <div class="footer-policy-box">
-            <strong>Payment Notice:</strong> Cash on Delivery is strictly unavailable for live animal welfare and logistics security. Prepaid only.
+            <strong>Payment Notice:</strong> Cash on Delivery is strictly unavailable for live animal welfare and
+            logistics security. Prepaid only.
           </div>
         </div>
       </div>
@@ -230,11 +300,18 @@
   <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart Drawer">
     <div class="cart-drawer-header">
       <h3 class="cart-drawer-title">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+          <path d="M3 6h18" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
         Your Living Order
       </h3>
       <button class="cart-drawer-close" onclick="closeCartDrawer()" aria-label="Close cart drawer">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
       </button>
     </div>
 
@@ -244,7 +321,8 @@
 
     <div class="cart-drawer-footer">
       <div class="cart-cod-reminder">
-        ⚠️ <strong>Notice:</strong> Cash on Delivery is strictly unavailable. Orders are prepaid via UPI/Bank transfer upon WhatsApp confirmation.
+        ⚠️ <strong>Notice:</strong> Cash on Delivery is strictly unavailable. Orders are prepaid via UPI/Bank transfer
+        upon WhatsApp confirmation.
       </div>
       <div class="cart-summary-row">
         <span>Order Total</span>
@@ -263,7 +341,10 @@
   <div class="modal-backdrop" id="productModal" onclick="handleModalBackdropClick(event)">
     <div class="modal-dialog" id="modalDialog">
       <button class="modal-close-btn" onclick="closeProductModal()" aria-label="Close product modal">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
       </button>
       <div id="modalContent" style="display:contents;">
         <!-- Injected dynamically by openProductModal(id) in script.js -->
@@ -272,10 +353,14 @@
   </div>
 
   <!-- 6b. Checkout & Delivery Details Modal (Shared) -->
-  <div class="modal-backdrop checkout-backdrop" id="checkoutModal" onclick="handleCheckoutModalBackdropClick(event)" role="dialog" aria-modal="true" aria-labelledby="checkoutModalTitle">
+  <div class="modal-backdrop checkout-backdrop" id="checkoutModal" onclick="handleCheckoutModalBackdropClick(event)"
+    role="dialog" aria-modal="true" aria-labelledby="checkoutModalTitle">
     <div class="modal-dialog checkout-dialog" id="checkoutDialog">
       <button class="modal-close-btn" onclick="closeCheckoutModal()" aria-label="Close checkout modal">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
       </button>
       <div id="checkoutContent">
         <!-- Dynamically rendered by script.js -->
@@ -289,12 +374,29 @@
       <div class="search-overlay-header">
         <h3 class="search-overlay-title">Search Living Catalogue</h3>
         <button class="search-overlay-close" onclick="closeSearchOverlay()" aria-label="Close search">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
       </div>
 
       <div class="search-overlay-bar">
-        <input type="text" id="searchOverlayInput" placeholder="Type species name, strain or kit..." oninput="handleOverlaySearch(this.value)" autocomplete="off">
+        <svg class="search-bar-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <input type="text" id="searchOverlayInput" placeholder="Search fish, isopods, tarantulas..."
+          oninput="handleOverlaySearch(this.value)" autocomplete="off">
+        <button type="button" class="search-overlay-clear" id="searchOverlayClear" onclick="clearSearchOverlayInput()"
+          aria-label="Clear search" title="Clear search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
       </div>
 
       <div class="search-overlay-results" id="searchOverlayResults">
@@ -309,4 +411,5 @@
   <!-- Master JavaScript Engine -->
   <script src="script.js"></script>
 </body>
+
 </html>

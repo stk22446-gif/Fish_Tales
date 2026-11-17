@@ -104,14 +104,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: true
@@ -136,14 +136,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -168,14 +168,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -200,14 +200,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: true
@@ -232,14 +232,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: true
@@ -264,14 +264,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -296,14 +296,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 300,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 300,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 600,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 600,
+          "label": "2 Pairs"
         }
       ],
       featured: true
@@ -328,14 +328,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -360,14 +360,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -392,14 +392,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -424,14 +424,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -456,14 +456,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 280,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 280,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 560,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 560,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -488,14 +488,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 250,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 250,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 500,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 500,
+          "label": "2 Pairs"
         }
       ],
       featured: false
@@ -520,14 +520,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (Male 5–6 cm)",
-                "price": 350,
-                "label": "Piece"
+          "name": "1 Specimen (Male 5–6 cm)",
+          "price": 350,
+          "label": "Piece"
         },
         {
-                "name": "2 Specimens (Select Males)",
-                "price": 700,
-                "label": "2 pcs"
+          "name": "2 Specimens (Select Males)",
+          "price": 700,
+          "label": "2 pcs"
         }
       ],
       featured: true
@@ -552,14 +552,14 @@
       },
       variants: [
         {
-                "name": "1 Pair (Adult Pair)",
-                "price": 180,
-                "label": "Pair"
+          "name": "1 Pair (Adult Pair)",
+          "price": 180,
+          "label": "Pair"
         },
         {
-                "name": "2 Pairs (Colony Pack)",
-                "price": 360,
-                "label": "2 Pairs"
+          "name": "2 Pairs (Colony Pack)",
+          "price": 360,
+          "label": "2 Pairs"
         }
       ],
       featured: true
@@ -584,14 +584,14 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 150,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 150,
+          "label": "Piece"
         },
         {
-                "name": "Pack of 5 (5 pcs)",
-                "price": 750,
-                "label": "5 pcs"
+          "name": "Pack of 5 (5 pcs)",
+          "price": 750,
+          "label": "5 pcs"
         }
       ],
       featured: true
@@ -615,19 +615,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 120,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 120,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 600,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 600,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 1200,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 1200,
+          "label": "10 pcs"
         }
       ],
       featured: true
@@ -651,19 +651,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 60,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 60,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 300,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 300,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 600,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 600,
+          "label": "10 pcs"
         }
       ],
       featured: false
@@ -687,19 +687,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 70,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 70,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 350,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 350,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 700,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 700,
+          "label": "10 pcs"
         }
       ],
       featured: true
@@ -723,19 +723,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 60,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 60,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 300,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 300,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 600,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 600,
+          "label": "10 pcs"
         }
       ],
       featured: false
@@ -759,19 +759,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 600,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 600,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 3000,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 3000,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 6000,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 6000,
+          "label": "10 pcs"
         }
       ],
       featured: true
@@ -795,19 +795,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 750,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 750,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 3750,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 3750,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 7500,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 7500,
+          "label": "10 pcs"
         }
       ],
       featured: true
@@ -831,19 +831,19 @@
       },
       variants: [
         {
-                "name": "Single (1 pc)",
-                "price": 150,
-                "label": "Piece"
+          "name": "Single (1 pc)",
+          "price": 150,
+          "label": "Piece"
         },
         {
-                "name": "Starter Culture (5 pcs)",
-                "price": 750,
-                "label": "5 pcs"
+          "name": "Starter Culture (5 pcs)",
+          "price": 750,
+          "label": "5 pcs"
         },
         {
-                "name": "Colony Culture (10 pcs)",
-                "price": 1500,
-                "label": "10 pcs"
+          "name": "Colony Culture (10 pcs)",
+          "price": 1500,
+          "label": "10 pcs"
         }
       ],
       featured: false
@@ -868,14 +868,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1–1.5 cm)",
-                "price": 2199,
-                "label": "Specimen"
+          "name": "1 Specimen (1–1.5 cm)",
+          "price": 2199,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 4398,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 4398,
+          "label": "2 specimens"
         }
       ],
       featured: true
@@ -900,14 +900,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1–1.5 cm)",
-                "price": 2199,
-                "label": "Specimen"
+          "name": "1 Specimen (1–1.5 cm)",
+          "price": 2199,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 4398,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 4398,
+          "label": "2 specimens"
         }
       ],
       featured: true
@@ -932,14 +932,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1–1.5 cm)",
-                "price": 2399,
-                "label": "Specimen"
+          "name": "1 Specimen (1–1.5 cm)",
+          "price": 2399,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 4798,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 4798,
+          "label": "2 specimens"
         }
       ],
       featured: true
@@ -964,14 +964,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1–1.5 cm)",
-                "price": 4799,
-                "label": "Specimen"
+          "name": "1 Specimen (1–1.5 cm)",
+          "price": 4799,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 9598,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 9598,
+          "label": "2 specimens"
         }
       ],
       featured: true
@@ -996,14 +996,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1–1.5 cm)",
-                "price": 1999,
-                "label": "Specimen"
+          "name": "1 Specimen (1–1.5 cm)",
+          "price": 1999,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 3998,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 3998,
+          "label": "2 specimens"
         }
       ],
       featured: false
@@ -1028,14 +1028,14 @@
       },
       variants: [
         {
-                "name": "1 Specimen (1 inch)",
-                "price": 3000,
-                "label": "Specimen"
+          "name": "1 Specimen (1 inch)",
+          "price": 3000,
+          "label": "Specimen"
         },
         {
-                "name": "Pair of Slings (2 specimens)",
-                "price": 6000,
-                "label": "2 specimens"
+          "name": "Pair of Slings (2 specimens)",
+          "price": 6000,
+          "label": "2 specimens"
         }
       ],
       featured: true
@@ -1057,21 +1057,21 @@
         "diet": "Included in starter pack",
         "habitat": "High-clarity glass enclosure",
         "kitIncludes": [
-                "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height)",
-                "Fittonia albivenis (Patterned nerve plant)",
-                "Hemigraphis sp. Pink (Purple waffle plant)",
-                "Sheet Moss layer",
-                "Bioactive Isopod Substrate Blend",
-                "Lotus Pod (natural hide for isopods)",
-                "Premium Isopod Food",
-                "Isopod Culture: 6 Cubaris sp. \"Glacier\""
+          "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height)",
+          "Fittonia albivenis (Patterned nerve plant)",
+          "Hemigraphis sp. Pink (Purple waffle plant)",
+          "Sheet Moss layer",
+          "Bioactive Isopod Substrate Blend",
+          "Lotus Pod (natural hide for isopods)",
+          "Premium Isopod Food",
+          "Isopod Culture: 6 Cubaris sp. \"Glacier\""
         ]
       },
       variants: [
         {
-                "name": "Complete Kit",
-                "price": 1545,
-                "label": "Kit"
+          "name": "Complete Kit",
+          "price": 1545,
+          "label": "Kit"
         }
       ],
       featured: true
@@ -1093,17 +1093,17 @@
         "diet": "Included in starter pack",
         "habitat": "High-clarity glass enclosure",
         "kitIncludes": [
-                "Half Cube Aquarium",
-                "1 beautiful Betta Fish",
-                "Live aquatic plants",
-                "Premium sand substrate"
+          "Half Cube Aquarium",
+          "1 beautiful Betta Fish",
+          "Live aquatic plants",
+          "Premium sand substrate"
         ]
       },
       variants: [
         {
-                "name": "Complete Kit",
-                "price": 999,
-                "label": "Kit"
+          "name": "Complete Kit",
+          "price": 999,
+          "label": "Kit"
         }
       ],
       featured: true
@@ -1125,17 +1125,17 @@
         "diet": "Included in starter pack",
         "habitat": "High-clarity glass enclosure",
         "kitIncludes": [
-                "10 Cubaris Murina Glacier Isopods",
-                "1 Bonus Isopod (11 specimens total)",
-                "Ventilated transport culture cup",
-                "Starter food blend"
+          "10 Cubaris Murina Glacier Isopods",
+          "1 Bonus Isopod (11 specimens total)",
+          "Ventilated transport culture cup",
+          "Starter food blend"
         ]
       },
       variants: [
         {
-                "name": "10 + 1 Free Deal (11 specimens)",
-                "price": 700,
-                "label": "11 Pieces"
+          "name": "10 + 1 Free Deal (11 specimens)",
+          "price": 700,
+          "label": "11 Pieces"
         }
       ],
       featured: true
@@ -2609,15 +2609,27 @@
   };
 
   /* ── 9. Live Search Overlay ──────────────────────────────── */
+  function escapeSearchHTML(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   window.openSearchOverlay = function () {
     const overlay = document.getElementById('searchOverlay');
     const input = document.getElementById('searchOverlayInput');
+    const clearBtn = document.getElementById('searchOverlayClear');
     if (overlay) {
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
       if (input) {
         input.value = '';
-        setTimeout(() => input.focus(), 150);
+        if (clearBtn) clearBtn.classList.remove('visible');
+        setTimeout(() => input.focus(), 120);
         renderSearchOverlayResults('');
       }
     }
@@ -2631,409 +2643,492 @@
     }
   };
 
+  window.clearSearchOverlayInput = function () {
+    const input = document.getElementById('searchOverlayInput');
+    const clearBtn = document.getElementById('searchOverlayClear');
+    if (input) {
+      input.value = '';
+      input.focus();
+    }
+    if (clearBtn) {
+      clearBtn.classList.remove('visible');
+    }
+    renderSearchOverlayResults('');
+  };
+
+  window.handleOverlaySearch = function (query) {
+    const clearBtn = document.getElementById('searchOverlayClear');
+    if (clearBtn) {
+      if (query && query.trim().length > 0) {
+        clearBtn.classList.add('visible');
+      } else {
+        clearBtn.classList.remove('visible');
+      }
+    }
+    renderSearchOverlayResults(query);
+  };
+
   function renderSearchOverlayResults(query) {
     const resultsWrap = document.getElementById('searchOverlayResults');
     if (!resultsWrap) return;
 
-    const q = query.toLowerCase().trim();
-    if (!q) {
-      resultsWrap.innerHTML = `
-        <div style="padding: 2rem 1rem; text-align: center; color: var(--text-muted); font-size: 0.95rem;">
-          Type species name, strain or combo kit to search our 30 verified products.
-        </div>
-      `;
-      return;
-    }
-
-    const matches = PRODUCTS.filter(p =>
-      p.name.toLowerCase().includes(q) ||
-      (p.scientificName && p.scientificName.toLowerCase().includes(q)) ||
-      (p.categoryName || p.categoryLabel).toLowerCase().includes(q) ||
-      p.description.toLowerCase().includes(q)
-    );
-
-    if (matches.length === 0) {
-      resultsWrap.innerHTML = `
-        <div style="padding: 2.5rem 1rem; text-align: center; color: var(--text-muted);">
-          No matching products found for "<strong>${query}</strong>".
-        </div>
-      `;
-      return;
-    }
-
-    resultsWrap.innerHTML = matches.map(p => {
-      const unitLabel = p.pricingUnit === 'pair' ? 'per pair' : (p.pricingUnit === 'kit' ? 'kit' : 'per piece');
-      return `
-        <div class="search-result-row" onclick="closeSearchOverlay(); openProductModal('${p.id}')">
-          <div style="display:flex; align-items:center; gap:0.75rem;">
-            <span style="font-size:1.5rem;">${p.emoji}</span>
-            <div>
-              <div style="color:var(--text-main); font-weight:600; font-size:0.95rem;">${p.name}</div>
-              <div style="color:var(--text-muted); font-size:0.8rem;">${(p.categoryName || p.categoryLabel)} ${p.scientificName ? '• ' + p.scientificName : ''}</div>
-            </div>
-          </div>
-          <div style="text-align:right;">
-            <div style="color:var(--color-accent); font-weight:700;">${CartManager.formatPrice(p.price)}</div>
-            <div style="color:var(--text-muted); font-size:0.75rem;">${unitLabel}</div>
+      const rawQ = (query || '').trim();
+      if (!rawQ) {
+        resultsWrap.innerHTML = `
+        <div class="search-overlay-empty" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+          <svg class="search-empty-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" style="display:block; margin-left:auto; margin-right:auto; align-self:center; margin-bottom:0.85rem; color:var(--color-leaf);">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <div class="search-empty-title" style="font-weight:600; color:var(--color-primary-dark); font-size:1.05rem; margin-bottom:0.35rem; text-align:center;">Search Fish Tales Living Catalogue</div>
+          <div class="search-empty-desc" style="font-size:0.875rem; color:var(--text-muted); max-width:380px; margin:0 auto; line-height:1.45; text-align:center;">
+            Type species name, strain or category — Betta, Guppy, Molly, Shrimps, Isopods, Tarantulas, or Living Aquariums.
           </div>
         </div>
       `;
-    }).join('');
-  }
-
-
-  /* ── Mobile Menu Handlers ────────────────────────────────── */
-  window.toggleMobileMenu = function (e) {
-    if (e && typeof e.stopPropagation === 'function') {
-      e.stopPropagation();
-    }
-    const navMenu = document.getElementById('navMenu');
-    const hamburger = document.getElementById('hamburger');
-    const backdrop = document.getElementById('mobileNavBackdrop');
-    if (!navMenu) return;
-
-    const isOpen = navMenu.classList.toggle('active');
-
-    if (hamburger) {
-      hamburger.classList.toggle('active', isOpen);
-      hamburger.setAttribute('aria-expanded', String(isOpen));
-      // Fallback for single-SVG markups
-      const closeIcon = hamburger.querySelector('.icon-close');
-      const burgerIcon = hamburger.querySelector('.icon-hamburger');
-      if (!closeIcon || !burgerIcon) {
-        hamburger.innerHTML = isOpen
-          ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
-          : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
-      }
-    }
-
-    if (backdrop) {
-      backdrop.classList.toggle('active', isOpen);
-    }
-    document.body.classList.toggle('mobile-nav-open', isOpen);
-    return isOpen;
-  };
-
-  window.closeMobileMenu = function () {
-    const navMenu = document.getElementById('navMenu');
-    const hamburger = document.getElementById('hamburger');
-    const backdrop = document.getElementById('mobileNavBackdrop');
-    if (!navMenu) return;
-
-    navMenu.classList.remove('active');
-
-    if (hamburger) {
-      hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded', 'false');
-      const closeIcon = hamburger.querySelector('.icon-close');
-      const burgerIcon = hamburger.querySelector('.icon-hamburger');
-      if (!closeIcon || !burgerIcon) {
-        hamburger.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
-      }
-    }
-
-    if (backdrop) {
-      backdrop.classList.remove('active');
-    }
-    document.body.classList.remove('mobile-nav-open');
-  };
-
-  window.initMobileMenu = function () {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-    if (!hamburger || !navMenu) return;
-
-    if (hamburger.dataset.menuInitialized === 'true') return;
-    hamburger.dataset.menuInitialized = 'true';
-
-    // Remove inline onclick to guarantee only this single listener handles clicks
-    hamburger.removeAttribute('onclick');
-
-    // Single dedicated click handler for hamburger
-    hamburger.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      window.toggleMobileMenu(e);
-    });
-
-    // Tapping on the backdrop closes the menu
-    const backdrop = document.getElementById('mobileNavBackdrop');
-    if (backdrop) {
-      backdrop.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.closeMobileMenu();
-      });
-    }
-
-    // Tapping any navigation link closes the menu
-    navMenu.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        window.closeMobileMenu();
-      });
-    });
-
-    // Tapping anywhere outside of navMenu and hamburger closes the menu
-    document.addEventListener('click', (e) => {
-      const nm = document.getElementById('navMenu');
-      if (!nm || !nm.classList.contains('active')) return;
-      if (e.target && (e.target.closest('#hamburger') || e.target.closest('#navMenu'))) {
         return;
       }
-      window.closeMobileMenu();
-    });
-  };
 
-  /* ── 10. Smooth Scroll & Navigation Helpers ──────────────── */
-  window.setActiveNavKey = function (targetKey) {
-    const navLinks = document.querySelectorAll('.nav-menu .nav-link');
-    if (!navLinks || navLinks.length === 0) return;
+      const q = rawQ.toLowerCase();
+      const queryTokens = q.split(/\s+/).filter(Boolean);
 
-    navLinks.forEach(link => {
-      const text = (link.textContent || '').trim().toLowerCase();
-      const href = (link.getAttribute('href') || '').toLowerCase();
+      const matches = PRODUCTS.filter(p => {
+        initProductVariantsAndSpecs(p);
 
-      let isMatch = false;
-      if (targetKey === 'home' && text === 'home') {
-        isMatch = true;
-      } else if (targetKey === 'aquarium' && (text.includes('aquarium') || href.includes('aquarium-fish.html'))) {
-        isMatch = true;
-      } else if (targetKey === 'isopods' && (text === 'isopods' || href.includes('isopods.html'))) {
-        isMatch = true;
-      } else if (targetKey === 'tarantulas' && (text === 'tarantulas' || href.includes('tarantulas.html'))) {
-        isMatch = true;
-      } else if (targetKey === 'combos' && (text.includes('combo') || href.includes('combo-packs.html'))) {
-        isMatch = true;
-      } else if (targetKey === 'about' && (text.includes('about') || href.endsWith('#about'))) {
-        isMatch = true;
-      } else if (targetKey === 'contact' && (text.includes('contact') || href.endsWith('#contact'))) {
-        isMatch = true;
+        const name = (p.name || '').toLowerCase();
+        const cat = (p.category || '').toLowerCase();
+        const catName = (p.categoryName || p.categoryLabel || '').toLowerCase();
+        const subCat = (p.subCategory || '').toLowerCase();
+        const subtitle = (p.subtitle || '').toLowerCase();
+        const sciName = (p.scientificName || (p.specs && p.specs['Scientific Name']) || '').toLowerCase();
+        const desc = (p.description || '').toLowerCase();
+        const id = (p.id || '').toLowerCase();
+
+        // Combined searchable text corpus
+        const corpus = `${name} ${cat} ${catName} ${subCat} ${subtitle} ${sciName} ${desc} ${id}`;
+
+        // Every word in query should match (supporting plural/singular variations)
+        return queryTokens.every(token => {
+          if (corpus.includes(token)) return true;
+          if (token.endsWith('s') && token.length > 3 && corpus.includes(token.slice(0, -1))) return true;
+          if (!token.endsWith('s') && corpus.includes(token + 's')) return true;
+          return false;
+        });
+      });
+
+      if (matches.length === 0) {
+        resultsWrap.innerHTML = `
+        <div class="search-overlay-no-results" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+          <div class="search-empty-icon" style="font-size:2rem; margin-bottom:0.5rem; display:block; margin-left:auto; margin-right:auto; align-self:center; text-align:center;">🔍</div>
+          <div class="search-empty-title" style="font-weight:700; font-size:1.05rem; color:var(--color-primary-dark); margin-bottom:0.35rem; text-align:center;">
+            No products found for "${escapeSearchHTML(rawQ)}"
+          </div>
+          <div class="search-empty-desc" style="font-size:0.875rem; color:var(--text-muted); max-width:360px; margin:0 auto; line-height:1.45; text-align:center;">
+            We couldn't find any matching species, strains, or kits. Try checking your spelling or searching for a category like "Betta", "Guppy", "Molly", "Shrimp", "Isopod", or "Tarantula".
+          </div>
+        </div>
+      `;
+        return;
       }
 
-      if (isMatch) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
+      resultsWrap.innerHTML = matches.map(p => {
+        const activeVariant = getProductSelectedVariant(p);
+        const displayPrice = CartManager.formatPrice(activeVariant.price || p.price || 0);
+        const unitLabel = activeVariant.unit ? ('/ ' + activeVariant.unit) : (p.pricingUnit ? ('/ ' + p.pricingUnit) : '');
+        const thumbImg = p.image || PLACEHOLDER_IMG;
+        const categoryMeta = p.categoryName || p.categoryLabel || 'Livestock';
+        const subMeta = p.subCategory ? ` • ${p.subCategory.toUpperCase()}` : '';
+
+        return `
+        <div class="search-result-row" onclick="closeSearchOverlay(); openProductModal('${p.id}')" role="button" tabindex="0" title="View details for ${escapeSearchHTML(p.name)}">
+          <div class="search-result-left">
+            <img src="${thumbImg}" alt="${escapeSearchHTML(p.name)}" class="search-result-thumb" loading="lazy" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
+            <div class="search-result-info">
+              <div class="search-result-name">${escapeSearchHTML(p.name)}</div>
+              <div class="search-result-meta">${escapeSearchHTML(categoryMeta)}${escapeSearchHTML(subMeta)}</div>
+            </div>
+          </div>
+          <div class="search-result-right">
+            <div class="search-result-price">${displayPrice}</div>
+            <div class="search-result-unit">${escapeSearchHTML(unitLabel)}</div>
+          </div>
+        </div>
+      `;
+      }).join('');
+    }
+
+    window.renderSearchOverlayResults = renderSearchOverlayResults;
+
+
+    /* ── Mobile Menu Handlers ────────────────────────────────── */
+    window.toggleMobileMenu = function (e) {
+      if (e && typeof e.stopPropagation === 'function') {
+        e.stopPropagation();
       }
-    });
-  };
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.getElementById('hamburger');
+      const backdrop = document.getElementById('mobileNavBackdrop');
+      if (!navMenu) return;
 
-  window.updateActiveNavLink = function () {
-    let rawPath = window.location.pathname.toLowerCase().replace(/\\/g, '/');
-    let page = rawPath.split('/').pop();
-    if (!page || page === '') {
-      page = 'index.html';
-    }
+      const isOpen = navMenu.classList.toggle('active');
 
-    if (page.includes('aquarium-fish')) {
-      window.setActiveNavKey('aquarium');
-    } else if (page.includes('isopods')) {
-      window.setActiveNavKey('isopods');
-    } else if (page.includes('tarantulas')) {
-      window.setActiveNavKey('tarantulas');
-    } else if (page.includes('combo-packs')) {
-      window.setActiveNavKey('combos');
-    } else {
-      // index.html / root
-      const hash = (window.location.hash || '').toLowerCase();
-      if (hash === '#about') {
-        window.setActiveNavKey('about');
-      } else if (hash === '#contact') {
-        window.setActiveNavKey('contact');
-      } else {
-        window.setActiveNavKey('home');
-      }
-    }
-  };
-
-  window.scrollToSection = function (elementId) {
-    if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
-    const el = document.getElementById(elementId);
-    if (!el) return;
-    const headerHeight = 74;
-    const pos = el.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-    window.scrollTo({
-      top: pos,
-      behavior: 'smooth'
-    });
-
-    if (elementId === 'about') {
-      window.setActiveNavKey('about');
-    } else if (elementId === 'contact') {
-      window.setActiveNavKey('contact');
-    } else if (elementId === 'hero' || elementId === 'catalogue' || elementId === 'categories') {
-      window.setActiveNavKey('home');
-    }
-  };
-
-  window.filterCategoryAndScroll = function (categoryKey) {
-    if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
-    const targetMap = {
-      aquarium: 'aquarium-fish.html',
-      isopods: 'isopods.html',
-      tarantulas: 'tarantulas.html',
-      combos: 'combo-packs.html'
-    };
-
-    const pageCat = getCurrentPageCategory();
-    if (pageCat === categoryKey) {
-      scrollToSection('catalogue');
-      return;
-    }
-
-    if (targetMap[categoryKey]) {
-      window.location.href = targetMap[categoryKey];
-      return;
-    }
-
-    currentCategory = categoryKey;
-    document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
-      tab.classList.toggle('active', tab.dataset.category === categoryKey);
-    });
-    renderProductGrid();
-    scrollToSection('catalogue');
-  };
-
-  /* ── 11. DOM Initialization ──────────────────────────────── */
-  document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initial cart badge & items render
-    const initialItems = CartManager.load();
-    CartManager.notify(initialItems);
-
-    // 2. Sync category with dedicated page if applicable
-    const initialPageCat = getCurrentPageCategory();
-    if (initialPageCat !== 'all') {
-      currentCategory = initialPageCat;
-    }
-
-    // Render initial product catalogue
-    renderProductGrid();
-
-    // 2b. Automatically apply EXACTLY ONE active class based on current page
-    window.updateActiveNavLink();
-    window.addEventListener('hashchange', () => {
-      window.updateActiveNavLink();
-    });
-
-    // 3. Header scroll effect and index.html section scroll spy
-    const header = document.getElementById('siteHeader');
-    const aboutSection = document.getElementById('about');
-    const contactSection = document.getElementById('contact');
-
-    window.addEventListener('scroll', () => {
-      if (header) {
-        if (window.scrollY > 20) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
+      if (hamburger) {
+        hamburger.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        // Fallback for single-SVG markups
+        const closeIcon = hamburger.querySelector('.icon-close');
+        const burgerIcon = hamburger.querySelector('.icon-hamburger');
+        if (!closeIcon || !burgerIcon) {
+          hamburger.innerHTML = isOpen
+            ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+            : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
         }
       }
 
-      // On index.html only: dynamically update active nav when scrolling into About or Contact
-      if (aboutSection && contactSection) {
-        const scrollPos = window.scrollY + 120;
-        const contactTop = contactSection.offsetTop;
-        const aboutTop = aboutSection.offsetTop;
+      if (backdrop) {
+        backdrop.classList.toggle('active', isOpen);
+      }
+      document.body.classList.toggle('mobile-nav-open', isOpen);
+      return isOpen;
+    };
 
-        if (scrollPos >= contactTop) {
-          window.setActiveNavKey('contact');
-        } else if (scrollPos >= aboutTop) {
+    window.closeMobileMenu = function () {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.getElementById('hamburger');
+      const backdrop = document.getElementById('mobileNavBackdrop');
+      if (!navMenu) return;
+
+      navMenu.classList.remove('active');
+
+      if (hamburger) {
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        const closeIcon = hamburger.querySelector('.icon-close');
+        const burgerIcon = hamburger.querySelector('.icon-hamburger');
+        if (!closeIcon || !burgerIcon) {
+          hamburger.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+        }
+      }
+
+      if (backdrop) {
+        backdrop.classList.remove('active');
+      }
+      document.body.classList.remove('mobile-nav-open');
+    };
+
+    window.initMobileMenu = function () {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      if (!hamburger || !navMenu) return;
+
+      if (hamburger.dataset.menuInitialized === 'true') return;
+      hamburger.dataset.menuInitialized = 'true';
+
+      // Remove inline onclick to guarantee only this single listener handles clicks
+      hamburger.removeAttribute('onclick');
+
+      // Single dedicated click handler for hamburger
+      hamburger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.toggleMobileMenu(e);
+      });
+
+      // Tapping on the backdrop closes the menu
+      const backdrop = document.getElementById('mobileNavBackdrop');
+      if (backdrop) {
+        backdrop.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.closeMobileMenu();
+        });
+      }
+
+      // Tapping any navigation link closes the menu
+      navMenu.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          window.closeMobileMenu();
+        });
+      });
+
+      // Tapping anywhere outside of navMenu and hamburger closes the menu
+      document.addEventListener('click', (e) => {
+        const nm = document.getElementById('navMenu');
+        if (!nm || !nm.classList.contains('active')) return;
+        if (e.target && (e.target.closest('#hamburger') || e.target.closest('#navMenu'))) {
+          return;
+        }
+        window.closeMobileMenu();
+      });
+    };
+
+    /* ── 10. Smooth Scroll & Navigation Helpers ──────────────── */
+    window.setActiveNavKey = function (targetKey) {
+      const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+      if (!navLinks || navLinks.length === 0) return;
+
+      navLinks.forEach(link => {
+        const text = (link.textContent || '').trim().toLowerCase();
+        const href = (link.getAttribute('href') || '').toLowerCase();
+
+        let isMatch = false;
+        if (targetKey === 'home' && text === 'home') {
+          isMatch = true;
+        } else if (targetKey === 'aquarium' && (text.includes('aquarium') || href.includes('aquarium-fish.html'))) {
+          isMatch = true;
+        } else if (targetKey === 'isopods' && (text === 'isopods' || href.includes('isopods.html'))) {
+          isMatch = true;
+        } else if (targetKey === 'tarantulas' && (text === 'tarantulas' || href.includes('tarantulas.html'))) {
+          isMatch = true;
+        } else if (targetKey === 'combos' && (text.includes('combo') || href.includes('combo-packs.html'))) {
+          isMatch = true;
+        } else if (targetKey === 'about' && (text.includes('about') || href.endsWith('#about'))) {
+          isMatch = true;
+        } else if (targetKey === 'contact' && (text.includes('contact') || href.endsWith('#contact'))) {
+          isMatch = true;
+        }
+
+        if (isMatch) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    };
+
+    window.updateActiveNavLink = function () {
+      let rawPath = window.location.pathname.toLowerCase().replace(/\\/g, '/');
+      let page = rawPath.split('/').pop();
+      if (!page || page === '') {
+        page = 'index.html';
+      }
+
+      if (page.includes('aquarium-fish')) {
+        window.setActiveNavKey('aquarium');
+      } else if (page.includes('isopods')) {
+        window.setActiveNavKey('isopods');
+      } else if (page.includes('tarantulas')) {
+        window.setActiveNavKey('tarantulas');
+      } else if (page.includes('combo-packs')) {
+        window.setActiveNavKey('combos');
+      } else {
+        // index.html / root
+        const hash = (window.location.hash || '').toLowerCase();
+        if (hash === '#about') {
           window.setActiveNavKey('about');
+        } else if (hash === '#contact') {
+          window.setActiveNavKey('contact');
         } else {
           window.setActiveNavKey('home');
         }
       }
-    }, { passive: true });
+    };
 
-    // 4. Mobile resize listener to reset overflow
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) {
-        if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
+    window.scrollToSection = function (elementId) {
+      if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const headerHeight = 74;
+      const pos = el.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+      window.scrollTo({
+        top: pos,
+        behavior: 'smooth'
+      });
+
+      if (elementId === 'about') {
+        window.setActiveNavKey('about');
+      } else if (elementId === 'contact') {
+        window.setActiveNavKey('contact');
+      } else if (elementId === 'hero' || elementId === 'catalogue' || elementId === 'categories') {
+        window.setActiveNavKey('home');
       }
-    }, { passive: true });
+    };
 
-    // 4. Mobile hamburger menu setup
-    window.initMobileMenu();
+    window.filterCategoryAndScroll = function (categoryKey) {
+      if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
+      const targetMap = {
+        aquarium: 'aquarium-fish.html',
+        isopods: 'isopods.html',
+        tarantulas: 'tarantulas.html',
+        combos: 'combo-packs.html'
+      };
 
-    // 5. Category tabs click listeners
-    document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const key = tab.dataset.filter || tab.dataset.category;
-        const pageCat = getCurrentPageCategory();
-        if (pageCat === 'aquarium') {
-          filterAquariumCategory(key);
-        } else {
-          filterByCategory(key);
+      const pageCat = getCurrentPageCategory();
+      if (pageCat === categoryKey) {
+        scrollToSection('catalogue');
+        return;
+      }
+
+      if (targetMap[categoryKey]) {
+        window.location.href = targetMap[categoryKey];
+        return;
+      }
+
+      currentCategory = categoryKey;
+      document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.category === categoryKey);
+      });
+      renderProductGrid();
+      scrollToSection('catalogue');
+    };
+
+    /* ── 11. DOM Initialization ──────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initial cart badge & items render
+      const initialItems = CartManager.load();
+      CartManager.notify(initialItems);
+
+      // 2. Sync category with dedicated page if applicable
+      const initialPageCat = getCurrentPageCategory();
+      if (initialPageCat !== 'all') {
+        currentCategory = initialPageCat;
+      }
+
+      // Render initial product catalogue
+      renderProductGrid();
+
+      // 2b. Automatically apply EXACTLY ONE active class based on current page
+      window.updateActiveNavLink();
+      window.addEventListener('hashchange', () => {
+        window.updateActiveNavLink();
+      });
+
+      // 3. Header scroll effect and index.html section scroll spy
+      const header = document.getElementById('siteHeader');
+      const aboutSection = document.getElementById('about');
+      const contactSection = document.getElementById('contact');
+
+      window.addEventListener('scroll', () => {
+        if (header) {
+          if (window.scrollY > 20) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
         }
-      });
-    });
 
-    // 6. Catalogue search input
-    const catalogSearch = document.getElementById('catalogSearch');
-    if (catalogSearch) {
-      let debounceTimer;
-      catalogSearch.addEventListener('input', (e) => {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-          currentSearch = e.target.value;
-          renderProductGrid();
-        }, 180);
-      });
-    }
+        // On index.html only: dynamically update active nav when scrolling into About or Contact
+        if (aboutSection && contactSection) {
+          const scrollPos = window.scrollY + 120;
+          const contactTop = contactSection.offsetTop;
+          const aboutTop = aboutSection.offsetTop;
 
-    // 7. Catalogue sort select
-    const catalogSort = document.getElementById('catalogSort');
-    if (catalogSort) {
-      catalogSort.addEventListener('change', (e) => {
-        currentSort = e.target.value;
-        renderProductGrid();
-      });
-    }
-
-    // 8. Live search overlay input
-    const searchOverlayInput = document.getElementById('searchOverlayInput');
-    if (searchOverlayInput) {
-      searchOverlayInput.addEventListener('input', (e) => {
-        renderSearchOverlayResults(e.target.value);
-      });
-    }
-
-    // 9. Keyboard Esc to close overlays/modals
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        if (typeof window.closeCartDrawer === 'function') window.closeCartDrawer();
-        if (typeof window.closeProductModal === 'function') window.closeProductModal();
-        if (typeof window.closeCheckoutModal === 'function') window.closeCheckoutModal();
-        if (typeof window.closeSearchOverlay === 'function') window.closeSearchOverlay();
-        if (typeof window.closeMobileMenu === 'function') window.closeMobileMenu();
-      }
-    });
-
-    // Auto close mobile menu on resize to desktop
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768 && typeof window.closeMobileMenu === 'function') {
-        window.closeMobileMenu();
-      }
-    });
-
-    // 10. Proceed to Checkout button in cart drawer
-    const checkoutBtn = document.getElementById('cartDrawerCheckoutBtn');
-    if (checkoutBtn) {
-      checkoutBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (CartManager.getCount() === 0) {
-          showToast('Your cart is empty! Add items to continue.', 'error');
-          return;
+          if (scrollPos >= contactTop) {
+            window.setActiveNavKey('contact');
+          } else if (scrollPos >= aboutTop) {
+            window.setActiveNavKey('about');
+          } else {
+            window.setActiveNavKey('home');
+          }
         }
-        window.openCheckoutModal();
-      });
-    }
-  });
+      }, { passive: true });
 
-  // Self-initialize if DOM is already ready
-  if (document.readyState !== 'loading') {
-    if (typeof window.initMobileMenu === 'function') {
+      // 4. Mobile resize listener to reset overflow
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+          if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
+        }
+      }, { passive: true });
+
+      // 4. Mobile hamburger menu setup
       window.initMobileMenu();
-    }
-  }
 
-})();
+      // 5. Category tabs click listeners
+      document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const key = tab.dataset.filter || tab.dataset.category;
+          const pageCat = getCurrentPageCategory();
+          if (pageCat === 'aquarium') {
+            filterAquariumCategory(key);
+          } else {
+            filterByCategory(key);
+          }
+        });
+      });
+
+      // 6. Catalogue search input
+      const catalogSearch = document.getElementById('catalogSearch');
+      if (catalogSearch) {
+        let debounceTimer;
+        catalogSearch.addEventListener('input', (e) => {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => {
+            currentSearch = e.target.value;
+            renderProductGrid();
+          }, 180);
+        });
+      }
+
+      // 7. Catalogue sort select
+      const catalogSort = document.getElementById('catalogSort');
+      if (catalogSort) {
+        catalogSort.addEventListener('change', (e) => {
+          currentSort = e.target.value;
+          renderProductGrid();
+        });
+      }
+
+      // 8. Live search overlay input & backdrop click
+      const searchOverlayInput = document.getElementById('searchOverlayInput');
+      const searchOverlayClear = document.getElementById('searchOverlayClear');
+      if (searchOverlayInput) {
+        searchOverlayInput.addEventListener('input', (e) => {
+          const val = e.target.value;
+          if (searchOverlayClear) {
+            if (val && val.trim().length > 0) {
+              searchOverlayClear.classList.add('visible');
+            } else {
+              searchOverlayClear.classList.remove('visible');
+            }
+          }
+          renderSearchOverlayResults(val);
+        });
+      }
+
+      const searchOverlayEl = document.getElementById('searchOverlay');
+      if (searchOverlayEl) {
+        searchOverlayEl.addEventListener('click', (e) => {
+          if (e.target === searchOverlayEl) {
+            window.closeSearchOverlay();
+          }
+        });
+      }
+
+      // 9. Keyboard Esc to close overlays/modals
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (typeof window.closeCartDrawer === 'function') window.closeCartDrawer();
+          if (typeof window.closeProductModal === 'function') window.closeProductModal();
+          if (typeof window.closeCheckoutModal === 'function') window.closeCheckoutModal();
+          if (typeof window.closeSearchOverlay === 'function') window.closeSearchOverlay();
+          if (typeof window.closeMobileMenu === 'function') window.closeMobileMenu();
+        }
+      });
+
+      // Auto close mobile menu on resize to desktop
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && typeof window.closeMobileMenu === 'function') {
+          window.closeMobileMenu();
+        }
+      });
+
+      // 10. Proceed to Checkout button in cart drawer
+      const checkoutBtn = document.getElementById('cartDrawerCheckoutBtn');
+      if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (CartManager.getCount() === 0) {
+            showToast('Your cart is empty! Add items to continue.', 'error');
+            return;
+          }
+          window.openCheckoutModal();
+        });
+      }
+    });
+
+    // Self-initialize if DOM is already ready
+    if (document.readyState !== 'loading') {
+      if (typeof window.initMobileMenu === 'function') {
+        window.initMobileMenu();
+      }
+    }
+
+  }) ();
