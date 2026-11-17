@@ -90,7 +90,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "Red Lace Guppy",
-      subtitle: "Poecilia reticulata var. Red Lace",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Cobra_Guppy_%28Poecilia_reticulata%29.JPG",
       images: [],
       video: "",
@@ -122,7 +122,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "Gold Dumbo Ear Guppy",
-      subtitle: "Poecilia reticulata var. Gold Dumbo Ear",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Poecilia_retic_090519-8688_kdBdk.jpg",
       images: [],
       video: "",
@@ -153,8 +153,8 @@
       category: "aquarium",
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
-      name: "Santacruz Dumbo Ear Guppy",
-      subtitle: "Poecilia reticulata var. Santacruz Dumbo",
+      name: "",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Poecilia_reticulata_%28male%29.JPG",
       images: [],
       video: "",
@@ -186,7 +186,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "Platinum Dumbo Ear Halfmoon Guppy",
-      subtitle: "Poecilia reticulata var. Platinum Dumbo Halfmoon",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/a/af/Poecilia_reticulata_01.jpg",
       images: [],
       video: "",
@@ -218,7 +218,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "Blue Dragon Dumbo Ear Halfmoon Guppy",
-      subtitle: "Poecilia reticulata var. Blue Dragon Dumbo",
+      subtitle: "",
       image: "https://images.unsplash.com/photo-1520989244660-118e51ae94bc?auto=format&fit=crop&w=600&q=80",
       images: [],
       video: "",
@@ -250,7 +250,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "Moscow Black Dumbo Ear Guppy",
-      subtitle: "Poecilia reticulata var. Moscow Black Dumbo",
+      subtitle: "",
       image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=600&q=80",
       images: [],
       video: "",
@@ -282,7 +282,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "AFR Big Dorsal Guppy",
-      subtitle: "Poecilia reticulata var. Albino Full Red Big Dorsal",
+      subtitle: "",
       image: "https://images.unsplash.com/photo-1548262323-694280fdc967?auto=format&fit=crop&w=600&q=80",
       images: [],
       video: "",
@@ -314,7 +314,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "Dark Knight Dragon Dumbo Ear Guppy",
-      subtitle: "Poecilia reticulata var. Dark Knight Dragon",
+      subtitle: "",
       image: "https://images.unsplash.com/photo-1553986187-9cb16fa33483?auto=format&fit=crop&w=600&q=80",
       images: [],
       video: "",
@@ -346,7 +346,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "Red Platinum Koi Dumbo Ear Guppy",
-      subtitle: "Poecilia reticulata var. Red Platinum Koi Dumbo",
+      subtitle: "",
       image: "https://images.unsplash.com/photo-1500909001949-1fc0780d81c9?auto=format&fit=crop&w=600&q=80",
       images: [],
       video: "",
@@ -378,7 +378,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "Magenta Red Tiger Guppy",
-      subtitle: "Poecilia reticulata var. Magenta Red Tiger",
+      subtitle: "",
       image: "https://images.unsplash.com/photo-1538719501547-bc023056a8b6?auto=format&fit=crop&w=600&q=80",
       images: [],
       video: "",
@@ -410,7 +410,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "White Tuxido Guppy",
-      subtitle: "Poecilia reticulata var. White Tuxedo",
+      subtitle: "",
       image: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=600&q=80",
       images: [],
       video: "",
@@ -442,7 +442,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "Silverado Red Dragon Guppy",
-      subtitle: "Poecilia reticulata var. Silverado Red Dragon",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Guppy_-_Poecilia_reticulata.jpg",
       images: [],
       video: "",
@@ -474,7 +474,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
       name: "Green Moscow Guppy",
-      subtitle: "Poecilia reticulata var. Green Moscow",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Poecilia_reticulata_-_Guppy%2C_male%2C_cobra-green_morph.jpg",
       images: [],
       video: "",
@@ -506,7 +506,7 @@
       categoryName: "Aquarium & Fish",
       subCategory: "betta",
       name: "Show Grade Betta Fish",
-      subtitle: "Betta splendens (Halfmoon / Plakat)",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Betta-splendens-male.jpg",
       images: [],
       video: "",
@@ -538,7 +538,7 @@
       categoryName: "Molly Fish",
       subCategory: "molly",
       name: "Golden Molly",
-      subtitle: "Poecilia sphenops var. Golden",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Gold_Molly_1.jpg",
       images: [],
       video: "",
@@ -570,7 +570,7 @@
       categoryName: "Shrimps",
       subCategory: "shrimps",
       name: "Crystal Red Shrimp",
-      subtitle: "Caridina cf. cantonensis var. Crystal Red",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/4/47/Caridina-cf-cantonensis-crystal-red.jpg",
       images: [],
       video: "",
@@ -602,7 +602,7 @@
       categoryName: "Isopods",
       subCategory: "isopods",
       name: "Armadillidium Gestroi",
-      subtitle: "Armadillidium gestroi",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/9/95/Armadillidium_vulgare.jpg",
       images: [],
       video: "",
@@ -638,7 +638,7 @@
       categoryName: "Isopods",
       subCategory: "isopods",
       name: "Cubaris Murina Orange",
-      subtitle: "Cubaris murina \"Orange\"",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Cubaris_murinaflorida.jpg",
       images: [],
       video: "",
@@ -674,7 +674,7 @@
       categoryName: "Isopods",
       subCategory: "isopods",
       name: "Cubaris Murina Glacier",
-      subtitle: "Cubaris murina \"Glacier\"",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/8/87/Cubaris_murinafloridatop.jpg",
       images: [],
       video: "",
@@ -710,7 +710,7 @@
       categoryName: "Isopods",
       subCategory: "isopods",
       name: "Porcellionides pruinosus Orange Pied",
-      subtitle: "Porcellionides pruinosus \"Orange Pied\"",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Porcellionides_pruinosus_P1380341a.jpg",
       images: [],
       video: "",
@@ -746,7 +746,7 @@
       categoryName: "Isopods",
       subCategory: "isopods",
       name: "Cubaris sp. Cappuccino",
-      subtitle: "Cubaris sp. \"Cappuccino\"",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/1/18/Cubaris_nigroflava_172816253.jpg",
       images: [],
       video: "",
@@ -782,7 +782,7 @@
       categoryName: "Isopods",
       subCategory: "isopods",
       name: "Cubaris sp. Cherry Blossom",
-      subtitle: "Cubaris sp. \"Cherry Blossom\"",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_marmorata_171397510.jpg",
       images: [],
       video: "",
@@ -818,7 +818,7 @@
       categoryName: "Isopods",
       subCategory: "isopods",
       name: "Armadillidium Peraccae",
-      subtitle: "Armadillidium peraccae",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Armadillidium_vulgare_001.jpg",
       images: [],
       video: "",
@@ -854,7 +854,7 @@
       categoryName: "Tarantulas",
       subCategory: "tarantulas",
       name: "Chilean Rose Hair",
-      subtitle: "Grammostola rosea",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/2/22/Grammostola_rosea_adult_weiblich.jpg",
       images: [],
       video: "",
@@ -886,7 +886,7 @@
       categoryName: "Tarantulas",
       subCategory: "tarantulas",
       name: "Brazilian Whiteknee",
-      subtitle: "Acanthoscurria geniculata",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Acanthoscurria_geniculata%2C_female.jpg",
       images: [],
       video: "",
@@ -918,7 +918,7 @@
       categoryName: "Tarantulas",
       subCategory: "tarantulas",
       name: "Mexican Red Knee",
-      subtitle: "Brachypelma hamorii",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Brachypelma_edit.jpg",
       images: [],
       video: "",
@@ -950,7 +950,7 @@
       categoryName: "Tarantulas",
       subCategory: "tarantulas",
       name: "Green Bottle Blue (GBB)",
-      subtitle: "Chromatopelma cyaneopubescens",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Chromatopelma_cyaneopubescens.jpg",
       images: [],
       video: "",
@@ -982,7 +982,7 @@
       categoryName: "Tarantulas",
       subCategory: "tarantulas",
       name: "Chaco Golden Knee",
-      subtitle: "Grammostola pulchripes",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/6/64/Grammostola_pulchripes_top_view.jpg",
       images: [],
       video: "",
@@ -1014,7 +1014,7 @@
       categoryName: "Tarantulas",
       subCategory: "tarantulas",
       name: "Salmon Pink",
-      subtitle: "Lasiodora parahybana",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Brazilian_Salmon_Pink_Birdeater.jpg",
       images: [],
       video: "",
@@ -1046,7 +1046,7 @@
       categoryName: "Combo Packs",
       subCategory: "isopod-kit",
       name: "Isopod House Kit",
-      subtitle: "Complete Bioactive Isopod Habitat",
+      subtitle: "",
       image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=800&q=80",
       images: [],
       video: "",
@@ -1082,7 +1082,7 @@
       categoryName: "Combo Packs",
       subCategory: "aquarium-kit",
       name: "Half Cube Aquarium Kit",
-      subtitle: "Desktop Betta Aquascape Bundle",
+      subtitle: "",
       image: "https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=800&q=80",
       images: [],
       video: "",
@@ -1113,8 +1113,8 @@
       category: "combo",
       categoryName: "Combo Packs",
       subCategory: "isopod-kit",
-      name: "Glacier Isopods (Buy 10, Get 1 Free)",
-      subtitle: "Cubaris murina \"Glacier\" 10+1 Special",
+      name: "Glacier Colony Pack",
+      subtitle: "",
       image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_tarangensis_190481013.jpg",
       images: [],
       video: "",
@@ -2672,9 +2672,9 @@
     const resultsWrap = document.getElementById('searchOverlayResults');
     if (!resultsWrap) return;
 
-      const rawQ = (query || '').trim();
-      if (!rawQ) {
-        resultsWrap.innerHTML = `
+    const rawQ = (query || '').trim();
+    if (!rawQ) {
+      resultsWrap.innerHTML = `
         <div class="search-overlay-empty" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
           <svg class="search-empty-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" style="display:block; margin-left:auto; margin-right:auto; align-self:center; margin-bottom:0.85rem; color:var(--color-leaf);">
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
@@ -2685,38 +2685,38 @@
           </div>
         </div>
       `;
-        return;
-      }
+      return;
+    }
 
-      const q = rawQ.toLowerCase();
-      const queryTokens = q.split(/\s+/).filter(Boolean);
+    const q = rawQ.toLowerCase();
+    const queryTokens = q.split(/\s+/).filter(Boolean);
 
-      const matches = PRODUCTS.filter(p => {
-        initProductVariantsAndSpecs(p);
+    const matches = PRODUCTS.filter(p => {
+      initProductVariantsAndSpecs(p);
 
-        const name = (p.name || '').toLowerCase();
-        const cat = (p.category || '').toLowerCase();
-        const catName = (p.categoryName || p.categoryLabel || '').toLowerCase();
-        const subCat = (p.subCategory || '').toLowerCase();
-        const subtitle = (p.subtitle || '').toLowerCase();
-        const sciName = (p.scientificName || (p.specs && p.specs['Scientific Name']) || '').toLowerCase();
-        const desc = (p.description || '').toLowerCase();
-        const id = (p.id || '').toLowerCase();
+      const name = (p.name || '').toLowerCase();
+      const cat = (p.category || '').toLowerCase();
+      const catName = (p.categoryName || p.categoryLabel || '').toLowerCase();
+      const subCat = (p.subCategory || '').toLowerCase();
+      const subtitle = (p.subtitle || '').toLowerCase();
+      const sciName = (p.scientificName || (p.specs && p.specs['Scientific Name']) || '').toLowerCase();
+      const desc = (p.description || '').toLowerCase();
+      const id = (p.id || '').toLowerCase();
 
-        // Combined searchable text corpus
-        const corpus = `${name} ${cat} ${catName} ${subCat} ${subtitle} ${sciName} ${desc} ${id}`;
+      // Combined searchable text corpus
+      const corpus = `${name} ${cat} ${catName} ${subCat} ${subtitle} ${sciName} ${desc} ${id}`;
 
-        // Every word in query should match (supporting plural/singular variations)
-        return queryTokens.every(token => {
-          if (corpus.includes(token)) return true;
-          if (token.endsWith('s') && token.length > 3 && corpus.includes(token.slice(0, -1))) return true;
-          if (!token.endsWith('s') && corpus.includes(token + 's')) return true;
-          return false;
-        });
+      // Every word in query should match (supporting plural/singular variations)
+      return queryTokens.every(token => {
+        if (corpus.includes(token)) return true;
+        if (token.endsWith('s') && token.length > 3 && corpus.includes(token.slice(0, -1))) return true;
+        if (!token.endsWith('s') && corpus.includes(token + 's')) return true;
+        return false;
       });
+    });
 
-      if (matches.length === 0) {
-        resultsWrap.innerHTML = `
+    if (matches.length === 0) {
+      resultsWrap.innerHTML = `
         <div class="search-overlay-no-results" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
           <div class="search-empty-icon" style="font-size:2rem; margin-bottom:0.5rem; display:block; margin-left:auto; margin-right:auto; align-self:center; text-align:center;">🔍</div>
           <div class="search-empty-title" style="font-weight:700; font-size:1.05rem; color:var(--color-primary-dark); margin-bottom:0.35rem; text-align:center;">
@@ -2727,18 +2727,18 @@
           </div>
         </div>
       `;
-        return;
-      }
+      return;
+    }
 
-      resultsWrap.innerHTML = matches.map(p => {
-        const activeVariant = getProductSelectedVariant(p);
-        const displayPrice = CartManager.formatPrice(activeVariant.price || p.price || 0);
-        const unitLabel = activeVariant.unit ? ('/ ' + activeVariant.unit) : (p.pricingUnit ? ('/ ' + p.pricingUnit) : '');
-        const thumbImg = p.image || PLACEHOLDER_IMG;
-        const categoryMeta = p.categoryName || p.categoryLabel || 'Livestock';
-        const subMeta = p.subCategory ? ` • ${p.subCategory.toUpperCase()}` : '';
+    resultsWrap.innerHTML = matches.map(p => {
+      const activeVariant = getProductSelectedVariant(p);
+      const displayPrice = CartManager.formatPrice(activeVariant.price || p.price || 0);
+      const unitLabel = activeVariant.unit ? ('/ ' + activeVariant.unit) : (p.pricingUnit ? ('/ ' + p.pricingUnit) : '');
+      const thumbImg = p.image || PLACEHOLDER_IMG;
+      const categoryMeta = p.categoryName || p.categoryLabel || 'Livestock';
+      const subMeta = p.subCategory ? ` • ${p.subCategory.toUpperCase()}` : '';
 
-        return `
+      return `
         <div class="search-result-row" onclick="closeSearchOverlay(); openProductModal('${p.id}')" role="button" tabindex="0" title="View details for ${escapeSearchHTML(p.name)}">
           <div class="search-result-left">
             <img src="${thumbImg}" alt="${escapeSearchHTML(p.name)}" class="search-result-thumb" loading="lazy" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
@@ -2753,382 +2753,382 @@
           </div>
         </div>
       `;
-      }).join('');
+    }).join('');
+  }
+
+  window.renderSearchOverlayResults = renderSearchOverlayResults;
+
+
+  /* ── Mobile Menu Handlers ────────────────────────────────── */
+  window.toggleMobileMenu = function (e) {
+    if (e && typeof e.stopPropagation === 'function') {
+      e.stopPropagation();
+    }
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.getElementById('hamburger');
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    if (!navMenu) return;
+
+    const isOpen = navMenu.classList.toggle('active');
+
+    if (hamburger) {
+      hamburger.classList.toggle('active', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      // Fallback for single-SVG markups
+      const closeIcon = hamburger.querySelector('.icon-close');
+      const burgerIcon = hamburger.querySelector('.icon-hamburger');
+      if (!closeIcon || !burgerIcon) {
+        hamburger.innerHTML = isOpen
+          ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+          : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      }
     }
 
-    window.renderSearchOverlayResults = renderSearchOverlayResults;
+    if (backdrop) {
+      backdrop.classList.toggle('active', isOpen);
+    }
+    document.body.classList.toggle('mobile-nav-open', isOpen);
+    return isOpen;
+  };
 
+  window.closeMobileMenu = function () {
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.getElementById('hamburger');
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    if (!navMenu) return;
 
-    /* ── Mobile Menu Handlers ────────────────────────────────── */
-    window.toggleMobileMenu = function (e) {
-      if (e && typeof e.stopPropagation === 'function') {
-        e.stopPropagation();
+    navMenu.classList.remove('active');
+
+    if (hamburger) {
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      const closeIcon = hamburger.querySelector('.icon-close');
+      const burgerIcon = hamburger.querySelector('.icon-hamburger');
+      if (!closeIcon || !burgerIcon) {
+        hamburger.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
       }
-      const navMenu = document.getElementById('navMenu');
-      const hamburger = document.getElementById('hamburger');
-      const backdrop = document.getElementById('mobileNavBackdrop');
-      if (!navMenu) return;
+    }
 
-      const isOpen = navMenu.classList.toggle('active');
+    if (backdrop) {
+      backdrop.classList.remove('active');
+    }
+    document.body.classList.remove('mobile-nav-open');
+  };
 
-      if (hamburger) {
-        hamburger.classList.toggle('active', isOpen);
-        hamburger.setAttribute('aria-expanded', String(isOpen));
-        // Fallback for single-SVG markups
-        const closeIcon = hamburger.querySelector('.icon-close');
-        const burgerIcon = hamburger.querySelector('.icon-hamburger');
-        if (!closeIcon || !burgerIcon) {
-          hamburger.innerHTML = isOpen
-            ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
-            : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
-        }
-      }
+  window.initMobileMenu = function () {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    if (!hamburger || !navMenu) return;
 
-      if (backdrop) {
-        backdrop.classList.toggle('active', isOpen);
-      }
-      document.body.classList.toggle('mobile-nav-open', isOpen);
-      return isOpen;
-    };
+    if (hamburger.dataset.menuInitialized === 'true') return;
+    hamburger.dataset.menuInitialized = 'true';
 
-    window.closeMobileMenu = function () {
-      const navMenu = document.getElementById('navMenu');
-      const hamburger = document.getElementById('hamburger');
-      const backdrop = document.getElementById('mobileNavBackdrop');
-      if (!navMenu) return;
+    // Remove inline onclick to guarantee only this single listener handles clicks
+    hamburger.removeAttribute('onclick');
 
-      navMenu.classList.remove('active');
+    // Single dedicated click handler for hamburger
+    hamburger.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.toggleMobileMenu(e);
+    });
 
-      if (hamburger) {
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-        const closeIcon = hamburger.querySelector('.icon-close');
-        const burgerIcon = hamburger.querySelector('.icon-hamburger');
-        if (!closeIcon || !burgerIcon) {
-          hamburger.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
-        }
-      }
-
-      if (backdrop) {
-        backdrop.classList.remove('active');
-      }
-      document.body.classList.remove('mobile-nav-open');
-    };
-
-    window.initMobileMenu = function () {
-      const hamburger = document.getElementById('hamburger');
-      const navMenu = document.getElementById('navMenu');
-      if (!hamburger || !navMenu) return;
-
-      if (hamburger.dataset.menuInitialized === 'true') return;
-      hamburger.dataset.menuInitialized = 'true';
-
-      // Remove inline onclick to guarantee only this single listener handles clicks
-      hamburger.removeAttribute('onclick');
-
-      // Single dedicated click handler for hamburger
-      hamburger.addEventListener('click', (e) => {
+    // Tapping on the backdrop closes the menu
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    if (backdrop) {
+      backdrop.addEventListener('click', (e) => {
         e.preventDefault();
-        e.stopPropagation();
-        window.toggleMobileMenu(e);
-      });
-
-      // Tapping on the backdrop closes the menu
-      const backdrop = document.getElementById('mobileNavBackdrop');
-      if (backdrop) {
-        backdrop.addEventListener('click', (e) => {
-          e.preventDefault();
-          window.closeMobileMenu();
-        });
-      }
-
-      // Tapping any navigation link closes the menu
-      navMenu.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          window.closeMobileMenu();
-        });
-      });
-
-      // Tapping anywhere outside of navMenu and hamburger closes the menu
-      document.addEventListener('click', (e) => {
-        const nm = document.getElementById('navMenu');
-        if (!nm || !nm.classList.contains('active')) return;
-        if (e.target && (e.target.closest('#hamburger') || e.target.closest('#navMenu'))) {
-          return;
-        }
         window.closeMobileMenu();
       });
-    };
+    }
 
-    /* ── 10. Smooth Scroll & Navigation Helpers ──────────────── */
-    window.setActiveNavKey = function (targetKey) {
-      const navLinks = document.querySelectorAll('.nav-menu .nav-link');
-      if (!navLinks || navLinks.length === 0) return;
-
-      navLinks.forEach(link => {
-        const text = (link.textContent || '').trim().toLowerCase();
-        const href = (link.getAttribute('href') || '').toLowerCase();
-
-        let isMatch = false;
-        if (targetKey === 'home' && text === 'home') {
-          isMatch = true;
-        } else if (targetKey === 'aquarium' && (text.includes('aquarium') || href.includes('aquarium-fish.html'))) {
-          isMatch = true;
-        } else if (targetKey === 'isopods' && (text === 'isopods' || href.includes('isopods.html'))) {
-          isMatch = true;
-        } else if (targetKey === 'tarantulas' && (text === 'tarantulas' || href.includes('tarantulas.html'))) {
-          isMatch = true;
-        } else if (targetKey === 'combos' && (text.includes('combo') || href.includes('combo-packs.html'))) {
-          isMatch = true;
-        } else if (targetKey === 'about' && (text.includes('about') || href.endsWith('#about'))) {
-          isMatch = true;
-        } else if (targetKey === 'contact' && (text.includes('contact') || href.endsWith('#contact'))) {
-          isMatch = true;
-        }
-
-        if (isMatch) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
+    // Tapping any navigation link closes the menu
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        window.closeMobileMenu();
       });
-    };
+    });
 
-    window.updateActiveNavLink = function () {
-      let rawPath = window.location.pathname.toLowerCase().replace(/\\/g, '/');
-      let page = rawPath.split('/').pop();
-      if (!page || page === '') {
-        page = 'index.html';
+    // Tapping anywhere outside of navMenu and hamburger closes the menu
+    document.addEventListener('click', (e) => {
+      const nm = document.getElementById('navMenu');
+      if (!nm || !nm.classList.contains('active')) return;
+      if (e.target && (e.target.closest('#hamburger') || e.target.closest('#navMenu'))) {
+        return;
+      }
+      window.closeMobileMenu();
+    });
+  };
+
+  /* ── 10. Smooth Scroll & Navigation Helpers ──────────────── */
+  window.setActiveNavKey = function (targetKey) {
+    const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+    if (!navLinks || navLinks.length === 0) return;
+
+    navLinks.forEach(link => {
+      const text = (link.textContent || '').trim().toLowerCase();
+      const href = (link.getAttribute('href') || '').toLowerCase();
+
+      let isMatch = false;
+      if (targetKey === 'home' && text === 'home') {
+        isMatch = true;
+      } else if (targetKey === 'aquarium' && (text.includes('aquarium') || href.includes('aquarium-fish.html'))) {
+        isMatch = true;
+      } else if (targetKey === 'isopods' && (text === 'isopods' || href.includes('isopods.html'))) {
+        isMatch = true;
+      } else if (targetKey === 'tarantulas' && (text === 'tarantulas' || href.includes('tarantulas.html'))) {
+        isMatch = true;
+      } else if (targetKey === 'combos' && (text.includes('combo') || href.includes('combo-packs.html'))) {
+        isMatch = true;
+      } else if (targetKey === 'about' && (text.includes('about') || href.endsWith('#about'))) {
+        isMatch = true;
+      } else if (targetKey === 'contact' && (text.includes('contact') || href.endsWith('#contact'))) {
+        isMatch = true;
       }
 
-      if (page.includes('aquarium-fish')) {
-        window.setActiveNavKey('aquarium');
-      } else if (page.includes('isopods')) {
-        window.setActiveNavKey('isopods');
-      } else if (page.includes('tarantulas')) {
-        window.setActiveNavKey('tarantulas');
-      } else if (page.includes('combo-packs')) {
-        window.setActiveNavKey('combos');
+      if (isMatch) {
+        link.classList.add('active');
       } else {
-        // index.html / root
-        const hash = (window.location.hash || '').toLowerCase();
-        if (hash === '#about') {
-          window.setActiveNavKey('about');
-        } else if (hash === '#contact') {
+        link.classList.remove('active');
+      }
+    });
+  };
+
+  window.updateActiveNavLink = function () {
+    let rawPath = window.location.pathname.toLowerCase().replace(/\\/g, '/');
+    let page = rawPath.split('/').pop();
+    if (!page || page === '') {
+      page = 'index.html';
+    }
+
+    if (page.includes('aquarium-fish')) {
+      window.setActiveNavKey('aquarium');
+    } else if (page.includes('isopods')) {
+      window.setActiveNavKey('isopods');
+    } else if (page.includes('tarantulas')) {
+      window.setActiveNavKey('tarantulas');
+    } else if (page.includes('combo-packs')) {
+      window.setActiveNavKey('combos');
+    } else {
+      // index.html / root
+      const hash = (window.location.hash || '').toLowerCase();
+      if (hash === '#about') {
+        window.setActiveNavKey('about');
+      } else if (hash === '#contact') {
+        window.setActiveNavKey('contact');
+      } else {
+        window.setActiveNavKey('home');
+      }
+    }
+  };
+
+  window.scrollToSection = function (elementId) {
+    if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    const headerHeight = 74;
+    const pos = el.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+    window.scrollTo({
+      top: pos,
+      behavior: 'smooth'
+    });
+
+    if (elementId === 'about') {
+      window.setActiveNavKey('about');
+    } else if (elementId === 'contact') {
+      window.setActiveNavKey('contact');
+    } else if (elementId === 'hero' || elementId === 'catalogue' || elementId === 'categories') {
+      window.setActiveNavKey('home');
+    }
+  };
+
+  window.filterCategoryAndScroll = function (categoryKey) {
+    if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
+    const targetMap = {
+      aquarium: 'aquarium-fish.html',
+      isopods: 'isopods.html',
+      tarantulas: 'tarantulas.html',
+      combos: 'combo-packs.html'
+    };
+
+    const pageCat = getCurrentPageCategory();
+    if (pageCat === categoryKey) {
+      scrollToSection('catalogue');
+      return;
+    }
+
+    if (targetMap[categoryKey]) {
+      window.location.href = targetMap[categoryKey];
+      return;
+    }
+
+    currentCategory = categoryKey;
+    document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.category === categoryKey);
+    });
+    renderProductGrid();
+    scrollToSection('catalogue');
+  };
+
+  /* ── 11. DOM Initialization ──────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initial cart badge & items render
+    const initialItems = CartManager.load();
+    CartManager.notify(initialItems);
+
+    // 2. Sync category with dedicated page if applicable
+    const initialPageCat = getCurrentPageCategory();
+    if (initialPageCat !== 'all') {
+      currentCategory = initialPageCat;
+    }
+
+    // Render initial product catalogue
+    renderProductGrid();
+
+    // 2b. Automatically apply EXACTLY ONE active class based on current page
+    window.updateActiveNavLink();
+    window.addEventListener('hashchange', () => {
+      window.updateActiveNavLink();
+    });
+
+    // 3. Header scroll effect and index.html section scroll spy
+    const header = document.getElementById('siteHeader');
+    const aboutSection = document.getElementById('about');
+    const contactSection = document.getElementById('contact');
+
+    window.addEventListener('scroll', () => {
+      if (header) {
+        if (window.scrollY > 20) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }
+
+      // On index.html only: dynamically update active nav when scrolling into About or Contact
+      if (aboutSection && contactSection) {
+        const scrollPos = window.scrollY + 120;
+        const contactTop = contactSection.offsetTop;
+        const aboutTop = aboutSection.offsetTop;
+
+        if (scrollPos >= contactTop) {
           window.setActiveNavKey('contact');
+        } else if (scrollPos >= aboutTop) {
+          window.setActiveNavKey('about');
         } else {
           window.setActiveNavKey('home');
         }
       }
-    };
+    }, { passive: true });
 
-    window.scrollToSection = function (elementId) {
-      if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
-      const el = document.getElementById(elementId);
-      if (!el) return;
-      const headerHeight = 74;
-      const pos = el.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-      window.scrollTo({
-        top: pos,
-        behavior: 'smooth'
-      });
-
-      if (elementId === 'about') {
-        window.setActiveNavKey('about');
-      } else if (elementId === 'contact') {
-        window.setActiveNavKey('contact');
-      } else if (elementId === 'hero' || elementId === 'catalogue' || elementId === 'categories') {
-        window.setActiveNavKey('home');
+    // 4. Mobile resize listener to reset overflow
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
       }
-    };
+    }, { passive: true });
 
-    window.filterCategoryAndScroll = function (categoryKey) {
-      if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
-      const targetMap = {
-        aquarium: 'aquarium-fish.html',
-        isopods: 'isopods.html',
-        tarantulas: 'tarantulas.html',
-        combos: 'combo-packs.html'
-      };
+    // 4. Mobile hamburger menu setup
+    window.initMobileMenu();
 
-      const pageCat = getCurrentPageCategory();
-      if (pageCat === categoryKey) {
-        scrollToSection('catalogue');
-        return;
-      }
-
-      if (targetMap[categoryKey]) {
-        window.location.href = targetMap[categoryKey];
-        return;
-      }
-
-      currentCategory = categoryKey;
-      document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.category === categoryKey);
-      });
-      renderProductGrid();
-      scrollToSection('catalogue');
-    };
-
-    /* ── 11. DOM Initialization ──────────────────────────────── */
-    document.addEventListener('DOMContentLoaded', () => {
-      // 1. Initial cart badge & items render
-      const initialItems = CartManager.load();
-      CartManager.notify(initialItems);
-
-      // 2. Sync category with dedicated page if applicable
-      const initialPageCat = getCurrentPageCategory();
-      if (initialPageCat !== 'all') {
-        currentCategory = initialPageCat;
-      }
-
-      // Render initial product catalogue
-      renderProductGrid();
-
-      // 2b. Automatically apply EXACTLY ONE active class based on current page
-      window.updateActiveNavLink();
-      window.addEventListener('hashchange', () => {
-        window.updateActiveNavLink();
-      });
-
-      // 3. Header scroll effect and index.html section scroll spy
-      const header = document.getElementById('siteHeader');
-      const aboutSection = document.getElementById('about');
-      const contactSection = document.getElementById('contact');
-
-      window.addEventListener('scroll', () => {
-        if (header) {
-          if (window.scrollY > 20) {
-            header.classList.add('scrolled');
-          } else {
-            header.classList.remove('scrolled');
-          }
+    // 5. Category tabs click listeners
+    document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.filter || tab.dataset.category;
+        const pageCat = getCurrentPageCategory();
+        if (pageCat === 'aquarium') {
+          filterAquariumCategory(key);
+        } else {
+          filterByCategory(key);
         }
-
-        // On index.html only: dynamically update active nav when scrolling into About or Contact
-        if (aboutSection && contactSection) {
-          const scrollPos = window.scrollY + 120;
-          const contactTop = contactSection.offsetTop;
-          const aboutTop = aboutSection.offsetTop;
-
-          if (scrollPos >= contactTop) {
-            window.setActiveNavKey('contact');
-          } else if (scrollPos >= aboutTop) {
-            window.setActiveNavKey('about');
-          } else {
-            window.setActiveNavKey('home');
-          }
-        }
-      }, { passive: true });
-
-      // 4. Mobile resize listener to reset overflow
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-          if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
-        }
-      }, { passive: true });
-
-      // 4. Mobile hamburger menu setup
-      window.initMobileMenu();
-
-      // 5. Category tabs click listeners
-      document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
-        tab.addEventListener('click', () => {
-          const key = tab.dataset.filter || tab.dataset.category;
-          const pageCat = getCurrentPageCategory();
-          if (pageCat === 'aquarium') {
-            filterAquariumCategory(key);
-          } else {
-            filterByCategory(key);
-          }
-        });
       });
+    });
 
-      // 6. Catalogue search input
-      const catalogSearch = document.getElementById('catalogSearch');
-      if (catalogSearch) {
-        let debounceTimer;
-        catalogSearch.addEventListener('input', (e) => {
-          clearTimeout(debounceTimer);
-          debounceTimer = setTimeout(() => {
-            currentSearch = e.target.value;
-            renderProductGrid();
-          }, 180);
-        });
-      }
-
-      // 7. Catalogue sort select
-      const catalogSort = document.getElementById('catalogSort');
-      if (catalogSort) {
-        catalogSort.addEventListener('change', (e) => {
-          currentSort = e.target.value;
+    // 6. Catalogue search input
+    const catalogSearch = document.getElementById('catalogSearch');
+    if (catalogSearch) {
+      let debounceTimer;
+      catalogSearch.addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          currentSearch = e.target.value;
           renderProductGrid();
-        });
-      }
+        }, 180);
+      });
+    }
 
-      // 8. Live search overlay input & backdrop click
-      const searchOverlayInput = document.getElementById('searchOverlayInput');
-      const searchOverlayClear = document.getElementById('searchOverlayClear');
-      if (searchOverlayInput) {
-        searchOverlayInput.addEventListener('input', (e) => {
-          const val = e.target.value;
-          if (searchOverlayClear) {
-            if (val && val.trim().length > 0) {
-              searchOverlayClear.classList.add('visible');
-            } else {
-              searchOverlayClear.classList.remove('visible');
-            }
+    // 7. Catalogue sort select
+    const catalogSort = document.getElementById('catalogSort');
+    if (catalogSort) {
+      catalogSort.addEventListener('change', (e) => {
+        currentSort = e.target.value;
+        renderProductGrid();
+      });
+    }
+
+    // 8. Live search overlay input & backdrop click
+    const searchOverlayInput = document.getElementById('searchOverlayInput');
+    const searchOverlayClear = document.getElementById('searchOverlayClear');
+    if (searchOverlayInput) {
+      searchOverlayInput.addEventListener('input', (e) => {
+        const val = e.target.value;
+        if (searchOverlayClear) {
+          if (val && val.trim().length > 0) {
+            searchOverlayClear.classList.add('visible');
+          } else {
+            searchOverlayClear.classList.remove('visible');
           }
-          renderSearchOverlayResults(val);
-        });
-      }
+        }
+        renderSearchOverlayResults(val);
+      });
+    }
 
-      const searchOverlayEl = document.getElementById('searchOverlay');
-      if (searchOverlayEl) {
-        searchOverlayEl.addEventListener('click', (e) => {
-          if (e.target === searchOverlayEl) {
-            window.closeSearchOverlay();
-          }
-        });
-      }
-
-      // 9. Keyboard Esc to close overlays/modals
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          if (typeof window.closeCartDrawer === 'function') window.closeCartDrawer();
-          if (typeof window.closeProductModal === 'function') window.closeProductModal();
-          if (typeof window.closeCheckoutModal === 'function') window.closeCheckoutModal();
-          if (typeof window.closeSearchOverlay === 'function') window.closeSearchOverlay();
-          if (typeof window.closeMobileMenu === 'function') window.closeMobileMenu();
+    const searchOverlayEl = document.getElementById('searchOverlay');
+    if (searchOverlayEl) {
+      searchOverlayEl.addEventListener('click', (e) => {
+        if (e.target === searchOverlayEl) {
+          window.closeSearchOverlay();
         }
       });
+    }
 
-      // Auto close mobile menu on resize to desktop
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && typeof window.closeMobileMenu === 'function') {
-          window.closeMobileMenu();
-        }
-      });
-
-      // 10. Proceed to Checkout button in cart drawer
-      const checkoutBtn = document.getElementById('cartDrawerCheckoutBtn');
-      if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (CartManager.getCount() === 0) {
-            showToast('Your cart is empty! Add items to continue.', 'error');
-            return;
-          }
-          window.openCheckoutModal();
-        });
+    // 9. Keyboard Esc to close overlays/modals
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (typeof window.closeCartDrawer === 'function') window.closeCartDrawer();
+        if (typeof window.closeProductModal === 'function') window.closeProductModal();
+        if (typeof window.closeCheckoutModal === 'function') window.closeCheckoutModal();
+        if (typeof window.closeSearchOverlay === 'function') window.closeSearchOverlay();
+        if (typeof window.closeMobileMenu === 'function') window.closeMobileMenu();
       }
     });
 
-    // Self-initialize if DOM is already ready
-    if (document.readyState !== 'loading') {
-      if (typeof window.initMobileMenu === 'function') {
-        window.initMobileMenu();
+    // Auto close mobile menu on resize to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && typeof window.closeMobileMenu === 'function') {
+        window.closeMobileMenu();
       }
-    }
+    });
 
-  }) ();
+    // 10. Proceed to Checkout button in cart drawer
+    const checkoutBtn = document.getElementById('cartDrawerCheckoutBtn');
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (CartManager.getCount() === 0) {
+          showToast('Your cart is empty! Add items to continue.', 'error');
+          return;
+        }
+        window.openCheckoutModal();
+      });
+    }
+  });
+
+  // Self-initialize if DOM is already ready
+  if (document.readyState !== 'loading') {
+    if (typeof window.initMobileMenu === 'function') {
+      window.initMobileMenu();
+    }
+  }
+
+})();

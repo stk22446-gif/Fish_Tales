@@ -56,18 +56,18 @@ expectedCategories.forEach(cat => {
   }
 });
 
-// 3. Verify that Promo cards remain intact
-console.log('\n3. Verifying Promo cards integrity...');
-const expectedPromoPills = [
+// 3. Verify that Promo cards remain intact without unwanted badges
+console.log('\n3. Verifying Promo cards integrity without unwanted badges...');
+const prohibitedPromoPills = [
   'Desktop Kit',
   'Buy 10, Get 1 Free'
 ];
 
-expectedPromoPills.forEach(pill => {
-  if (!indexHtml.includes(pill)) {
-    errors.push(`Unrelated promo pill was accidentally removed: ${pill}`);
+prohibitedPromoPills.forEach(pill => {
+  if (indexHtml.includes(pill)) {
+    errors.push(`Prohibited promo pill still present in index.html: "${pill}"`);
   } else {
-    console.log(`✓ Unrelated promo pill preserved: "${pill}"`);
+    console.log(`✓ Prohibited promo pill successfully removed: "${pill}"`);
   }
 });
 

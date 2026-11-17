@@ -67,7 +67,7 @@ Captive-bred spiderlings with documented sizes:
 ### 4. Combo Packs (3 Confirmed Bundles)
 - **Isopod House Kit — ₹1,545**: Glass Isopod House (5" L × 5" D × 5" H + 2.5" roof), live plants (*Fittonia albivenis*, *Hemigraphis sp. Pink*, Sheet Moss), bioactive substrate blend, lotus pod hide, premium food, and 6 *Cubaris sp. "Glacier"* isopods.
 - **Half Cube Aquarium Kit — ₹999**: High-clarity desktop rimless glass aquarium kit.
-- **Glacier Isopods (Buy 10, Get 1 Free) — ₹700**: 11 *Cubaris murina "Glacier"* specimens total.
+- **Glacier Colony Pack — ₹700**: 11 *Cubaris murina "Glacier"* specimens total.
 
 ---
 
