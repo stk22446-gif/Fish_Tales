@@ -12,8 +12,8 @@ const PRODUCTS = eval(productsMatch[1]);
 console.log(`1. Total master products: ${PRODUCTS.length}`);
 assert.strictEqual(PRODUCTS.length, 32, 'Must have exactly 32 products');
 
-// 2. Validate exact 13 keys in exact order for all 32 products
-console.log('\n2. Verifying 13 standardized keys in exact order:');
+// 2. Validate exact 19 keys in exact order for all 32 products (variants removed)
+console.log('\n2. Verifying 19 standardized keys in exact order:');
 const requiredKeys = [
   'id',
   'category',
@@ -25,8 +25,14 @@ const requiredKeys = [
   'images',
   'video',
   'description',
+  'price',
+  'unit',
+  'minQuantity',
   'specs',
-  'variants',
+  'overview',
+  'careRequirements',
+  'habitatSetup',
+  'didYouKnow',
   'featured'
 ];
 
@@ -37,8 +43,8 @@ PRODUCTS.forEach((p, idx) => {
   seenIds.add(p.id);
 
   const keys = Object.keys(p);
-  assert.strictEqual(keys.length, 13, `Product ${p.id} must have exactly 13 keys`);
-  for (let i = 0; i < 13; i++) {
+  assert.strictEqual(keys.length, 19, `Product ${p.id} must have exactly 19 keys`);
+  for (let i = 0; i < 19; i++) {
     assert.strictEqual(
       keys[i],
       requiredKeys[i],
@@ -58,17 +64,12 @@ PRODUCTS.forEach((p, idx) => {
   assert(typeof p.video === 'string');
   assert(typeof p.description === 'string' && p.description.length > 0);
   assert(typeof p.specs === 'object' && p.specs !== null);
-  assert(Array.isArray(p.variants) && p.variants.length > 0);
+  assert(typeof p.price === 'number' && p.price > 0);
+  assert(typeof p.unit === 'string' && p.unit.length > 0);
+  assert(typeof p.minQuantity === 'number' && p.minQuantity >= 1);
   assert(typeof p.featured === 'boolean');
-
-  // Variants check
-  p.variants.forEach((v, vIdx) => {
-    assert(typeof v.name === 'string' && v.name.length > 0);
-    assert(typeof v.price === 'number' && v.price > 0);
-    assert(typeof v.label === 'string' && v.label.length > 0);
-  });
 });
-console.log('  ✓ Every single product contains all 13 fields in exact specified order');
+console.log('  ✓ Every single product contains all 19 fields in exact specified order');
 console.log('  ✓ Zero duplicate IDs found (32 unique products)');
 
 // 3. Category & SubCategory validation

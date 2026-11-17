@@ -43,16 +43,105 @@
     return 'PRICE:';
   }
 
+  function isIsopodProduct(productOrItem) {
+    if (!productOrItem) return false;
+    const cat = String(productOrItem.category || '').toLowerCase();
+    const subCat = String(productOrItem.subCategory || '').toLowerCase();
+    const catLabel = String(productOrItem.categoryLabel || productOrItem.categoryName || '').toLowerCase();
+    const id = String(productOrItem.id || productOrItem.baseId || '').toLowerCase();
+
+    // Check if category identifier is explicitly 'isopods'
+    if (cat === 'isopods' || subCat === 'isopods' || catLabel === 'isopods') {
+      return true;
+    }
+
+    // Match against master PRODUCTS catalogue by ID
+    const master = PRODUCTS.find(p => String(p.id) === id || String(p.id) === String(productOrItem.baseId));
+    if (master && (master.category === 'isopods' || master.subCategory === 'isopods')) {
+      return true;
+    }
+
+    return false;
+  }
+
+  function getProductQuantityLabel(product) {
+    if (!product) return 'Select Quantity';
+    const subCat = (product.subCategory || '').toLowerCase();
+    const id = (product.id || '').toLowerCase();
+    const name = (product.name || '').toLowerCase();
+    const pricingUnit = (product.unit || product.pricingUnit || '').toLowerCase();
+
+    // Fish types using pairs: Guppy / Molly / Betta (or any product priced/sold per pair)
+    if (subCat === 'guppy' || subCat === 'molly' || subCat === 'betta' ||
+      id.includes('guppy') || id.includes('molly') || id.includes('betta') ||
+      name.includes('guppy') || name.includes('molly') || name.includes('betta') ||
+      pricingUnit.includes('pair')) {
+      return 'Select Pair';
+    }
+    // All other products: Shrimps, Isopods, Tarantulas, Aquariums and Combo Kits
+    return 'Select Quantity';
+  }
+
   function initProductVariantsAndSpecs(p) {
     if (!p) return;
     // Backward-compatibility aliases for legacy templates and test suites
     if (!p.categoryLabel) p.categoryLabel = p.categoryName || '';
-    if (!p.scientificName) p.scientificName = p.subtitle || '';
-    if (p.price === undefined && p.variants && p.variants.length > 0) {
-      p.price = p.variants[0].price;
+
+    const SPECIES_SCIENTIFIC_NAMES = {
+      'guppy-red-lace': 'Poecilia reticulata',
+      'guppy-gold-dumbo-ear': 'Poecilia reticulata',
+      'guppy-santacruz-dumbo-ear': 'Poecilia reticulata',
+      'guppy-platinum-dumbo-halfmoon': 'Poecilia reticulata',
+      'guppy-blue-dragon-dumbo-halfmoon': 'Poecilia reticulata',
+      'guppy-moscow-black-dumbo': 'Poecilia reticulata',
+      'guppy-afr-big-dorsal': 'Poecilia reticulata',
+      'guppy-dark-knight-dragon-dumbo': 'Poecilia reticulata',
+      'guppy-red-platinum-koi-dumbo': 'Poecilia reticulata',
+      'guppy-magenta-red-tiger': 'Poecilia reticulata',
+      'guppy-white-tuxido': 'Poecilia reticulata',
+      'guppy-silverado-red-dragon': 'Poecilia reticulata',
+      'guppy-green-moscow': 'Poecilia reticulata',
+      'show-grade-betta': 'Betta splendens',
+      'molly-golden': 'Poecilia sphenops var. Golden',
+      'shrimp-crystal-red': 'Caridina cf. cantonensis var. Crystal Red',
+      'armadillidium-gestroi': 'Armadillidium gestroi',
+      'cubaris-murina-orange': 'Cubaris murina var. Orange',
+      'cubaris-murina-glacier': 'Cubaris murina var. Glacier',
+      'porcellionides-pruinosus-orange-pied': 'Porcellionides pruinosus var. Orange Pied',
+      'cubaris-sp-cappuccino': 'Cubaris sp. Cappuccino',
+      'cubaris-sp-cherry-blossom': 'Cubaris sp. Cherry Blossom',
+      'armadillidium-peraccae': 'Armadillidium peraccae',
+      'chilean-rose-hair': 'Grammostola rosea',
+      'brazilian-whiteknee': 'Acanthoscurria geniculata',
+      'mexican-red-knee': 'Brachypelma hamorii',
+      'green-bottle-blue': 'Chromatopelma cyaneopubescens',
+      'chaco-golden-knee': 'Grammostola pulchripes',
+      'salmon-pink': 'Lasiodora parahybana',
+      'isopod-house-kit': 'Bioactive Glass Vivarium Kit',
+      'half-cube-aquarium-kit': 'Nano Desktop Aquascape System',
+      'glacier-colony-pack': 'Cubaris murina var. Glacier'
+    };
+
+    if (!p.scientificName || p.scientificName === '') {
+      p.scientificName = SPECIES_SCIENTIFIC_NAMES[p.id] || p.subtitle || '';
     }
-    if (!p.pricingUnit && p.variants && p.variants.length > 0) {
-      p.pricingUnit = (p.variants[0].label || 'item').toLowerCase();
+    if (!p.subtitle || p.subtitle === '') {
+      p.subtitle = p.scientificName;
+    }
+
+    if (p.price === undefined || p.price === null) {
+      p.price = 0;
+    } else {
+      p.price = Number(p.price);
+    }
+    if (!p.unit) {
+      p.unit = p.pricingUnit || (isIsopodProduct(p) ? 'piece' : 'pair');
+    }
+    if (!p.pricingUnit) {
+      p.pricingUnit = p.unit;
+    }
+    if (p.minQuantity === undefined || p.minQuantity === null) {
+      p.minQuantity = isIsopodProduct(p) ? 5 : 1;
     }
     if (p.specs && p.specs.size && !p.size) {
       p.size = p.specs.size;
@@ -69,1078 +158,1402 @@
       else if (id.includes('molly') || name.includes('molly')) p.subCategory = 'molly';
       else if (id.includes('shrimp') || name.includes('shrimp')) p.subCategory = 'shrimp';
     }
-    if (p.variants) {
-      p.variants.forEach(v => {
-        if (!v.unit) v.unit = (v.label || 'item').toLowerCase();
-      });
+
+    // Extended product information sections (Overview, Care Requirements, Habitat Setup, Did You Know)
+    const isFish = p.category === 'aquarium';
+    const isIsopod = p.category === 'isopods';
+    const isTarantula = p.category === 'tarantulas';
+    const isCombo = p.category === 'combo';
+    const specs = p.specs || {};
+
+    if (p.overview === undefined) {
+      if (isFish) {
+        if (p.subCategory === 'guppy') {
+          p.overview = `The ${p.name} (${p.subtitle || 'Poecilia reticulata'}) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.`;
+        } else if (p.subCategory === 'betta') {
+          p.overview = `The ${p.name} is a majestic labyrinth fish displaying symmetrical finnage, vibrant iridescence, and intelligent personality. Each specimen is selected for health, vitality, and show-standard conformation.`;
+        } else if (p.subCategory === 'molly') {
+          p.overview = `The ${p.name} (${p.subtitle || 'Poecilia sphenops'}) is an active, gregarious livebearer with radiant golden coloration. Renowned for grazing natural algae and thriving in planted community biotopes.`;
+        } else if (p.subCategory === 'shrimps') {
+          p.overview = `The ${p.name} (${p.subtitle || 'Caridina cf. cantonensis'}) is a premier dwarf freshwater invertebrate exhibiting striking opaque white and vivid red color banding. Exceptional algae grazer for planted aquascapes.`;
+        } else {
+          p.overview = `The ${p.name} is a healthy, active specimen carefully conditioned for planted aquariums and community biotopes.`;
+        }
+      } else if (isIsopod) {
+        p.overview = `${p.name} (${p.subtitle || 'Bioactive Isopod'}) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.`;
+      } else if (isTarantula) {
+        p.overview = `The ${p.name} (${p.subtitle || 'Theraphosidae'}) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.`;
+      } else if (isCombo) {
+        p.overview = `The ${p.name} is an all-inclusive, curated complete biological setup designed by Fish Tales specialists. Includes premium glass enclosure, substrate, live specimens, and balanced essentials.`;
+      } else {
+        p.overview = p.description || '';
+      }
+    }
+
+    if (p.careRequirements === undefined) {
+      if (isFish) {
+        if (p.subCategory === 'guppy') {
+          p.careRequirements = {
+            'Difficulty': 'Beginner / Community',
+            'Water Temp': specs.temp || '22°C – 28°C',
+            'Diet': specs.diet || 'Micro-pellets, spirulina flakes & live daphnia',
+            'Lifespan': '2 – 3 years',
+            'pH Range': '6.8 – 7.8',
+            'Hardness': 'Medium to hard (8–12 dGH)'
+          };
+        } else if (p.subCategory === 'betta') {
+          p.careRequirements = {
+            'Difficulty': 'Beginner / Community',
+            'Water Temp': specs.temp || '24°C – 28°C',
+            'Diet': specs.diet || 'High-protein betta micro-pellets & live/frozen bloodworms',
+            'Lifespan': '3 – 5 years',
+            'pH Range': '6.5 – 7.5',
+            'Handling': 'Do not house adult males together'
+          };
+        } else if (p.subCategory === 'molly') {
+          p.careRequirements = {
+            'Difficulty': 'Beginner / Community',
+            'Water Temp': specs.temp || '22°C – 28°C',
+            'Diet': specs.diet || 'Flakes, micro-pellets & vegetable matter',
+            'Lifespan': '3 – 5 years',
+            'pH Range': '7.0 – 8.2',
+            'Hardness': 'Hard water preferred (10–25 dGH)'
+          };
+        } else if (p.subCategory === 'shrimps') {
+          p.careRequirements = {
+            'Difficulty': 'Intermediate / Peaceful',
+            'Water Temp': specs.temp || '21°C – 25°C',
+            'Diet': specs.diet || 'Biofilm, specialized shrimp pellets & blanched vegetables',
+            'Lifespan': '1.5 – 2 years',
+            'pH Range': '6.2 – 6.8',
+            'TDS / GH': 'TDS 110–140 ppm, GH 4–6'
+          };
+        } else {
+          p.careRequirements = {
+            'Difficulty': specs.care || 'Beginner',
+            'Water Temp': specs.temp || '22°C – 28°C',
+            'Diet': specs.diet || 'Micro-pellets & flakes'
+          };
+        }
+      } else if (isIsopod) {
+        p.careRequirements = {
+          'Difficulty': 'Beginner to Intermediate',
+          'Temperature': specs.temp || '20°C – 26°C',
+          'Humidity': '60% – 80% (moisture gradient required)',
+          'Diet': specs.diet || 'Decaying leaf litter, rotting hardwood, calcium (cuttlebone) & supplemental protein',
+          'Lifespan': '2 – 3 years',
+          'Handling': 'Delicate live specimens; observe without excessive handling'
+        };
+      } else if (isTarantula) {
+        p.careRequirements = {
+          'Difficulty': specs.care || 'Low Maintenance',
+          'Temperature': specs.temp || '23°C – 28°C',
+          'Humidity': '55% – 70% with access to a shallow water dish',
+          'Diet': specs.diet || 'Pre-killed or appropriately sized live pinhead crickets & roach nymphs',
+          'Lifespan': '15 – 25 years (females), 4 – 6 years (males)',
+          'Temperament': 'New World terrestrial species; observe as display exotic'
+        };
+      } else if (isCombo) {
+        p.careRequirements = {
+          'Setup Difficulty': 'Beginner Friendly / Turnkey Kit',
+          'Operating Temp': specs.temp || 'Ambient Room Temp (20°C – 28°C)',
+          'Maintenance': 'Weekly misting or feeding as specified in care guidelines',
+          'Included Components': specs.kitIncludes ? specs.kitIncludes.join(', ') : 'All essential setup hardware and live specimens'
+        };
+      } else {
+        p.careRequirements = {};
+      }
+    }
+
+    if (p.habitatSetup === undefined) {
+      if (isFish) {
+        if (p.subCategory === 'guppy') {
+          p.habitatSetup = {
+            'Aquarium Size': 'Minimum 10 gallons for active pairs or colonies',
+            'Substrate': 'Fine gravel or dark aquatic soil to highlight iridescent coloration',
+            'Filtration & Flow': 'Gentle sponge or internal filter to protect delicate flowing fins',
+            'Plants & Decor': 'Dense live plants like Java Moss, Hornwort, and Anubias for shelter'
+          };
+        } else if (p.subCategory === 'betta') {
+          p.habitatSetup = {
+            'Aquarium Size': '5 to 10 gallons nano tank (avoid tiny unheated bowls)',
+            'Filtration & Flow': 'Low-flow filtration as heavy currents tire flowing fins',
+            'Substrate': 'Smooth dark sand or planted substrate',
+            'Plants & Decor': 'Broad-leaf live plants like Anubias providing rest spots near the surface'
+          };
+        } else if (p.subCategory === 'molly') {
+          p.habitatSetup = {
+            'Aquarium Size': '15–20 gallons or larger for active swimming pairs',
+            'Substrate': 'Aquatic soil or planted substrate supporting robust plant growth',
+            'Filtration & Flow': 'Moderate biological filtration with clean water maintenance',
+            'Plants & Decor': 'Ample swimming room combined with background stems (Vallisneria, Amazon Swords)'
+          };
+        } else if (p.subCategory === 'shrimps') {
+          p.habitatSetup = {
+            'Aquarium Size': '5 to 10 gallons mature planted nano tank',
+            'Filtration & Flow': 'Sponge filtration only to prevent shrimplets from being drawn into impellers',
+            'Substrate': 'Active buffering substrate maintaining slightly acidic pH',
+            'Plants & Decor': 'Cholla wood, Indian almond leaves, and dense mosses (Java, Christmas, Phoenix)'
+          };
+        } else {
+          p.habitatSetup = {
+            'Aquarium Size': '10+ gallons planted tank',
+            'Substrate': 'Aquatic gravel or planted soil',
+            'Filtration & Flow': 'Gentle biological filtration'
+          };
+        }
+      } else if (isIsopod) {
+        p.habitatSetup = {
+          'Enclosure': 'Ventilated acrylic, glass, or plastic container with moisture retention',
+          'Substrate': 'Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter',
+          'Moisture Gradient': 'One moist corner with damp sphagnum moss and one drier ventilating side',
+          'Hiding Places': 'Cork bark flats, decaying wood chunks, and natural lotus pods'
+        };
+      } else if (isTarantula) {
+        p.habitatSetup = {
+          'Enclosure': 'Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid',
+          'Substrate': '3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing',
+          'Hides & Decor': 'Curved cork bark hide and small shallow water dish (for specimens over 2 cm)',
+          'Ventilation': 'Cross-ventilation holes to prevent stagnant humidity while retaining comfort'
+        };
+      } else if (isCombo) {
+        p.habitatSetup = {
+          'Enclosure Construction': 'High-clarity precision glass with optimal ventilation and biological balance',
+          'Placement': 'Place on a sturdy, level surface away from direct harsh sunlight or extreme drafts',
+          'Lighting': 'Gentle ambient room light or nano LED fixture supporting live botanical growth'
+        };
+      } else {
+        p.habitatSetup = {};
+      }
+    }
+
+    if (p.didYouKnow === undefined) {
+      if (isFish) {
+        if (p.subCategory === 'guppy') {
+          p.didYouKnow = [
+            'Guppies are renowned as "millionfish" due to their prolific breeding and astounding color diversity.',
+            'Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns.'
+          ];
+        } else if (p.subCategory === 'betta') {
+          p.didYouKnow = [
+            'Bettas possess a specialized labyrinth organ enabling them to breathe atmospheric air directly from the water surface.',
+            'Each betta has a unique interactive personality and quickly learns to recognize its keeper during feeding time.'
+          ];
+        } else if (p.subCategory === 'molly') {
+          p.didYouKnow = [
+            'Mollies perform natural cleanup duty in planted aquariums by gently grazing surface biofilm and hair algae.',
+            'They are highly adaptable euryhaline fish that thrive in freshwater, hard water, and even light brackish setups.'
+          ];
+        } else if (p.subCategory === 'shrimps') {
+          p.didYouKnow = [
+            'Crystal Red Shrimps originate from a rare red mutation of wild Bee Shrimp discovered in Japan in the 1990s.',
+            'They molt their exoskeleton as they grow, during which they hide in mosses until their new shell hardens.'
+          ];
+        } else {
+          p.didYouKnow = [
+            'All Fish Tales aquatic specimens are fully quarantined and conditioned before dispatch.'
+          ];
+        }
+      } else if (isIsopod) {
+        p.didYouKnow = [
+          'Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.',
+          'They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material.'
+        ];
+      } else if (isTarantula) {
+        p.didYouKnow = [
+          'New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.',
+          'Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration.'
+        ];
+      } else if (isCombo) {
+        p.didYouKnow = [
+          'Bioactive closed-loop habitats create self-sustaining micro-ecosystems where plants, micro-fauna, and custodial cleaners thrive harmoniously.',
+          'All kit components are hand-selected, cleaned, and balanced by Fish Tales biologists for immediate plug-and-play enjoyment.'
+        ];
+      } else {
+        p.didYouKnow = [];
+      }
     }
   }
 
   function getProductSelectedVariant(product) {
+    if (!product) return { name: '', price: 0, unit: 'piece', label: 'piece' };
     initProductVariantsAndSpecs(product);
-    const idx = selectedVariants[product.id] || 0;
-    return product.variants[idx] || product.variants[0];
+    return {
+      name: product.name,
+      price: Number(product.price || 0),
+      unit: product.unit || product.pricingUnit || 'piece',
+      label: product.unit || product.pricingUnit || 'piece'
+    };
   }
 
   /* ── 3. Master Product Catalogue (Standardized Schema) ───── */
   const PRODUCTS = [
     {
-      id: "guppy-red-lace",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "Red Lace Guppy",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Cobra_Guppy_%28Poecilia_reticulata%29.JPG",
-      images: [],
-      video: "",
-      description: "Intricate red lace-patterned caudal fin with iridescent body tones. Captive bred and peaceful in planted community tanks.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair (1 Male + 1 Female)"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+        id: "guppy-red-lace",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "Red Lace Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Cobra_Guppy_%28Poecilia_reticulata%29.JPG",
+        images: [],
+        video: "",
+        description: "Intricate red lace-patterned caudal fin with iridescent body tones. Captive bred and peaceful in planted community tanks.",
+        price: 250,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair (1 Male + 1 Female)",
+        overview: "The Red Lace Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: true
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: true
     },
     {
-      id: "guppy-gold-dumbo-ear",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "Gold Dumbo Ear Guppy",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Poecilia_retic_090519-8688_kdBdk.jpg",
-      images: [],
-      video: "",
-      description: "Lustrous golden body with enlarged, prominent \"dumbo ear\" pectoral fins creating a graceful flutter in planted tanks.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+        id: "guppy-gold-dumbo-ear",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "Gold Dumbo Ear Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Poecilia_retic_090519-8688_kdBdk.jpg",
+        images: [],
+        video: "",
+        description: "Lustrous golden body with enlarged, prominent \"dumbo ear\" pectoral fins creating a graceful flutter in planted tanks.",
+        price: 280,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The Gold Dumbo Ear Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: false
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: false
     },
     {
-      id: "guppy-santacruz-dumbo-ear",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Poecilia_reticulata_%28male%29.JPG",
-      images: [],
-      video: "",
-      description: "Striking Santacruz lineage showcasing oversized dumbo ears, iridescent cobalt-blue coloration, and active schooling behavior.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+        id: "guppy-santacruz-dumbo-ear",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "Santacruz Dumbo Ear Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Poecilia_reticulata_%28male%29.JPG",
+        images: [],
+        video: "",
+        description: "Striking Santacruz lineage showcasing oversized dumbo ears, iridescent cobalt-blue coloration, and active schooling behavior.",
+        price: 250,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The Santacruz Dumbo Ear Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: false
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: false
     },
     {
-      id: "guppy-platinum-dumbo-halfmoon",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "Platinum Dumbo Ear Halfmoon Guppy",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/a/af/Poecilia_reticulata_01.jpg",
-      images: [],
-      video: "",
-      description: "Full 180-degree halfmoon caudal fin with gleaming platinum-white scales and grand dumbo pectoral ears.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+        id: "guppy-platinum-dumbo-halfmoon",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "Platinum Dumbo Ear Halfmoon Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://upload.wikimedia.org/wikipedia/commons/a/af/Poecilia_reticulata_01.jpg",
+        images: [],
+        video: "",
+        description: "Full 180-degree halfmoon caudal fin with gleaming platinum-white scales and grand dumbo pectoral ears.",
+        price: 280,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The Platinum Dumbo Ear Halfmoon Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: true
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: true
     },
     {
-      id: "guppy-blue-dragon-dumbo-halfmoon",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "Blue Dragon Dumbo Ear Halfmoon Guppy",
-      subtitle: "",
-      image: "https://images.unsplash.com/photo-1520989244660-118e51ae94bc?auto=format&fit=crop&w=600&q=80",
-      images: [],
-      video: "",
-      description: "Rich royal blue metallic dorsal and halfmoon tail paired with grand dumbo ear fins. Centerpiece display fish.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+        id: "guppy-blue-dragon-dumbo-halfmoon",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "Blue Dragon Dumbo Ear Halfmoon Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://images.unsplash.com/photo-1520989244660-118e51ae94bc?auto=format&fit=crop&w=600&q=80",
+        images: [],
+        video: "",
+        description: "Rich royal blue metallic dorsal and halfmoon tail paired with grand dumbo ear fins. Centerpiece display fish.",
+        price: 280,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The Blue Dragon Dumbo Ear Halfmoon Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: true
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: true
     },
     {
-      id: "guppy-moscow-black-dumbo",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "Moscow Black Dumbo Ear Guppy",
-      subtitle: "",
-      image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=600&q=80",
-      images: [],
-      video: "",
-      description: "Deep velvet-black coloration spanning from snout to tail, contrasted by delicate fluttery dumbo pectoral fins.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+        id: "guppy-moscow-black-dumbo",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "Moscow Black Dumbo Ear Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=600&q=80",
+        images: [],
+        video: "",
+        description: "Deep velvet-black coloration spanning from snout to tail, contrasted by delicate fluttery dumbo pectoral fins.",
+        price: 250,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The Moscow Black Dumbo Ear Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: false
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: false
     },
     {
-      id: "guppy-afr-big-dorsal",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "AFR Big Dorsal Guppy",
-      subtitle: "",
-      image: "https://images.unsplash.com/photo-1548262323-694280fdc967?auto=format&fit=crop&w=600&q=80",
-      images: [],
-      video: "",
-      description: "Prized Albino Full Red (AFR) genetics with an extravagant, sail-like big dorsal fin and ruby-red eyes.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 300,
-          "label": "Pair"
+        id: "guppy-afr-big-dorsal",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "AFR Big Dorsal Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://images.unsplash.com/photo-1548262323-694280fdc967?auto=format&fit=crop&w=600&q=80",
+        images: [],
+        video: "",
+        description: "Prized Albino Full Red (AFR) genetics with an extravagant, sail-like big dorsal fin and ruby-red eyes.",
+        price: 300,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The AFR Big Dorsal Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 600,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: true
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: true
     },
     {
-      id: "guppy-dark-knight-dragon-dumbo",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "Dark Knight Dragon Dumbo Ear Guppy",
-      subtitle: "",
-      image: "https://images.unsplash.com/photo-1553986187-9cb16fa33483?auto=format&fit=crop&w=600&q=80",
-      images: [],
-      video: "",
-      description: "Dark dramatic dragon scales with violet and navy undertones, complemented by fluttering dumbo ears.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+        id: "guppy-dark-knight-dragon-dumbo",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "Dark Knight Dragon Dumbo Ear Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://images.unsplash.com/photo-1553986187-9cb16fa33483?auto=format&fit=crop&w=600&q=80",
+        images: [],
+        video: "",
+        description: "Dark dramatic dragon scales with violet and navy undertones, complemented by fluttering dumbo ears.",
+        price: 280,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The Dark Knight Dragon Dumbo Ear Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: false
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: false
     },
     {
-      id: "guppy-red-platinum-koi-dumbo",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "Red Platinum Koi Dumbo Ear Guppy",
-      subtitle: "",
-      image: "https://images.unsplash.com/photo-1500909001949-1fc0780d81c9?auto=format&fit=crop&w=600&q=80",
-      images: [],
-      video: "",
-      description: "Classic red and platinum koi-styled color patterns with translucent big dumbo ears. Active and hardy.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+        id: "guppy-red-platinum-koi-dumbo",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "Red Platinum Koi Dumbo Ear Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://images.unsplash.com/photo-1500909001949-1fc0780d81c9?auto=format&fit=crop&w=600&q=80",
+        images: [],
+        video: "",
+        description: "Classic red and platinum koi-styled color patterns with translucent big dumbo ears. Active and hardy.",
+        price: 280,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The Red Platinum Koi Dumbo Ear Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: false
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: false
     },
     {
-      id: "guppy-magenta-red-tiger",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "Magenta Red Tiger Guppy",
-      subtitle: "",
-      image: "https://images.unsplash.com/photo-1538719501547-bc023056a8b6?auto=format&fit=crop&w=600&q=80",
-      images: [],
-      video: "",
-      description: "Bold tiger bar stripes over vibrant magenta-red body. Energetic swimmer that thrives in planted aquascapes.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+        id: "guppy-magenta-red-tiger",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "Magenta Red Tiger Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://images.unsplash.com/photo-1538719501547-bc023056a8b6?auto=format&fit=crop&w=600&q=80",
+        images: [],
+        video: "",
+        description: "Bold tiger bar stripes over vibrant magenta-red body. Energetic swimmer that thrives in planted aquascapes.",
+        price: 250,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The Magenta Red Tiger Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: false
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: false
     },
     {
-      id: "guppy-white-tuxido",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "White Tuxido Guppy",
-      subtitle: "",
-      image: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=600&q=80",
-      images: [],
-      video: "",
-      description: "Crisp white caudal fin contrasted with a deep midnight tuxedo torso. Highly prolific and peaceful.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+        id: "guppy-white-tuxido",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "White Tuxido Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=600&q=80",
+        images: [],
+        video: "",
+        description: "Crisp white caudal fin contrasted with a deep midnight tuxedo torso. Highly prolific and peaceful.",
+        price: 250,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The White Tuxido Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: false
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: false
     },
     {
-      id: "guppy-silverado-red-dragon",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "Silverado Red Dragon Guppy",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Guppy_-_Poecilia_reticulata.jpg",
-      images: [],
-      video: "",
-      description: "Silvery metallic chest transitioning into a fierce red dragon-patterned tail fin. Stunning light-reflective sheen.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 280,
-          "label": "Pair"
+        id: "guppy-silverado-red-dragon",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "Silverado Red Dragon Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Guppy_-_Poecilia_reticulata.jpg",
+        images: [],
+        video: "",
+        description: "Silvery metallic chest transitioning into a fierce red dragon-patterned tail fin. Stunning light-reflective sheen.",
+        price: 280,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The Silverado Red Dragon Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 560,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: false
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: false
     },
     {
-      id: "guppy-green-moscow",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "guppy",
-      name: "Green Moscow Guppy",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Poecilia_reticulata_-_Guppy%2C_male%2C_cobra-green_morph.jpg",
-      images: [],
-      video: "",
-      description: "Deep emerald-green metallic sheen covering head to tail. An all-time legendary strain for planted aquariums.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 250,
-          "label": "Pair"
+        id: "guppy-green-moscow",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "guppy",
+        name: "Green Moscow Guppy",
+        subtitle: "Poecilia reticulata",
+        image: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Poecilia_reticulata_-_Guppy%2C_male%2C_cobra-green_morph.jpg",
+        images: [],
+        video: "",
+        description: "Deep emerald-green metallic sheen covering head to tail. An all-time legendary strain for planted aquariums.",
+        price: 250,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The Green Moscow Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "2 – 3 years",
+            "pH Range": "6.8 – 7.8",
+            "Hardness": "Medium to hard (8–12 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 500,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: false
+        habitatSetup: {
+            "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
+            "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
+            "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
+            "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
+        },
+        didYouKnow: [
+            "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
+            "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
+        ],
+        featured: false
     },
     {
-      id: "show-grade-betta",
-      category: "aquarium",
-      categoryName: "Aquarium & Fish",
-      subCategory: "betta",
-      name: "Show Grade Betta Fish",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Betta-splendens-male.jpg",
-      images: [],
-      video: "",
-      description: "Hand-selected healthy Betta splendens featuring vibrant color iridescence and large flowing fins. Centerpiece display specimen.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Micro-pellets & live/frozen daphnia",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult (5–6 cm)"
-      },
-      variants: [
-        {
-          "name": "1 Specimen (Male 5–6 cm)",
-          "price": 350,
-          "label": "Piece"
+        id: "show-grade-betta",
+        category: "aquarium",
+        categoryName: "Aquarium & Fish",
+        subCategory: "betta",
+        name: "Show Grade Betta Fish",
+        subtitle: "Betta splendens",
+        image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Betta-splendens-male.jpg",
+        images: [],
+        video: "",
+        description: "Hand-selected healthy Betta splendens featuring vibrant color iridescence and large flowing fins. Centerpiece display specimen.",
+        price: 350,
+        unit: "piece",
+        minQuantity: 1,
+        size: "Adult (5–6 cm)",
+        overview: "The Show Grade Betta Fish is a majestic labyrinth fish displaying symmetrical finnage, vibrant iridescence, and intelligent personality. Each specimen is selected for health, vitality, and show-standard conformation.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Micro-pellets & live/frozen daphnia",
+            "Lifespan": "3 – 5 years",
+            "pH Range": "6.5 – 7.5",
+            "Handling": "Do not house adult males together"
         },
-        {
-          "name": "2 Specimens (Select Males)",
-          "price": 700,
-          "label": "2 pcs"
-        }
-      ],
-      featured: true
+        habitatSetup: {
+            "Aquarium Size": "5 to 10 gallons nano tank (avoid tiny unheated bowls)",
+            "Filtration & Flow": "Low-flow filtration as heavy currents tire flowing fins",
+            "Substrate": "Smooth dark sand or planted substrate",
+            "Plants & Decor": "Broad-leaf live plants like Anubias providing rest spots near the surface"
+        },
+        didYouKnow: [
+            "Bettas possess a specialized labyrinth organ enabling them to breathe atmospheric air directly from the water surface.",
+            "Each betta has a unique interactive personality and quickly learns to recognize its keeper during feeding time."
+        ],
+        featured: true
     },
     {
-      id: "molly-golden",
-      category: "aquarium",
-      categoryName: "Molly Fish",
-      subCategory: "molly",
-      name: "Golden Molly",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Gold_Molly_1.jpg",
-      images: [],
-      video: "",
-      description: "Active and peaceful livebearer showcasing lustrous golden coloration. Thrives in planted community aquariums and grazes on natural biofilm.",
-      specs: {
-        "care": "Beginner / Community",
-        "temp": "22°C – 28°C",
-        "diet": "Flakes, micro-pellets & vegetable matter",
-        "habitat": "Planted freshwater aquarium",
-        "size": "Adult Pair"
-      },
-      variants: [
-        {
-          "name": "1 Pair (Adult Pair)",
-          "price": 180,
-          "label": "Pair"
+        id: "molly-golden",
+        category: "aquarium",
+        categoryName: "Molly Fish",
+        subCategory: "molly",
+        name: "Golden Molly",
+        subtitle: "Poecilia sphenops var. Golden",
+        image: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Gold_Molly_1.jpg",
+        images: [],
+        video: "",
+        description: "Active and peaceful livebearer showcasing lustrous golden coloration. Thrives in planted community aquariums and grazes on natural biofilm.",
+        price: 180,
+        unit: "pair",
+        minQuantity: 1,
+        size: "Adult Pair",
+        overview: "The Golden Molly (Poecilia sphenops var. Golden) is an active, gregarious livebearer with radiant golden coloration. Renowned for grazing natural algae and thriving in planted community biotopes.",
+        careRequirements: {
+            "Difficulty": "Beginner / Community",
+            "Water Temp": "22°C – 28°C",
+            "Diet": "Flakes, micro-pellets & vegetable matter",
+            "Lifespan": "3 – 5 years",
+            "pH Range": "7.0 – 8.2",
+            "Hardness": "Hard water preferred (10–25 dGH)"
         },
-        {
-          "name": "2 Pairs (Colony Pack)",
-          "price": 360,
-          "label": "2 Pairs"
-        }
-      ],
-      featured: true
+        habitatSetup: {
+            "Aquarium Size": "15–20 gallons or larger for active swimming pairs",
+            "Substrate": "Aquatic soil or planted substrate supporting robust plant growth",
+            "Filtration & Flow": "Moderate biological filtration with clean water maintenance",
+            "Plants & Decor": "Ample swimming room combined with background stems (Vallisneria, Amazon Swords)"
+        },
+        didYouKnow: [
+            "Mollies perform natural cleanup duty in planted aquariums by gently grazing surface biofilm and hair algae.",
+            "They are highly adaptable euryhaline fish that thrive in freshwater, hard water, and even light brackish setups."
+        ],
+        featured: true
     },
     {
-      id: "shrimp-crystal-red",
-      category: "aquarium",
-      categoryName: "Shrimps",
-      subCategory: "shrimps",
-      name: "Crystal Red Shrimp",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/4/47/Caridina-cf-cantonensis-crystal-red.jpg",
-      images: [],
-      video: "",
-      description: "Prized high-grade dwarf freshwater shrimp displaying vivid red and bright white bands. Gentle algae grazer ideal for nano planted tanks.",
-      specs: {
-        "care": "Intermediate / Peaceful",
-        "temp": "21°C – 25°C",
-        "diet": "Biofilm, specialized shrimp pellets & blanched vegetables",
-        "habitat": "Planted freshwater nano tank",
-        "size": "Adult (2–2.5 cm)"
-      },
-      variants: [
-        {
-          "name": "Single (1 pc)",
-          "price": 150,
-          "label": "Piece"
+        id: "shrimp-crystal-red",
+        category: "aquarium",
+        categoryName: "Shrimps",
+        subCategory: "shrimps",
+        name: "Crystal Red Shrimp",
+        subtitle: "Caridina cf. cantonensis var. Crystal Red",
+        image: "https://upload.wikimedia.org/wikipedia/commons/4/47/Caridina-cf-cantonensis-crystal-red.jpg",
+        images: [],
+        video: "",
+        description: "Prized high-grade dwarf freshwater shrimp displaying vivid red and bright white bands. Gentle algae grazer ideal for nano planted tanks.",
+        price: 150,
+        unit: "piece",
+        minQuantity: 1,
+        size: "Adult (2–2.5 cm)",
+        overview: "The Crystal Red Shrimp (Caridina cf. cantonensis var. Crystal Red) is a premier dwarf freshwater invertebrate exhibiting striking opaque white and vivid red color banding. Exceptional algae grazer for planted aquascapes.",
+        careRequirements: {
+            "Difficulty": "Intermediate / Peaceful",
+            "Water Temp": "21°C – 25°C",
+            "Diet": "Biofilm, specialized shrimp pellets & blanched vegetables",
+            "Lifespan": "1.5 – 2 years",
+            "pH Range": "6.2 – 6.8",
+            "TDS / GH": "TDS 110–140 ppm, GH 4–6"
         },
-        {
-          "name": "Pack of 5 (5 pcs)",
-          "price": 750,
-          "label": "5 pcs"
-        }
-      ],
-      featured: true
+        habitatSetup: {
+            "Aquarium Size": "5 to 10 gallons mature planted nano tank",
+            "Filtration & Flow": "Sponge filtration only to prevent shrimplets from being drawn into impellers",
+            "Substrate": "Active buffering substrate maintaining slightly acidic pH",
+            "Plants & Decor": "Cholla wood, Indian almond leaves, and dense mosses (Java, Christmas, Phoenix)"
+        },
+        didYouKnow: [
+            "Crystal Red Shrimps originate from a rare red mutation of wild Bee Shrimp discovered in Japan in the 1990s.",
+            "They molt their exoskeleton as they grow, during which they hide in mosses until their new shell hardens."
+        ],
+        featured: true
     },
     {
-      id: "armadillidium-gestroi",
-      category: "isopods",
-      categoryName: "Isopods",
-      subCategory: "isopods",
-      name: "Armadillidium Gestroi",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/9/95/Armadillidium_vulgare.jpg",
-      images: [],
-      video: "",
-      description: "Striking Mediterranean pill bug known for its large size, bright yellow spotted dorsal plates, and vigorous vivarium janitorial skills.",
-      specs: {
-        "care": "Bioactive Cleaners",
-        "temp": "20°C – 26°C",
-        "diet": "Leaf litter, decaying wood, calcium",
-        "habitat": "Bioactive vivarium / enclosure"
-      },
-      variants: [
-        {
-          "name": "Single (1 pc)",
-          "price": 120,
-          "label": "Piece"
+        id: "armadillidium-gestroi",
+        category: "isopods",
+        categoryName: "Isopods",
+        subCategory: "isopods",
+        name: "Armadillidium Gestroi",
+        subtitle: "Armadillidium gestroi",
+        image: "https://upload.wikimedia.org/wikipedia/commons/9/95/Armadillidium_vulgare.jpg",
+        images: [],
+        video: "",
+        description: "Striking Mediterranean pill bug known for its large size, bright yellow spotted dorsal plates, and vigorous vivarium janitorial skills.",
+        price: 120,
+        unit: "piece",
+        minQuantity: 5,
+        size: "",
+        overview: "Armadillidium Gestroi (Armadillidium gestroi) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
+        careRequirements: {
+            "Difficulty": "Beginner to Intermediate",
+            "Temperature": "20°C – 26°C",
+            "Humidity": "60% – 80% (moisture gradient required)",
+            "Diet": "Leaf litter, decaying wood, calcium",
+            "Lifespan": "2 – 3 years",
+            "Handling": "Delicate live specimens; observe without excessive handling"
         },
-        {
-          "name": "Starter Culture (5 pcs)",
-          "price": 600,
-          "label": "5 pcs"
+        habitatSetup: {
+            "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
+            "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
+            "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
+            "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
         },
-        {
-          "name": "Colony Culture (10 pcs)",
-          "price": 1200,
-          "label": "10 pcs"
-        }
-      ],
-      featured: true
+        didYouKnow: [
+            "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
+            "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
+        ],
+        featured: true
     },
     {
-      id: "cubaris-murina-orange",
-      category: "isopods",
-      categoryName: "Isopods",
-      subCategory: "isopods",
-      name: "Cubaris Murina Orange",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Cubaris_murinaflorida.jpg",
-      images: [],
-      video: "",
-      description: "Warm apricot-orange color morph. Hardy, highly active, and quick to establish a thriving custodial colony in humid vivariums.",
-      specs: {
-        "care": "Bioactive Cleaners",
-        "temp": "20°C – 26°C",
-        "diet": "Leaf litter, decaying wood, calcium",
-        "habitat": "Bioactive vivarium / enclosure"
-      },
-      variants: [
-        {
-          "name": "Single (1 pc)",
-          "price": 60,
-          "label": "Piece"
+        id: "cubaris-murina-orange",
+        category: "isopods",
+        categoryName: "Isopods",
+        subCategory: "isopods",
+        name: "Cubaris Murina Orange",
+        subtitle: "Cubaris murina var. Orange",
+        image: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Cubaris_murinaflorida.jpg",
+        images: [],
+        video: "",
+        description: "Warm apricot-orange color morph. Hardy, highly active, and quick to establish a thriving custodial colony in humid vivariums.",
+        price: 60,
+        unit: "piece",
+        minQuantity: 5,
+        size: "",
+        overview: "Cubaris Murina Orange (Cubaris murina var. Orange) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
+        careRequirements: {
+            "Difficulty": "Beginner to Intermediate",
+            "Temperature": "20°C – 26°C",
+            "Humidity": "60% – 80% (moisture gradient required)",
+            "Diet": "Leaf litter, decaying wood, calcium",
+            "Lifespan": "2 – 3 years",
+            "Handling": "Delicate live specimens; observe without excessive handling"
         },
-        {
-          "name": "Starter Culture (5 pcs)",
-          "price": 300,
-          "label": "5 pcs"
+        habitatSetup: {
+            "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
+            "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
+            "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
+            "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
         },
-        {
-          "name": "Colony Culture (10 pcs)",
-          "price": 600,
-          "label": "10 pcs"
-        }
-      ],
-      featured: false
+        didYouKnow: [
+            "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
+            "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
+        ],
+        featured: false
     },
     {
-      id: "cubaris-murina-glacier",
-      category: "isopods",
-      categoryName: "Isopods",
-      subCategory: "isopods",
-      name: "Cubaris Murina Glacier",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/8/87/Cubaris_murinafloridatop.jpg",
-      images: [],
-      video: "",
-      description: "Pristine white porcelain appearance with subtle translucent undertones. Excellent bioactive cleanup crew.",
-      specs: {
-        "care": "Bioactive Cleaners",
-        "temp": "20°C – 26°C",
-        "diet": "Leaf litter, decaying wood, calcium",
-        "habitat": "Bioactive vivarium / enclosure"
-      },
-      variants: [
-        {
-          "name": "Single (1 pc)",
-          "price": 70,
-          "label": "Piece"
+        id: "cubaris-murina-glacier",
+        category: "isopods",
+        categoryName: "Isopods",
+        subCategory: "isopods",
+        name: "Cubaris Murina Glacier",
+        subtitle: "Cubaris murina var. Glacier",
+        image: "https://upload.wikimedia.org/wikipedia/commons/8/87/Cubaris_murinafloridatop.jpg",
+        images: [],
+        video: "",
+        description: "Pristine white porcelain appearance with subtle translucent undertones. Excellent bioactive cleanup crew.",
+        price: 70,
+        unit: "piece",
+        minQuantity: 5,
+        size: "",
+        overview: "Cubaris Murina Glacier (Cubaris murina var. Glacier) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
+        careRequirements: {
+            "Difficulty": "Beginner to Intermediate",
+            "Temperature": "20°C – 26°C",
+            "Humidity": "60% – 80% (moisture gradient required)",
+            "Diet": "Leaf litter, decaying wood, calcium",
+            "Lifespan": "2 – 3 years",
+            "Handling": "Delicate live specimens; observe without excessive handling"
         },
-        {
-          "name": "Starter Culture (5 pcs)",
-          "price": 350,
-          "label": "5 pcs"
+        habitatSetup: {
+            "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
+            "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
+            "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
+            "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
         },
-        {
-          "name": "Colony Culture (10 pcs)",
-          "price": 700,
-          "label": "10 pcs"
-        }
-      ],
-      featured: true
+        didYouKnow: [
+            "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
+            "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
+        ],
+        featured: true
     },
     {
-      id: "porcellionides-pruinosus-orange-pied",
-      category: "isopods",
-      categoryName: "Isopods",
-      subCategory: "isopods",
-      name: "Porcellionides pruinosus Orange Pied",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Porcellionides_pruinosus_P1380341a.jpg",
-      images: [],
-      video: "",
-      description: "Fast-moving, velvety powder-orange isopod with distinctive white pied patches. Superb detritivore for tropical enclosures.",
-      specs: {
-        "care": "Bioactive Cleaners",
-        "temp": "20°C – 26°C",
-        "diet": "Leaf litter, decaying wood, calcium",
-        "habitat": "Bioactive vivarium / enclosure"
-      },
-      variants: [
-        {
-          "name": "Single (1 pc)",
-          "price": 60,
-          "label": "Piece"
+        id: "porcellionides-pruinosus-orange-pied",
+        category: "isopods",
+        categoryName: "Isopods",
+        subCategory: "isopods",
+        name: "Porcellionides pruinosus Orange Pied",
+        subtitle: "Porcellionides pruinosus var. Orange Pied",
+        image: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Porcellionides_pruinosus_P1380341a.jpg",
+        images: [],
+        video: "",
+        description: "Fast-moving, velvety powder-orange isopod with distinctive white pied patches. Superb detritivore for tropical enclosures.",
+        price: 60,
+        unit: "piece",
+        minQuantity: 5,
+        size: "",
+        overview: "Porcellionides pruinosus Orange Pied (Porcellionides pruinosus var. Orange Pied) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
+        careRequirements: {
+            "Difficulty": "Beginner to Intermediate",
+            "Temperature": "20°C – 26°C",
+            "Humidity": "60% – 80% (moisture gradient required)",
+            "Diet": "Leaf litter, decaying wood, calcium",
+            "Lifespan": "2 – 3 years",
+            "Handling": "Delicate live specimens; observe without excessive handling"
         },
-        {
-          "name": "Starter Culture (5 pcs)",
-          "price": 300,
-          "label": "5 pcs"
+        habitatSetup: {
+            "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
+            "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
+            "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
+            "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
         },
-        {
-          "name": "Colony Culture (10 pcs)",
-          "price": 600,
-          "label": "10 pcs"
-        }
-      ],
-      featured: false
+        didYouKnow: [
+            "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
+            "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
+        ],
+        featured: false
     },
     {
-      id: "cubaris-sp-cappuccino",
-      category: "isopods",
-      categoryName: "Isopods",
-      subCategory: "isopods",
-      name: "Cubaris sp. Cappuccino",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/1/18/Cubaris_nigroflava_172816253.jpg",
-      images: [],
-      video: "",
-      description: "Ultra-rare collector isopod exhibiting warm espresso-brown skirts and a creamy dorsal stripe reminiscent of a barista cappuccino.",
-      specs: {
-        "care": "Bioactive Cleaners",
-        "temp": "20°C – 26°C",
-        "diet": "Leaf litter, decaying wood, calcium",
-        "habitat": "Bioactive vivarium / enclosure"
-      },
-      variants: [
-        {
-          "name": "Single (1 pc)",
-          "price": 600,
-          "label": "Piece"
+        id: "cubaris-sp-cappuccino",
+        category: "isopods",
+        categoryName: "Isopods",
+        subCategory: "isopods",
+        name: "Cubaris sp. Cappuccino",
+        subtitle: "",
+        image: "https://upload.wikimedia.org/wikipedia/commons/1/18/Cubaris_nigroflava_172816253.jpg",
+        images: [],
+        video: "",
+        description: "Ultra-rare collector isopod exhibiting warm espresso-brown skirts and a creamy dorsal stripe reminiscent of a barista cappuccino.",
+        price: 600,
+        unit: "piece",
+        minQuantity: 5,
+        size: "",
+        overview: "Ultra-rare collector isopod exhibiting warm espresso-brown skirts and a creamy dorsal stripe reminiscent of a barista cappuccino. Highly sought-after display specimen and bioactive cleaner.",
+        careRequirements: {
+            "Difficulty": "Beginner to Intermediate",
+            "Temperature": "20°C – 26°C",
+            "Humidity": "75% – 85% (moisture gradient required)",
+            "Diet": "Leaf litter, decaying wood, calcium",
+            "Lifespan": "2 – 3 years",
+            "Temperament": "Peaceful bioactive custodial cleaners"
         },
-        {
-          "name": "Starter Culture (5 pcs)",
-          "price": 3000,
-          "label": "5 pcs"
+        habitatSetup: {
+            "Enclosure": "Bioactive vivarium / enclosure",
+            "Substrate": "Damp organic bioactive soil blend enriched with decaying leaf litter and rotting hardwood",
+            "Moisture Gradient": "One moist corner with sphagnum moss and one drier ventilated side",
+            "Hiding Places": "Decaying wood chunks, cork bark flats and leaf litter"
         },
-        {
-          "name": "Colony Culture (10 pcs)",
-          "price": 6000,
-          "label": "10 pcs"
-        }
-      ],
-      featured: true
+        didYouKnow: [
+            "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
+            "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
+        ],
+        featured: true
     },
     {
-      id: "cubaris-sp-cherry-blossom",
-      category: "isopods",
-      categoryName: "Isopods",
-      subCategory: "isopods",
-      name: "Cubaris sp. Cherry Blossom",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_marmorata_171397510.jpg",
-      images: [],
-      video: "",
-      description: "Exquisite pastel pink and creamy white hues mimicking delicate sakura blossoms. A prized gem among luxury isopod enthusiasts.",
-      specs: {
-        "care": "Bioactive Cleaners",
-        "temp": "20°C – 26°C",
-        "diet": "Leaf litter, decaying wood, calcium",
-        "habitat": "Bioactive vivarium / enclosure"
-      },
-      variants: [
-        {
-          "name": "Single (1 pc)",
-          "price": 750,
-          "label": "Piece"
+        id: "cubaris-sp-cherry-blossom",
+        category: "isopods",
+        categoryName: "Isopods",
+        subCategory: "isopods",
+        name: "Cubaris sp. Cherry Blossom",
+        subtitle: "Cubaris sp. Cherry Blossom",
+        image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_marmorata_171397510.jpg",
+        images: [],
+        video: "",
+        description: "Exquisite pastel pink and creamy white hues mimicking delicate sakura blossoms. A prized gem among luxury isopod enthusiasts.",
+        price: 750,
+        unit: "piece",
+        minQuantity: 5,
+        size: "",
+        overview: "Cubaris sp. Cherry Blossom (Cubaris sp. Cherry Blossom) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
+        careRequirements: {
+            "Difficulty": "Beginner to Intermediate",
+            "Temperature": "20°C – 26°C",
+            "Humidity": "60% – 80% (moisture gradient required)",
+            "Diet": "Leaf litter, decaying wood, calcium",
+            "Lifespan": "2 – 3 years",
+            "Handling": "Delicate live specimens; observe without excessive handling"
         },
-        {
-          "name": "Starter Culture (5 pcs)",
-          "price": 3750,
-          "label": "5 pcs"
+        habitatSetup: {
+            "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
+            "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
+            "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
+            "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
         },
-        {
-          "name": "Colony Culture (10 pcs)",
-          "price": 7500,
-          "label": "10 pcs"
-        }
-      ],
-      featured: true
+        didYouKnow: [
+            "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
+            "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
+        ],
+        featured: true
     },
     {
-      id: "armadillidium-peraccae",
-      category: "isopods",
-      categoryName: "Isopods",
-      subCategory: "isopods",
-      name: "Armadillidium Peraccae",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Armadillidium_vulgare_001.jpg",
-      images: [],
-      video: "",
-      description: "Fascinating textured, bumpy slate-grey shell with high drought tolerance. Extremely resilient and fascinating to observe.",
-      specs: {
-        "care": "Bioactive Cleaners",
-        "temp": "20°C – 26°C",
-        "diet": "Leaf litter, decaying wood, calcium",
-        "habitat": "Bioactive vivarium / enclosure"
-      },
-      variants: [
-        {
-          "name": "Single (1 pc)",
-          "price": 150,
-          "label": "Piece"
+        id: "armadillidium-peraccae",
+        category: "isopods",
+        categoryName: "Isopods",
+        subCategory: "isopods",
+        name: "Armadillidium Peraccae",
+        subtitle: "Armadillidium peraccae",
+        image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Armadillidium_vulgare_001.jpg",
+        images: [],
+        video: "",
+        description: "Fascinating textured, bumpy slate-grey shell with high drought tolerance. Extremely resilient and fascinating to observe.",
+        price: 150,
+        unit: "piece",
+        minQuantity: 5,
+        size: "",
+        overview: "Armadillidium Peraccae (Armadillidium peraccae) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
+        careRequirements: {
+            "Difficulty": "Beginner to Intermediate",
+            "Temperature": "20°C – 26°C",
+            "Humidity": "60% – 80% (moisture gradient required)",
+            "Diet": "Leaf litter, decaying wood, calcium",
+            "Lifespan": "2 – 3 years",
+            "Handling": "Delicate live specimens; observe without excessive handling"
         },
-        {
-          "name": "Starter Culture (5 pcs)",
-          "price": 750,
-          "label": "5 pcs"
+        habitatSetup: {
+            "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
+            "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
+            "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
+            "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
         },
-        {
-          "name": "Colony Culture (10 pcs)",
-          "price": 1500,
-          "label": "10 pcs"
-        }
-      ],
-      featured: false
+        didYouKnow: [
+            "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
+            "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
+        ],
+        featured: false
     },
     {
-      id: "chilean-rose-hair",
-      category: "tarantulas",
-      categoryName: "Tarantulas",
-      subCategory: "tarantulas",
-      name: "Chilean Rose Hair",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/2/22/Grammostola_rosea_adult_weiblich.jpg",
-      images: [],
-      video: "",
-      description: "Renowned for its calm, docile temperament and subtle pink carapace setae. The quintessential beginner New World tarantula.",
-      specs: {
-        "care": "Low Maintenance",
-        "temp": "23°C – 28°C",
-        "diet": "Pinhead crickets & roach nymphs",
-        "habitat": "Ventilated sling vial / enclosure",
-        "size": "1–1.5 cm"
-      },
-      variants: [
-        {
-          "name": "1 Specimen (1–1.5 cm)",
-          "price": 2199,
-          "label": "Specimen"
+        id: "chilean-rose-hair",
+        category: "tarantulas",
+        categoryName: "Tarantulas",
+        subCategory: "tarantulas",
+        name: "Chilean Rose Hair",
+        subtitle: "Grammostola rosea",
+        image: "https://upload.wikimedia.org/wikipedia/commons/2/22/Grammostola_rosea_adult_weiblich.jpg",
+        images: [],
+        video: "",
+        description: "Renowned for its calm, docile temperament and subtle pink carapace setae. The quintessential beginner New World tarantula.",
+        price: 2199,
+        unit: "specimen",
+        minQuantity: 1,
+        size: "1–1.5 cm",
+        overview: "The Chilean Rose Hair (Grammostola rosea) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+        careRequirements: {
+            "Difficulty": "Low Maintenance",
+            "Temperature": "23°C – 28°C",
+            "Humidity": "55% – 70% with access to a shallow water dish",
+            "Diet": "Pinhead crickets & roach nymphs",
+            "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
+            "Temperament": "New World terrestrial species; observe as display exotic"
         },
-        {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 4398,
-          "label": "2 specimens"
-        }
-      ],
-      featured: true
-    },
-    {
-      id: "brazilian-whiteknee",
-      category: "tarantulas",
-      categoryName: "Tarantulas",
-      subCategory: "tarantulas",
-      name: "Brazilian Whiteknee",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Acanthoscurria_geniculata%2C_female.jpg",
-      images: [],
-      video: "",
-      description: "Bold contrast of jet-black legs adorned with striking snow-white knee bands. Highly active with an enthusiastic feeding response.",
-      specs: {
-        "care": "Low Maintenance",
-        "temp": "23°C – 28°C",
-        "diet": "Pinhead crickets & roach nymphs",
-        "habitat": "Ventilated sling vial / enclosure",
-        "size": "1–1.5 cm"
-      },
-      variants: [
-        {
-          "name": "1 Specimen (1–1.5 cm)",
-          "price": 2199,
-          "label": "Specimen"
+        habitatSetup: {
+            "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
+            "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
+            "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
+            "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
         },
-        {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 4398,
-          "label": "2 specimens"
-        }
-      ],
-      featured: true
+        didYouKnow: [
+            "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
+            "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
+        ],
+        featured: true
     },
     {
-      id: "mexican-red-knee",
-      category: "tarantulas",
-      categoryName: "Tarantulas",
-      subCategory: "tarantulas",
-      name: "Mexican Red Knee",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Brachypelma_edit.jpg",
-      images: [],
-      video: "",
-      description: "World-famous display species showcasing fiery orange-red leg joints and deep black velvety body. Very docile and long-lived.",
-      specs: {
-        "care": "Low Maintenance",
-        "temp": "23°C – 28°C",
-        "diet": "Pinhead crickets & roach nymphs",
-        "habitat": "Ventilated sling vial / enclosure",
-        "size": "1–1.5 cm"
-      },
-      variants: [
-        {
-          "name": "1 Specimen (1–1.5 cm)",
-          "price": 2399,
-          "label": "Specimen"
+        id: "brazilian-whiteknee",
+        category: "tarantulas",
+        categoryName: "Tarantulas",
+        subCategory: "tarantulas",
+        name: "Brazilian Whiteknee",
+        subtitle: "Acanthoscurria geniculata",
+        image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Acanthoscurria_geniculata%2C_female.jpg",
+        images: [],
+        video: "",
+        description: "Bold contrast of jet-black legs adorned with striking snow-white knee bands. Highly active with an enthusiastic feeding response.",
+        price: 2199,
+        unit: "specimen",
+        minQuantity: 1,
+        size: "1–1.5 cm",
+        overview: "The Brazilian Whiteknee (Acanthoscurria geniculata) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+        careRequirements: {
+            "Difficulty": "Low Maintenance",
+            "Temperature": "23°C – 28°C",
+            "Humidity": "55% – 70% with access to a shallow water dish",
+            "Diet": "Pinhead crickets & roach nymphs",
+            "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
+            "Temperament": "New World terrestrial species; observe as display exotic"
         },
-        {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 4798,
-          "label": "2 specimens"
-        }
-      ],
-      featured: true
-    },
-    {
-      id: "green-bottle-blue",
-      category: "tarantulas",
-      categoryName: "Tarantulas",
-      subCategory: "tarantulas",
-      name: "Green Bottle Blue (GBB)",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Chromatopelma_cyaneopubescens.jpg",
-      images: [],
-      video: "",
-      description: "Spectacular electric blue legs, metallic emerald-green carapace, and vibrant tiger-striped abdomen. Prolific heavy webber.",
-      specs: {
-        "care": "Low Maintenance",
-        "temp": "23°C – 28°C",
-        "diet": "Pinhead crickets & roach nymphs",
-        "habitat": "Ventilated sling vial / enclosure",
-        "size": "1–1.5 cm"
-      },
-      variants: [
-        {
-          "name": "1 Specimen (1–1.5 cm)",
-          "price": 4799,
-          "label": "Specimen"
+        habitatSetup: {
+            "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
+            "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
+            "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
+            "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
         },
-        {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 9598,
-          "label": "2 specimens"
-        }
-      ],
-      featured: true
+        didYouKnow: [
+            "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
+            "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
+        ],
+        featured: true
     },
     {
-      id: "chaco-golden-knee",
-      category: "tarantulas",
-      categoryName: "Tarantulas",
-      subCategory: "tarantulas",
-      name: "Chaco Golden Knee",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/6/64/Grammostola_pulchripes_top_view.jpg",
-      images: [],
-      video: "",
-      description: "Gentle giant famous for golden-yellow striped knee markings and calm demeanor. Highly recommended for enthusiastic beginners.",
-      specs: {
-        "care": "Low Maintenance",
-        "temp": "23°C – 28°C",
-        "diet": "Pinhead crickets & roach nymphs",
-        "habitat": "Ventilated sling vial / enclosure",
-        "size": "1–1.5 cm"
-      },
-      variants: [
-        {
-          "name": "1 Specimen (1–1.5 cm)",
-          "price": 1999,
-          "label": "Specimen"
+        id: "mexican-red-knee",
+        category: "tarantulas",
+        categoryName: "Tarantulas",
+        subCategory: "tarantulas",
+        name: "Mexican Red Knee",
+        subtitle: "Brachypelma hamorii",
+        image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Brachypelma_edit.jpg",
+        images: [],
+        video: "",
+        description: "World-famous display species showcasing fiery orange-red leg joints and deep black velvety body. Very docile and long-lived.",
+        price: 2399,
+        unit: "specimen",
+        minQuantity: 1,
+        size: "1–1.5 cm",
+        overview: "The Mexican Red Knee (Brachypelma hamorii) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+        careRequirements: {
+            "Difficulty": "Low Maintenance",
+            "Temperature": "23°C – 28°C",
+            "Humidity": "55% – 70% with access to a shallow water dish",
+            "Diet": "Pinhead crickets & roach nymphs",
+            "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
+            "Temperament": "New World terrestrial species; observe as display exotic"
         },
-        {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 3998,
-          "label": "2 specimens"
-        }
-      ],
-      featured: false
-    },
-    {
-      id: "salmon-pink",
-      category: "tarantulas",
-      categoryName: "Tarantulas",
-      subCategory: "tarantulas",
-      name: "Salmon Pink",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Brazilian_Salmon_Pink_Birdeater.jpg",
-      images: [],
-      video: "",
-      description: "One of the largest tarantula species in the world. Fast-growing established spiderling with salmon-pink hairs.",
-      specs: {
-        "care": "Low Maintenance",
-        "temp": "23°C – 28°C",
-        "diet": "Pinhead crickets & roach nymphs",
-        "habitat": "Ventilated sling vial / enclosure",
-        "size": "1 inch"
-      },
-      variants: [
-        {
-          "name": "1 Specimen (1 inch)",
-          "price": 3000,
-          "label": "Specimen"
+        habitatSetup: {
+            "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
+            "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
+            "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
+            "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
         },
-        {
-          "name": "Pair of Slings (2 specimens)",
-          "price": 6000,
-          "label": "2 specimens"
-        }
-      ],
-      featured: true
+        didYouKnow: [
+            "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
+            "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
+        ],
+        featured: true
     },
     {
-      id: "isopod-house-kit",
-      category: "combo",
-      categoryName: "Combo Packs",
-      subCategory: "isopod-kit",
-      name: "Isopod House Kit",
-      subtitle: "",
-      image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=800&q=80",
-      images: [],
-      video: "",
-      description: "Complete glass bioactive habitat setup. Includes glass isopod house, live plants, substrate blend, lotus pod hide, food, and a starter culture of 6 Cubaris Glacier isopods.",
-      specs: {
-        "care": "Complete Bioactive Setup",
-        "temp": "Ambient Room Temp",
-        "diet": "Included in starter pack",
-        "habitat": "High-clarity glass enclosure",
-        "kitIncludes": [
-          "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height)",
-          "Fittonia albivenis (Patterned nerve plant)",
-          "Hemigraphis sp. Pink (Purple waffle plant)",
-          "Sheet Moss layer",
-          "Bioactive Isopod Substrate Blend",
-          "Lotus Pod (natural hide for isopods)",
-          "Premium Isopod Food",
-          "Isopod Culture: 6 Cubaris sp. \"Glacier\""
-        ]
-      },
-      variants: [
-        {
-          "name": "Complete Kit",
-          "price": 1545,
-          "label": "Kit"
-        }
-      ],
-      featured: true
+        id: "green-bottle-blue",
+        category: "tarantulas",
+        categoryName: "Tarantulas",
+        subCategory: "tarantulas",
+        name: "Green Bottle Blue (GBB)",
+        subtitle: "Chromatopelma cyaneopubescens",
+        image: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Chromatopelma_cyaneopubescens.jpg",
+        images: [],
+        video: "",
+        description: "Spectacular electric blue legs, metallic emerald-green carapace, and vibrant tiger-striped abdomen. Prolific heavy webber.",
+        price: 4799,
+        unit: "specimen",
+        minQuantity: 1,
+        size: "1–1.5 cm",
+        overview: "The Green Bottle Blue (GBB) (Chromatopelma cyaneopubescens) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+        careRequirements: {
+            "Difficulty": "Low Maintenance",
+            "Temperature": "23°C – 28°C",
+            "Humidity": "55% – 70% with access to a shallow water dish",
+            "Diet": "Pinhead crickets & roach nymphs",
+            "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
+            "Temperament": "New World terrestrial species; observe as display exotic"
+        },
+        habitatSetup: {
+            "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
+            "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
+            "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
+            "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
+        },
+        didYouKnow: [
+            "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
+            "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
+        ],
+        featured: true
     },
     {
-      id: "half-cube-aquarium-kit",
-      category: "combo",
-      categoryName: "Combo Packs",
-      subCategory: "aquarium-kit",
-      name: "Half Cube Aquarium Kit",
-      subtitle: "",
-      image: "https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=800&q=80",
-      images: [],
-      video: "",
-      description: "Desktop planted aquarium kit. Includes Half Cube aquarium, 1 healthy Betta fish, live aquatic plants, and premium sand substrate.",
-      specs: {
-        "care": "Complete Bioactive Setup",
-        "temp": "Ambient Room Temp",
-        "diet": "Included in starter pack",
-        "habitat": "High-clarity glass enclosure",
-        "kitIncludes": [
-          "Half Cube Aquarium",
-          "1 beautiful Betta Fish",
-          "Live aquatic plants",
-          "Premium sand substrate"
-        ]
-      },
-      variants: [
-        {
-          "name": "Complete Kit",
-          "price": 999,
-          "label": "Kit"
-        }
-      ],
-      featured: true
+        id: "chaco-golden-knee",
+        category: "tarantulas",
+        categoryName: "Tarantulas",
+        subCategory: "tarantulas",
+        name: "Chaco Golden Knee",
+        subtitle: "Grammostola pulchripes",
+        image: "https://upload.wikimedia.org/wikipedia/commons/6/64/Grammostola_pulchripes_top_view.jpg",
+        images: [],
+        video: "",
+        description: "Gentle giant famous for golden-yellow striped knee markings and calm demeanor. Highly recommended for enthusiastic beginners.",
+        price: 1999,
+        unit: "specimen",
+        minQuantity: 1,
+        size: "1–1.5 cm",
+        overview: "The Chaco Golden Knee (Grammostola pulchripes) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+        careRequirements: {
+            "Difficulty": "Low Maintenance",
+            "Temperature": "23°C – 28°C",
+            "Humidity": "55% – 70% with access to a shallow water dish",
+            "Diet": "Pinhead crickets & roach nymphs",
+            "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
+            "Temperament": "New World terrestrial species; observe as display exotic"
+        },
+        habitatSetup: {
+            "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
+            "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
+            "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
+            "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
+        },
+        didYouKnow: [
+            "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
+            "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
+        ],
+        featured: false
     },
     {
-      id: "glacier-colony-pack",
-      category: "combo",
-      categoryName: "Combo Packs",
-      subCategory: "isopod-kit",
-      name: "Glacier Colony Pack",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_tarangensis_190481013.jpg",
-      images: [],
-      video: "",
-      description: "Promotional colony pack: Purchase 10 Cubaris Murina Glacier isopods and receive 1 bonus isopod free of charge (11 specimens total).",
-      specs: {
-        "care": "Complete Bioactive Setup",
-        "temp": "Ambient Room Temp",
-        "diet": "Included in starter pack",
-        "habitat": "High-clarity glass enclosure",
-        "kitIncludes": [
-          "10 Cubaris Murina Glacier Isopods",
-          "1 Bonus Isopod (11 specimens total)",
-          "Ventilated transport culture cup",
-          "Starter food blend"
-        ]
-      },
-      variants: [
-        {
-          "name": "10 + 1 Free Deal (11 specimens)",
-          "price": 700,
-          "label": "11 Pieces"
-        }
-      ],
-      featured: true
+        id: "salmon-pink",
+        category: "tarantulas",
+        categoryName: "Tarantulas",
+        subCategory: "tarantulas",
+        name: "Salmon Pink",
+        subtitle: "Lasiodora parahybana",
+        image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Brazilian_Salmon_Pink_Birdeater.jpg",
+        images: [],
+        video: "",
+        description: "One of the largest tarantula species in the world. Fast-growing established spiderling with salmon-pink hairs.",
+        price: 3000,
+        unit: "specimen",
+        minQuantity: 1,
+        size: "1 inch",
+        overview: "The Salmon Pink (Lasiodora parahybana) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+        careRequirements: {
+            "Difficulty": "Low Maintenance",
+            "Temperature": "23°C – 28°C",
+            "Humidity": "55% – 70% with access to a shallow water dish",
+            "Diet": "Pinhead crickets & roach nymphs",
+            "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
+            "Temperament": "New World terrestrial species; observe as display exotic"
+        },
+        habitatSetup: {
+            "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
+            "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
+            "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
+            "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
+        },
+        didYouKnow: [
+            "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
+            "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
+        ],
+        featured: true
+    },
+    {
+        id: "isopod-house-kit",
+        category: "combo",
+        categoryName: "Combo Packs",
+        subCategory: "isopod-kit",
+        name: "Isopod House Kit",
+        subtitle: "Bioactive Glass Vivarium Kit",
+        image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=800&q=80",
+        images: [],
+        video: "",
+        description: "Complete glass bioactive habitat setup. Includes glass isopod house, live plants, substrate blend, lotus pod hide, food, and a starter culture of 6 Cubaris Glacier isopods.",
+        price: 1545,
+        unit: "kit",
+        minQuantity: 1,
+        size: "",
+        kitIncludes: [
+            "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height)",
+            "Fittonia albivenis (Patterned nerve plant)",
+            "Hemigraphis sp. Pink (Purple waffle plant)",
+            "Sheet Moss layer",
+            "Bioactive Isopod Substrate Blend",
+            "Lotus Pod (natural hide for isopods)",
+            "Premium Isopod Food",
+            "Isopod Culture: 6 Cubaris sp. \"Glacier\""
+        ],
+        overview: "The Isopod House Kit is an all-inclusive, curated complete biological setup designed by Fish Tales specialists. Includes premium glass enclosure, substrate, live specimens, and balanced essentials.",
+        careRequirements: {
+            "Setup Difficulty": "Beginner Friendly / Turnkey Kit",
+            "Operating Temp": "Ambient Room Temp",
+            "Maintenance": "Weekly misting or feeding as specified in care guidelines",
+            "Included Components": "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height), Fittonia albivenis (Patterned nerve plant), Hemigraphis sp. Pink (Purple waffle plant), Sheet Moss layer, Bioactive Isopod Substrate Blend, Lotus Pod (natural hide for isopods), Premium Isopod Food, Isopod Culture: 6 Cubaris sp. \"Glacier\""
+        },
+        habitatSetup: {
+            "Enclosure Construction": "High-clarity precision glass with optimal ventilation and biological balance",
+            "Placement": "Place on a sturdy, level surface away from direct harsh sunlight or extreme drafts",
+            "Lighting": "Gentle ambient room light or nano LED fixture supporting live botanical growth"
+        },
+        didYouKnow: [
+            "Bioactive closed-loop habitats create self-sustaining micro-ecosystems where plants, micro-fauna, and custodial cleaners thrive harmoniously.",
+            "All kit components are hand-selected, cleaned, and balanced by Fish Tales biologists for immediate plug-and-play enjoyment."
+        ],
+        featured: true
+    },
+    {
+        id: "half-cube-aquarium-kit",
+        category: "combo",
+        categoryName: "Combo Packs",
+        subCategory: "aquarium-kit",
+        name: "Half Cube Aquarium Kit",
+        subtitle: "Nano Desktop Aquascape System",
+        image: "https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=800&q=80",
+        images: [],
+        video: "",
+        description: "Desktop planted aquarium kit. Includes Half Cube aquarium, 1 healthy Betta fish, live aquatic plants, and premium sand substrate.",
+        price: 999,
+        unit: "kit",
+        minQuantity: 1,
+        size: "",
+        kitIncludes: [
+            "Half Cube Aquarium",
+            "1 beautiful Betta Fish",
+            "Live aquatic plants",
+            "Premium sand substrate"
+        ],
+        overview: "The Half Cube Aquarium Kit is an all-inclusive, curated complete biological setup designed by Fish Tales specialists. Includes premium glass enclosure, substrate, live specimens, and balanced essentials.",
+        careRequirements: {
+            "Setup Difficulty": "Beginner Friendly / Turnkey Kit",
+            "Operating Temp": "Ambient Room Temp",
+            "Maintenance": "Weekly misting or feeding as specified in care guidelines",
+            "Included Components": "Half Cube Aquarium, 1 beautiful Betta Fish, Live aquatic plants, Premium sand substrate"
+        },
+        habitatSetup: {
+            "Enclosure Construction": "High-clarity precision glass with optimal ventilation and biological balance",
+            "Placement": "Place on a sturdy, level surface away from direct harsh sunlight or extreme drafts",
+            "Lighting": "Gentle ambient room light or nano LED fixture supporting live botanical growth"
+        },
+        didYouKnow: [
+            "Bioactive closed-loop habitats create self-sustaining micro-ecosystems where plants, micro-fauna, and custodial cleaners thrive harmoniously.",
+            "All kit components are hand-selected, cleaned, and balanced by Fish Tales biologists for immediate plug-and-play enjoyment."
+        ],
+        featured: true
+    },
+    {
+        id: "glacier-colony-pack",
+        category: "combo",
+        categoryName: "Combo Packs",
+        subCategory: "isopod-kit",
+        name: "Glacier Colony Pack",
+        subtitle: "Cubaris murina var. Glacier",
+        image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_tarangensis_190481013.jpg",
+        images: [],
+        video: "",
+        description: "Promotional colony pack: Purchase 10 Cubaris Murina Glacier isopods and receive 1 bonus isopod free of charge (11 specimens total).",
+        price: 700,
+        unit: "11 pieces",
+        minQuantity: 1,
+        size: "",
+        kitIncludes: [
+            "10 Cubaris Murina Glacier Isopods",
+            "1 Bonus Isopod (11 specimens total)",
+            "Ventilated transport culture cup",
+            "Starter food blend"
+        ],
+        overview: "The Glacier Colony Pack is an all-inclusive, curated complete biological setup designed by Fish Tales specialists. Includes premium glass enclosure, substrate, live specimens, and balanced essentials.",
+        careRequirements: {
+            "Setup Difficulty": "Beginner Friendly / Turnkey Kit",
+            "Operating Temp": "Ambient Room Temp",
+            "Maintenance": "Weekly misting or feeding as specified in care guidelines",
+            "Included Components": "10 Cubaris Murina Glacier Isopods, 1 Bonus Isopod (11 specimens total), Ventilated transport culture cup, Starter food blend"
+        },
+        habitatSetup: {
+            "Enclosure Construction": "High-clarity precision glass with optimal ventilation and biological balance",
+            "Placement": "Place on a sturdy, level surface away from direct harsh sunlight or extreme drafts",
+            "Lighting": "Gentle ambient room light or nano LED fixture supporting live botanical growth"
+        },
+        didYouKnow: [
+            "Bioactive closed-loop habitats create self-sustaining micro-ecosystems where plants, micro-fauna, and custodial cleaners thrive harmoniously.",
+            "All kit components are hand-selected, cleaned, and balanced by Fish Tales biologists for immediate plug-and-play enjoyment."
+        ],
+        featured: true
     }
-  ];
+];
 
   /* ── 4. Cart State Management (localStorage) ────────────── */
   const CartManager = {
@@ -1179,28 +1592,38 @@
       return items.reduce((sum, item) => sum + item.quantity, 0);
     },
 
-    add(product, qty = 1, variant = null) {
+    add(product, qty = 1) {
       if (!product || !product.id) return;
       initProductVariantsAndSpecs(product);
-      qty = Math.max(1, Math.floor(qty));
-      const activeVariant = variant || getProductSelectedVariant(product);
-      const isBaseOption = !activeVariant || activeVariant.name === '1 Pair (Adult Pair)' || activeVariant.name === 'Single (1 pc)' || activeVariant.name === 'Complete Kit';
-      const variantKey = isBaseOption ? String(product.id) : String(product.id) + '__var_' + encodeURIComponent(activeVariant.name);
-      const displayName = isBaseOption ? product.name : product.name + ' (' + activeVariant.name + ')';
-      const activePrice = activeVariant ? activeVariant.price : product.price;
-      const activeUnit = activeVariant ? activeVariant.unit : product.pricingUnit;
+
+      // Special Minimum Order Quantity rule ONLY for Isopods (min: 5 pieces)
+      const minQty = product.minQuantity || (isIsopodProduct(product) ? 5 : 1);
+      if (qty < minQty) {
+        qty = minQty;
+        if (isIsopodProduct(product)) {
+          showToast('Minimum order for Isopods is 5 pieces.', 'info');
+        }
+      } else {
+        qty = Math.floor(qty);
+      }
+
+      const cartId = String(product.id);
+      const displayName = product.name;
+      const activePrice = Number(product.price || 0);
+      const activeUnit = isIsopodProduct(product) ? 'pieces' : (product.unit || product.pricingUnit || 'piece');
 
       const items = this.load();
-      const idx = items.findIndex(i => String(i.id) === variantKey);
+      const idx = items.findIndex(i => String(i.id) === cartId || String(i.baseId) === cartId);
       if (idx >= 0) {
         items[idx].quantity += qty;
       } else {
         items.push({
-          id: variantKey,
-          baseId: String(product.id),
+          id: cartId,
+          baseId: cartId,
           name: displayName,
-          price: Number(activePrice),
+          price: activePrice,
           pricingUnit: activeUnit,
+          unit: activeUnit,
           size: product.size || null,
           categoryLabel: (product.categoryName || product.categoryLabel) || '',
           image: product.image || PLACEHOLDER_IMG,
@@ -1211,20 +1634,17 @@
       showToast(`Added ${displayName} to cart!`, 'success');
     },
 
-    addById(id, qty = 1, variantIndex = null) {
+    addById(id, qty = null) {
       const product = PRODUCTS.find(p => String(p.id) === String(id));
       if (!product) {
         console.warn('Product not found for id:', id);
         return;
       }
       initProductVariantsAndSpecs(product);
-      let variant = null;
-      if (variantIndex !== null && product.variants && product.variants[variantIndex]) {
-        variant = product.variants[variantIndex];
-      } else {
-        variant = getProductSelectedVariant(product);
+      if (qty === null || qty === undefined || isNaN(qty)) {
+        qty = product.minQuantity || (isIsopodProduct(product) ? 5 : 1);
       }
-      this.add(product, qty, variant);
+      this.add(product, qty);
     },
 
     update(id, qty) {
@@ -1236,6 +1656,12 @@
       const items = this.load();
       const idx = items.findIndex(i => String(i.id) === String(id));
       if (idx >= 0) {
+        const item = items[idx];
+        const isIsopod = isIsopodProduct(item);
+        if (isIsopod && qty < 5) {
+          qty = 5;
+          showToast('Minimum order for Isopods is 5 pieces.', 'info');
+        }
         items[idx].quantity = qty;
         this.save(items);
       }
@@ -1316,6 +1742,10 @@
   window.CartManager = CartManager;
   window.addToCartById = (id, qty = 1) => CartManager.addById(id, qty);
   window.renderProductGrid = renderProductGrid;
+  window.initProductVariantsAndSpecs = initProductVariantsAndSpecs;
+  window.getProductSelectedVariant = getProductSelectedVariant;
+  window.isIsopodProduct = isIsopodProduct;
+  window.getProductQuantityLabel = getProductQuantityLabel;
 
   /* ── 5. Toast Notification Controller ────────────────────── */
   function showToast(message, type = 'success') {
@@ -1406,65 +1836,11 @@
   let currentSearch = '';
   let currentSort = 'default';
 
-  window.onCardVariantChange = function (productId, variantIndex) {
-    selectedVariants[productId] = Number(variantIndex);
-    const product = PRODUCTS.find(p => String(p.id) === String(productId));
-    if (!product) return;
-    initProductVariantsAndSpecs(product);
-    const variant = product.variants[Number(variantIndex)] || product.variants[0];
-
-    const priceEl = document.getElementById('cardPrice_' + productId);
-    const unitEl = document.getElementById('cardUnit_' + productId);
-    const varPriceEl = document.getElementById('cardVarPrice_' + productId);
-    const labelEl = document.getElementById('cardPriceLabel_' + productId);
-
-    if (priceEl) priceEl.textContent = CartManager.formatPrice(variant.price);
-    if (unitEl) unitEl.textContent = '/ ' + variant.unit;
-    if (varPriceEl) varPriceEl.textContent = CartManager.formatPrice(variant.price);
-    if (labelEl) labelEl.textContent = getProductPriceLabel(variant, product.category);
-
-    // Sync with modal if currently open for this product
-    const modalSelect = document.getElementById('modalVariantSelect');
-    if (modalSelect) {
-      modalSelect.value = variantIndex;
-      const modalPriceEl = document.getElementById('modalPrice');
-      const modalVariantPriceEl = document.getElementById('modalVariantPrice');
-      const modalUnitEl = document.getElementById('modalUnit');
-      if (modalPriceEl) modalPriceEl.textContent = CartManager.formatPrice(variant.price);
-      if (modalVariantPriceEl) modalVariantPriceEl.textContent = CartManager.formatPrice(variant.price);
-      if (modalUnitEl) modalUnitEl.textContent = '/ ' + variant.unit;
-    }
-  };
-
-  window.onModalVariantChange = function (productId, variantIndex) {
-    selectedVariants[productId] = Number(variantIndex);
-    const product = PRODUCTS.find(p => String(p.id) === String(productId));
-    if (!product) return;
-    initProductVariantsAndSpecs(product);
-    const variant = product.variants[Number(variantIndex)] || product.variants[0];
-
-    const modalPriceEl = document.getElementById('modalPrice');
-    const modalVariantPriceEl = document.getElementById('modalVariantPrice');
-    const modalUnitEl = document.getElementById('modalUnit');
-    if (modalPriceEl) modalPriceEl.textContent = CartManager.formatPrice(variant.price);
-    if (modalVariantPriceEl) modalVariantPriceEl.textContent = CartManager.formatPrice(variant.price);
-    if (modalUnitEl) modalUnitEl.textContent = '/ ' + variant.unit;
-
-    // Sync corresponding product card if visible
-    const cardSelect = document.getElementById('cardVar_' + productId);
-    if (cardSelect) cardSelect.value = variantIndex;
-    const priceEl = document.getElementById('cardPrice_' + productId);
-    const unitEl = document.getElementById('cardUnit_' + productId);
-    const varPriceEl = document.getElementById('cardVarPrice_' + productId);
-    const labelEl = document.getElementById('cardPriceLabel_' + productId);
-    if (priceEl) priceEl.textContent = CartManager.formatPrice(variant.price);
-    if (unitEl) unitEl.textContent = '/ ' + variant.unit;
-    if (varPriceEl) varPriceEl.textContent = CartManager.formatPrice(variant.price);
-    if (labelEl) labelEl.textContent = getProductPriceLabel(variant, product.category);
-  };
+  window.onCardVariantChange = function () {};
+  window.onModalVariantChange = function () {};
 
   window.addCardVariantToCart = function (productId) {
-    CartManager.addById(productId, 1);
+    CartManager.addById(productId);
   };
 
   function renderProductGrid() {
@@ -1579,7 +1955,7 @@
       return `
         <article class="product-card" data-id="${product.id}">
           <!-- 1. Product image -->
-          <div class="product-card-thumb" onclick="openProductModal('${product.id}')" title="View ${product.name} details">
+          <div class="product-card-thumb" onclick="navigateToProduct('${product.id}')" title="View ${product.name} details">
             <img src="${product.image || PLACEHOLDER_IMG}" alt="${product.name}" class="product-card-img" loading="lazy" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
           </div>
 
@@ -1589,7 +1965,7 @@
             <div class="product-card-cat">${(product.categoryName || product.categoryLabel)}</div>
 
             <!-- 3. Product name -->
-            <h3 class="product-card-name" onclick="openProductModal('${product.id}')" title="${product.name}">${product.name}</h3>
+            <h3 class="product-card-name" onclick="navigateToProduct('${product.id}')" title="${product.name}">${product.name}</h3>
 
             <!-- 4. Product subtitle or short description -->
             <div class="product-card-sub" title="${product.scientificName || product.description}">${product.scientificName || product.description}</div>
@@ -1607,7 +1983,7 @@
 
               <!-- 7 & 8. Action buttons (Full-width stacked: 7. View Details, 8. Add to Cart) -->
               <div class="product-card-actions">
-                <button type="button" class="btn card-btn-view" onclick="openProductModal('${product.id}')">
+                <button type="button" class="btn card-btn-view" onclick="navigateToProduct('${product.id}')">
                   View Details
                 </button>
                 <button type="button" class="btn card-btn-add" onclick="addCardVariantToCart('${product.id}')">
@@ -1689,8 +2065,26 @@
     renderProductGrid();
   };
 
-  /* ── 7. Product Detail Modal ─────────────────────────────── */
+  /* ── 7. Product Detail Navigation & Modal ─────────────────── */
+  window.navigateToProduct = function (productId) {
+    if (typeof window !== 'undefined' && window.location && typeof window.location.href === 'string') {
+      window.location.href = 'product.html?id=' + encodeURIComponent(productId);
+    } else if (typeof window.openProductModal === 'function') {
+      window.openProductModal(productId);
+    }
+  };
+
   window.openProductModal = function (productId) {
+    // In live browser environment, navigate directly to dedicated full-page product detail page
+    if (typeof window !== 'undefined' && window.location && typeof window.location.href === 'string' && window.location.pathname) {
+      const currentId = new URLSearchParams(window.location.search).get('id');
+      if (window.location.pathname.endsWith('product.html') && currentId === String(productId)) {
+        return;
+      }
+      window.location.href = 'product.html?id=' + encodeURIComponent(productId);
+      return;
+    }
+
     const product = PRODUCTS.find(p => String(p.id) === String(productId));
     if (!product) return;
     initProductVariantsAndSpecs(product);
@@ -1701,8 +2095,12 @@
 
     const activeVariant = getProductSelectedVariant(product);
     const activeVariantIdx = selectedVariants[product.id] || 0;
-    const displayPrice = CartManager.formatPrice(activeVariant.price);
-    const displayUnit = '/ ' + activeVariant.unit;
+    const isIsopod = isIsopodProduct(product);
+    const defaultQty = isIsopod ? 5 : 1;
+    const unitPrice = (activeVariant && activeVariant.price !== undefined) ? Number(activeVariant.price) : Number(product.price || 0);
+    const displayPrice = CartManager.formatPrice(unitPrice);
+    const displayTotalPrice = CartManager.formatPrice(unitPrice * defaultQty);
+    const displayUnit = isIsopod ? '/ piece' : ('/ ' + activeVariant.unit);
 
     const kitHTML = (product.kitIncludes && product.kitIncludes.length)
       ? `
@@ -1715,7 +2113,11 @@
       `
       : '';
 
-    const specs = product.specs || {};
+    const care = product.careRequirements || {};
+    const careLevel = care.Difficulty || care.difficulty || care['Setup Difficulty'] || 'Moderate';
+    const tempVal = care['Water Temp'] || care.Temperature || care['Operating Temp'] || '22°C – 28°C';
+    const dietVal = care.Diet || care.diet || 'Micro-pellets & live/frozen foods';
+    const sizeVal = product.size || (isIsopod ? 'Colony Specimen' : (product.unit === 'pair' ? 'Adult Pair' : 'Standard Specimen'));
 
     modalContent.innerHTML = `
       <div class="modal-layout">
@@ -1746,18 +2148,16 @@
           <!-- Product description -->
           <p class="modal-desc">${product.description}</p>
 
-          <!-- Variant selector with selected price (SELECT VARIANT header row + dropdown) -->
-          <div class="modal-variant-section">
-            <div class="modal-variant-header">
-              <span class="variant-hdr-label">SELECT VARIANT:</span>
-              <span class="variant-hdr-price" id="modalVariantPrice">${displayPrice}</span>
+          <!-- Quantity selector with unit label & dynamic total price (Replaces legacy dropdown) -->
+          <div class="modal-qty-section">
+            <div class="modal-qty-header">
+              <span class="modal-qty-label">${getProductQuantityLabel(product)}</span>
+              <span class="modal-qty-total-price" id="modalQtyTotal">${displayTotalPrice}</span>
             </div>
-            <div class="modal-variant-dropdown-wrap">
-              <select id="modalVariantSelect" class="modal-variant-dropdown" onchange="onModalVariantChange('${product.id}', this.value)" title="Choose variant">
-                ${product.variants.map((v, idx) => `
-                  <option value="${idx}" ${idx === activeVariantIdx ? 'selected' : ''}>${v.name} (${CartManager.formatPrice(v.price)})</option>
-                `).join('')}
-              </select>
+            <div class="modal-qty-selector">
+              <button type="button" class="modal-qty-btn" onclick="updateModalQty(-1, '${product.id}')" aria-label="Decrease quantity">−</button>
+              <span class="modal-qty-value" id="modalQty">${defaultQty}</span>
+              <button type="button" class="modal-qty-btn" onclick="updateModalQty(1, '${product.id}')" aria-label="Increase quantity">+</button>
             </div>
           </div>
 
@@ -1765,19 +2165,19 @@
           <div class="modal-specs-card">
             <div class="spec-entry">
               <span class="spec-k">Care Level:</span>
-              <span class="spec-v">${specs.care || 'Moderate'}</span>
+              <span class="spec-v">${careLevel}</span>
             </div>
             <div class="spec-entry">
               <span class="spec-k">Water Temp:</span>
-              <span class="spec-v">${specs.temp || '22°C – 28°C'}</span>
+              <span class="spec-v">${tempVal}</span>
             </div>
             <div class="spec-entry">
               <span class="spec-k">Diet:</span>
-              <span class="spec-v">${specs.diet || 'Micro-pellets & live/frozen foods'}</span>
+              <span class="spec-v">${dietVal}</span>
             </div>
             <div class="spec-entry">
               <span class="spec-k">Specimen Size:</span>
-              <span class="spec-v">${product.size || 'Adult Pair / Verified Mature'}</span>
+              <span class="spec-v">${sizeVal}</span>
             </div>
           </div>
 
@@ -1815,14 +2215,35 @@
     }
   };
 
-  window.updateModalQty = function (delta) {
+  window.updateModalQty = function (delta, productId) {
     const qtyEl = document.getElementById('modalQty');
     if (!qtyEl) return;
+    const product = productId ? PRODUCTS.find(p => String(p.id) === String(productId)) : null;
+    const isIsopod = product ? isIsopodProduct(product) : false;
+    const minQty = isIsopod ? 5 : 1;
+
     let current = parseInt(qtyEl.textContent, 10);
-    if (isNaN(current)) current = 1;
+    if (isNaN(current)) current = minQty;
     let qty = current + delta;
-    if (qty < 1) qty = 1;
+    if (qty < minQty) {
+      qty = minQty;
+      if (isIsopod) {
+        showToast('Minimum order for Isopods is 5 pieces.', 'info');
+      }
+    }
     qtyEl.textContent = qty;
+
+    // Dynamically calculate and update total price
+    if (product) {
+      initProductVariantsAndSpecs(product);
+      const variant = getProductSelectedVariant(product);
+      const unitPrice = (variant && variant.price !== undefined) ? Number(variant.price) : Number(product.price || 0);
+      const total = unitPrice * qty;
+      const totalEl = document.getElementById('modalQtyTotal');
+      if (totalEl) {
+        totalEl.textContent = CartManager.formatPrice(total);
+      }
+    }
   };
 
   window.addModalCurrentToCart = function (productId) {
@@ -1857,6 +2278,601 @@
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
+  /* ── 7b. Full-Page Product Detail Page (PDP) System ──────── */
+  window.renderProductDetailPage = function () {
+    const mainContainer = document.getElementById('pdpMain');
+    if (!mainContainer) return;
+
+    let requestedId = '';
+    if (typeof window !== 'undefined' && window.location && window.location.search) {
+      const urlParams = new URLSearchParams(window.location.search);
+      requestedId = urlParams.get('id') || urlParams.get('product') || '';
+    }
+
+    let product = PRODUCTS.find(p => String(p.id).toLowerCase() === String(requestedId).toLowerCase());
+    if (!product) {
+      product = PRODUCTS[0];
+    }
+    initProductVariantsAndSpecs(product);
+
+    // Update Page Title
+    if (typeof document !== 'undefined' && document.title !== undefined) {
+      document.title = `${product.name} — Fish Tales | Aquatic & Exotic Life`;
+    }
+
+    // Category & Collection Breadcrumbs
+    let collectionUrl = 'index.html';
+    let collectionName = 'Living Catalogue';
+    const catLower = (product.category || '').toLowerCase();
+    if (catLower === 'fish' || catLower === 'aquarium') {
+      collectionUrl = 'aquarium-fish.html';
+      collectionName = 'Aquarium & Fish';
+    } else if (catLower === 'isopods') {
+      collectionUrl = 'isopods.html';
+      collectionName = 'Bioactive Isopods';
+    } else if (catLower === 'tarantulas') {
+      collectionUrl = 'tarantulas.html';
+      collectionName = 'Exotic Tarantulas';
+    } else if (catLower === 'combos' || catLower === 'combo') {
+      collectionUrl = 'combo-packs.html';
+      collectionName = 'Combo Packs';
+    }
+
+    const activeVariant = getProductSelectedVariant(product);
+    const unitPrice = (activeVariant && activeVariant.price !== undefined) ? Number(activeVariant.price) : Number(product.price || 0);
+    const isIsopod = isIsopodProduct(product);
+    const defaultQty = isIsopod ? 5 : 1;
+    const minQty = defaultQty;
+    const displayPrice = CartManager.formatPrice(unitPrice);
+    const displayUnit = isIsopod ? '/ piece' : ('/ ' + (activeVariant ? activeVariant.unit : (product.pricingUnit || 'piece')));
+    const qtyLabel = isIsopod ? 'Select Quantity (pieces)' : getProductQuantityLabel(product);
+
+    // Images gallery
+    const mainImg = product.image || PLACEHOLDER_IMG;
+    const galleryImages = (product.images && Array.isArray(product.images) && product.images.length > 0)
+      ? product.images
+      : [mainImg];
+
+    // Scientific name & difficulty
+    const scientificName = product.scientificName || product.subtitle || product.name;
+    const difficulty = (product.careRequirements && (product.careRequirements.Difficulty || product.careRequirements.difficulty || product.careRequirements['Setup Difficulty']))
+      || (product.specs && (product.specs['Care Level'] || product.specs.care))
+      || 'Beginner Friendly';
+
+    // Related products (3-4 items)
+    let related = PRODUCTS.filter(p => String(p.id) !== String(product.id) && (p.subCategory === product.subCategory || p.category === product.category));
+    if (related.length < 3) {
+      const others = PRODUCTS.filter(p => String(p.id) !== String(product.id) && !related.includes(p));
+      related = related.concat(others);
+    }
+    const relatedProducts = related.slice(0, 4);
+
+    // Helper functions for dynamic PDP labels and icons
+    function formatFieldLabel(key) {
+      if (!key) return '';
+      if (/[A-Z]/.test(key) && (/\s/.test(key) || /\//.test(key))) {
+        return key.trim();
+      }
+      const map = {
+        care: 'Care Level / Role',
+        temp: 'Temperature Range',
+        diet: 'Dietary Needs',
+        habitat: 'Habitat Environment',
+        size: 'Specimen Size',
+        kitIncludes: 'Kit Inclusions',
+        difficulty: 'Difficulty',
+        temperature: 'Temperature',
+        humidity: 'Humidity',
+        lifespan: 'Lifespan',
+        handling: 'Handling Guide',
+        temperament: 'Temperament',
+        waterParameters: 'Water Parameters',
+        filtration: 'Filtration & Flow',
+        substrate: 'Substrate',
+        lighting: 'Lighting Requirements',
+        plantsAndDecor: 'Plants & Decor',
+        hidesAndShelters: 'Hides & Shelters'
+      };
+      if (map[key]) return map[key];
+      const abbrevs = { tds: 'TDS', gh: 'GH', ph: 'pH', cuc: 'CUC' };
+      if (abbrevs[key.toLowerCase()]) return abbrevs[key.toLowerCase()];
+      return String(key)
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/[_-]/g, ' ')
+        .trim()
+        .replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    function getFieldIcon(label) {
+      const l = String(label).toLowerCase();
+      if (l.includes('temp') || l.includes('heat')) return '🌡️';
+      if (l.includes('humid') || l.includes('moist') || l.includes('water') || l.includes('ph') || l.includes('tds') || l.includes('hardness')) return '💧';
+      if (l.includes('diet') || l.includes('feed') || l.includes('food')) return '🍃';
+      if (l.includes('diff') || l.includes('level') || l.includes('care')) return '⭐';
+      if (l.includes('life') || l.includes('age') || l.includes('span')) return '⏳';
+      if (l.includes('handl') || l.includes('touch')) return '🧤';
+      if (l.includes('param')) return '🧪';
+      if (l.includes('temper') || l.includes('behav')) return '🐾';
+      if (l.includes('enclos') || l.includes('tank') || l.includes('aquarium') || l.includes('house') || l.includes('cage') || l.includes('setup') || l.includes('habitat') || l.includes('size')) return '🏡';
+      if (l.includes('substr') || l.includes('soil') || l.includes('sand') || l.includes('wood')) return '🪵';
+      if (l.includes('plant') || l.includes('decor') || l.includes('flora')) return '🌿';
+      if (l.includes('hide') || l.includes('shelter') || l.includes('cave')) return '🛖';
+      if (l.includes('vent') || l.includes('flow') || l.includes('filter')) return '🔄';
+      if (l.includes('light')) return '💡';
+      if (l.includes('place') || l.includes('location')) return '📍';
+      if (l.includes('maint')) return '🛠️';
+      if (l.includes('comp') || l.includes('kit') || l.includes('include')) return '📦';
+      return '✨';
+    }
+
+    // Dynamic Overview text & relevant specifications from specs
+    const overviewText = (product.overview && String(product.overview).trim().length > 0)
+      ? String(product.overview).trim()
+      : (product.description || '');
+
+    const overviewItems = [];
+    if (scientificName) {
+      overviewItems.push({
+        label: 'Scientific Name',
+        value: `<em>${scientificName}</em>`
+      });
+    }
+    if (product.size && String(product.size).trim().length > 0) {
+      overviewItems.push({
+        label: 'Specimen Size',
+        value: String(product.size).trim()
+      });
+    }
+    if (product.categoryName || product.categoryLabel) {
+      overviewItems.push({
+        label: 'Category',
+        value: product.categoryName || product.categoryLabel
+      });
+    }
+    if (difficulty) {
+      overviewItems.push({
+        label: 'Experience Level',
+        value: difficulty
+      });
+    }
+
+    // Dynamic Care Requirements: loop over every key-value pair
+    const careCards = [];
+    const careReqSource = product.careRequirements;
+    if (careReqSource && typeof careReqSource === 'object' && !Array.isArray(careReqSource)) {
+      Object.entries(careReqSource).forEach(([key, val]) => {
+        if (val !== undefined && val !== null) {
+          const valStr = Array.isArray(val) ? val.join(', ') : String(val).trim();
+          if (valStr.length > 0) {
+            careCards.push({
+              label: formatFieldLabel(key),
+              value: valStr,
+              icon: getFieldIcon(key)
+            });
+          }
+        }
+      });
+    } else if (typeof careReqSource === 'string' && careReqSource.trim().length > 0) {
+      careCards.push({
+        label: 'Care Guide',
+        value: careReqSource.trim(),
+        icon: '💧'
+      });
+    }
+
+    // Fallback if careRequirements was empty but specs has info
+    if (careCards.length === 0 && product.specs) {
+      if (product.specs.temp) {
+        careCards.push({ label: 'Water Temp', value: String(product.specs.temp).trim(), icon: '🌡️' });
+      }
+      if (product.specs.diet) {
+        careCards.push({ label: 'Diet', value: String(product.specs.diet).trim(), icon: '🍃' });
+      }
+      if (product.specs.care) {
+        careCards.push({ label: 'Care Level', value: String(product.specs.care).trim(), icon: '⭐' });
+      }
+    }
+
+    // Dynamic Habitat Setup: loop over every key-value pair
+    const habitatCards = [];
+    const habitatSource = product.habitatSetup;
+    if (habitatSource && typeof habitatSource === 'object' && !Array.isArray(habitatSource)) {
+      Object.entries(habitatSource).forEach(([key, val]) => {
+        if (val !== undefined && val !== null) {
+          const valStr = Array.isArray(val) ? val.join(', ') : String(val).trim();
+          if (valStr.length > 0) {
+            habitatCards.push({
+              label: formatFieldLabel(key),
+              value: valStr,
+              icon: getFieldIcon(key)
+            });
+          }
+        }
+      });
+    } else if (typeof habitatSource === 'string' && habitatSource.trim().length > 0) {
+      habitatCards.push({
+        label: 'Habitat Setup',
+        value: habitatSource.trim(),
+        icon: '🏡'
+      });
+    }
+
+    // Fallback if habitatSetup was empty but specs has habitat
+    if (habitatCards.length === 0 && product.specs && product.specs.habitat) {
+      habitatCards.push({
+        label: 'Habitat Setup',
+        value: String(product.specs.habitat).trim(),
+        icon: '🏡'
+      });
+    }
+
+    // Dynamic Did You Know: loop over all items in didYouKnow array
+    let dykFacts = [];
+    if (product.didYouKnow && Array.isArray(product.didYouKnow) && product.didYouKnow.length > 0) {
+      dykFacts = product.didYouKnow.filter(f => f && String(f).trim().length > 0).map(f => String(f).trim());
+    } else if (typeof product.didYouKnow === 'string' && product.didYouKnow.trim().length > 0) {
+      dykFacts = [product.didYouKnow.trim()];
+    }
+
+    if (dykFacts.length === 0) {
+      if (isIsopod) {
+        dykFacts = [
+          'Bioactive custodial cleaners that break down organic waste, decaying wood, and mold in bioactive vivaria.',
+          'Display stunning aesthetic contrast with warm espresso-brown skirts and a creamy dorsal stripe.',
+          'Thrives in moderate-humidity vivaria with nutrient-rich leaf litter, rotting hardwood, and calcium.'
+        ];
+      } else {
+        dykFacts = [
+          'Ethically captive-bred and quarantined by Fish Tales biological specialists.',
+          'Shipped in temperature-regulated, thermal-insulated live-specimen transit packaging.'
+        ];
+      }
+    }
+
+    // If kitIncludes exists (Combo kits)
+    let kitSectionHtml = '';
+    if (product.kitIncludes && product.kitIncludes.length > 0) {
+      kitSectionHtml = `
+        <div class="pdp-kit-box">
+          <h4 class="pdp-kit-title">Included in Complete Kit:</h4>
+          <ul class="pdp-kit-list">
+            ${product.kitIncludes.map(item => `<li><span class="pdp-kit-bullet">✓</span> ${item}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }
+
+    // Min Order Notice
+    const minOrderNoticeHtml = isIsopod
+      ? `<div class="pdp-min-notice" role="alert">
+          <span class="pdp-min-icon">🌿</span>
+          <span class="pdp-min-text"><strong>Minimum order for Isopods is 5 pieces</strong> (ensures healthy bioactive colony establishment &amp; acclimation).</span>
+        </div>`
+      : '';
+
+    // Render HTML into pdpMain
+    mainContainer.innerHTML = `
+      <div class="container pdp-container">
+        <!-- 1. Breadcrumbs (Top position on mobile and desktop) -->
+        <nav class="pdp-breadcrumbs" aria-label="Breadcrumb">
+          <a href="index.html" class="pdp-crumb-link">Home</a>
+          <span class="pdp-crumb-sep">/</span>
+          <a href="${collectionUrl}" class="pdp-crumb-link">${collectionName}</a>
+          <span class="pdp-crumb-sep">/</span>
+          <span class="pdp-crumb-cat">${product.categoryName || product.categoryLabel}</span>
+          <span class="pdp-crumb-sep">/</span>
+          <span class="pdp-crumb-current" aria-current="page">${product.name}</span>
+        </nav>
+
+        <!-- Two Column Main Layout -->
+        <div class="pdp-grid">
+          <!-- LEFT COLUMN: Gallery -->
+          <div class="pdp-gallery-col">
+            <div class="pdp-main-image-wrap">
+              <img id="pdpMainImg" src="${galleryImages[0]}" alt="${product.name}" class="pdp-main-img" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
+              ${galleryImages.length > 1 ? `
+                <button type="button" class="pdp-nav-arrow pdp-arrow-prev" id="pdpGalleryPrev" aria-label="Previous image">‹</button>
+                <button type="button" class="pdp-nav-arrow pdp-arrow-next" id="pdpGalleryNext" aria-label="Next image">›</button>
+              ` : ''}
+            </div>
+
+            <!-- Thumbnails Row -->
+            <div class="pdp-thumbnails" id="pdpThumbnails" role="tablist" aria-label="Product image gallery">
+              ${galleryImages.map((img, idx) => `
+                <button type="button" class="pdp-thumb-btn ${idx === 0 ? 'active' : ''}" data-idx="${idx}" aria-label="Thumbnail ${idx + 1}">
+                  <img src="${img}" alt="${product.name} view ${idx + 1}" class="pdp-thumb-img" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: Details & Purchase -->
+          <div class="pdp-info-col">
+            <!-- Scientific Name / Genus -->
+            <div class="pdp-scientific-name">${scientificName}</div>
+
+            <!-- Product Title -->
+            <h1 class="pdp-title">${product.name}</h1>
+
+            <!-- Difficulty Badge & Stock Status Row -->
+            <div class="pdp-badges-row">
+              <span class="pdp-difficulty-badge">🌱 ${difficulty}</span>
+              <span class="pdp-stock-badge">✓ In Stock • Ready for Live Transit</span>
+            </div>
+
+            <!-- Price & Unit -->
+            <div class="pdp-price-box">
+              <span class="pdp-price" id="pdpUnitPrice">${displayPrice}</span>
+              <span class="pdp-price-unit" id="pdpPriceUnit">${displayUnit}</span>
+            </div>
+
+            <!-- Short Description -->
+            <p class="pdp-description">${product.description}</p>
+
+            ${kitSectionHtml}
+
+            <!-- Minimum Order Notice (if applicable) -->
+            ${minOrderNoticeHtml}
+
+            <!-- Quantity Selector & Dynamic Total -->
+            <div class="pdp-qty-section">
+              <div class="pdp-qty-header">
+                <span class="pdp-qty-label">${qtyLabel}</span>
+                <div class="pdp-qty-total-wrap">
+                  <span class="pdp-qty-total-label">Subtotal:</span>
+                  <span class="pdp-qty-total" id="pdpQtyTotal">${CartManager.formatPrice(unitPrice * minQty)}</span>
+                </div>
+              </div>
+              <div class="pdp-qty-selector">
+                <button type="button" class="pdp-qty-btn" id="pdpQtyMinus" aria-label="Decrease quantity">−</button>
+                <span class="pdp-qty-value" id="pdpQty">${minQty}</span>
+                <button type="button" class="pdp-qty-btn" id="pdpQtyPlus" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+
+            <!-- Action Buttons: Add to Cart & Direct WhatsApp -->
+            <div class="pdp-action-buttons">
+              <button type="button" class="btn btn-primary pdp-btn-cart" id="pdpAddToCartBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                  <path d="M3 6h18" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                <span>Add to Cart</span>
+              </button>
+              <button type="button" class="btn btn-whatsapp pdp-btn-whatsapp" id="pdpDirectWhatsAppBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z" />
+                </svg>
+                <span>Order via WhatsApp</span>
+              </button>
+            </div>
+
+            <!-- Guarantee Badges -->
+            <div class="pdp-guarantee-pills">
+              <span class="pdp-pill">🛡️ Live Arrival Guarantee</span>
+              <span class="pdp-pill">📦 Thermal Insulated Transit</span>
+              <span class="pdp-pill">🌿 Pure Bloodline</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Clearly Separated Information Sections -->
+        <section class="pdp-info-sections" aria-label="Detailed Product Information">
+          <!-- Section A: OVERVIEW -->
+          ${(overviewText || overviewItems.length > 0) ? `
+          <article class="pdp-section-card" id="pdpSectionOverview">
+            <div class="pdp-section-header">
+              <span class="pdp-section-icon">📖</span>
+              <h2 class="pdp-section-title">Overview</h2>
+            </div>
+            <div class="pdp-section-body">
+              ${overviewText ? `<p class="pdp-overview-text">${overviewText}</p>` : ''}
+              ${overviewItems.length > 0 ? `
+              <div class="pdp-overview-grid">
+                ${overviewItems.map(item => `
+                  <div class="pdp-spec-item">
+                    <span class="pdp-spec-label">${item.label}</span>
+                    <span class="pdp-spec-value">${item.value}</span>
+                  </div>
+                `).join('')}
+              </div>` : ''}
+            </div>
+          </article>` : ''}
+
+          <!-- Section B: CARE REQUIREMENTS -->
+          ${careCards.length > 0 ? `
+          <article class="pdp-section-card" id="pdpSectionCare">
+            <div class="pdp-section-header">
+              <span class="pdp-section-icon">💧</span>
+              <h2 class="pdp-section-title">Care Requirements</h2>
+            </div>
+            <div class="pdp-section-body">
+              <div class="pdp-cards-grid">
+                ${careCards.map(c => `
+                  <div class="pdp-stat-card">
+                    <span class="pdp-stat-icon">${c.icon}</span>
+                    <span class="pdp-stat-label">${c.label}</span>
+                    <span class="pdp-stat-value">${c.value}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </article>` : ''}
+
+          <!-- Section C: HABITAT SETUP -->
+          ${habitatCards.length > 0 ? `
+          <article class="pdp-section-card" id="pdpSectionHabitat">
+            <div class="pdp-section-header">
+              <span class="pdp-section-icon">🏡</span>
+              <h2 class="pdp-section-title">Habitat Setup</h2>
+            </div>
+            <div class="pdp-section-body">
+              <div class="pdp-cards-grid">
+                ${habitatCards.map(c => `
+                  <div class="pdp-stat-card">
+                    <span class="pdp-stat-icon">${c.icon}</span>
+                    <span class="pdp-stat-label">${c.label}</span>
+                    <span class="pdp-stat-value">${c.value}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </article>` : ''}
+
+          <!-- Section D: DID YOU KNOW? -->
+          ${dykFacts.length > 0 ? `
+          <article class="pdp-section-card pdp-facts-card" id="pdpSectionFacts">
+            <div class="pdp-section-header">
+              <span class="pdp-section-icon">💡</span>
+              <h2 class="pdp-section-title">Did You Know?</h2>
+            </div>
+            <div class="pdp-section-body">
+              <ul class="pdp-facts-list">
+                ${dykFacts.map(fact => `
+                  <li class="pdp-fact-item">
+                    <span class="pdp-fact-bullet">✨</span>
+                    <span class="pdp-fact-text">${fact}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+          </article>` : ''}
+        </section>
+
+        <!-- Related Products Section: YOU MAY ALSO LIKE -->
+        <section class="pdp-related-section" aria-label="Related Products">
+          <div class="pdp-related-header">
+            <h2 class="pdp-related-title">YOU MAY ALSO LIKE</h2>
+            <p class="pdp-related-sub">Carefully curated companion species and setups from the Fish Tales collection</p>
+          </div>
+          <div class="pdp-related-grid">
+            ${relatedProducts.map(rel => {
+      initProductVariantsAndSpecs(rel);
+      const relVar = getProductSelectedVariant(rel);
+      const relPrice = CartManager.formatPrice(relVar.price);
+      const relUnit = isIsopodProduct(rel) ? '/ piece' : ('/ ' + relVar.unit);
+      return `
+                <article class="product-card pdp-related-card" data-id="${rel.id}">
+                  <div class="product-card-thumb" onclick="navigateToProduct('${rel.id}')" title="View ${rel.name}">
+                    <img src="${rel.image || PLACEHOLDER_IMG}" alt="${rel.name}" class="product-card-img" loading="lazy" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
+                  </div>
+                  <div class="product-card-body">
+                    <div class="product-card-cat">${rel.categoryName || rel.categoryLabel}</div>
+                    <h3 class="product-card-name" onclick="navigateToProduct('${rel.id}')" title="${rel.name}">${rel.name}</h3>
+                    <div class="product-card-sub" title="${rel.scientificName || rel.description}">${rel.scientificName || rel.description}</div>
+                    <div class="product-card-footer">
+                      <div class="card-divider"></div>
+                      <div class="product-card-pricing">
+                        <span class="product-card-price">${relPrice}</span>
+                        <span class="product-card-unit">${relUnit}</span>
+                      </div>
+                      <div class="product-card-actions">
+                        <button type="button" class="btn card-btn-view" onclick="navigateToProduct('${rel.id}')">
+                          View Details
+                        </button>
+                        <button type="button" class="btn card-btn-add" onclick="addCardVariantToCart('${rel.id}')">
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;">
+                            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                            <path d="M3 6h18" />
+                            <path d="M16 10a4 4 0 0 1-8 0" />
+                          </svg>
+                          <span>Add to Cart</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              `;
+    }).join('')}
+          </div>
+        </section>
+      </div>
+    `;
+
+    // Interactive PDP Event Handlers:
+    // 1. Gallery Image Switching
+    let currentImgIdx = 0;
+    const mainImgEl = document.getElementById('pdpMainImg');
+    const thumbBtns = document.querySelectorAll('.pdp-thumb-btn');
+
+    function selectGalleryImage(idx) {
+      if (idx < 0) idx = galleryImages.length - 1;
+      if (idx >= galleryImages.length) idx = 0;
+      currentImgIdx = idx;
+      if (mainImgEl) mainImgEl.src = galleryImages[currentImgIdx];
+      thumbBtns.forEach((b, i) => {
+        if (i === currentImgIdx) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+    }
+
+    thumbBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.idx, 10);
+        if (!isNaN(idx)) selectGalleryImage(idx);
+      });
+    });
+
+    const prevBtn = document.getElementById('pdpGalleryPrev');
+    const nextBtn = document.getElementById('pdpGalleryNext');
+    if (prevBtn) prevBtn.addEventListener('click', () => selectGalleryImage(currentImgIdx - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => selectGalleryImage(currentImgIdx + 1));
+
+    // 2. Quantity Stepper Controls
+    let currentQty = minQty;
+    const qtyValEl = document.getElementById('pdpQty');
+    const qtyTotalEl = document.getElementById('pdpQtyTotal');
+    const minusBtn = document.getElementById('pdpQtyMinus');
+    const plusBtn = document.getElementById('pdpQtyPlus');
+
+    function updatePdpQuantity(delta) {
+      let next = currentQty + delta;
+      if (isIsopod) {
+        if (next < 5) {
+          next = 5;
+          showToast('Minimum order quantity for Isopods is 5 pieces.', 'info');
+        }
+      } else {
+        if (next < 1) next = 1;
+      }
+      currentQty = next;
+      if (qtyValEl) qtyValEl.textContent = currentQty;
+      if (qtyTotalEl) qtyTotalEl.textContent = CartManager.formatPrice(unitPrice * currentQty);
+    }
+
+    if (minusBtn) minusBtn.addEventListener('click', () => updatePdpQuantity(-1));
+    if (plusBtn) plusBtn.addEventListener('click', () => updatePdpQuantity(1));
+
+    // 3. Add to Cart Button
+    const addCartBtn = document.getElementById('pdpAddToCartBtn');
+    if (addCartBtn) {
+      addCartBtn.addEventListener('click', () => {
+        CartManager.addById(product.id, currentQty);
+      });
+    }
+
+    // 4. Direct WhatsApp Inquiry
+    const directWaBtn = document.getElementById('pdpDirectWhatsAppBtn');
+    if (directWaBtn) {
+      directWaBtn.addEventListener('click', () => {
+        const totalStr = CartManager.formatPrice(unitPrice * currentQty);
+        const msg = [
+          'Hello Fish Tales!',
+          '',
+          `I would like to order/enquire about:`,
+          `• Product: ${product.name}`,
+          `• Scientific Name: ${scientificName}`,
+          `• Quantity: ${currentQty} ${isIsopod ? 'pieces' : (activeVariant ? activeVariant.unit : 'unit')}`,
+          `• Total Value: ${totalStr}`,
+          '',
+          'Please confirm livestock availability, shipping schedule and payment info (Prepaid only, COD unavailable).'
+        ].join('\n');
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+      });
+    }
+  };
+
   /* ── 8. Cart Drawer Controller ───────────────────────────── */
   function renderCartDrawerItems(items, total) {
     const itemsWrap = document.getElementById('cartDrawerItems');
@@ -1888,8 +2904,9 @@
     }
 
     itemsWrap.innerHTML = items.map(item => {
+      const isIsopod = isIsopodProduct(item);
       const lineTotal = CartManager.formatPrice(item.price * item.quantity);
-      const unitLabel = item.pricingUnit === 'pair' ? 'per pair' : (item.pricingUnit === 'kit' ? 'kit' : 'per piece');
+      const unitLabel = item.pricingUnit === 'pair' ? 'per pair' : (item.pricingUnit === 'kit' ? 'kit' : (isIsopod ? 'per piece' : 'per piece'));
       const productObj = PRODUCTS.find(p => String(p.id) === String(item.id)) || item;
       return `
         <div class="cart-item" data-id="${item.id}">
@@ -1900,6 +2917,7 @@
             <span class="cart-item-title">${item.name}</span>
             <span class="cart-item-meta">${CartManager.formatPrice(item.price)} ${unitLabel}</span>
             ${item.size ? `<span class="cart-item-meta" style="color:var(--color-amber);">Size: ${item.size}</span>` : ''}
+            ${isIsopod ? `<span class="cart-item-min-notice">Minimum order: 5 pieces</span>` : ''}
             <div class="cart-item-stepper">
               <button class="cart-step-btn" onclick="CartManager.update('${item.id}', ${item.quantity - 1})" aria-label="Decrease quantity">−</button>
               <span class="cart-step-val">${item.quantity}</span>
@@ -2699,7 +3717,7 @@
       const catName = (p.categoryName || p.categoryLabel || '').toLowerCase();
       const subCat = (p.subCategory || '').toLowerCase();
       const subtitle = (p.subtitle || '').toLowerCase();
-      const sciName = (p.scientificName || (p.specs && p.specs['Scientific Name']) || '').toLowerCase();
+      const sciName = (p.scientificName || p.subtitle || '').toLowerCase();
       const desc = (p.description || '').toLowerCase();
       const id = (p.id || '').toLowerCase();
 
@@ -2739,7 +3757,7 @@
       const subMeta = p.subCategory ? ` • ${p.subCategory.toUpperCase()}` : '';
 
       return `
-        <div class="search-result-row" onclick="closeSearchOverlay(); openProductModal('${p.id}')" role="button" tabindex="0" title="View details for ${escapeSearchHTML(p.name)}">
+        <div class="search-result-row" onclick="closeSearchOverlay(); navigateToProduct('${p.id}')" role="button" tabindex="0" title="View details for ${escapeSearchHTML(p.name)}">
           <div class="search-result-left">
             <img src="${thumbImg}" alt="${escapeSearchHTML(p.name)}" class="search-result-thumb" loading="lazy" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
             <div class="search-result-info">
@@ -2984,6 +4002,16 @@
 
     // Render initial product catalogue
     renderProductGrid();
+
+    // 2a. Render Full Product Detail Page if #pdpMain exists
+    if (document.getElementById('pdpMain')) {
+      renderProductDetailPage();
+    }
+    window.addEventListener('popstate', () => {
+      if (document.getElementById('pdpMain')) {
+        renderProductDetailPage();
+      }
+    });
 
     // 2b. Automatically apply EXACTLY ONE active class based on current page
     window.updateActiveNavLink();

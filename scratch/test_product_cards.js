@@ -77,9 +77,9 @@ console.log('  ✓ Zero <select> or variant dropdown elements in card template:'
 // 4. CHECK PRODUCT DATA PRESERVATION
 console.log('\n4. UNDERLYING PRODUCT DATA PRESERVATION:');
 const hasProducts = scriptCode.includes('const PRODUCTS = [');
-const hasVariants = scriptCode.includes('variants: [');
+const hasPricesAndUnits = scriptCode.includes('price:') && scriptCode.includes('unit:');
 console.log('  ✓ PRODUCTS array intact in script.js:', hasProducts);
-console.log('  ✓ Product variants data preserved in PRODUCTS array:', hasVariants);
+console.log('  ✓ Product price & unit data preserved in PRODUCTS array:', hasPricesAndUnits);
 
 // 5. ALL 5 PAGES CONSISTENCY
 console.log('\n5. ALL 5 PAGES LINKAGE & READINESS:');
@@ -104,7 +104,7 @@ pages.forEach(p => {
 
 const allPassed = !hasChooseVariantInRender && hasCartIconInBtn && hasDividerInCard &&
   actionsIsColumn && viewBtnStyle && addBtnStyle && exactOrder && !hasSelectOrDropdown &&
-  hasProducts && hasVariants && allPagesOk;
+  hasProducts && hasPricesAndUnits && allPagesOk;
 
 if (allPassed) {
   console.log('\n🎉 ALL PRODUCT CARD UI REDESIGN TESTS PASSED WITH 100% SUCCESS!');
