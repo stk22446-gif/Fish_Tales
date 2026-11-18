@@ -1844,32 +1844,40 @@ textarea {
   .policy-section {
     padding: 3rem 0;
   }
+
   .policy-card {
     padding: 1.75rem 1.25rem;
     border-radius: var(--radius-sm, 8px);
   }
+
   .policy-section-title {
     font-size: 1.25rem;
   }
+
   .policy-badges-row {
     flex-direction: column;
     align-items: stretch;
     gap: 0.6rem;
   }
+
   .policy-badge {
     justify-content: center;
     padding: 0.5rem 0.85rem;
     font-size: 0.8125rem;
   }
+
   .policy-lead-text {
     font-size: 0.95rem;
   }
+
   .policy-checklist li {
     font-size: 0.875rem;
   }
+
   .policy-replacement-box {
     padding: 1rem 1.15rem;
   }
+
   .policy-replacement-text {
     font-size: 0.85rem;
   }
@@ -4373,6 +4381,180 @@ input {
     min-height: 40px;
     font-size: 0.8125rem;
     padding: 0 0.5rem;
+  }
+}
+
+/* ── 8B. Dedicated Category Page Hero Banner Styles ─────────── */
+.category-hero-section {
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 4.75rem 1.25rem 4.25rem;
+  min-height: 310px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle, rgba(23, 75, 50, 0.15));
+}
+
+.category-hero-aquarium {
+  background-image: url('https://res.cloudinary.com/pv8lnpft/image/upload/v1794953470/eccae651-a950-4cda-b18c-7378d8db5185.png');
+}
+
+.category-hero-isopods {
+  background-image: url('https://res.cloudinary.com/pv8lnpft/image/upload/v1794953531/0343bded-0337-457f-8ac6-6ec6e7d28e2a.png');
+}
+
+.category-hero-tarantulas {
+  background-image: url('https://res.cloudinary.com/pv8lnpft/image/upload/v1794953506/988b48ba-c3a9-41b9-b928-e99a1fb5cd7a.png');
+}
+
+.category-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+      rgba(6, 24, 14, 0.46) 0%,
+      rgba(8, 28, 17, 0.32) 50%,
+      rgba(5, 20, 12, 0.54) 100%);
+  pointer-events: none;
+}
+
+.category-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.category-hero-section .breadcrumb-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.15rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.category-hero-section .breadcrumb-nav a {
+  color: #86EFAC;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color var(--trans-fast);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.category-hero-section .breadcrumb-nav a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+.category-hero-section .breadcrumb-sep {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.8rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.category-hero-section .breadcrumb-current {
+  color: #FFFFFF;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.category-hero-section .catalogue-header {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.category-hero-section .catalogue-eyebrow-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #0A361F;
+  background-color: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  padding: 0.4rem 1.2rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.15rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.category-hero-section .catalogue-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.15rem, 4.2vw, 3.1rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.95), 0 4px 18px rgba(0, 0, 0, 0.9), 0 8px 32px rgba(0, 0, 0, 0.7);
+  letter-spacing: -0.01em;
+}
+
+.category-hero-section .catalogue-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  color: rgba(255, 255, 255, 0.96);
+  font-weight: 500;
+  line-height: 1.65;
+  max-width: 700px;
+  margin: 0 auto;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 3px 14px rgba(0, 0, 0, 0.85);
+}
+
+.category-hero-section+.catalogue-section {
+  padding-top: 2.25rem;
+}
+
+@media (max-width: 768px) {
+  .category-hero-section {
+    padding: 3.25rem 0.75rem 2.75rem;
+    min-height: 230px;
+    background-position: center center;
+  }
+
+  .category-hero-aquarium {
+    background-position: center center;
+  }
+
+  .category-hero-isopods {
+    background-position: center center;
+  }
+
+  .category-hero-tarantulas {
+    background-position: center center;
+  }
+
+  .category-hero-section .catalogue-title {
+    font-size: clamp(1.65rem, 5.8vw, 2.2rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .category-hero-section .catalogue-subtitle {
+    font-size: 0.925rem;
+    line-height: 1.55;
+    padding: 0 0.5rem;
+  }
+
+  .category-hero-section .breadcrumb-nav {
+    margin-bottom: 0.85rem;
+    font-size: 0.775rem;
+  }
+
+  .category-hero-section .catalogue-eyebrow-pill {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.9rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .category-hero-section+.catalogue-section {
+    padding-top: 1.75rem;
   }
 }
 
