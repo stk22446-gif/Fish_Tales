@@ -6,7 +6,6 @@ const assert = require('assert');
 
 console.log('Testing WhatsApp Order Message formatting in script.js...');
 
-// Load script.js in a mock DOM / browser environment
 const scriptCode = fs.readFileSync(path.join(__dirname, '..', 'script.js'), 'utf8');
 
 const mockWindow = {
@@ -30,105 +29,124 @@ mockWindow.window = mockWindow;
 const context = vm.createContext(mockWindow);
 vm.runInContext(scriptCode, context);
 
-// Test products from different categories
 const products = mockWindow.PRODUCTS;
 assert(Array.isArray(products) && products.length > 0, 'PRODUCTS array must exist');
 
-// Check products from various categories
-const sampleGuppy = products.find(p => p.category === 'Guppies' || p.category === 'Aquarium & Fish' || (p.name && p.name.includes('Guppy')));
-const sampleIsopod = products.find(p => p.category === 'Isopods');
-const sampleTarantula = products.find(p => p.category === 'Tarantulas');
-const sampleCombo = products.find(p => p.category === 'Combo Packs' || (p.name && p.name.includes('Kit')));
-
-console.log('Found test products:', {
-  guppy: sampleGuppy?.name,
-  isopod: sampleIsopod?.name,
-  tarantula: sampleTarantula?.name,
-  combo: sampleCombo?.name
-});
-
-// Mock CartManager checkout flow test
-const testItems = [
-  {
-    id: sampleGuppy ? sampleGuppy.id : 'guppy-1',
-    productId: sampleGuppy ? sampleGuppy.id : 'guppy-1',
-    name: 'Red Lace Guppy',
-    price: 250,
-    quantity: 2,
-    variantId: 'pair',
-    variantName: '1 Pair (Adult Pair)'
-  },
-  {
-    id: sampleIsopod ? sampleIsopod.id : 'isopod-1',
-    productId: sampleIsopod ? sampleIsopod.id : 'isopod-1',
-    name: 'Cubaris Murina Orange',
-    price: 60,
-    quantity: 5,
-    variantId: 'default',
-    variantName: 'Standard / Piece'
-  }
-];
-
-const testCustomer = {
-  fullName: 'Rahul Sharma',
-  mobile: '9876543210',
-  email: 'rahul@example.com',
-  address: '123 Marine Drive',
-  city: 'Mumbai',
-  state: 'Maharashtra',
-  pincode: '400001'
-};
-
-const subtotal = (250 * 2) + (60 * 5); // 500 + 300 = 800
-
-// In script.js, let's extract or call the WhatsApp message generator logic
-// Let's test by inspecting the exact regex / execution of buildWhatsAppOrderMessage
-// Notice buildWhatsAppOrderMessage is a closure inside DOMContentLoaded. Let's inspect how it is tested or invoke it directly via vm or by checking the source regex and execution.
-
-const orderDetails = {
-  orderId: 'FT-20261118-001',
-  date: '18/11/2026',
-  time: '07:05 PM',
-  items: testItems,
-  subtotal: subtotal,
-  customer: testCustomer
-};
-
-// Check if buildWhatsAppOrderMessage contains 'Unit Price:' in script.js
-const hasUnitPrice = scriptCode.includes('Unit Price:');
-console.log('Does script.js still have any "Unit Price:" string?', hasUnitPrice);
-assert.strictEqual(hasUnitPrice, false, 'script.js should NOT have any "Unit Price:" string');
-
-// Let's also extract and run the actual buildWhatsAppOrderMessage from script.js using vm
+// Extract buildWhatsAppOrderMessage function directly from script.js
 const extractFuncMatch = scriptCode.match(/function buildWhatsAppOrderMessage\([\s\S]*?\n  \}/);
 assert(extractFuncMatch, 'buildWhatsAppOrderMessage must be found');
 
-const funcCode = `
+const extractHelperMatch = scriptCode.match(/function getProductAndVariantDisplay\([\s\S]*?\n  \}/);
+assert(extractHelperMatch, 'getProductAndVariantDisplay must be found');
+
+const testScript = `
+${extractHelperMatch[0]}
 ${extractFuncMatch[0]}
-function getProductAndVariantDisplay(item) {
-  let prodName = item.name || 'Product';
-  let variantName = item.variantName || 'Standard';
-  return { prodName, variantName };
-}
-const CartManager = {
-  formatPrice(p) { return '₹' + p; }
-};
+const CartManager = mockWindow.CartManager;
 buildWhatsAppOrderMessage(orderDetails);
 `;
 
-const evalContext = vm.createContext({ orderDetails });
-const msg = vm.runInContext(funcCode, evalContext);
-console.log('\n--- Generated WhatsApp Message ---');
-console.log(msg);
-console.log('---------------------------------\n');
+// Test 1: Guppy + Gold Dumbo Ear Guppy (User's specific prompt examples)
+const order1 = {
+  orderId: 'FT-20261118-001',
+  date: '18/11/2026',
+  time: '07:25 PM',
+  items: [
+    {
+      id: 'guppy-1',
+      name: 'Red Lace Guppy',
+      price: 250,
+      quantity: 2
+    },
+    {
+      id: 'guppy-2',
+      name: 'Gold Dumbo Ear Guppy',
+      price: 280,
+      quantity: 1
+    }
+  ],
+  subtotal: (250 * 2) + (280 * 1), // 500 + 280 = 780
+  customer: {
+    fullName: 'Rahul Sharma',
+    mobile: '9876543210',
+    email: 'rahul@example.com',
+    address: '123 Marine Drive',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    pincode: '400001'
+  }
+};
 
-// Verifications
-assert(!msg.includes('Unit Price'), 'Message must not contain "Unit Price"');
-assert(msg.includes('Red Lace Guppy × 2'), 'Message must contain product name and quantity');
-assert(msg.includes('Variant: 1 Pair (Adult Pair)'), 'Message must contain variant name');
-assert(msg.includes('Cubaris Murina Orange × 5'), 'Message must contain second product name and quantity');
-assert(msg.includes('Product Subtotal: ₹800'), 'Message must keep Product Subtotal');
-assert(msg.includes('Shipping: To be confirmed (Live transit fee)'), 'Message must keep Shipping');
-assert(msg.includes('Final Total: ₹800 (Shipping confirmation pending)'), 'Message must keep Final Total');
+const evalContext1 = vm.createContext({ mockWindow, orderDetails: order1 });
+const msg1 = vm.runInContext(testScript, evalContext1);
 
-console.log('✅ ALL WhatsApp message tests passed successfully!');
+console.log('\n--- Test 1 WhatsApp Message (Guppies) ---');
+console.log(msg1);
+
+assert(msg1.includes('Red Lace Guppy × 2 (₹250)'), 'Must format Red Lace Guppy × 2 (₹250)');
+assert(msg1.includes('Gold Dumbo Ear Guppy × 1 (₹280)'), 'Must format Gold Dumbo Ear Guppy × 1 (₹280)');
+assert(!msg1.includes('Variant:'), 'Must NOT contain any "Variant:" line');
+assert(!msg1.includes('Unit Price:'), 'Must NOT contain any separate "Unit Price:" line');
+assert(msg1.includes('Product Subtotal: ₹780'), 'Must keep Product Subtotal in summary');
+assert(msg1.includes('Shipping: To be confirmed (Live transit fee)'), 'Must keep Shipping in summary');
+assert(msg1.includes('Final Total: ₹780 (Shipping confirmation pending)'), 'Must keep Final Total in summary');
+
+// Test 2: Multi-category order (Isopods, Tarantula, Combo Pack, Molly, Betta)
+const order2 = {
+  orderId: 'FT-20261118-002',
+  date: '18/11/2026',
+  time: '07:26 PM',
+  items: [
+    {
+      id: 'iso-1',
+      name: 'Cubaris Murina Orange',
+      price: 60,
+      quantity: 5 // Isopod min order is 5
+    },
+    {
+      id: 'tar-1',
+      name: 'Chilean Rose Tarantula',
+      price: 2500,
+      quantity: 1
+    },
+    {
+      id: 'combo-1',
+      name: 'Isopod House Kit',
+      price: 799,
+      quantity: 2
+    },
+    {
+      id: 'molly-1',
+      name: 'Golden Molly',
+      price: 90,
+      quantity: 3
+    }
+  ],
+  subtotal: (60 * 5) + (2500 * 1) + (799 * 2) + (90 * 3), // 300 + 2500 + 1598 + 270 = 4668
+  customer: {
+    fullName: 'Ananya Rao',
+    mobile: '9123456789',
+    email: '',
+    address: '45 Lake View Road',
+    city: 'Hyderabad',
+    state: 'Telangana',
+    pincode: '500033'
+  }
+};
+
+const evalContext2 = vm.createContext({ mockWindow, orderDetails: order2 });
+const msg2 = vm.runInContext(testScript, evalContext2);
+
+console.log('\n--- Test 2 WhatsApp Message (Multi-category) ---');
+console.log(msg2);
+
+assert(msg2.includes('Cubaris Murina Orange × 5 (₹60)'), 'Isopod unit price must be ₹60, not total ₹300');
+assert(msg2.includes('Chilean Rose Tarantula × 1 (₹2,500)'), 'Tarantula unit price must be ₹2,500');
+assert(msg2.includes('Isopod House Kit × 2 (₹799)'), 'Kit unit price must be ₹799, not total ₹1,598');
+assert(msg2.includes('Golden Molly × 3 (₹90)'), 'Molly unit price must be ₹90, not total ₹270');
+assert(!msg2.includes('Variant:'), 'Must NOT contain any "Variant:" line');
+assert(!msg2.includes('Unit Price:'), 'Must NOT contain any separate "Unit Price:" line');
+assert(msg2.includes('Product Subtotal: ₹4,668'), 'Must keep Product Subtotal in summary');
+assert(msg2.includes('Final Total: ₹4,668 (Shipping confirmation pending)'), 'Must keep Final Total in summary');
+
+console.log('\n✅ ALL WhatsApp format tests passed successfully!');
