@@ -3209,6 +3209,52 @@
     return { prodName, variantName };
   }
 
+  function getOwnerProductQuantityUnit(item) {
+    // Find master product from catalog for reliable category/unit mapping
+    const product = (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS))
+      ? PRODUCTS.find(p => String(p.id) === String(item.id) || String(p.id) === String(item.baseId))
+      : null;
+
+    const rawUnit = String(
+      (product && product.unit) ||
+      item.unit ||
+      (product && product.pricingUnit) ||
+      item.pricingUnit ||
+      ''
+    ).toLowerCase();
+
+    const category = String(
+      (product && product.category) ||
+      item.category ||
+      item.categoryLabel ||
+      ''
+    ).toLowerCase();
+
+    const subCategory = String(
+      (product && product.subCategory) ||
+      item.subCategory ||
+      ''
+    ).toLowerCase();
+
+    // 1. Pair-based fish (Guppies, Mollies, or products sold per pair)
+    if (rawUnit.includes('pair') || subCategory === 'guppy' || subCategory === 'molly') {
+      return 'Pair';
+    }
+
+    // 2. Combo products / kits
+    if (category === 'combo' || category === 'combos' || rawUnit.includes('kit') || subCategory.includes('kit')) {
+      return 'Kit';
+    }
+
+    // 3. Tarantulas (specimen unit)
+    if (category === 'tarantulas' || category === 'tarantula' || subCategory === 'tarantulas' || rawUnit.includes('specimen')) {
+      return 'Specimen';
+    }
+
+    // 4. Isopods (piece count) & other individual livestock (Bettas, Shrimps, etc.)
+    return 'Pcs';
+  }
+
   function buildWhatsAppOrderMessage(orderDetails) {
     const { orderId, date, time, items, subtotal, customer } = orderDetails;
     const divider = '━━━━━━━━━━━━━━━━━━━━';
@@ -3225,9 +3271,10 @@
 
     items.forEach((item) => {
       const { prodName } = getProductAndVariantDisplay(item);
-      const unitPriceFormatted = CartManager.formatPrice(item.price || 0);
+      const unit = getOwnerProductQuantityUnit(item);
+      const lineTotalFormatted = CartManager.formatPrice(Number(item.price || 0) * Number(item.quantity || 1));
 
-      lines.push(`${prodName} × ${item.quantity} (${unitPriceFormatted})`);
+      lines.push(`${prodName} × ${item.quantity} ${unit} — ${lineTotalFormatted}`);
     });
 
     lines.push(divider);
@@ -3324,34 +3371,6 @@
       window.closeCheckoutModal();
     }
   };
-
-  function getUnboxingPolicyHTML() {
-    return `
-      <div class="checkout-unboxing-policy" role="region" aria-label="Unboxing Video &amp; Live Arrival Policy">
-        <div class="checkout-unboxing-policy-header">
-          📦 IMPORTANT: UNBOXING VIDEO &amp; LIVE ARRIVAL POLICY
-        </div>
-        <div class="checkout-unboxing-policy-tags">
-          <span class="checkout-policy-tag tag-video">🎥 Unboxing Video Required</span>
-          <span class="checkout-policy-tag tag-shipping">🚚 Replacement Shipping Charges Applicable</span>
-        </div>
-        <p>To protect both our customers and Fish Tales, please record a clear, continuous unboxing video while opening your delivered package.</p>
-        <ul>
-          <li>Start recording before opening the sealed package.</li>
-          <li>Clearly show the outer packaging, shipping label and the complete unboxing process.</li>
-          <li>Do not pause, edit or cut the video.</li>
-          <li>If any live livestock arrives dead or damaged during transit, the unboxing video will be required as proof for verification.</li>
-          <li>Our team will review the video and verify the issue before approving a replacement.</li>
-        </ul>
-        <div class="policy-replacement">
-          <strong>Replacement Policy:</strong> If a dead-on-arrival claim is verified and approved by Fish Tales, the replacement product will be provided free of product cost. However, the customer will need to pay the applicable delivery/shipping charges for the replacement shipment.
-        </div>
-        <div class="policy-note-footer">
-          Please keep the unboxing video safe until your order is successfully verified.
-        </div>
-      </div>
-    `;
-  }
 
   window.renderCheckoutStep1 = function () {
     checkoutState.step = 1;
@@ -3501,8 +3520,6 @@
           <div class="checkout-cod-banner">
             ⚠️ <strong>Payment Notice:</strong> Cash on Delivery (COD) is strictly unavailable for live livestock and bioactive habitats. Prepaid orders only via UPI/Bank Transfer after WhatsApp confirmation.
           </div>
-
-          ${getUnboxingPolicyHTML()}
         </div>
       </div>
     `;
@@ -3737,8 +3754,6 @@
         <div class="checkout-callout-box">
           ⚠️ <strong>Payment Notice:</strong> Cash on Delivery (COD) is strictly unavailable for live livestock and bioactive habitats. Prepaid orders only via UPI/Bank Transfer after WhatsApp confirmation.
         </div>
-
-        ${getUnboxingPolicyHTML()}
 
         <div class="checkout-actions-row">
           <button type="button" class="btn btn-outline" onclick="window.renderCheckoutStep1();">

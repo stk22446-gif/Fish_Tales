@@ -1696,71 +1696,183 @@ textarea {
   line-height: 1.6;
 }
 
-/* ── 12. About Section ────────────────────────────────────── */
-.about-section {
-  padding: 5.5rem 0;
-  background-color: var(--bg-mint-tint);
-  border-bottom: 1px solid var(--border-subtle);
+/* ── 12. Unboxing Video & Live Arrival Policy Section ───────────── */
+.policy-section {
+  padding: 5rem 0;
+  background-color: var(--bg-mint-tint, #F4F8F4);
+  border-bottom: 1px solid var(--border-subtle, rgba(23, 75, 50, 0.12));
 }
 
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+.policy-card {
+  max-width: 860px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-leaf, rgba(23, 75, 50, 0.18));
+  border-top: 4px solid var(--color-primary, #174B32);
+  border-radius: var(--radius-md, 12px);
+  padding: 2.75rem 3rem;
+  box-shadow: 0 12px 36px rgba(16, 56, 35, 0.08);
+}
+
+.policy-card-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.policy-section-title {
+  font-family: var(--font-serif, "Cinzel Decorative", Georgia, serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-primary-dark, #103823);
+  line-height: 1.35;
+  margin-bottom: 1.25rem;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
 }
 
-.about-content {
+.policy-icon {
+  font-size: 1.75rem;
+}
+
+.policy-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+.policy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-full, 9999px);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.policy-badge-video {
+  background-color: #FFF3E0;
+  color: #C2410C;
+  border: 1px solid #FFD8A8;
+}
+
+.policy-badge-shipping {
+  background-color: #EBF7EE;
+  color: #174B32;
+  border: 1px solid #C4E7CB;
+}
+
+.policy-lead-text {
+  font-size: 1.05rem;
+  color: var(--text-body, #2C3531);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.policy-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.75rem 0;
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
 }
 
-.about-text {
+.policy-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
   font-size: 0.95rem;
-  color: var(--text-body);
-  line-height: 1.75;
-  margin-bottom: 1.25rem;
-}
-
-.about-notice-box {
-  background-color: #FFFFFF;
-  border-left: 3px solid var(--color-orange);
-  border-top: 1px solid var(--border-leaf);
-  border-right: 1px solid var(--border-leaf);
-  border-bottom: 1px solid var(--border-leaf);
-  padding: 1.25rem 1.35rem;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  margin-top: 1rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.about-notice-title {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-orange-hover);
-  margin-bottom: 0.35rem;
-}
-
-.about-notice-body {
-  font-size: 0.825rem;
-  color: var(--text-body);
+  color: var(--text-body, #2C3531);
   line-height: 1.6;
 }
 
-.about-photo-frame {
-  position: relative;
-  border: 4px solid #FFFFFF;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
+.policy-check-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border-radius: 50%;
+  background-color: #EBF7EE;
+  color: #174B32;
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-top: 0.15rem;
+  border: 1px solid #C4E7CB;
 }
 
-.about-photo-img {
-  width: 100%;
-  height: 440px;
-  object-fit: cover;
+.policy-replacement-box {
+  background-color: #FFFDF5;
+  border-left: 4px solid var(--color-orange, #E65100);
+  border-top: 1px solid #F0E6D2;
+  border-right: 1px solid #F0E6D2;
+  border-bottom: 1px solid #F0E6D2;
+  border-radius: var(--radius-sm, 6px);
+  padding: 1.25rem 1.5rem;
+  margin: 1.75rem 0 1.25rem 0;
+}
+
+.policy-replacement-title {
+  font-size: 0.95rem;
+  color: #C2410C;
+  margin-bottom: 0.35rem;
+}
+
+.policy-replacement-text {
+  font-size: 0.925rem;
+  color: #4A4031;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.policy-safe-notice {
+  font-size: 0.9rem;
+  color: var(--text-muted, #556B2F);
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .policy-section {
+    padding: 3rem 0;
+  }
+  .policy-card {
+    padding: 1.75rem 1.25rem;
+    border-radius: var(--radius-sm, 8px);
+  }
+  .policy-section-title {
+    font-size: 1.25rem;
+  }
+  .policy-badges-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+  .policy-badge {
+    justify-content: center;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.8125rem;
+  }
+  .policy-lead-text {
+    font-size: 0.95rem;
+  }
+  .policy-checklist li {
+    font-size: 0.875rem;
+  }
+  .policy-replacement-box {
+    padding: 1rem 1.15rem;
+  }
+  .policy-replacement-text {
+    font-size: 0.85rem;
+  }
 }
 
 /* ── 13. Contact & WhatsApp Desk ──────────────────────────── */
@@ -4621,102 +4733,6 @@ input {
 
 .checkout-cod-banner strong {
   color: #E65100;
-}
-
-/* Unboxing Video & Live Arrival Policy Card */
-.checkout-unboxing-policy {
-  margin-top: 0.85rem;
-  padding: 0.85rem 0.95rem;
-  background-color: #FFFDF2;
-  border: 1px solid #E2D8B3;
-  border-left: 3.5px solid #2E7D32;
-  border-radius: var(--radius-xs);
-  font-size: 0.775rem;
-  line-height: 1.5;
-  color: #4A4031;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  box-sizing: border-box;
-}
-
-.checkout-unboxing-policy-header {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.825rem;
-  font-weight: 700;
-  color: #174B32;
-  margin-bottom: 0.45rem;
-  letter-spacing: 0.01em;
-  flex-wrap: wrap;
-}
-
-.checkout-unboxing-policy-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 0.45rem 0 0.6rem 0;
-}
-
-.checkout-policy-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.2rem 0.5rem;
-  border-radius: var(--radius-xs);
-  line-height: 1.25;
-}
-
-.checkout-policy-tag.tag-video {
-  background-color: #FFF3E0;
-  color: #E65100;
-  border: 1px solid #FFE0B2;
-}
-
-.checkout-policy-tag.tag-shipping {
-  background-color: #E8F5E9;
-  color: #2E7D32;
-  border: 1px solid #C8E6C9;
-}
-
-.checkout-unboxing-policy p {
-  margin: 0 0 0.45rem 0;
-  color: #4A4031;
-}
-
-.checkout-unboxing-policy ul {
-  margin: 0 0 0.55rem 1.15rem;
-  padding: 0;
-  list-style-type: disc;
-}
-
-.checkout-unboxing-policy li {
-  margin-bottom: 0.3rem;
-  color: #4A4031;
-}
-
-.checkout-unboxing-policy .policy-replacement {
-  background-color: rgba(255, 255, 255, 0.75);
-  border-left: 3px solid #E65100;
-  padding: 0.5rem 0.65rem;
-  margin: 0.5rem 0;
-  border-radius: 2px;
-  font-size: 0.76rem;
-  line-height: 1.45;
-  color: #3E3326;
-}
-
-.checkout-unboxing-policy .policy-replacement strong {
-  color: #B73D00;
-}
-
-.checkout-unboxing-policy .policy-note-footer {
-  font-style: italic;
-  font-size: 0.735rem;
-  color: #6B5D4D;
-  margin-top: 0.4rem;
 }
 
 /* Actions Row */
