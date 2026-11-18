@@ -3325,6 +3325,34 @@
     }
   };
 
+  function getUnboxingPolicyHTML() {
+    return `
+      <div class="checkout-unboxing-policy" role="region" aria-label="Unboxing Video &amp; Live Arrival Policy">
+        <div class="checkout-unboxing-policy-header">
+          📦 IMPORTANT: UNBOXING VIDEO &amp; LIVE ARRIVAL POLICY
+        </div>
+        <div class="checkout-unboxing-policy-tags">
+          <span class="checkout-policy-tag tag-video">🎥 Unboxing Video Required</span>
+          <span class="checkout-policy-tag tag-shipping">🚚 Replacement Shipping Charges Applicable</span>
+        </div>
+        <p>To protect both our customers and Fish Tales, please record a clear, continuous unboxing video while opening your delivered package.</p>
+        <ul>
+          <li>Start recording before opening the sealed package.</li>
+          <li>Clearly show the outer packaging, shipping label and the complete unboxing process.</li>
+          <li>Do not pause, edit or cut the video.</li>
+          <li>If any live livestock arrives dead or damaged during transit, the unboxing video will be required as proof for verification.</li>
+          <li>Our team will review the video and verify the issue before approving a replacement.</li>
+        </ul>
+        <div class="policy-replacement">
+          <strong>Replacement Policy:</strong> If a dead-on-arrival claim is verified and approved by Fish Tales, the replacement product will be provided free of product cost. However, the customer will need to pay the applicable delivery/shipping charges for the replacement shipment.
+        </div>
+        <div class="policy-note-footer">
+          Please keep the unboxing video safe until your order is successfully verified.
+        </div>
+      </div>
+    `;
+  }
+
   window.renderCheckoutStep1 = function () {
     checkoutState.step = 1;
     const content = document.getElementById('checkoutContent');
@@ -3473,6 +3501,8 @@
           <div class="checkout-cod-banner">
             ⚠️ <strong>Payment Notice:</strong> Cash on Delivery (COD) is strictly unavailable for live livestock and bioactive habitats. Prepaid orders only via UPI/Bank Transfer after WhatsApp confirmation.
           </div>
+
+          ${getUnboxingPolicyHTML()}
         </div>
       </div>
     `;
@@ -3707,6 +3737,8 @@
         <div class="checkout-callout-box">
           ⚠️ <strong>Payment Notice:</strong> Cash on Delivery (COD) is strictly unavailable for live livestock and bioactive habitats. Prepaid orders only via UPI/Bank Transfer after WhatsApp confirmation.
         </div>
+
+        ${getUnboxingPolicyHTML()}
 
         <div class="checkout-actions-row">
           <button type="button" class="btn btn-outline" onclick="window.renderCheckoutStep1();">
