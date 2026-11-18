@@ -30,7 +30,8 @@
     aquarium: 'Aquarium & Fish',
     isopods: 'Isopods',
     tarantulas: 'Tarantulas',
-    combos: 'Combo Packs'
+    combos: 'Combo Packs',
+    cultures: 'Cultures'
   };
 
   function getProductPriceLabel(variant, category) {
@@ -41,6 +42,7 @@
     if (u.includes('piece') || u.includes('pc')) return 'PRICE (PIECE):';
     if (u.includes('specimen')) return 'PRICE (SPECIMEN):';
     if (u.includes('kit') || category === 'combos') return 'PRICE (KIT):';
+    if (u.includes('culture') || category === 'cultures') return 'PRICE (CULTURE):';
     return 'PRICE:';
   }
 
@@ -1723,6 +1725,118 @@
     }
   ];
 
+  /* ── 3b. Specialized Living Cultures Catalogue ────────────── */
+  const LIVE_CULTURES = [
+    {
+      id: "culture-microworm",
+      category: "cultures",
+      categoryName: "Cultures",
+      subCategory: "microworm",
+      name: "Microworm Starter Culture",
+      subtitle: "Panagrellus redivivus",
+      image: "live_food_cultures_category.jpg",
+      images: ["live_food_cultures_category.jpg"],
+      video: "",
+      description: "Active, prolific starter culture of Panagrellus redivivus nematodes. Perfect for nano fish, bettas, and newborn fry. Simple oatmeal maintenance with zero foul odor.",
+      price: 150,
+      unit: "Culture",
+      minQuantity: 1,
+      specs: {
+        "Organism": "Panagrellus redivivus (Free-living nematode)",
+        "Culture Medium": "Sterilized oatmeal with active yeast starter",
+        "Size": "0.5 – 2.0 mm micro-swimmers",
+        "Temperature": "20°C – 28°C ambient room temperature",
+        "Suitability": "Betta fry, Guppy fry, Nano tetras, Killifish"
+      },
+      overview: "Microworms are an essential live food source for raising healthy, fast-growing ornamental fish fry. Extremely nutritious and simple to maintain indefinitely.",
+      careRequirements: "Maintain on moist oatmeal bed with a pinch of dry yeast. Subculture every 2 to 3 weeks for continuous harvest.",
+      habitatSetup: "Ventilated plastic container at ambient room temperature away from direct sunlight.",
+      didYouKnow: "Microworms remain alive and active in aquarium water for up to 12 hours, giving shy fry plenty of time to hunt naturally.",
+      featured: true
+    },
+    {
+      id: "culture-vinegar-eel",
+      category: "cultures",
+      categoryName: "Cultures",
+      subCategory: "vinegar-eel",
+      name: "Vinegar Eel Live Culture",
+      subtitle: "Turbatrix aceti",
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Daphnia_magna.png/800px-Daphnia_magna.png",
+      images: ["https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Daphnia_magna.png/800px-Daphnia_magna.png"],
+      video: "",
+      description: "Resilient live culture of Turbatrix aceti. Unlike microworms that sink, vinegar eels swim continuously throughout the water column, ideal for surface-feeding fry.",
+      price: 180,
+      unit: "Culture",
+      minQuantity: 1,
+      specs: {
+        "Organism": "Turbatrix aceti",
+        "Culture Medium": "Organic apple cider vinegar and sliced apple",
+        "Size": "1.0 – 2.0 mm free swimmers",
+        "Temperature": "18°C – 28°C",
+        "Suitability": "Betta fry, Rainbowfish fry, Gouramis"
+      },
+      overview: "Vinegar eels are virtually uncrashable cultures that require minimal maintenance. They can survive in freshwater for days without fouling water quality.",
+      careRequirements: "Keep in a 50/50 mix of raw apple cider vinegar and dechlorinated water with apple slices.",
+      habitatSetup: "Glass bottle or jar with breathable cotton plug at room temperature.",
+      didYouKnow: "Vinegar eels can survive in low pH environments and will swim continuously for over 24 hours in aquarium water.",
+      featured: true
+    },
+    {
+      id: "culture-moina",
+      category: "cultures",
+      categoryName: "Cultures",
+      subCategory: "moina",
+      name: "Moina Macrocopa Live Culture",
+      subtitle: "Moina macrocopa",
+      image: "https://upload.wikimedia.org/wikipedia/commons/2/25/Daphnia_magna_-_NTNU.jpg",
+      images: ["https://upload.wikimedia.org/wikipedia/commons/2/25/Daphnia_magna_-_NTNU.jpg"],
+      video: "",
+      description: "High-density freshwater micro-crustacean starter culture. Smaller and softer-shelled than standard Daphnia magna, making them easier for small fish to digest.",
+      price: 200,
+      unit: "Culture",
+      minQuantity: 1,
+      specs: {
+        "Organism": "Moina macrocopa (Water Flea)",
+        "Culture Medium": "Aged green water or spirulina yeast suspension",
+        "Size": "0.5 – 1.5 mm",
+        "Temperature": "22°C – 30°C",
+        "Suitability": "Show guppies, Adult Bettas, Killifish, Small cichlids"
+      },
+      overview: "Moina are the gold standard for conditioning breeding pairs of show guppies and bettas, promoting intense coloration and natural predatory behavior.",
+      careRequirements: "Feed lightly with green water or yeast suspension. Provide gentle aeration and moderate light.",
+      habitatSetup: "Clean freshwater tank or bucket with gentle sponge aeration.",
+      didYouKnow: "Moina reproduce both sexually and asexually, allowing populations to double within 48 to 72 hours under optimal feeding.",
+      featured: true
+    },
+    {
+      id: "culture-grindal-worm",
+      category: "cultures",
+      categoryName: "Cultures",
+      subCategory: "grindal-worm",
+      name: "Grindal Worm Starter Culture",
+      subtitle: "Enchytraeus buchholzi",
+      image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=800&q=80",
+      images: ["https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=800&q=80"],
+      video: "",
+      description: "Dense starter culture of Enchytraeus buchholzi on damp organic peat/coco fiber substrate. Exceptionally rich in protein and lipids for conditioning breeders.",
+      price: 220,
+      unit: "Culture",
+      minQuantity: 1,
+      specs: {
+        "Organism": "Enchytraeus buchholzi",
+        "Culture Medium": "Damp organic coco coir / sponge media",
+        "Size": "5 – 10 mm",
+        "Temperature": "20°C – 24°C cool ambient",
+        "Suitability": "Adult guppies, Bettas, Dwarf cichlids, Newts"
+      },
+      overview: "Grindal worms bridge the gap between microscopic fry food and large earthworms. Ideal for conditioning finicky show fish.",
+      careRequirements: "Feed high-protein baby cereal or crushed dog kibble under a glass harvesting plate. Keep substrate evenly damp.",
+      habitatSetup: "Shallow plastic container with ventilation holes and moist coco coir.",
+      didYouKnow: "Grindal worms were named after Mrs. Morten Grindal of Sweden, who first cultivated them as fish food in the 1950s.",
+      featured: true
+    }
+  ];
+
   /* ── 4. Cart State Management (localStorage) ────────────── */
   const CartManager = {
     load() {
@@ -1803,7 +1917,8 @@
     },
 
     addById(id, qty = null) {
-      const product = PRODUCTS.find(p => String(p.id) === String(id));
+      const product = PRODUCTS.find(p => String(p.id) === String(id)) ||
+        (typeof LIVE_CULTURES !== 'undefined' && LIVE_CULTURES.find(p => String(p.id) === String(id)));
       if (!product) {
         console.warn('Product not found for id:', id);
         return;
@@ -1908,6 +2023,8 @@
   // Expose global convenience helpers
   window.CONTACT_EMAIL = CONTACT_EMAIL;
   window.PRODUCTS = PRODUCTS;
+  window.CATEGORY_NAMES = CATEGORY_NAMES;
+  window.getCurrentPageCategory = getCurrentPageCategory;
   window.CartManager = CartManager;
   window.addToCartById = (id, qty = 1) => CartManager.addById(id, qty);
   window.renderProductGrid = renderProductGrid;
@@ -2000,6 +2117,7 @@
     if (path.includes('isopods')) return 'isopods';
     if (path.includes('tarantulas')) return 'tarantulas';
     if (path.includes('combo-packs')) return 'combos';
+    if (path.includes('cultures')) return 'cultures';
     return 'all';
   }
   let currentSearch = '';
@@ -2039,9 +2157,22 @@
         list = aquariumPool;
       }
     } else if (pageCategory !== 'all') {
-      // Dedicated category pages (isopods, tarantulas, combo packs)
-      list = list.filter(p => p.category === pageCategory || ((pageCategory === 'combos' || pageCategory === 'combo') && (p.category === 'combo' || p.category === 'combos')));
-      totalInCategory = list.length;
+      // Dedicated category pages (isopods, tarantulas, combo packs, cultures)
+      if (pageCategory === 'cultures') {
+        const culturePool = list.filter(p => p.category === 'cultures');
+        if (culturePool.length > 0) {
+          list = culturePool;
+        } else if (typeof LIVE_CULTURES !== 'undefined' && Array.isArray(LIVE_CULTURES)) {
+          list = [...LIVE_CULTURES];
+          list.forEach(p => initProductVariantsAndSpecs(p));
+        } else {
+          list = [];
+        }
+        totalInCategory = list.length;
+      } else {
+        list = list.filter(p => p.category === pageCategory || ((pageCategory === 'combos' || pageCategory === 'combo') && (p.category === 'combo' || p.category === 'combos')));
+        totalInCategory = list.length;
+      }
     } else {
       // Home page (index.html)
       if (currentCategory === 'aquarium') {
@@ -2092,6 +2223,8 @@
     if (indicatorEl) {
       if (isAquariumPage) {
         indicatorEl.textContent = AQUARIUM_FILTER_NAMES[currentAquariumFilter] || 'All Products';
+      } else if (pageCategory !== 'all') {
+        indicatorEl.textContent = CATEGORY_NAMES[pageCategory] || CATEGORY_NAMES[currentCategory] || 'All Products';
       } else {
         indicatorEl.textContent = CATEGORY_NAMES[currentCategory] || 'All Products';
       }
@@ -2199,11 +2332,14 @@
       isopods: 'isopods.html',
       tarantulas: 'tarantulas.html',
       combos: 'combo-packs.html',
-      combo: 'combo-packs.html'
+      combo: 'combo-packs.html',
+      cultures: 'cultures.html',
+      culture: 'cultures.html'
     };
 
     const isMatch = (pageCat === categoryKey) ||
-      ((pageCat === 'combos' || pageCat === 'combo') && (categoryKey === 'combos' || categoryKey === 'combo'));
+      ((pageCat === 'combos' || pageCat === 'combo') && (categoryKey === 'combos' || categoryKey === 'combo')) ||
+      ((pageCat === 'cultures' || pageCat === 'culture') && (categoryKey === 'cultures' || categoryKey === 'culture'));
 
     if (pageCat !== 'all' && !isMatch) {
       if (categoryKey === 'all') {
@@ -2218,7 +2354,8 @@
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
       const val = tab.dataset.category || tab.dataset.filter;
       const active = (val === categoryKey) ||
-        ((val === 'combos' || val === 'combo') && (categoryKey === 'combos' || categoryKey === 'combo'));
+        ((val === 'combos' || val === 'combo') && (categoryKey === 'combos' || categoryKey === 'combo')) ||
+        ((val === 'cultures' || val === 'culture') && (categoryKey === 'cultures' || categoryKey === 'culture'));
       tab.classList.toggle('active', active);
     });
     renderProductGrid();
@@ -2254,7 +2391,8 @@
       return;
     }
 
-    const product = PRODUCTS.find(p => String(p.id) === String(productId));
+    const product = PRODUCTS.find(p => String(p.id) === String(productId)) ||
+      (typeof LIVE_CULTURES !== 'undefined' && LIVE_CULTURES.find(p => String(p.id) === String(productId)));
     if (!product) return;
     initProductVariantsAndSpecs(product);
 
@@ -2424,7 +2562,8 @@
   };
 
   window.directModalWhatsAppEnquire = function (productId) {
-    const product = PRODUCTS.find(p => String(p.id) === String(productId));
+    const product = PRODUCTS.find(p => String(p.id) === String(productId)) ||
+      (typeof LIVE_CULTURES !== 'undefined' && LIVE_CULTURES.find(p => String(p.id) === String(productId)));
     if (!product) return;
     initProductVariantsAndSpecs(product);
     const activeVariant = getProductSelectedVariant(product);
@@ -2458,7 +2597,8 @@
       requestedId = urlParams.get('id') || urlParams.get('product') || '';
     }
 
-    let product = PRODUCTS.find(p => String(p.id).toLowerCase() === String(requestedId).toLowerCase());
+    let product = PRODUCTS.find(p => String(p.id).toLowerCase() === String(requestedId).toLowerCase()) ||
+      (typeof LIVE_CULTURES !== 'undefined' && LIVE_CULTURES.find(p => String(p.id).toLowerCase() === String(requestedId).toLowerCase()));
     if (!product) {
       product = PRODUCTS[0];
     }
@@ -3244,6 +3384,11 @@
     // 2. Combo products / kits
     if (category === 'combo' || category === 'combos' || rawUnit.includes('kit') || subCategory.includes('kit')) {
       return 'Kit';
+    }
+
+    // 2b. Live food cultures
+    if (category === 'cultures' || category === 'culture' || rawUnit.includes('culture')) {
+      return 'Culture';
     }
 
     // 3. Tarantulas (specimen unit)
@@ -4111,6 +4256,8 @@
         isMatch = true;
       } else if (targetKey === 'combos' && (text.includes('combo') || href.includes('combo-packs.html'))) {
         isMatch = true;
+      } else if (targetKey === 'cultures' && (text.includes('culture') || href.includes('cultures.html'))) {
+        isMatch = true;
       } else if (targetKey === 'about' && (text.includes('about') || href.endsWith('#about'))) {
         isMatch = true;
       } else if (targetKey === 'contact' && (text.includes('contact') || href.endsWith('#contact'))) {
@@ -4140,6 +4287,8 @@
       window.setActiveNavKey('tarantulas');
     } else if (page.includes('combo-packs')) {
       window.setActiveNavKey('combos');
+    } else if (page.includes('cultures')) {
+      window.setActiveNavKey('cultures');
     } else {
       // index.html / root
       const hash = (window.location.hash || '').toLowerCase();

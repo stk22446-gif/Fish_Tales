@@ -976,12 +976,13 @@ textarea {
 
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.15rem;
 }
 
 .category-card {
   position: relative;
+  min-width: 0;
   background-color: var(--color-cream);
   border: 1px solid var(--border-leaf);
   border-radius: var(--radius-sm);
@@ -1029,7 +1030,7 @@ textarea {
 }
 
 .category-card-body {
-  padding: 1.35rem 1.25rem;
+  padding: 1.25rem 1.05rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -1037,31 +1038,37 @@ textarea {
 
 .category-card-title {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 1.2vw, 1.25rem);
   font-weight: 700;
   color: var(--color-primary-dark);
   margin-bottom: 0.45rem;
   line-height: 1.25;
+  word-break: break-word;
 }
 
 .category-card-desc {
-  font-size: 0.825rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
-  line-height: 1.55;
-  margin-bottom: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 1.15rem;
   flex-grow: 1;
 }
 
 .category-card-cta {
-  font-size: 0.775rem;
+  font-size: clamp(0.72rem, 0.78vw, 0.775rem);
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-primary);
   display: flex;
   align-items: center;
   gap: 0.45rem;
+  white-space: nowrap;
   transition: gap var(--trans-fast), color var(--trans-fast);
+}
+
+.category-card-cta svg {
+  flex-shrink: 0;
 }
 
 .category-card:hover .category-card-cta {
@@ -3079,11 +3086,6 @@ input {
     gap: 1.25rem;
   }
 
-  .categories-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-
   .promos-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -3093,6 +3095,9 @@ input {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
+}
+
+@media (max-width: 1080px) {
 
 
   .about-grid {
@@ -3633,6 +3638,51 @@ input {
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.85rem;
+  }
+
+  /* Mobile card ordering: Row 1 (Aquarium & Fish, Isopods), Row 2 (Tarantulas, Cultures), Row 3 (Combo Packs) */
+  .category-card:nth-child(1),
+  .category-card[href="aquarium-fish.html"] {
+    order: 1;
+  }
+
+  .category-card:nth-child(2),
+  .category-card[href="isopods.html"] {
+    order: 2;
+  }
+
+  .category-card:nth-child(3),
+  .category-card[href="tarantulas.html"] {
+    order: 3;
+  }
+
+  .category-card:nth-child(5),
+  .category-card[href="cultures.html"] {
+    order: 4;
+  }
+
+  .category-card:nth-child(4),
+  .category-card[href="combo-packs.html"] {
+    order: 5;
+    grid-column: 1 / -1;
+  }
+
+  /* Full-width Combo Packs card: slightly wider in its layout, not excessively tall */
+  .category-card:nth-child(4) .category-card-media,
+  .category-card[href="combo-packs.html"] .category-card-media {
+    aspect-ratio: 2.1 / 1;
+    max-height: 160px;
+  }
+
+  .category-card:nth-child(4) .category-card-body,
+  .category-card[href="combo-packs.html"] .category-card-body {
+    padding: 1rem 0.95rem;
+  }
+
+  .category-card:nth-child(4) .category-card-desc,
+  .category-card[href="combo-packs.html"] .category-card-desc {
+    -webkit-line-clamp: 2;
+    margin-bottom: 0.65rem;
   }
 
   .category-card-body {
@@ -4411,6 +4461,10 @@ input {
   background-image: url('https://res.cloudinary.com/pv8lnpft/image/upload/v1794953506/988b48ba-c3a9-41b9-b928-e99a1fb5cd7a.png');
 }
 
+.category-hero-cultures {
+  background-image: url('live_food_cultures_category.jpg');
+}
+
 .category-hero-overlay {
   position: absolute;
   inset: 0;
@@ -4528,6 +4582,10 @@ input {
   }
 
   .category-hero-tarantulas {
+    background-position: center center;
+  }
+
+  .category-hero-cultures {
     background-position: center center;
   }
 
