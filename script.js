@@ -3225,12 +3225,9 @@
 
     items.forEach((item) => {
       const { prodName, variantName } = getProductAndVariantDisplay(item);
-      const unitPriceFormatted = CartManager.formatPrice(item.price);
-      const lineTotalFormatted = CartManager.formatPrice(item.price * item.quantity);
 
       lines.push(`${prodName} × ${item.quantity}`);
       lines.push(`Variant: ${variantName}`);
-      lines.push(`Unit Price: ${unitPriceFormatted}`);
     });
 
     lines.push(divider);
