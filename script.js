@@ -2097,27 +2097,64 @@
     }
   }
 
-  window.filterAquariumCategory = function (filterKey) {
+  function filterAquariumCategory(filterKey, shouldScroll = true) {
     currentAquariumFilter = filterKey || 'all';
+
+    // When resetting to 'all', clear active search so all 17 aquarium products are displayed
+    if (currentAquariumFilter === 'all') {
+      currentSearch = '';
+      const searchInput = document.getElementById('catalogSearch');
+      if (searchInput) searchInput.value = '';
+    }
+
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(pill => {
       const pillFilter = pill.dataset.filter || pill.dataset.category;
       pill.classList.toggle('active', pillFilter === currentAquariumFilter);
     });
     renderProductGrid();
-  };
+
+    // Scroll smoothly to the actual product listing section on the Aquarium & Fish page
+    if (shouldScroll) {
+      const targetSection = document.getElementById('catalogue') || document.getElementById('productGrid');
+      if (targetSection && typeof targetSection.getBoundingClientRect === 'function') {
+        const headerHeight = 74;
+        const targetPos = targetSection.getBoundingClientRect().top + (window.pageYOffset || window.scrollY || 0) - headerHeight;
+        if (typeof window.scrollTo === 'function') {
+          window.scrollTo({
+            top: Math.max(0, targetPos),
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
+  }
+  window.filterAquariumCategory = filterAquariumCategory;
 
   function getCurrentPageCategory() {
-    const pageCat = (document.body && document.body.dataset && document.body.dataset.pageCategory) ||
-      (document.querySelector('main') && document.querySelector('main').dataset && document.querySelector('main').dataset.pageCategory);
+    const bodyCat = document.body && document.body.dataset && document.body.dataset.pageCategory;
+    const mainEl = document.querySelector('main');
+    const mainCat = mainEl && mainEl.dataset && mainEl.dataset.pageCategory;
+    const pageCat = bodyCat || mainCat;
     if (pageCat && pageCat !== 'home' && pageCat !== 'all') {
       return pageCat;
     }
     const path = (window.location && window.location.pathname) ? window.location.pathname.toLowerCase() : '';
-    if (path.includes('aquarium-fish')) return 'aquarium';
-    if (path.includes('isopods')) return 'isopods';
-    if (path.includes('tarantulas')) return 'tarantulas';
-    if (path.includes('combo-packs')) return 'combos';
-    if (path.includes('cultures')) return 'cultures';
+    const href = (window.location && window.location.href) ? window.location.href.toLowerCase() : '';
+    if (path.includes('aquarium') || href.includes('aquarium')) return 'aquarium';
+    if (path.includes('isopod') || href.includes('isopod')) return 'isopods';
+    if (path.includes('tarantula') || href.includes('tarantula')) return 'tarantulas';
+    if (path.includes('combo') || href.includes('combo')) return 'combos';
+    if (path.includes('culture') || href.includes('culture')) return 'cultures';
+
+    // Reliable fallback based on category hero classes or filter markup
+    if (document.querySelector('.category-hero-aquarium') || document.querySelector('.filter-pills-row[aria-label*="Aquarium"]')) {
+      return 'aquarium';
+    }
+    if (document.querySelector('.category-hero-isopods')) return 'isopods';
+    if (document.querySelector('.category-hero-tarantulas')) return 'tarantulas';
+    if (document.querySelector('.category-hero-combos')) return 'combos';
+    if (document.querySelector('.category-hero-cultures')) return 'cultures';
+
     return 'all';
   }
   let currentSearch = '';
@@ -2323,8 +2360,24 @@
   window.filterByCategory = function (categoryKey) {
     const pageCat = getCurrentPageCategory();
     if (pageCat === 'aquarium') {
-      filterAquariumCategory(categoryKey);
-      return;
+      // If filtering aquarium subcategories or all on the Aquarium & Fish page, stay on this page
+      if (categoryKey === 'all' || (typeof AQUARIUM_FILTER_NAMES !== 'undefined' && AQUARIUM_FILTER_NAMES[categoryKey]) || ['aquarium', 'betta', 'guppy', 'molly', 'shrimps', 'combos'].includes(categoryKey)) {
+        filterAquariumCategory(categoryKey);
+        return;
+      }
+      // If navigating to a different category altogether
+      const targetMap = {
+        isopods: 'isopods.html',
+        tarantulas: 'tarantulas.html',
+        combos: 'combo-packs.html',
+        combo: 'combo-packs.html',
+        cultures: 'cultures.html',
+        culture: 'cultures.html'
+      };
+      if (targetMap[categoryKey]) {
+        window.location.href = targetMap[categoryKey];
+        return;
+      }
     }
 
     const targetMap = {
@@ -4318,7 +4371,12 @@
     } else if (elementId === 'contact') {
       window.setActiveNavKey('contact');
     } else if (elementId === 'hero' || elementId === 'catalogue' || elementId === 'categories') {
-      window.setActiveNavKey('home');
+      const pageCat = getCurrentPageCategory();
+      if (pageCat === 'all' || pageCat === 'home') {
+        window.setActiveNavKey('home');
+      } else {
+        window.setActiveNavKey(pageCat);
+      }
     }
   };
 
@@ -4587,12 +4645,19 @@
 
     // 5. Category tabs click listeners
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
-      tab.addEventListener('click', () => {
+      tab.addEventListener('click', (e) => {
         const key = tab.dataset.filter || tab.dataset.category;
         const pageCat = getCurrentPageCategory();
         if (pageCat === 'aquarium') {
+          // If inline onclick exists on this tab, avoid calling it twice
+          if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes('filterAquariumCategory')) {
+            return;
+          }
           filterAquariumCategory(key);
         } else {
+          if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes('filterByCategory')) {
+            return;
+          }
           filterByCategory(key);
         }
       });
