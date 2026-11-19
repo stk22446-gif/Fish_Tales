@@ -722,7 +722,7 @@
       video: "",
       description: "A striking Albino Full Red (AFR) Guppy featuring rich, solid red coloration, a prominent oversized dorsal fin and flowing red tail.",
       price: 300,
-      unit: "pair",
+      unit: "pair (Few Pair Left)",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
       overview: "The AFR Big Dorsal Guppy (Poecilia reticulata), short for Albino Full Red Big Dorsal, is a selectively bred ornamental freshwater guppy admired for its vivid red body and fins, distinctive albino pigmentation and enlarged, sail-like dorsal fin. Its peaceful temperament makes it suitable for compatible freshwater community aquariums.",
