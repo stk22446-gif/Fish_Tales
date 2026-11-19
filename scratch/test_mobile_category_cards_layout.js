@@ -39,7 +39,7 @@ assert(
 console.log('  ✓ Tarantulas: second row, left (order: 3)');
 
 assert(
-  css.includes('.category-card[href="cultures.html"]') &&
+  (css.includes('.category-card[href="culture.html"]') || css.includes('.category-card[href="cultures.html"]')) &&
   css.includes('order: 4'),
   'Cultures must have order: 4 (second row, right)'
 );
@@ -77,7 +77,7 @@ const expectedCards = [
   { href: 'isopods.html', title: 'Isopods', expectedMobileRow: 1, expectedMobileCol: 'right' },
   { href: 'tarantulas.html', title: 'Tarantulas', expectedMobileRow: 2, expectedMobileCol: 'left' },
   { href: 'combo-packs.html', title: 'Combo Packs', expectedMobileRow: 3, expectedMobileCol: 'span 2' },
-  { href: 'cultures.html', title: 'Cultures', expectedMobileRow: 2, expectedMobileCol: 'right' }
+  { href: 'culture.html', title: 'Cultures', expectedMobileRow: 2, expectedMobileCol: 'right' }
 ];
 
 expectedCards.forEach(c => {

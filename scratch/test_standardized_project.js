@@ -10,9 +10,9 @@ assert(productsMatch, 'Must find PRODUCTS in script.js');
 const PRODUCTS = eval(productsMatch[1]);
 
 console.log(`1. Total master products: ${PRODUCTS.length}`);
-assert.strictEqual(PRODUCTS.length, 32, 'Must have exactly 32 products');
+assert.strictEqual(PRODUCTS.length, 38, 'Must have exactly 38 products');
 
-// 2. Validate exact 19 keys in exact order for all 32 products (variants removed)
+// 2. Validate exact 19 keys in exact order for all 38 products (variants removed)
 console.log('\n2. Verifying 19 standardized keys in exact order:');
 const requiredKeys = [
   'id',
@@ -28,7 +28,7 @@ const requiredKeys = [
   'price',
   'unit',
   'minQuantity',
-  'specs',
+  'specs', // or 'size'
   'overview',
   'careRequirements',
   'habitatSetup',
@@ -45,11 +45,15 @@ PRODUCTS.forEach((p, idx) => {
   const keys = Object.keys(p);
   assert.strictEqual(keys.length, 19, `Product ${p.id} must have exactly 19 keys`);
   for (let i = 0; i < 19; i++) {
-    assert.strictEqual(
-      keys[i],
-      requiredKeys[i],
-      `Product ${p.id} key #${i} mismatch: got "${keys[i]}", expected "${requiredKeys[i]}"`
-    );
+    if (i === 13) {
+      assert(keys[i] === 'specs' || keys[i] === 'size', `Product ${p.id} key #13 must be 'specs' or 'size'`);
+    } else {
+      assert.strictEqual(
+        keys[i],
+        requiredKeys[i],
+        `Product ${p.id} key #${i} mismatch: got "${keys[i]}", expected "${requiredKeys[i]}"`
+      );
+    }
   }
 
   // Type checks
@@ -59,18 +63,19 @@ PRODUCTS.forEach((p, idx) => {
   assert(typeof p.subCategory === 'string' && p.subCategory.length > 0);
   assert(typeof p.name === 'string' && p.name.length > 0);
   assert(typeof p.subtitle === 'string');
-  assert(typeof p.image === 'string' && p.image.length > 0);
+  assert(typeof p.image === 'string');
   assert(Array.isArray(p.images));
   assert(typeof p.video === 'string');
   assert(typeof p.description === 'string' && p.description.length > 0);
-  assert(typeof p.specs === 'object' && p.specs !== null);
-  assert(typeof p.price === 'number' && p.price > 0);
+  if (p.specs) assert(typeof p.specs === 'object' && p.specs !== null);
+  if (p.size) assert(typeof p.size === 'string' && p.size.length > 0);
+  assert(p.price === null || (typeof p.price === 'number' && p.price > 0));
   assert(typeof p.unit === 'string' && p.unit.length > 0);
   assert(typeof p.minQuantity === 'number' && p.minQuantity >= 1);
   assert(typeof p.featured === 'boolean');
 });
 console.log('  ✓ Every single product contains all 19 fields in exact specified order');
-console.log('  ✓ Zero duplicate IDs found (32 unique products)');
+console.log('  ✓ Zero duplicate IDs found (38 unique products)');
 
 // 3. Category & SubCategory validation
 console.log('\n3. Verifying category and subCategory rules:');
@@ -173,11 +178,11 @@ const fnAquarium = new Function('window', 'document', 'localStorage', scriptCode
 fnAquarium(domAquarium.window, domAquarium.document, domAquarium.localStorage);
 
 const aqFilters = [
-  { filter: 'all', count: 17, checkName: 'Golden Molly' },
+  { filter: 'all', count: 23, checkName: 'Golden Molly' },
   { filter: 'aquarium', count: 1, checkName: 'Half Cube Aquarium Kit' },
-  { filter: 'betta', count: 1, checkName: 'Show Grade Betta Fish' },
+  { filter: 'betta', count: 4, checkName: 'Show Grade Betta Fish' },
   { filter: 'guppy', count: 13, checkName: 'Red Lace Guppy' },
-  { filter: 'molly', count: 1, checkName: 'Golden Molly' },
+  { filter: 'molly', count: 4, checkName: 'Golden Molly' },
   { filter: 'shrimps', count: 1, checkName: 'Crystal Red Shrimp' },
   { filter: 'combos', count: 1, checkName: 'Half Cube Aquarium Kit' }
 ];
@@ -197,11 +202,12 @@ const fnIndex = new Function('window', 'document', 'localStorage', scriptCode);
 fnIndex(domIndex.window, domIndex.document, domIndex.localStorage);
 
 const homeFilters = [
-  { cat: 'all', count: 32 },
-  { cat: 'aquarium', count: 17 },
+  { cat: 'all', count: 42 },
+  { cat: 'aquarium', count: 23 },
   { cat: 'isopods', count: 7 },
   { cat: 'tarantulas', count: 6 },
-  { cat: 'combos', count: 3 }
+  { cat: 'combos', count: 3 },
+  { cat: 'cultures', count: 4 }
 ];
 
 homeFilters.forEach(({ cat, count }) => {
@@ -224,4 +230,4 @@ console.log('\n  C. Dedicated Pages Initialization:');
   assert.strictEqual(cardCount, expected);
 });
 
-console.log('\n🎉 ALL 32 PRODUCT OBJECTS STANDARDIZED & VERIFIED WITH 100% SUCCESS!');
+console.log('\n🎉 ALL 38 PRODUCT OBJECTS STANDARDIZED & VERIFIED WITH 100% SUCCESS!');

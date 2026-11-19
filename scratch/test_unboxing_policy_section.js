@@ -18,18 +18,19 @@ assert(!indexHtml.includes('Fish Tales is an independent boutique exotic livesto
 
 // 2. Verify new Policy Section in index.html
 console.log('2. Checking new Unboxing Video & Live Arrival Policy in index.html...');
-assert(indexHtml.includes('IMPORTANT: UNBOXING VIDEO &amp; LIVE ARRIVAL POLICY') || indexHtml.includes('IMPORTANT: UNBOXING VIDEO & LIVE ARRIVAL POLICY'), 'Heading must be present');
-assert(indexHtml.includes('Unboxing Video Required'), 'Must highlight Unboxing Video Required');
-assert(indexHtml.includes('Replacement Shipping Charges Applicable'), 'Must highlight Replacement Shipping Charges Applicable');
-assert(indexHtml.includes('To protect both our customers and Fish Tales, please record a clear, continuous unboxing video while opening your delivered package.'), 'Must include intro paragraph');
-assert(indexHtml.includes('Start recording before opening the sealed package.'), 'Must include bullet 1');
-assert(indexHtml.includes('Clearly show the outer packaging, shipping label and the complete unboxing process.'), 'Must include bullet 2');
-assert(indexHtml.includes('Do not pause, edit or cut the video.'), 'Must include bullet 3');
-assert(indexHtml.includes('If any live livestock arrives dead or damaged during transit, the unboxing video will be required as proof for verification.'), 'Must include bullet 4');
-assert(indexHtml.includes('Our team will review the video and verify the issue before approving a replacement.'), 'Must include bullet 5');
-assert(indexHtml.includes('Replacement Policy:'), 'Must include Replacement Policy heading');
-assert(indexHtml.includes('the replacement product will be provided free of product cost. However, the customer will need to pay the applicable delivery/shipping charges for the replacement shipment.'), 'Must include replacement terms');
-assert(indexHtml.includes('Please keep the unboxing video safe until your order is successfully verified.'), 'Must include safe video reminder');
+const normalizedHtml = indexHtml.replace(/\s+/g, ' ');
+assert(normalizedHtml.includes('IMPORTANT: UNBOXING VIDEO &amp; LIVE ARRIVAL POLICY') || normalizedHtml.includes('IMPORTANT: UNBOXING VIDEO & LIVE ARRIVAL POLICY'), 'Heading must be present');
+assert(normalizedHtml.includes('Unboxing Video Required'), 'Must highlight Unboxing Video Required');
+assert(normalizedHtml.includes('Replacement Shipping Charges Applicable'), 'Must highlight Replacement Shipping Charges Applicable');
+assert(normalizedHtml.includes('To protect both our customers and Fish Tales, please record a clear, continuous unboxing video while opening your delivered package.'), 'Must include intro paragraph');
+assert(normalizedHtml.includes('Start recording before opening the sealed package.'), 'Must include bullet 1');
+assert(normalizedHtml.includes('Clearly show the outer packaging, shipping label and the complete unboxing process.'), 'Must include bullet 2');
+assert(normalizedHtml.includes('Do not pause, edit or cut the video.'), 'Must include bullet 3');
+assert(normalizedHtml.includes('If any live livestock arrives dead or damaged during transit, the unboxing video will be required as proof for verification.'), 'Must include bullet 4');
+assert(normalizedHtml.includes('Our team will review the video and verify the issue before approving a replacement.'), 'Must include bullet 5');
+assert(normalizedHtml.includes('Replacement Policy:'), 'Must include Replacement Policy heading');
+assert(normalizedHtml.includes('the replacement product will be provided free of product cost. However, the customer will need to pay the applicable delivery/shipping charges for the replacement shipment.'), 'Must include replacement terms');
+assert(normalizedHtml.includes('Please keep the unboxing video safe until your order is successfully verified.'), 'Must include safe video reminder');
 
 // 3. Verify Checkout Page does NOT display the policy card
 console.log('3. Checking Checkout Page in script.js (policy card removed, COD banner preserved)...');

@@ -105,7 +105,13 @@
       'guppy-silverado-red-dragon': 'Poecilia reticulata',
       'guppy-green-moscow': 'Poecilia reticulata',
       'show-grade-betta': 'Betta splendens',
+      'betta-avatar-stardust-plakat': 'Betta splendens (Shortfin Plakat)',
+      'betta-rgg-ironman-halfmoon-plakat': 'Betta splendens (Halfmoon Plakat)',
+      'betta-pure-white-crowntail': 'Betta splendens (Crowntail)',
       'molly-golden': 'Poecilia sphenops var. Golden',
+      'molly-blue-eye-platinum-white-lyretail-balloon': 'Poecilia sphenops var. Balloon Lyretail',
+      'molly-crystal-eye-zebra-lyretail-balloon': 'Poecilia sphenops var. Balloon Zebra',
+      'molly-platinum-white-round-tail-balloon': 'Poecilia sphenops var. Balloon Round Tail',
       'shrimp-crystal-red': 'Caridina cf. cantonensis var. Crystal Red',
       'armadillidium-gestroi': 'Armadillidium gestroi',
       'cubaris-murina-orange': 'Cubaris murina var. Orange',
@@ -132,8 +138,8 @@
       p.subtitle = p.scientificName;
     }
 
-    if (p.price === undefined || p.price === null) {
-      p.price = 0;
+    if (p.price === undefined || p.price === null || p.price === '') {
+      p.price = null;
     } else {
       p.price = Number(p.price);
     }
@@ -148,6 +154,10 @@
     }
     if (p.specs && p.specs.size && !p.size) {
       p.size = p.specs.size;
+    }
+    if (p.id === 'glacier-colony-pack') {
+      p.packSize = '11 specimens (10 + 1 Free)';
+      if (!p.size) p.size = p.packSize;
     }
     if (p.specs && p.specs.kitIncludes && !p.kitIncludes) {
       p.kitIncludes = p.specs.kitIncludes;
@@ -379,11 +389,12 @@
   }
 
   function getProductSelectedVariant(product) {
-    if (!product) return { name: '', price: 0, unit: 'piece', label: 'piece' };
+    if (!product) return { name: '', price: null, unit: 'piece', label: 'piece' };
     initProductVariantsAndSpecs(product);
+    const hasPrice = product.price !== null && product.price !== undefined && !isNaN(product.price) && Number(product.price) > 0;
     return {
       name: product.name,
-      price: Number(product.price || 0),
+      price: hasPrice ? Number(product.price) : null,
       unit: product.unit || product.pricingUnit || 'piece',
       label: product.unit || product.pricingUnit || 'piece'
     };
@@ -391,6 +402,7 @@
 
   /* ── 3. Master Product Catalogue (Standardized Schema) ───── */
   const PRODUCTS = [
+
     {
       id: "guppy-red-lace",
       category: "aquarium",
@@ -398,41 +410,52 @@
       subCategory: "guppy",
       name: "Red Lace Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Cobra_Guppy_%28Poecilia_reticulata%29.JPG",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795039473/c0da96d8-87ce-4451-b416-5d256f51b8b7.png",
       images: [],
       video: "",
-      description: "Intricate red lace-patterned caudal fin with iridescent body tones. Captive bred and peaceful in planted community tanks.",
+      description: "Striking red-orange lace-patterned caudal fin with intricate dark markings and a shimmering iridescent body. A beautiful fancy guppy for peaceful planted freshwater aquariums.",
       price: 250,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair (1 Male + 1 Female)"
-},
-      overview: "The Red Lace Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+
+      overview: "The Red Lace Guppy (Poecilia reticulata) is a fancy freshwater livebearer admired for its vibrant red-orange coloration and distinctive lace-like tail pattern. Its peaceful temperament and active swimming behaviour make it suitable for compatible planted community aquariums.",
+
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner / Community",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "6.8 – 7.8",
+        "General Hardness (GH)": "Medium to hard (8 – 18 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
+
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres (10 gallons) or larger; more space is recommended for groups",
+        "Substrate": "Fine gravel or dark aquatic soil to highlight the fish's coloration",
+        "Filtration": "Gentle sponge or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow, suitable for fancy guppies with flowing fins",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Maintain stable, clean and well-oxygenated water with zero ammonia and nitrite",
+        "Tankmates": "Compatible with small, peaceful freshwater community fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "A secure lid is recommended because guppies can jump"
+      },
+
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Guppies are popularly known as millionfish because of their prolific breeding ability.",
+        "The Red Lace variety is admired for its intricate dark markings across its red-orange tail.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young rather than laying eggs.",
+        "Male guppies are generally smaller and more colourful than females.",
+        "Guppies are omnivores and benefit from a varied diet."
+      ],
+
       featured: true
-    },
+    }
+    ,
+
     {
       id: "guppy-gold-dumbo-ear",
       category: "aquarium",
@@ -440,41 +463,51 @@
       subCategory: "guppy",
       name: "Gold Dumbo Ear Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://upload.wikimedia.org/wikipedia/commons/7/78/Poecilia_retic_090519-8688_kdBdk.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795040018/ece7921b-17ff-4106-893d-b61e5f97135a.png",
       images: [],
       video: "",
-      description: "Lustrous golden body with enlarged, prominent \"dumbo ear\" pectoral fins creating a graceful flutter in planted tanks.",
+      description: "Lustrous golden body coloration combined with enlarged, flowing Dumbo Ear pectoral fins. A graceful and eye-catching fancy guppy for planted freshwater aquariums.",
       price: 280,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The Gold Dumbo Ear Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+
+      overview: "The Gold Dumbo Ear Guppy (Poecilia reticulata) is a selectively bred fancy guppy admired for its attractive golden coloration and oversized pectoral fins resembling elephant ears. Its peaceful temperament and active swimming behaviour make it suitable for compatible freshwater community aquariums.",
+
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "Water Hardness": "Moderately hard to hard (8 – 15 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
+
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres or larger; a 75-litre aquarium is preferable for a group",
+        "Substrate": "Fine gravel or dark aquatic soil",
+        "Filtration": "Gentle sponge filter or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow to accommodate enlarged pectoral fins",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Maintain stable, clean and well-oxygenated water with zero ammonia and nitrite",
+        "Tankmates": "Compatible with small, peaceful freshwater fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "Use a secure lid to prevent jumping"
+      },
+
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Dumbo Ear Guppies are named after their enlarged pectoral fins, which resemble elephant ears.",
+        "The Dumbo Ear feature is a selectively bred trait of the common guppy.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young.",
+        "Guppies are omnivores and benefit from a varied diet.",
+        "Male guppies are generally smaller and more colourful than females."
+      ],
+
       featured: false
     },
+
     {
       id: "guppy-santacruz-dumbo-ear",
       category: "aquarium",
@@ -482,41 +515,50 @@
       subCategory: "guppy",
       name: "Santacruz Dumbo Ear Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Poecilia_reticulata_%28male%29.JPG",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795040331/ebb2c7b8-6148-4f21-98a7-3b8ec5b56548.png",
       images: [],
       video: "",
-      description: "Striking Santacruz lineage showcasing oversized dumbo ears, iridescent cobalt-blue coloration, and active schooling behavior.",
+      description: "Distinctive Dumbo Ear Guppy featuring enlarged, flowing pectoral fins, shimmering cobalt-blue coloration, and an elegant appearance in planted freshwater aquariums.",
       price: 250,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The Santacruz Dumbo Ear Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+
+      overview: "The Santacruz Dumbo Ear Guppy (Poecilia reticulata) is a fancy guppy variety admired for its enlarged pectoral fins, iridescent blue coloration, and graceful swimming movements. Its peaceful temperament makes it suitable for compatible freshwater community aquariums.",
+
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner / Community",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet consisting of quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "Water Hardness": "Medium to hard (8 – 18 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
+
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres or larger, with more space recommended for groups",
+        "Substrate": "Fine gravel or dark aquatic soil",
+        "Filtration": "Gentle sponge or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow to accommodate flowing fins",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Maintain stable, clean and well-oxygenated water with zero ammonia and nitrite",
+        "Tankmates": "Compatible with small, peaceful freshwater community fish; avoid fin-nipping species"
+      },
+
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Guppies are commonly called millionfish because of their prolific breeding ability.",
+        "Dumbo Ear Guppies are recognised by their enlarged pectoral fins, which resemble small ears.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young rather than laying eggs.",
+        "Fancy guppy varieties have been developed through generations of selective breeding."
+      ],
+
       featured: false
     },
+
+
     {
       id: "guppy-platinum-dumbo-halfmoon",
       category: "aquarium",
@@ -524,41 +566,52 @@
       subCategory: "guppy",
       name: "Platinum Dumbo Ear Halfmoon Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://upload.wikimedia.org/wikipedia/commons/a/af/Poecilia_reticulata_01.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795040686/b9003b12-4cb1-47d2-bfd1-158d88df5155.png",
       images: [],
       video: "",
-      description: "Full 180-degree halfmoon caudal fin with gleaming platinum-white scales and grand dumbo pectoral ears.",
+      description: "Elegant platinum-white body coloration paired with enlarged Dumbo Ear pectoral fins and a broad, flowing halfmoon-shaped caudal fin.",
       price: 280,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The Platinum Dumbo Ear Halfmoon Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+
+      overview: "The Platinum Dumbo Ear Halfmoon Guppy (Poecilia reticulata) is a selectively bred fancy guppy admired for its shimmering platinum coloration, enlarged pectoral fins and impressive fan-shaped caudal fin. Its peaceful temperament makes it suitable for compatible freshwater community aquariums.",
+
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "General Hardness (GH)": "Moderately hard to hard (8 – 18 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
+
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres (10 gallons) or larger; a larger aquarium is preferable for groups",
+        "Substrate": "Fine gravel or dark aquatic soil to highlight platinum coloration",
+        "Filtration": "Gentle sponge filter or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow to accommodate long, flowing fins",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Maintain stable, clean and well-oxygenated water with zero ammonia and nitrite",
+        "Tankmates": "Compatible with small, peaceful freshwater community fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "A secure lid is recommended because guppies can jump"
+      },
+
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Halfmoon guppies are admired for their broad, fan-shaped caudal fins that can approach a 180-degree spread.",
+        "Dumbo Ear Guppies have enlarged pectoral fins that resemble small ears.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young.",
+        "Fancy guppy varieties have been developed through generations of selective breeding.",
+        "Long flowing fins can make fancy guppies more vulnerable to fin-nipping tankmates."
+      ],
+
       featured: true
     },
+
+
     {
       id: "guppy-blue-dragon-dumbo-halfmoon",
       category: "aquarium",
@@ -566,41 +619,47 @@
       subCategory: "guppy",
       name: "Blue Dragon Dumbo Ear Halfmoon Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://images.unsplash.com/photo-1520989244660-118e51ae94bc?auto=format&fit=crop&w=600&q=80",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795040866/6fb1a1d3-5e2b-4d8a-bba1-0b56237bf111.png",
       images: [],
       video: "",
-      description: "Rich royal blue metallic dorsal and halfmoon tail paired with grand dumbo ear fins. Centerpiece display fish.",
+      description: "A striking fancy guppy featuring metallic blue dragon-scale patterns, oversized Dumbo Ear pectoral fins and a broad, flowing halfmoon-shaped tail.",
       price: 280,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The Blue Dragon Dumbo Ear Halfmoon Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+      overview: "The Blue Dragon Dumbo Ear Halfmoon Guppy (Poecilia reticulata) is a selectively bred ornamental freshwater guppy admired for its shimmering blue metallic body, distinctive dragon-scale appearance, enlarged ear-like pectoral fins and impressive halfmoon tail. Its peaceful temperament makes it suitable for compatible freshwater community aquariums.",
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "General Hardness (GH)": "Moderately hard to hard (8 – 15 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres (10 gallons) or larger; a larger aquarium is preferable for groups",
+        "Substrate": "Fine gravel or dark aquatic soil to complement its metallic blue coloration",
+        "Filtration": "Gentle sponge filter or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow to accommodate enlarged pectoral fins and flowing tail",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Use a fully cycled aquarium and maintain stable, clean water with zero ammonia and nitrite",
+        "Tankmates": "Choose small, peaceful freshwater fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "A secure lid is recommended because guppies can jump"
+      },
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Guppies are often called millionfish because they reproduce readily and produce live young.",
+        "Dumbo Ear Guppies are named after their enlarged pectoral fins, which resemble elephant ears.",
+        "Dragon guppy varieties are admired for their dense, metallic-looking scale patterns.",
+        "Halfmoon guppies are prized for their broad, fan-shaped caudal fins.",
+        "Female guppies give birth to free-swimming fry rather than laying eggs."
+      ],
       featured: true
     },
+
+
     {
       id: "guppy-moscow-black-dumbo",
       category: "aquarium",
@@ -608,41 +667,47 @@
       subCategory: "guppy",
       name: "Moscow Black Dumbo Ear Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=600&q=80",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795041020/dbfef8d3-2691-46eb-b482-9f2da25667ff.png",
       images: [],
       video: "",
-      description: "Deep velvet-black coloration spanning from snout to tail, contrasted by delicate fluttery dumbo pectoral fins.",
+      description: "An elegant fancy guppy featuring deep, velvety black coloration and distinctive enlarged Dumbo Ear pectoral fins that create a graceful swimming appearance.",
       price: 250,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The Moscow Black Dumbo Ear Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+      overview: "The Moscow Black Dumbo Ear Guppy (Poecilia reticulata) is a selectively bred ornamental freshwater guppy admired for its deep black coloration and enlarged, ear-like pectoral fins. Its peaceful temperament makes it suitable for compatible freshwater community aquariums.",
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "General Hardness (GH)": "Moderately hard to hard (8 – 15 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres (10 gallons) or larger; a larger aquarium is preferable for groups",
+        "Substrate": "Fine gravel or a lighter-coloured substrate can help the dark body coloration stand out",
+        "Filtration": "Gentle sponge filter or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow to accommodate enlarged pectoral fins",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Use a fully cycled aquarium and maintain stable, clean water with zero ammonia and nitrite",
+        "Tankmates": "Choose small, peaceful freshwater fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "A secure lid is recommended because guppies can jump"
+      },
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Moscow guppies are selectively bred for their rich, solid body coloration.",
+        "The Dumbo Ear trait refers to enlarged pectoral fins that resemble elephant ears.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young.",
+        "Male Moscow guppies generally display stronger solid coloration than females.",
+        "Fancy guppy varieties have been developed through generations of selective breeding."
+      ],
       featured: false
     },
+
+
     {
       id: "guppy-afr-big-dorsal",
       category: "aquarium",
@@ -650,41 +715,49 @@
       subCategory: "guppy",
       name: "AFR Big Dorsal Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://images.unsplash.com/photo-1548262323-694280fdc967?auto=format&fit=crop&w=600&q=80",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795041117/0b58d375-c049-443f-93c5-31bd17202aee.png",
       images: [],
       video: "",
-      description: "Prized Albino Full Red (AFR) genetics with an extravagant, sail-like big dorsal fin and ruby-red eyes.",
+      description: "A striking Albino Full Red (AFR) Guppy featuring rich, solid red coloration, a prominent oversized dorsal fin and flowing red tail.",
       price: 300,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The AFR Big Dorsal Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+      overview: "The AFR Big Dorsal Guppy (Poecilia reticulata), short for Albino Full Red Big Dorsal, is a selectively bred ornamental freshwater guppy admired for its vivid red body and fins, distinctive albino pigmentation and enlarged, sail-like dorsal fin. Its peaceful temperament makes it suitable for compatible freshwater community aquariums.",
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "General Hardness (GH)": "Moderately hard to hard (8 – 15 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres (10 gallons) or larger; a larger aquarium is preferable for groups",
+        "Substrate": "Fine gravel or dark aquatic soil to complement its red coloration",
+        "Filtration": "Gentle sponge filter or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow to accommodate the enlarged dorsal and flowing tail",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Lighting": "Moderate lighting with shaded areas is a sensible choice for albino fish",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Use a fully cycled aquarium and maintain stable, clean water with zero ammonia and nitrite",
+        "Tankmates": "Choose small, peaceful freshwater fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "A secure lid is recommended because guppies can jump"
+      },
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "AFR stands for Albino Full Red, a guppy variety bred for its solid red coloration.",
+        "Albino guppies lack much of their dark pigmentation and commonly have red or pinkish eyes.",
+        "The Big Dorsal trait is prized for its enlarged, sail-like dorsal fin.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young.",
+        "A varied omnivorous diet supports healthy growth and condition."
+      ],
       featured: true
     },
+
+
+
     {
       id: "guppy-dark-knight-dragon-dumbo",
       category: "aquarium",
@@ -692,41 +765,47 @@
       subCategory: "guppy",
       name: "Dark Knight Dragon Dumbo Ear Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://images.unsplash.com/photo-1553986187-9cb16fa33483?auto=format&fit=crop&w=600&q=80",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795041233/5e956b3d-2f9a-4caa-a0a0-9b54fbb4cc5e.png",
       images: [],
       video: "",
-      description: "Dark dramatic dragon scales with violet and navy undertones, complemented by fluttering dumbo ears.",
+      description: "A dramatic fancy guppy featuring a dark dragon-scale appearance with deep navy and violet undertones, complemented by distinctive enlarged Dumbo Ear pectoral fins.",
       price: 280,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The Dark Knight Dragon Dumbo Ear Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+      overview: "The Dark Knight Dragon Dumbo Ear Guppy (Poecilia reticulata) is a selectively bred ornamental freshwater guppy admired for its dark, metallic-looking dragon-scale appearance and enlarged, ear-like pectoral fins. Its peaceful temperament makes it suitable for compatible freshwater community aquariums.",
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "General Hardness (GH)": "Moderately hard to hard (8 – 15 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres (10 gallons) or larger; a larger aquarium is preferable for groups",
+        "Substrate": "Dark aquatic soil or fine gravel can complement its darker coloration",
+        "Filtration": "Gentle sponge filter or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow to accommodate enlarged pectoral fins",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Use a fully cycled aquarium and maintain stable, clean water with zero ammonia and nitrite",
+        "Tankmates": "Choose small, peaceful freshwater fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "A secure lid is recommended because guppies can jump"
+      },
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Dumbo Ear Guppies are named after their enlarged pectoral fins, which resemble elephant ears.",
+        "Dragon guppy varieties are admired for their distinctive metallic-looking scale patterns.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young.",
+        "Fancy guppy varieties are developed through generations of selective breeding.",
+        "Large flowing fins can make fancy guppies more vulnerable to fin-nipping tankmates."
+      ],
       featured: false
     },
+
+
     {
       id: "guppy-red-platinum-koi-dumbo",
       category: "aquarium",
@@ -734,41 +813,47 @@
       subCategory: "guppy",
       name: "Red Platinum Koi Dumbo Ear Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://images.unsplash.com/photo-1500909001949-1fc0780d81c9?auto=format&fit=crop&w=600&q=80",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795041406/813a5341-f058-4ba4-a055-2c4e2b831cc4.png",
       images: [],
       video: "",
-      description: "Classic red and platinum koi-styled color patterns with translucent big dumbo ears. Active and hardy.",
+      description: "An attractive fancy guppy featuring a shimmering platinum body, vibrant red and koi-style colour patches, and distinctive enlarged Dumbo Ear pectoral fins.",
       price: 280,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The Red Platinum Koi Dumbo Ear Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+      overview: "The Red Platinum Koi Dumbo Ear Guppy (Poecilia reticulata) is a selectively bred ornamental freshwater guppy admired for its metallic platinum base colour, contrasting red and koi-style patches, and enlarged ear-like pectoral fins. Its peaceful temperament makes it suitable for compatible freshwater community aquariums.",
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "General Hardness (GH)": "Moderately hard to hard (8 – 15 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres (10 gallons) or larger; a larger aquarium is preferable for groups",
+        "Substrate": "Fine gravel or dark aquatic soil to complement its platinum and red coloration",
+        "Filtration": "Gentle sponge filter or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow to accommodate enlarged pectoral fins",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Use a fully cycled aquarium and maintain stable, clean water with zero ammonia and nitrite",
+        "Tankmates": "Choose small, peaceful freshwater fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "A secure lid is recommended because guppies can jump"
+      },
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Koi guppies are admired for their contrasting patches of colour inspired by koi carp.",
+        "Dumbo Ear Guppies have enlarged pectoral fins that resemble elephant ears.",
+        "The platinum appearance comes from a metallic-looking body coloration.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young.",
+        "Selective breeding produces a wide variety of guppy colours, patterns and fin shapes."
+      ],
       featured: false
     },
+
+
     {
       id: "guppy-magenta-red-tiger",
       category: "aquarium",
@@ -776,41 +861,47 @@
       subCategory: "guppy",
       name: "Magenta Red Tiger Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://images.unsplash.com/photo-1538719501547-bc023056a8b6?auto=format&fit=crop&w=600&q=80",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795041721/36a59507-0fce-4013-bb37-a1ee990d9231.png",
       images: [],
       video: "",
-      description: "Bold tiger bar stripes over vibrant magenta-red body. Energetic swimmer that thrives in planted aquascapes.",
+      description: "A colourful fancy guppy featuring vibrant magenta-red body tones and distinctive tiger-like markings, creating a bold and eye-catching appearance.",
       price: 250,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The Magenta Red Tiger Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+      overview: "The Magenta Red Tiger Guppy (Poecilia reticulata) is an ornamental freshwater guppy admired for its rich magenta-red coloration and contrasting tiger-like body markings. Like other fancy guppies, it is a livebearing fish with a peaceful temperament, making it suitable for compatible freshwater community aquariums.",
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "General Hardness (GH)": "Moderately hard to hard (8 – 15 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres (10 gallons) or larger; a larger aquarium is preferable for groups",
+        "Substrate": "Fine gravel or dark aquatic soil to complement its vibrant coloration",
+        "Filtration": "Gentle sponge filter or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Use a fully cycled aquarium and maintain stable, clean water with zero ammonia and nitrite",
+        "Tankmates": "Choose small, peaceful freshwater fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "A secure lid is recommended because guppies can jump"
+      },
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Guppies are often called millionfish because they reproduce readily.",
+        "Fancy guppies have been selectively bred into a wide range of colours and patterns.",
+        "Tiger-like markings create a striped appearance that distinguishes this variety.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young.",
+        "A varied omnivorous diet supports healthy growth and body condition."
+      ],
       featured: false
     },
+
+
     {
       id: "guppy-white-tuxido",
       category: "aquarium",
@@ -818,41 +909,47 @@
       subCategory: "guppy",
       name: "White Tuxido Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=600&q=80",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795041881/2fee6b82-750a-4955-bcb1-22151598f15d.png",
       images: [],
       video: "",
-      description: "Crisp white caudal fin contrasted with a deep midnight tuxedo torso. Highly prolific and peaceful.",
+      description: "A striking two-tone fancy guppy featuring a light white or platinum front, a contrasting dark tuxedo-style rear body and elegant white flowing fins.",
       price: 250,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The White Tuxido Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+      overview: "The White Tuxido Guppy (Poecilia reticulata) is a selectively bred ornamental freshwater guppy admired for its distinctive tuxedo pattern, combining a light-coloured front with a dark rear body and white or platinum fins. Its peaceful temperament and active swimming behaviour make it suitable for compatible freshwater community aquariums.",
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and baby brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "General Hardness (GH)": "Moderately hard to hard (8 – 15 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres (10 gallons) or larger; a larger aquarium is preferable for groups",
+        "Substrate": "Dark gravel or aquatic soil can provide contrast against its light coloration",
+        "Filtration": "Gentle sponge filter or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Use a fully cycled aquarium and maintain stable, clean water with zero ammonia and nitrite",
+        "Tankmates": "Choose small, peaceful freshwater fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "A secure lid is recommended because guppies can jump"
+      },
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Tuxedo guppies are also commonly called Half Black guppies because of their contrasting dark rear body.",
+        "White Tuxedo varieties combine the classic tuxedo pattern with pale or white fins.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young.",
+        "Male guppies are generally smaller and more colourful than females.",
+        "Guppies are omnivores and benefit from a varied diet."
+      ],
       featured: false
     },
+
+
     {
       id: "guppy-silverado-red-dragon",
       category: "aquarium",
@@ -860,41 +957,47 @@
       subCategory: "guppy",
       name: "Silverado Red Dragon Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Guppy_-_Poecilia_reticulata.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795042005/2c1b1c0a-4d08-4b6c-895b-61433aa33481.png",
       images: [],
       video: "",
-      description: "Silvery metallic chest transitioning into a fierce red dragon-patterned tail fin. Stunning light-reflective sheen.",
+      description: "A distinctive fancy guppy combining a shimmering silver or platinum-toned body with contrasting red dragon-style patterns across its flowing fins.",
       price: 280,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The Silverado Red Dragon Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+      overview: "The Silverado Red Dragon Guppy (Poecilia reticulata) is an ornamental freshwater guppy presented for its metallic silver body coloration and contrasting red dragon-style fin patterns. Its peaceful temperament makes it suitable for compatible freshwater community aquariums.",
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "General Hardness (GH)": "Moderately hard to hard (8 – 15 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres (10 gallons) or larger; a larger aquarium is preferable for groups",
+        "Substrate": "Dark aquatic soil or fine gravel can help highlight its metallic silver coloration",
+        "Filtration": "Gentle sponge filter or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow, especially if the fish has long flowing fins",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Use a fully cycled aquarium and maintain stable, clean water with zero ammonia and nitrite",
+        "Tankmates": "Choose small, peaceful freshwater fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "A secure lid is recommended because guppies can jump"
+      },
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Silverado is a documented guppy colour strain associated with metallic silver coloration.",
+        "The Silverado phenotype has been described as having silver iridophores that give the body its reflective appearance.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young.",
+        "Fancy guppy varieties are developed through generations of selective breeding.",
+        "A varied omnivorous diet supports healthy growth and body condition."
+      ],
       featured: false
     },
+
+
     {
       id: "guppy-green-moscow",
       category: "aquarium",
@@ -902,41 +1005,46 @@
       subCategory: "guppy",
       name: "Green Moscow Guppy",
       subtitle: "Poecilia reticulata",
-      image: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Poecilia_reticulata_-_Guppy%2C_male%2C_cobra-green_morph.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795042216/687f7103-783a-477f-bb58-556898d5cac5.png",
       images: [],
       video: "",
-      description: "Deep emerald-green metallic sheen covering head to tail. An all-time legendary strain for planted aquariums.",
+      description: "A striking Moscow strain featuring rich metallic emerald-green to turquoise coloration extending across the body and flowing fins, creating a beautiful reflective sheen.",
       price: 250,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The Green Moscow Guppy (Poecilia reticulata) is an exquisite livebearing freshwater fish prized for its vibrant coloration, intricate tail patterns, and peaceful demeanor in planted aquariums.",
+      size: "Adult Pair (1 Male + 1 Female)",
+      overview: "The Green Moscow Guppy (Poecilia reticulata) is a selectively bred ornamental freshwater guppy admired for its distinctive solid metallic green coloration. Its body and fins can display emerald, teal or turquoise tones depending on lighting and individual coloration. Its peaceful temperament makes it suitable for compatible freshwater community aquariums.",
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "2 – 3 years",
-      "pH Range": "6.8 – 7.8",
-      "Hardness": "Medium to hard (8–12 dGH)"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous diet including quality micro-pellets, flakes, and live or frozen foods such as Daphnia and brine shrimp",
+        "Lifespan": "Approximately 2 – 3 years",
+        "pH Range": "7.0 – 8.0",
+        "General Hardness (GH)": "Moderately hard to hard (8 – 15 dGH)",
+        "Temperament": "Peaceful and active community fish",
+        "Social Behaviour": "Social fish that generally do well in groups of compatible guppies"
+      },
       habitatSetup: {
-      "Aquarium Size": "Minimum 10 gallons for active pairs or colonies",
-      "Substrate": "Fine gravel or dark aquatic soil to highlight iridescent coloration",
-      "Filtration & Flow": "Gentle sponge or internal filter to protect delicate flowing fins",
-      "Plants & Decor": "Dense live plants like Java Moss, Hornwort, and Anubias for shelter"
-},
+        "Aquarium Size": "Approximately 40 litres (10 gallons) or larger; a larger aquarium is preferable for groups",
+        "Substrate": "Dark aquatic soil or fine gravel can help highlight its metallic green coloration",
+        "Filtration": "Gentle sponge filter or suitable aquarium filtration",
+        "Water Flow": "Low to moderate flow",
+        "Plants & Decor": "Java Moss, Hornwort and Anubias provide shelter and resting areas",
+        "Swimming Space": "Maintain open swimming areas alongside planted sections",
+        "Water Quality": "Use a fully cycled aquarium and maintain stable, clean water with zero ammonia and nitrite",
+        "Tankmates": "Choose small, peaceful freshwater fish; avoid aggressive and fin-nipping species",
+        "Aquarium Cover": "A secure lid is recommended because guppies can jump"
+      },
       didYouKnow: [
-      "Guppies are renowned as \"millionfish\" due to their prolific breeding and astounding color diversity.",
-      "Selective breeding over decades has produced distinctive fancy strains like Dumbo ear pectoral flutters and lace caudal patterns."
-],
+        "Green Moscow is a colour variation of the Moscow guppy strain.",
+        "Its green appearance is associated with yellow pigment cells interacting with the blue Moscow coloration.",
+        "Metallic scales can reflect green, teal or turquoise depending on the viewing angle and lighting.",
+        "Guppies are livebearers, meaning females give birth to free-swimming young.",
+        "Male Moscow guppies generally display stronger and more uniform body coloration than females."
+      ],
       featured: false
     },
+
     {
       id: "show-grade-betta",
       category: "aquarium",
@@ -944,83 +1052,357 @@
       subCategory: "betta",
       name: "Show Grade Betta Fish",
       subtitle: "Betta splendens",
-      image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Betta-splendens-male.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795042372/dfbebb09-be81-4cd1-8d46-6adbbdbad80d.png",
       images: [],
       video: "",
-      description: "Hand-selected healthy Betta splendens featuring vibrant color iridescence and large flowing fins. Centerpiece display specimen.",
+      description: "A striking ornamental Betta splendens admired for its vibrant colours, iridescent scales and elegant flowing fins. A beautiful centrepiece fish for a carefully maintained freshwater aquarium.",
       price: 350,
       unit: "piece",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Micro-pellets & live/frozen daphnia",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult (5–6 cm)"
-},
-      overview: "The Show Grade Betta Fish is a majestic labyrinth fish displaying symmetrical finnage, vibrant iridescence, and intelligent personality. Each specimen is selected for health, vitality, and show-standard conformation.",
+      size: "Adult (Approximately 5–7 cm, depending on variety)",
+      overview: "The Show Grade Betta Fish (Betta splendens), also known as the Siamese Fighting Fish, is a popular ornamental freshwater species recognised for its vivid colours, distinctive finnage and curious behaviour. Bettas are labyrinth fish that can breathe atmospheric air at the water surface. Each fish may display individual differences in colour, fin shape and personality.",
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Micro-pellets & live/frozen daphnia",
-      "Lifespan": "3 – 5 years",
-      "pH Range": "6.5 – 7.5",
-      "Handling": "Do not house adult males together"
-},
+        "Difficulty": "Beginner with a properly equipped aquarium",
+        "Water Temperature": "24°C – 28°C",
+        "Diet": "Carnivorous; feed quality Betta pellets as the staple, supplemented with Daphnia, brine shrimp and bloodworms",
+        "Lifespan": "Approximately 3 – 5 years with proper care",
+        "pH Range": "6.5 – 7.5",
+        "Temperament": "Territorial; adult males should be housed separately",
+        "Social Behaviour": "Generally kept individually; carefully selected tankmates may be possible in a suitably sized aquarium"
+      },
       habitatSetup: {
-      "Aquarium Size": "5 to 10 gallons nano tank (avoid tiny unheated bowls)",
-      "Filtration & Flow": "Low-flow filtration as heavy currents tire flowing fins",
-      "Substrate": "Smooth dark sand or planted substrate",
-      "Plants & Decor": "Broad-leaf live plants like Anubias providing rest spots near the surface"
-},
+        "Aquarium Size": "At least 19 litres (5 gallons); around 38 litres (10 gallons) provides more stable conditions",
+        "Heating": "Use a suitable adjustable heater and thermometer to maintain stable warm water",
+        "Filtration": "Gentle sponge filter or low-flow adjustable filtration",
+        "Water Flow": "Low flow; strong currents can stress bettas, especially long-finned varieties",
+        "Substrate": "Smooth sand or fine gravel",
+        "Plants & Decor": "Live plants such as Anubias and Java Fern, with smooth decorations and hiding spots",
+        "Resting Areas": "Broad-leaf plants or resting spots near the water surface",
+        "Water Quality": "Use a fully cycled aquarium and maintain clean, stable water with zero ammonia and nitrite",
+        "Aquarium Cover": "A secure lid is recommended because bettas can jump",
+        "Tankmates": "Avoid housing adult males together; choose any community tankmates carefully"
+      },
       didYouKnow: [
-      "Bettas possess a specialized labyrinth organ enabling them to breathe atmospheric air directly from the water surface.",
-      "Each betta has a unique interactive personality and quickly learns to recognize its keeper during feeding time."
-],
+        "Bettas possess a specialised labyrinth organ that allows them to breathe atmospheric air directly from the water surface.",
+        "Male bettas are territorial and should not be housed together.",
+        "Bettas naturally inhabit slow-moving, vegetation-rich freshwater environments.",
+        "Their flowing fins and wide range of colours have been developed through selective breeding.",
+        "Bettas can learn to recognise familiar feeding routines and may respond to their keeper."
+      ],
       featured: true
     },
     {
+      id: "betta-avatar-stardust-plakat",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "Avatar Stardust — Plakat Variety",
+      subtitle: "Betta splendens (Shortfin Plakat)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795045676/7612bf26-e9d9-4217-891c-3fa2d710e805.png",
+      images: [],
+      video: "",
+      description: "A spectacular short-finned Plakat Betta displaying a deep midnight-black base dusted with shimmering metallic blue and cyan scales reminiscent of a cosmic starfield. Active, vigorous, and agile.",
+      price: null,
+      unit: "piece",
+      minQuantity: 1,
+      size: "Adult (Approximately 4.5 – 6 cm)",
+      overview: "Avatar Stardust is a highly prized modern Betta splendens morph celebrated for its dark, velvety black body heavily speckled with luminous, star-like metallic cyan and electric blue scales. As a traditional Plakat variety, it possesses compact, muscular finnage that allows swift, unhindered swimming and superior stamina compared to heavy long-finned varieties. Each individual specimen displays a unique constellation of iridescence.",
+      careRequirements: {
+        "Difficulty": "Beginner with suitable heated nano setup",
+        "Water Temperature": "25°C – 29°C (stable heater required)",
+        "Diet": "Carnivorous; high-protein micro-pellets, frozen bloodworms, live daphnia and mosquito larvae",
+        "Lifespan": "Approximately 3 – 5 years",
+        "pH Range": "6.5 – 7.5",
+        "General Hardness (GH)": "Soft to moderately hard (4 – 10 dGH)",
+        "Temperament": "Territorial; adult males must be housed solitary",
+        "Social Behaviour": "Solitary centerpiece; responds actively to keeper interaction"
+      },
+      habitatSetup: {
+        "Aquarium Size": "Minimum 15 to 25 litres (4–6 gallons) for an individual adult",
+        "Heating": "Reliable preset or adjustable aquarium heater to maintain tropical warmth",
+        "Filtration": "Gentle sponge filter or baffled low-flow filter",
+        "Water Flow": "Low flow; plakat bettas are agile swimmers but still prefer gentle currents",
+        "Plants & Decor": "Live plants like Anubias, Java Fern, and resting hammocks near the surface",
+        "Water Quality": "Fully cycled aquarium; maintain clean water with zero ammonia and nitrite",
+        "Aquarium Cover": "Tight-fitting lid is essential as bettas are accomplished jumpers"
+      },
+      didYouKnow: [
+        "Plakat (from the Thai word 'Plakad') refers to the short-finned, athletic fighting-type finnage closely related to wild bettas.",
+        "The 'Avatar' morph is known for developing increasing metallic blue dusting as the fish matures.",
+        "Bettas breathe atmospheric air directly using their labyrinth organ, requiring access to the water surface.",
+        "Shortfin bettas are less prone to fin nipping and fin rot than long-finned counterparts due to their compact finnage."
+      ],
+      featured: true
+    },
+
+    {
+      id: "betta-rgg-ironman-halfmoon-plakat",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "RGG Ironman — Halfmoon Plakat Variety",
+      subtitle: "Betta splendens (Halfmoon Plakat)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795045913/4f775a40-8f7a-4ac6-a0a1-3ffb1a43fe19.png",
+      images: [],
+      video: "",
+      description: "A bold Halfmoon Plakat (HMPK) Betta characterized by a dynamic red, gold, and metallic armored mask pattern reminiscent of the iconic Ironman color scheme, paired with a crisp 180-degree caudal spread.",
+      price: null,
+      unit: "piece",
+      minQuantity: 1,
+      size: "Adult (Approximately 5 – 6.5 cm)",
+      overview: "The RGG (Red Gold Green / Red Galaxy Gold) Ironman Halfmoon Plakat is an elite exhibition-grade Betta splendens strain. It blends bold red and metallic gold or copper scaling across its flanks with an armored head mask, echoing the famous superhero aesthetic. As a Halfmoon Plakat, it features short, stout rays with a wide D-shaped 180-degree tail flare, combining show-quality conformation with robust vitality.",
+      careRequirements: {
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "25°C – 28°C",
+        "Diet": "Strictly carnivorous; premium betta pellets, frozen brine shrimp, mysis, and daphnia",
+        "Lifespan": "Approximately 3 – 5 years",
+        "pH Range": "6.5 – 7.4",
+        "General Hardness (GH)": "5 – 12 dGH",
+        "Temperament": "Territorial and assertive; keep singly",
+        "Social Behaviour": "Solitary male display fish; flaring exercises maintain fin tone"
+      },
+      habitatSetup: {
+        "Aquarium Size": "Minimum 20 litres (5 gallons)",
+        "Heating": "Submersible heater to maintain stable tropical temperatures",
+        "Filtration": "Low-flow sponge filtration to protect finnage",
+        "Water Flow": "Very gentle current",
+        "Plants & Decor": "Broad-leafed plants such as Anubias barteri for surface resting",
+        "Water Quality": "Mature cycled nitrogen cycle with weekly water refreshes",
+        "Aquarium Cover": "Secure lid with slight air gap for labyrinth breathing"
+      },
+      didYouKnow: [
+        "Halfmoon Plakat (HMPK) bettas have a caudal fin that expands to a full 180-degree semi-circle when flared.",
+        "The Ironman coloration combines rich crimson base tones with metallic copper-gold iridophores.",
+        "Brief daily flaring using a small mirror provides healthy exercise and keeps fin rays straight and supple.",
+        "Bettas can recognize their human caretakers and often swim to the front of the tank during feeding times."
+      ],
+      featured: true
+    },
+
+    {
+      id: "betta-pure-white-crowntail",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "Pure White Crowntail",
+      subtitle: "Betta splendens (Crowntail Variety)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795045998/369a3fb6-c574-4ecf-bc1c-b87da89625f6.png",
+      images: ["https://res.cloudinary.com/pv8lnpft/image/upload/v1795046274/97f5519b-fdff-4084-ad58-3c455882a9ea.png",
+        "https://res.cloudinary.com/pv8lnpft/image/upload/v1795045998/369a3fb6-c574-4ecf-bc1c-b87da89625f6.png"
+      ],
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795046116/7f93b8d6edaec52538e950e60ad77415.mp4",
+      description: "An ethereal show-grade Betta splendens featuring pristine, solid snow-white pigmentation and dramatic crowntail finnage with deeply extended, crown-like webbing reduction along each ray.",
+      price: null,
+      unit: "piece",
+      minQuantity: 1,
+      size: "Adult (Approximately 5 – 7 cm including fin rays)",
+      overview: "The Pure White Crowntail Betta is a breathtaking specimen known for its angelic, opaque white coloration free of dark spotting or red wash. Its hallmark feature is the crowntail finnage, where the webbing between the fin rays is reduced by 33% to 50%, leaving slender, needle-like spike extensions that resemble an ornate royal crown. The delicate fins require clean, gentle water conditions to prevent ray curling and maintain pristine structural integrity.",
+      careRequirements: {
+        "Difficulty": "Intermediate (clean, gentle water essential for delicate fin rays)",
+        "Water Temperature": "25°C – 28°C",
+        "Diet": "Carnivorous; small floating betta pellets, frozen bloodworms, and vitamin-enriched daphnia",
+        "Lifespan": "Approximately 3 – 5 years",
+        "pH Range": "6.5 – 7.2 (mildly acidic to neutral)",
+        "General Hardness (GH)": "Soft to moderately soft water (4 – 8 dGH helps prevent ray curling)",
+        "Temperament": "Territorial solitary fish",
+        "Social Behaviour": "Must be housed individually; avoid tankmates that nip fins"
+      },
+      habitatSetup: {
+        "Aquarium Size": "Minimum 20 to 30 litres (5–8 gallons)",
+        "Filtration": "Ultra-gentle air-driven sponge filter; avoid strong intake suction",
+        "Water Flow": "Minimal current to protect delicate crown rays",
+        "Substrate": "Smooth fine sand or soft bare-bottom setup",
+        "Plants & Decor": "Silk or live plants only (Java Moss, floating Salvinia); avoid sharp decor",
+        "Water Quality": "Pristine water quality with regular testing; Indian Almond leaf extract recommended",
+        "Aquarium Cover": "Secure cover with warm, humid surface air layer"
+      },
+      didYouKnow: [
+        "The Crowntail fin mutation was first developed in Indonesia in the late 1990s and is designated as 'CT' in show standards.",
+        "A pure opaque white betta requires absence of melanin (black pigment), erythrin (red pigment), and xanthic (yellow pigment).",
+        "Tannins from Catappa (Indian almond) leaves naturally protect the delicate fin rays from bacterial issues.",
+        "Crowntail rays can be single-ray, double-ray (DR), or cross-ray (CR) depending on genetics."
+      ],
+      featured: true
+    },
+
+    {
       id: "molly-golden",
       category: "aquarium",
-      categoryName: "Molly Fish",
+      categoryName: "Aquarium & Fish",
       subCategory: "molly",
       name: "Golden Molly",
-      subtitle: "Poecilia sphenops var. Golden",
+      subtitle: "Poecilia sphenops",
       image: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Gold_Molly_1.jpg",
       images: [],
       video: "",
-      description: "Active and peaceful livebearer showcasing lustrous golden coloration. Thrives in planted community aquariums and grazes on natural biofilm.",
+      description: "A lively and peaceful livebearer with bright golden-yellow coloration. Golden Mollies actively explore their aquarium and graze on algae and natural biofilm.",
       price: 180,
       unit: "pair",
       minQuantity: 1,
-      specs: {
-      "care": "Beginner / Community",
-      "temp": "22°C – 28°C",
-      "diet": "Flakes, micro-pellets & vegetable matter",
-      "habitat": "Planted freshwater aquarium",
-      "size": "Adult Pair"
-},
-      overview: "The Golden Molly (Poecilia sphenops var. Golden) is an active, gregarious livebearer with radiant golden coloration. Renowned for grazing natural algae and thriving in planted community biotopes.",
+      size: "Adult Pair (1 Male + 1 Female)",
+      overview: "The Golden Molly (Poecilia sphenops) is a selectively bred colour variety of the common molly, admired for its warm golden-yellow appearance and active swimming behaviour. This peaceful livebearer is suited to appropriately sized freshwater community aquariums with stable, mineral-rich water. Mollies are omnivores and naturally graze on algae and other food found on surfaces.",
       careRequirements: {
-      "Difficulty": "Beginner / Community",
-      "Water Temp": "22°C – 28°C",
-      "Diet": "Flakes, micro-pellets & vegetable matter",
-      "Lifespan": "3 – 5 years",
-      "pH Range": "7.0 – 8.2",
-      "Hardness": "Hard water preferred (10–25 dGH)"
-},
+        "Difficulty": "Beginner with suitable water conditions",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Omnivorous; provide quality flakes or micro-pellets along with vegetable-based foods such as spirulina flakes, algae wafers and blanched vegetables",
+        "Lifespan": "Approximately 3 – 5 years",
+        "pH Range": "7.0 – 8.5",
+        "General Hardness (GH)": "Moderately hard to hard water (approximately 15 – 30 dGH)",
+        "Temperament": "Generally peaceful and active community fish",
+        "Social Behaviour": "Social livebearers that do well in groups; keeping more females than males helps reduce persistent mating attention"
+      },
       habitatSetup: {
-      "Aquarium Size": "15–20 gallons or larger for active swimming pairs",
-      "Substrate": "Aquatic soil or planted substrate supporting robust plant growth",
-      "Filtration & Flow": "Moderate biological filtration with clean water maintenance",
-      "Plants & Decor": "Ample swimming room combined with background stems (Vallisneria, Amazon Swords)"
-},
+        "Aquarium Size": "Around 75 litres (20 gallons) or larger for a small group; provide more space for additional fish",
+        "Substrate": "Aquarium sand or smooth gravel",
+        "Filtration": "Reliable biological filtration with good water circulation",
+        "Water Flow": "Moderate flow with calm areas for swimming",
+        "Plants & Decor": "Live plants such as Vallisneria and Java Fern provide cover and grazing surfaces",
+        "Swimming Space": "Leave open areas for active swimming alongside planted sections",
+        "Water Quality": "Use a fully cycled aquarium; maintain stable water with zero ammonia and nitrite and keep nitrate controlled",
+        "Tankmates": "Choose peaceful fish that prefer similar hard, alkaline water conditions",
+        "Aquarium Cover": "A secure lid is recommended because mollies can jump"
+      },
       didYouKnow: [
-      "Mollies perform natural cleanup duty in planted aquariums by gently grazing surface biofilm and hair algae.",
-      "They are highly adaptable euryhaline fish that thrive in freshwater, hard water, and even light brackish setups."
-],
+        "Mollies are livebearers, meaning females give birth to free-swimming young rather than laying eggs.",
+        "They naturally graze on algae and biofilm growing on aquarium surfaces.",
+        "Mollies can tolerate both freshwater and mildly brackish conditions, but added salt is not essential for healthy freshwater keeping.",
+        "Their diet should include plenty of plant-based food alongside other suitable foods.",
+        "Female mollies are generally larger and fuller-bodied than males."
+      ],
       featured: true
     },
+    {
+      id: "molly-blue-eye-platinum-white-lyretail-balloon",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "molly",
+      name: "Blue Eye Platinum White Lyre Tail Balloon Molly",
+      subtitle: "Poecilia sphenops var. Balloon Lyretail",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795046446/7a27a05d-48ca-4c2b-93aa-5363f080666f.png",
+      images: [],
+      video: "",
+      description: "An exceptional Balloon Molly variety featuring a compact, rounded body profile, shimmering platinum-white scales, elegant lyretail caudal extensions, and distinctive blue-tinted eyes. Peaceful, active, and well suited for planted community aquariums.",
+      price: 3000,
+      unit: "pair",
+      minQuantity: 1,
+      size: "Adult Pair (Subject to supplier stock availability)",
+      overview: "The Blue Eye Platinum White Lyre Tail Balloon Molly is a selectively bred ornamental livebearer distinguished by its shortened arched vertebral structure, creating a charming rounded silhouette paired with elongated lyretail fin extensions. Its bright platinum body exhibits a soft iridescence accented by striking blue eyes. Like all mollies, they thrive in stable, hard, mineral-rich water conditions and actively graze on surface biofilm and algae.",
+      careRequirements: {
+        "Difficulty": "Beginner with suitable water conditions",
+        "Water Temperature": "24°C – 28°C",
+        "Diet": "Omnivorous; quality vegetable-rich flakes, spirulina pellets, and supplemental live or frozen daphnia and brine shrimp",
+        "Lifespan": "Approximately 3 – 5 years",
+        "pH Range": "7.2 – 8.2",
+        "General Hardness (GH)": "Moderately hard to hard water (15 – 25 dGH)",
+        "Temperament": "Peaceful and active livebearer",
+        "Social Behaviour": "Social community fish; thrives in pairs or small groups"
+      },
+      habitatSetup: {
+        "Aquarium Size": "Minimum 60 litres (15 gallons) for a pair",
+        "Substrate": "Smooth fine gravel or inert sand",
+        "Filtration": "Gentle biological filtration with moderate water circulation",
+        "Water Flow": "Low to moderate flow to accommodate the compact balloon body",
+        "Plants & Decor": "Live plants such as Java Fern, Anubias, and Vallisneria with open swimming channels",
+        "Water Quality": "Stable, mature cycled water; maintain zero ammonia and nitrite",
+        "Aquarium Cover": "A secure lid is recommended because mollies can jump"
+      },
+      didYouKnow: [
+        "The lyretail trait features elongated outer rays on the top and bottom of the caudal fin, creating an elegant fork shape.",
+        "Balloon mollies have a naturally shortened vertebral column developed through selective breeding.",
+        "Their distinctive blue eye coloration creates an exquisite aesthetic contrast against the pure platinum white scales.",
+        "Mollies are livebearers, with females giving birth to fully formed, free-swimming fry."
+      ],
+      featured: true
+    },
+
+    {
+      id: "molly-crystal-eye-zebra-lyretail-balloon",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "molly",
+      name: "Crystal Eye Zebra Lyre Tail Balloon Molly",
+      subtitle: "Poecilia sphenops var. Balloon Zebra",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795046636/418d60ce-0db9-423f-a621-014345060b07.png",
+      images: [],
+      video: "",
+      description: "A rare and captivating Balloon Molly displaying dramatic dark zebra banding across a light body, flowing lyretail finnage, and reflective crystal-clear eyes. An eye-catching, charismatic livebearer for dedicated community setups.",
+      price: 3500,
+      unit: "pair",
+      minQuantity: 1,
+      size: "Adult Pair (Subject to supplier stock availability)",
+      overview: "The Crystal Eye Zebra Lyre Tail Balloon Molly is a rare ornamental livebearer strain celebrated for its eye-catching monochrome zebra banding over an arched, spherical body shape. The flowing lyretail adds grace and movement to its compact frame, while the reflective crystal eyes distinguish this strain from traditional balloon mollies. Best maintained in hard, alkaline freshwater with stable parameters.",
+      careRequirements: {
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "24°C – 28°C",
+        "Diet": "Omnivorous; high-vegetable flake foods, spirulina pellets, and live or frozen daphnia and brine shrimp",
+        "Lifespan": "Approximately 3 – 5 years",
+        "pH Range": "7.2 – 8.2",
+        "General Hardness (GH)": "Hard water preferred (15 – 25 dGH)",
+        "Temperament": "Peaceful, curious, and social",
+        "Social Behaviour": "Peaceful schooling livebearer; best kept in pairs or small colonies"
+      },
+      habitatSetup: {
+        "Aquarium Size": "Minimum 60 litres (15 gallons)",
+        "Substrate": "Dark sand or smooth gravel to accent zebra patterns",
+        "Filtration": "Efficient biological filtration without excessive turbulent currents",
+        "Water Flow": "Moderate flow with plenty of calm resting zones",
+        "Plants & Decor": "Planted layout with natural driftwood and hardy plants",
+        "Water Quality": "Fully cycled aquarium with zero ammonia and nitrite",
+        "Aquarium Cover": "Secure hood or cover glass is recommended"
+      },
+      didYouKnow: [
+        "The zebra pattern is produced by selective melanin expression, forming bold vertical striping along the flanks.",
+        "The crystal eye characteristic gives the iris a clear, jewel-like reflective sheen under aquarium illumination.",
+        "The lyretail fin extensions continue to elongate and refine as the fish matures into full adulthood.",
+        "Mollies naturally graze on surface biofilm and algae throughout the day, assisting in aquarium cleanliness."
+      ],
+      featured: true
+    },
+
+    {
+      id: "molly-platinum-white-round-tail-balloon",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "molly",
+      name: "Platinum White Round Tail Balloon Molly",
+      subtitle: "Poecilia sphenops var. Balloon Round Tail",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795046900/8e9e2b1f-6309-4443-8325-63cd1edbe15a.png",
+      images: [],
+      video: "",
+      description: "A charming Balloon Molly featuring glistening porcelain-white platinum coloration and a smooth, classic rounded caudal fin. Compact, playful, and gentle, swimming gracefully in peaceful community aquariums.",
+      price: 2000,
+      unit: "pair",
+      minQuantity: 1,
+      size: "Adult Pair (Subject to supplier stock availability)",
+      overview: "The Platinum White Round Tail Balloon Molly features a bright, solid platinum sheen across its deep, rounded body. Unlike lyretail strains, this variety sports a traditional symmetrical rounded caudal fin that gives it a clean, classic profile and stable swimming agility. They are hardy, friendly livebearers that appreciate well-oxygenated, mineral-rich aquariums with gentle water flow.",
+      careRequirements: {
+        "Difficulty": "Beginner Friendly",
+        "Water Temperature": "23°C – 28°C",
+        "Diet": "Omnivorous; spirulina flakes, plant-based pellets, algae wafers, and occasional protein treats",
+        "Lifespan": "Approximately 3 – 5 years",
+        "pH Range": "7.0 – 8.2",
+        "General Hardness (GH)": "Moderately hard to hard water (12 – 25 dGH)",
+        "Temperament": "Peaceful and friendly community fish",
+        "Social Behaviour": "Social livebearer; enjoys the company of other peaceful mollies"
+      },
+      habitatSetup: {
+        "Aquarium Size": "Minimum 50 to 60 litres (13–15 gallons)",
+        "Substrate": "Inert sand or smooth river gravel",
+        "Filtration": "Standard sponge or canister filter with gentle surface agitation",
+        "Water Flow": "Low to moderate flow",
+        "Plants & Decor": "Planted areas with Vallisneria, Cryptocoryne, and floating cover",
+        "Water Quality": "Mature cycled aquarium with regular partial water changes",
+        "Aquarium Cover": "Keep aquarium covered to prevent jumping"
+      },
+      didYouKnow: [
+        "The round tail (or fan tail) is the traditional ancestral tail morphology of the species, providing balanced propulsion.",
+        "The platinum white iridescence is produced by guanine crystals in the dermal iridophore cells of the scales.",
+        "Balloon mollies have a naturally compacted abdominal cavity, so smaller, frequent feedings are ideal.",
+        "Female mollies can store viable sperm for several months and produce successive broods."
+      ],
+      featured: true
+    },
+
     {
       id: "shrimp-crystal-red",
       category: "aquarium",
@@ -1036,33 +1418,36 @@
       unit: "piece",
       minQuantity: 1,
       specs: {
-      "care": "Intermediate / Peaceful",
-      "temp": "21°C – 25°C",
-      "diet": "Biofilm, specialized shrimp pellets & blanched vegetables",
-      "habitat": "Planted freshwater nano tank",
-      "size": "Adult (2–2.5 cm)"
-},
+        "care": "Intermediate / Peaceful",
+        "temp": "21°C – 25°C",
+        "diet": "Biofilm, specialized shrimp pellets & blanched vegetables",
+        "habitat": "Planted freshwater nano tank",
+        "size": "Adult (2–2.5 cm)"
+      },
       overview: "The Crystal Red Shrimp (Caridina cf. cantonensis var. Crystal Red) is a premier dwarf freshwater invertebrate exhibiting striking opaque white and vivid red color banding. Exceptional algae grazer for planted aquascapes.",
       careRequirements: {
-      "Difficulty": "Intermediate / Peaceful",
-      "Water Temp": "21°C – 25°C",
-      "Diet": "Biofilm, specialized shrimp pellets & blanched vegetables",
-      "Lifespan": "1.5 – 2 years",
-      "pH Range": "6.2 – 6.8",
-      "TDS / GH": "TDS 110–140 ppm, GH 4–6"
-},
+        "Difficulty": "Intermediate / Peaceful",
+        "Water Temp": "21°C – 25°C",
+        "Diet": "Biofilm, specialized shrimp pellets & blanched vegetables",
+        "Lifespan": "1.5 – 2 years",
+        "pH Range": "6.2 – 6.8",
+        "TDS / GH": "TDS 110–140 ppm, GH 4–6"
+      },
       habitatSetup: {
-      "Aquarium Size": "5 to 10 gallons mature planted nano tank",
-      "Filtration & Flow": "Sponge filtration only to prevent shrimplets from being drawn into impellers",
-      "Substrate": "Active buffering substrate maintaining slightly acidic pH",
-      "Plants & Decor": "Cholla wood, Indian almond leaves, and dense mosses (Java, Christmas, Phoenix)"
-},
+        "Aquarium Size": "5 to 10 gallons mature planted nano tank",
+        "Filtration & Flow": "Sponge filtration only to prevent shrimplets from being drawn into impellers",
+        "Substrate": "Active buffering substrate maintaining slightly acidic pH",
+        "Plants & Decor": "Cholla wood, Indian almond leaves, and dense mosses (Java, Christmas, Phoenix)"
+      },
       didYouKnow: [
-      "Crystal Red Shrimps originate from a rare red mutation of wild Bee Shrimp discovered in Japan in the 1990s.",
-      "They molt their exoskeleton as they grow, during which they hide in mosses until their new shell hardens."
-],
+        "Crystal Red Shrimps originate from a rare red mutation of wild Bee Shrimp discovered in Japan in the 1990s.",
+        "They molt their exoskeleton as they grow, during which they hide in mosses until their new shell hardens."
+      ],
       featured: true
     },
+
+    // ISOPODS 
+
     {
       id: "armadillidium-gestroi",
       category: "isopods",
@@ -1070,189 +1455,225 @@
       subCategory: "isopods",
       name: "Armadillidium Gestroi",
       subtitle: "Armadillidium gestroi",
-      image: "https://upload.wikimedia.org/wikipedia/commons/9/95/Armadillidium_vulgare.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795042536/ce83f0db-68a5-4fed-b112-bbbeceba3beb.png",
       images: [],
       video: "",
-      description: "Striking Mediterranean pill bug known for its large size, bright yellow spotted dorsal plates, and vigorous vivarium janitorial skills.",
+      description: "An attractive Mediterranean pill isopod recognised by its dark brown to grey body and vivid yellow dorsal spots. A fascinating species for bioactive enclosures and dedicated isopod colonies.",
       price: 120,
       unit: "piece",
       minQuantity: 5,
-      specs: {
-      "care": "Bioactive Cleaners",
-      "temp": "20°C – 26°C",
-      "diet": "Leaf litter, decaying wood, calcium",
-      "habitat": "Bioactive vivarium / enclosure"
-},
-      overview: "Armadillidium Gestroi (Armadillidium gestroi) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
+      size: "Adult Size (Approximately 1.8 – 2.3 cm)",
+      overview: "Armadillidium gestroi, commonly known as Gestroi's Pill Isopod or the Yellow-Spotted Isopod, is a terrestrial crustacean native to the Mediterranean region. Its rounded body features distinctive yellow spots against a darker shell. It is popular among isopod keepers for its appearance and ability to roll into a protective ball when disturbed.",
       careRequirements: {
-      "Difficulty": "Beginner to Intermediate",
-      "Temperature": "20°C – 26°C",
-      "Humidity": "60% – 80% (moisture gradient required)",
-      "Diet": "Leaf litter, decaying wood, calcium",
-      "Lifespan": "2 – 3 years",
-      "Handling": "Delicate live specimens; observe without excessive handling"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Temperature": "18°C – 25°C",
+        "Humidity": "Maintain a moisture gradient with one-third of the enclosure kept damp and the remaining area relatively drier",
+        "Diet": "Primarily decaying hardwood leaves and rotten wood; supplement with vegetables, occasional protein foods and a constant calcium source",
+        "Lifespan": "Approximately 1.5 – 3 years",
+        "Handling": "Best observed rather than handled frequently; avoid dropping or excessive disturbance"
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
-      "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
-      "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
-      "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
-},
+        "Enclosure": "Well-ventilated plastic, acrylic or glass enclosure with a secure lid",
+        "Substrate": "Approximately 6 – 8 cm of pesticide-free organic soil, leaf mould and decomposed hardwood",
+        "Moisture Gradient": "Keep one section moist with sphagnum moss while allowing the opposite side to remain comparatively dry",
+        "Leaf Litter": "Provide a generous layer of pesticide-free dried oak, beech or other suitable deciduous leaves",
+        "Hiding Places": "Cork bark flats, decaying hardwood pieces and natural hides",
+        "Calcium Source": "Keep cuttlebone, crushed limestone or another suitable calcium source available at all times",
+        "Ventilation": "Provide cross-ventilation to prevent stagnant air and excessive condensation",
+        "Watering": "Add water to the moist section as needed; avoid soaking the entire substrate"
+      },
       didYouKnow: [
-      "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
-      "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
-],
+        "Isopods are terrestrial crustaceans, not insects, and are related to crabs and shrimp.",
+        "Armadillidium species can roll into a tight ball when disturbed, a behaviour known as conglobation.",
+        "Armadillidium gestroi has a dark body with distinctive vivid yellow dorsal spots.",
+        "Isopods help break down decaying leaves and wood, returning nutrients to the substrate.",
+        "Females carry developing young in a specialised brood pouch called a marsupium."
+      ],
       featured: true
     },
+
     {
       id: "cubaris-murina-orange",
       category: "isopods",
       categoryName: "Isopods",
       subCategory: "isopods",
       name: "Cubaris Murina Orange",
-      subtitle: "Cubaris murina var. Orange",
-      image: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Cubaris_murinaflorida.jpg",
+      subtitle: "Cubaris murina 'Orange'",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795042768/cf1d3a85-c6be-49d1-ac5b-9341c4208743.png",
       images: [],
       video: "",
-      description: "Warm apricot-orange color morph. Hardy, highly active, and quick to establish a thriving custodial colony in humid vivariums.",
+      description: "An attractive orange colour form of the hardy Cubaris murina, admired for its warm orange tones, active behaviour and suitability for humid bioactive enclosures.",
       price: 60,
       unit: "piece",
       minQuantity: 5,
-      specs: {
-      "care": "Bioactive Cleaners",
-      "temp": "20°C – 26°C",
-      "diet": "Leaf litter, decaying wood, calcium",
-      "habitat": "Bioactive vivarium / enclosure"
-},
-      overview: "Cubaris Murina Orange (Cubaris murina var. Orange) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
+      size: "Adult Size (Approximately 0.8 – 1.2 cm)",
+      overview: "Cubaris murina 'Orange' is an orange-coloured hobby variety of the terrestrial isopod Cubaris murina, commonly known as the Little Sea Isopod. It is a compact, rounded species that feeds on decaying organic matter and can roll into a protective ball when disturbed. Its adaptable nature and relatively straightforward care make it a popular choice for beginner isopod colonies and bioactive enclosures.",
       careRequirements: {
-      "Difficulty": "Beginner to Intermediate",
-      "Temperature": "20°C – 26°C",
-      "Humidity": "60% – 80% (moisture gradient required)",
-      "Diet": "Leaf litter, decaying wood, calcium",
-      "Lifespan": "2 – 3 years",
-      "Handling": "Delicate live specimens; observe without excessive handling"
-},
+        "Difficulty": "Beginner",
+        "Temperature": "21°C – 27°C",
+        "Humidity": "Maintain a moist refuge and a less-wet area with good ventilation; approximately 60% – 80% relative humidity can be used as a general guide",
+        "Diet": "Primarily dried leaf litter and decaying hardwood; supplement with vegetables, occasional protein foods and a constant calcium source",
+        "Lifespan": "Approximately 1.5 – 2 years",
+        "Handling": "Avoid frequent handling; move specimens gently using a leaf or small spoon"
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
-      "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
-      "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
-      "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
-},
+        "Enclosure": "Ventilated plastic, acrylic or glass enclosure with a secure lid",
+        "Substrate": "At least 6 cm of pesticide-free organic soil, leaf mould and decomposed hardwood",
+        "Moisture Gradient": "Keep approximately one-third of the substrate consistently moist, with the opposite side comparatively drier",
+        "Leaf Litter": "Provide a generous layer of pesticide-free dried oak, beech or other suitable deciduous leaves",
+        "Hiding Places": "Cork bark flats, decaying hardwood and damp sphagnum moss",
+        "Calcium Source": "Keep cuttlebone, crushed limestone or another suitable calcium source available at all times",
+        "Ventilation": "Provide gentle cross-ventilation to prevent stagnant air and excessive condensation",
+        "Watering": "Moisten one section of the substrate as needed; avoid soaking the entire enclosure"
+      },
       didYouKnow: [
-      "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
-      "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
-],
+        "Cubaris murina is commonly known as the Little Sea Isopod, despite being fully terrestrial.",
+        "It can roll into a protective ball when disturbed, a behaviour known as conglobation.",
+        "Cubaris murina colour forms include Orange, Papaya and Glacier.",
+        "Isopods are terrestrial crustaceans, not insects, and are related to crabs and shrimp.",
+        "They help recycle nutrients by feeding on decaying leaves and other organic matter."
+      ],
       featured: false
     },
+
     {
       id: "cubaris-murina-glacier",
       category: "isopods",
       categoryName: "Isopods",
       subCategory: "isopods",
       name: "Cubaris Murina Glacier",
-      subtitle: "Cubaris murina var. Glacier",
-      image: "https://upload.wikimedia.org/wikipedia/commons/8/87/Cubaris_murinafloridatop.jpg",
+      subtitle: "Cubaris murina 'Glacier'",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795043058/4d63ce84-0bbf-4471-91ee-5e345c25d66f.png",
       images: [],
       video: "",
-      description: "Pristine white porcelain appearance with subtle translucent undertones. Excellent bioactive cleanup crew.",
+      description: "A beautiful pale-white colour morph of Cubaris murina, admired for its frosty appearance, compact rounded body and suitability for humid bioactive enclosures.",
       price: 70,
       unit: "piece",
       minQuantity: 5,
-      specs: {
-      "care": "Bioactive Cleaners",
-      "temp": "20°C – 26°C",
-      "diet": "Leaf litter, decaying wood, calcium",
-      "habitat": "Bioactive vivarium / enclosure"
-},
-      overview: "Cubaris Murina Glacier (Cubaris murina var. Glacier) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
+      size: "Adult Size (Approximately 0.8 – 1.2 cm)",
+      overview: "Cubaris murina 'Glacier', commonly known as the Glacier Isopod, is a pale or white hobby colour morph of the terrestrial Little Sea Isopod. Its rounded body and light coloration make it an attractive addition to dedicated isopod colonies and bioactive terrariums. Like other Cubaris murina, it feeds primarily on decaying leaves and hardwood and benefits from a stable, moisture-controlled enclosure.",
       careRequirements: {
-      "Difficulty": "Beginner to Intermediate",
-      "Temperature": "20°C – 26°C",
-      "Humidity": "60% – 80% (moisture gradient required)",
-      "Diet": "Leaf litter, decaying wood, calcium",
-      "Lifespan": "2 – 3 years",
-      "Handling": "Delicate live specimens; observe without excessive handling"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Temperature": "21°C – 27°C",
+        "Humidity": "Maintain a consistently damp refuge with access to a less-moist area; approximately 70% – 85% relative humidity can be used as a monitoring guide",
+        "Diet": "Primarily dried hardwood leaf litter and decaying wood; supplement with vegetables, occasional protein foods and a constant calcium source",
+        "Lifespan": "Approximately 1 – 2.5 years",
+        "Handling": "Avoid frequent handling; observe the colony and move specimens gently when necessary"
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
-      "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
-      "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
-      "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
-},
+        "Enclosure": "Secure, well-ventilated plastic, acrylic or glass enclosure with fine mesh to prevent juvenile escapes",
+        "Substrate": "At least 6 cm of pesticide-free organic soil, leaf mould and decomposed hardwood",
+        "Moisture Gradient": "Keep roughly one-third of the substrate consistently moist, with the opposite side comparatively less damp",
+        "Leaf Litter": "Provide a generous layer of pesticide-free dried oak, beech or other suitable deciduous leaves",
+        "Hiding Places": "Cork bark flats, decaying hardwood and damp sphagnum moss",
+        "Calcium Source": "Keep cuttlebone, crushed limestone or another suitable calcium source available at all times",
+        "Ventilation": "Provide gentle cross-ventilation while retaining moisture in the damp refuge",
+        "Watering": "Add water to the moist section as needed; avoid waterlogging the entire substrate",
+        "Placement": "Keep away from direct sunlight and excessive heat"
+      },
       didYouKnow: [
-      "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
-      "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
-],
+        "Glacier is a pale or white hobby morph of Cubaris murina, not a separate species.",
+        "Cubaris murina is commonly called the Little Sea Isopod, although it lives entirely on land.",
+        "Like other pill isopods, it can roll into a protective ball when disturbed.",
+        "Females carry developing young in a specialised brood pouch called a marsupium.",
+        "These isopods help recycle nutrients by breaking down decaying leaves and hardwood."
+      ],
       featured: true
     },
+
     {
       id: "porcellionides-pruinosus-orange-pied",
       category: "isopods",
       categoryName: "Isopods",
       subCategory: "isopods",
       name: "Porcellionides pruinosus Orange Pied",
-      subtitle: "Porcellionides pruinosus var. Orange Pied",
-      image: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Porcellionides_pruinosus_P1380341a.jpg",
+      subtitle: "Porcellionides pruinosus 'Orange Pied'",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795043219/0a58d8eb-e990-411e-a0a4-d402fb216407.png",
       images: [],
       video: "",
-      description: "Fast-moving, velvety powder-orange isopod with distinctive white pied patches. Superb detritivore for tropical enclosures.",
+      description: "A fast-moving and attractive orange colour morph featuring contrasting pied patches and a subtle powdery appearance. An active detritivore suited to well-maintained bioactive enclosures.",
       price: 60,
       unit: "piece",
       minQuantity: 5,
-      specs: {
-      "care": "Bioactive Cleaners",
-      "temp": "20°C – 26°C",
-      "diet": "Leaf litter, decaying wood, calcium",
-      "habitat": "Bioactive vivarium / enclosure"
-},
-      overview: "Porcellionides pruinosus Orange Pied (Porcellionides pruinosus var. Orange Pied) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
+      size: "Adult Size (Approximately 1 – 1.5 cm)",
+      overview: "Porcellionides pruinosus 'Orange Pied' is a selectively maintained colour variety of the widespread terrestrial isopod Porcellionides pruinosus, commonly known as the Powder Isopod. Its orange coloration combined with contrasting pied markings makes it popular among isopod enthusiasts. It is an active, adaptable species that feeds on decaying organic matter and can serve as a useful clean-up crew in suitable bioactive enclosures.",
       careRequirements: {
-      "Difficulty": "Beginner to Intermediate",
-      "Temperature": "20°C – 26°C",
-      "Humidity": "60% – 80% (moisture gradient required)",
-      "Diet": "Leaf litter, decaying wood, calcium",
-      "Lifespan": "2 – 3 years",
-      "Handling": "Delicate live specimens; observe without excessive handling"
-},
+        "Difficulty": "Beginner",
+        "Temperature": "20°C – 27°C",
+        "Humidity": "Approximately 50% – 80% relative humidity as a general guide; maintain a moist refuge and a comparatively dry area",
+        "Diet": "Dried leaf litter and decaying hardwood as the staple, supplemented with vegetables, occasional protein foods and a constant calcium source",
+        "Lifespan": "Approximately 1 – 3 years",
+        "Activity": "Very active and fast-moving",
+        "Handling": "Small and delicate; avoid frequent handling and move specimens gently when necessary"
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
-      "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
-      "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
-      "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
-},
+        "Enclosure": "Well-ventilated plastic, acrylic or glass enclosure with a secure lid",
+        "Substrate": "Approximately 5 – 8 cm of pesticide-free organic soil, leaf mould and decomposed hardwood",
+        "Moisture Gradient": "Keep one-third of the substrate moist while allowing the remaining area to stay comparatively drier",
+        "Leaf Litter": "Provide a generous layer of pesticide-free dried oak, beech or other suitable deciduous leaves",
+        "Hiding Places": "Cork bark flats, decaying hardwood and leaf litter",
+        "Calcium Source": "Keep cuttlebone, crushed limestone or another suitable calcium source available at all times",
+        "Ventilation": "Provide cross-ventilation to prevent stagnant air and excessive condensation",
+        "Watering": "Moisten the damp section as needed; avoid waterlogging the substrate",
+        "Placement": "Keep away from direct sunlight and excessive heat"
+      },
       didYouKnow: [
-      "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
-      "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
-],
+        "Porcellionides pruinosus is commonly known as the Powder Isopod.",
+        "Orange Pied is a colour form with contrasting patches, sometimes also marketed as Orange Dalmatian.",
+        "This species is known for its quick movement and relatively fast colony growth.",
+        "Unlike Armadillidium pill isopods, Porcellionides pruinosus cannot roll into a tight ball.",
+        "Isopods are terrestrial crustaceans, not insects, and help recycle nutrients by breaking down decaying organic matter."
+      ],
       featured: false
     },
+
     {
       id: "cubaris-sp-cappuccino",
       category: "isopods",
       categoryName: "Isopods",
       subCategory: "isopods",
       name: "Cubaris sp. Cappuccino",
-      subtitle: "",
-      image: "https://upload.wikimedia.org/wikipedia/commons/1/18/Cubaris_nigroflava_172816253.jpg",
+      subtitle: "Cubaris sp. 'Cappuccino'",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795043475/b7e76bba-0873-4600-9643-c9809f8c2eaa.png",
       images: [],
       video: "",
-      description: "Ultra-rare collector isopod exhibiting warm espresso-brown skirts and a creamy dorsal stripe reminiscent of a barista cappuccino.",
+      description: "A premium collector isopod admired for its beautiful coffee-brown and creamy beige marbled coloration. A distinctive tropical species suited to carefully maintained, humid isopod enclosures.",
       price: 600,
       unit: "piece",
       minQuantity: 5,
-      specs: {
-      "care": "Bioactive Cleaners",
-      "temp": "20°C – 26°C",
-      "diet": "Leaf litter, decaying wood, calcium",
-      "habitat": "Bioactive vivarium / enclosure"
-},
-      overview: "",
-      careRequirements: {},
-      habitatSetup: "",
-      didYouKnow: [],
+      size: "Adult Size (Approximately 15 – 22 mm)",
+      overview: "Cubaris sp. 'Cappuccino' is a popular tropical hobby isopod recognised for its rounded body and attractive coffee-and-cream colour pattern. The name Cappuccino is a hobby trade name rather than a formally established scientific species name. It is generally slower to establish and reproduce than many beginner-friendly isopods, making it better suited to keepers who can maintain stable warmth, moisture and ventilation.",
+      careRequirements: {
+        "Difficulty": "Intermediate",
+        "Temperature": "21°C – 26°C",
+        "Humidity": "Approximately 70% – 80%; maintain a moist refuge and a comparatively drier area",
+        "Diet": "Dried leaf litter and decaying hardwood as the staple; supplement with vegetables, occasional protein foods and a constant calcium source",
+        "Lifespan": "Approximately 2 – 3 years; captive-keeping estimate",
+        "Activity": "Often most active during the evening and night",
+        "Handling": "Avoid frequent handling and unnecessary disturbance, especially while establishing a colony"
+      },
+      habitatSetup: {
+        "Enclosure": "Secure, well-ventilated plastic, acrylic or glass enclosure that retains moisture",
+        "Substrate": "At least 6 – 8 cm of moisture-retentive organic substrate containing decomposed hardwood and leaf mould",
+        "Moisture Gradient": "Maintain one consistently moist section with sphagnum moss and another comparatively drier section",
+        "Leaf Litter": "Provide a generous layer of pesticide-free dried oak, beech or other suitable deciduous leaves",
+        "Hiding Places": "Cork bark flats, decaying hardwood and natural hides",
+        "Calcium Source": "Keep cuttlebone, crushed limestone or another suitable calcium source available at all times",
+        "Protein Supplement": "Offer small amounts of suitable protein food occasionally",
+        "Ventilation": "Provide gentle cross-ventilation to prevent stagnant air, mould and excessive condensation",
+        "Watering": "Moisten the damp section as needed; never allow the entire substrate to become waterlogged",
+        "Placement": "Keep away from direct sunlight and excessive heat"
+      },
+      didYouKnow: [
+        "The Cappuccino name comes from its coffee-brown and creamy beige colour pattern.",
+        "Cubaris sp. 'Cappuccino' is a hobby trade name, not a formally described species name.",
+        "This variety is generally considered a slower breeder than common beginner isopods.",
+        "Isopods are terrestrial crustaceans, not insects, and are related to crabs and shrimp.",
+        "They help recycle nutrients by feeding on decaying leaves and wood."
+      ],
       featured: true
     },
+
     {
       id: "cubaris-sp-cherry-blossom",
       category: "isopods",
@@ -1260,7 +1681,7 @@
       subCategory: "isopods",
       name: "Cubaris sp. Cherry Blossom",
       subtitle: "Cubaris sp. Cherry Blossom",
-      image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_marmorata_171397510.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795043605/d4ba12eb-677e-4cc1-b9d0-21d4ef917c9a.png",
       images: [],
       video: "",
       description: "Exquisite pastel pink and creamy white hues mimicking delicate sakura blossoms. A prized gem among luxury isopod enthusiasts.",
@@ -1268,32 +1689,33 @@
       unit: "piece",
       minQuantity: 5,
       specs: {
-      "care": "Bioactive Cleaners",
-      "temp": "20°C – 26°C",
-      "diet": "Leaf litter, decaying wood, calcium",
-      "habitat": "Bioactive vivarium / enclosure"
-},
+        "care": "Bioactive Cleaners",
+        "temp": "20°C – 26°C",
+        "diet": "Leaf litter, decaying wood, calcium",
+        "habitat": "Bioactive vivarium / enclosure"
+      },
       overview: "Cubaris sp. Cherry Blossom (Cubaris sp. Cherry Blossom) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
       careRequirements: {
-      "Difficulty": "Beginner to Intermediate",
-      "Temperature": "20°C – 26°C",
-      "Humidity": "60% – 80% (moisture gradient required)",
-      "Diet": "Leaf litter, decaying wood, calcium",
-      "Lifespan": "2 – 3 years",
-      "Handling": "Delicate live specimens; observe without excessive handling"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Temperature": "20°C – 26°C",
+        "Humidity": "60% – 80% (moisture gradient required)",
+        "Diet": "Leaf litter, decaying wood, calcium",
+        "Lifespan": "2 – 3 years",
+        "Handling": "Delicate live specimens; observe without excessive handling"
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
-      "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
-      "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
-      "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
-},
+        "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
+        "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
+        "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
+        "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
+      },
       didYouKnow: [
-      "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
-      "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
-],
+        "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
+        "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
+      ],
       featured: true
     },
+
     {
       id: "armadillidium-peraccae",
       category: "isopods",
@@ -1301,40 +1723,48 @@
       subCategory: "isopods",
       name: "Armadillidium Peraccae",
       subtitle: "Armadillidium peraccae",
-      image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Armadillidium_vulgare_001.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795043801/c805b15e-80ee-4c64-9091-a39ef7488807.png",
       images: [],
       video: "",
-      description: "Fascinating textured, bumpy slate-grey shell with high drought tolerance. Extremely resilient and fascinating to observe.",
+      description: "A distinctive pill isopod recognised by its rugged, granular slate-grey to bluish-grey shell. An active and hardy species that makes an interesting addition to bioactive enclosures and dedicated isopod colonies.",
       price: 150,
       unit: "piece",
       minQuantity: 5,
-      specs: {
-      "care": "Bioactive Cleaners",
-      "temp": "20°C – 26°C",
-      "diet": "Leaf litter, decaying wood, calcium",
-      "habitat": "Bioactive vivarium / enclosure"
-},
-      overview: "Armadillidium Peraccae (Armadillidium peraccae) is a prized terrestrial crustacean ideal as a clean-up crew (CUC) in bioactive terrariums or as a fascinating display colony.",
+      size: "Adult Size (Approximately 1.5 – 2.1 cm)",
+      overview: "Armadillidium peraccae, commonly known as Peracca's Pill Woodlouse, is a terrestrial crustacean native to parts of southeastern Europe. Its robust, textured body and ability to roll into a protective ball make it an interesting species for isopod enthusiasts. It feeds on decaying leaves and hardwood and does well in an enclosure with a clear moisture gradient and good ventilation.",
       careRequirements: {
-      "Difficulty": "Beginner to Intermediate",
-      "Temperature": "20°C – 26°C",
-      "Humidity": "60% – 80% (moisture gradient required)",
-      "Diet": "Leaf litter, decaying wood, calcium",
-      "Lifespan": "2 – 3 years",
-      "Handling": "Delicate live specimens; observe without excessive handling"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Temperature": "19°C – 24°C",
+        "Humidity": "Maintain a damp refuge with a comparatively dry, ventilated side; approximately 50% – 75% ambient relative humidity as a guide",
+        "Diet": "Dried deciduous leaf litter and soft decaying hardwood as the staple; supplement with vegetables, occasional protein foods and a constant calcium source",
+        "Lifespan": "Approximately 2 – 3 years",
+        "Activity": "Often more active during the evening and night",
+        "Handling": "Avoid frequent handling; observe the colony and move specimens gently when necessary"
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated acrylic, glass, or plastic container with moisture retention",
-      "Substrate": "Damp organic bioactive soil blend enriched with worm castings and crushed leaf litter",
-      "Moisture Gradient": "One moist corner with damp sphagnum moss and one drier ventilating side",
-      "Hiding Places": "Cork bark flats, decaying wood chunks, and natural lotus pods"
-},
+        "Enclosure": "Secure, well-ventilated plastic, acrylic or glass enclosure",
+        "Substrate": "Approximately 6 – 8 cm of pesticide-free organic topsoil, decomposed leaf litter and soft rotten hardwood",
+        "Moisture Gradient": "Keep roughly one-third of the substrate damp while allowing the opposite side to remain comparatively dry",
+        "Leaf Litter": "Provide a generous layer of pesticide-free dried oak, beech or other suitable deciduous leaves",
+        "Hiding Places": "Cork bark flats, decaying hardwood and a small amount of sphagnum moss at the damp end",
+        "Calcium Source": "Keep cuttlebone, limestone or clean crushed eggshell available at all times",
+        "Ventilation": "Provide fine cross-ventilation on at least two sides while retaining moisture in the damp refuge",
+        "Watering": "Add water to the damp corner when needed instead of spraying the entire enclosure",
+        "Placement": "Keep away from direct sunlight and excessive heat"
+      },
       didYouKnow: [
-      "Isopods are terrestrial crustaceans—not insects—and breathe using specialized pleopodal lungs requiring moisture.",
-      "They form the vital backbone of bioactive setups by breaking down mold, waste, and shed organic material."
-],
+        "Armadillidium peraccae is commonly called Peracca's Pill Woodlouse.",
+        "Its granular, rugged shell gives it a distinctive bumpy appearance.",
+        "Like other Armadillidium species, it can roll into a protective ball when disturbed.",
+        "It is a terrestrial crustacean, not an insect, and is related to crabs and shrimp.",
+        "It helps recycle nutrients by feeding on decaying leaves and rotten wood."
+      ],
       featured: false
     },
+
+
+    // TARANTULAS
+
     {
       id: "chilean-rose-hair",
       category: "tarantulas",
@@ -1342,41 +1772,46 @@
       subCategory: "tarantulas",
       name: "Chilean Rose Hair",
       subtitle: "Grammostola rosea",
-      image: "https://upload.wikimedia.org/wikipedia/commons/2/22/Grammostola_rosea_adult_weiblich.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795044064/590cb229-29c5-47db-aa6a-3a9507467cfd.png",
       images: [],
       video: "",
-      description: "Renowned for its calm, docile temperament and subtle pink carapace setae. The quintessential beginner New World tarantula.",
+      description: "A hardy, slow-growing New World terrestrial tarantula known for its subtle rose-coloured hairs and adaptable nature. A popular species among tarantula keepers, though individual temperament and feeding behaviour can vary.",
       price: 2199,
       unit: "specimen",
       minQuantity: 1,
-      specs: {
-      "care": "Low Maintenance",
-      "temp": "23°C – 28°C",
-      "diet": "Pinhead crickets & roach nymphs",
-      "habitat": "Ventilated sling vial / enclosure",
-      "size": "1–1.5 cm"
-},
-      overview: "The Chilean Rose Hair (Grammostola rosea) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+      size: "Current Size: 1 – 1.5 cm (Spiderling)",
+      overview: "The Chilean Rose Hair (Grammostola rosea) is a terrestrial tarantula native to Chile and surrounding regions of South America. It is known for its slow growth, relatively dry habitat preferences and ability to go through extended periods without eating. It spends much of its time near a sheltered retreat and is best kept in a secure, low-height enclosure with suitable substrate and access to fresh water.",
       careRequirements: {
-      "Difficulty": "Low Maintenance",
-      "Temperature": "23°C – 28°C",
-      "Humidity": "55% – 70% with access to a shallow water dish",
-      "Diet": "Pinhead crickets & roach nymphs",
-      "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
-      "Temperament": "New World terrestrial species; observe as display exotic"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Temperature": "20°C – 26°C",
+        "Humidity": "Generally dry conditions with good ventilation. Avoid keeping the substrate constantly wet; provide access to fresh water and a slightly moist area when needed.",
+        "Diet": "Appropriately sized pinhead crickets and small roach nymphs. Feed prey smaller than the spider and remove uneaten feeders.",
+        "Lifespan": "Approximately 15 – 25 years for females and 4 – 8 years for males; individual lifespan varies.",
+        "Temperament": "Usually slow-moving, but individual behaviour varies. May flick urticating hairs or become defensive when disturbed.",
+        "Activity": "Primarily terrestrial; may spend long periods inside its hide or retreat.",
+        "Handling": "Avoid routine handling. Observe the specimen and use a catch cup for necessary transfers."
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
-      "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
-      "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
-      "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
-},
+        "Enclosure": "Small, secure and well-ventilated terrestrial sling enclosure. Upgrade the enclosure as the tarantula grows.",
+        "Substrate": "Use pesticide-free coco fibre, unfertilised topsoil or a suitable tarantula substrate. Provide enough depth for a small retreat while keeping the enclosure low.",
+        "Moisture": "Keep most of the substrate dry to lightly dry. A small area can be slightly moist when needed, but avoid waterlogged conditions.",
+        "Hides & Decor": "Provide a small cork bark piece or another stable hide. Keep decorations minimal and secure.",
+        "Water": "Provide a tiny, shallow water dish when the sling's size allows safe access. Keep fresh water available.",
+        "Ventilation": "Provide adequate ventilation to prevent stagnant, overly humid conditions.",
+        "Safety": "Keep the distance between the substrate and enclosure lid low to reduce injury risk from falls.",
+        "Placement": "Keep away from direct sunlight, heat sources and sudden temperature changes."
+      },
       didYouKnow: [
-      "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
-      "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
-],
+        "Grammostola rosea is native to Chile and is adapted to relatively dry environments.",
+        "This species is known for slow growth and can sometimes refuse food for extended periods.",
+        "Like many New World tarantulas, it has urticating hairs on its abdomen that it can use as a defence.",
+        "Tarantulas shed their outer exoskeleton during moulting as they grow.",
+        "A tarantula lying on its back may be moulting. Avoid disturbing it during this process."
+      ],
       featured: true
     },
+
+
     {
       id: "brazilian-whiteknee",
       category: "tarantulas",
@@ -1384,41 +1819,47 @@
       subCategory: "tarantulas",
       name: "Brazilian Whiteknee",
       subtitle: "Acanthoscurria geniculata",
-      image: "https://upload.wikimedia.org/wikipedia/commons/6/60/Acanthoscurria_geniculata%2C_female.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795044166/ff33845c-f511-47f7-8301-08e24fb6f6bb.png",
       images: [],
       video: "",
-      description: "Bold contrast of jet-black legs adorned with striking snow-white knee bands. Highly active with an enthusiastic feeding response.",
+      description: "A large and impressive New World terrestrial tarantula recognised by its jet-black legs with striking white knee bands. Known for its fast growth, strong feeding response and bold behaviour, making it an eye-catching species for experienced display enthusiasts.",
       price: 2199,
       unit: "specimen",
       minQuantity: 1,
-      specs: {
-      "care": "Low Maintenance",
-      "temp": "23°C – 28°C",
-      "diet": "Pinhead crickets & roach nymphs",
-      "habitat": "Ventilated sling vial / enclosure",
-      "size": "1–1.5 cm"
-},
-      overview: "The Brazilian Whiteknee (Acanthoscurria geniculata) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+      size: "Current Size: 1 – 1.5 cm (Spiderling)",
+      overview: "The Brazilian Whiteknee (Acanthoscurria geniculata) is a large terrestrial tarantula native to Brazil. Its distinctive white bands against a dark body make it easily recognisable. This species is known for growing relatively quickly and often displaying an enthusiastic feeding response. It requires a secure terrestrial enclosure with deep substrate, a suitable hide, good ventilation and access to fresh water. Although popular among hobbyists, it can be defensive and is best kept as a display animal.",
       careRequirements: {
-      "Difficulty": "Low Maintenance",
-      "Temperature": "23°C – 28°C",
-      "Humidity": "55% – 70% with access to a shallow water dish",
-      "Diet": "Pinhead crickets & roach nymphs",
-      "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
-      "Temperament": "New World terrestrial species; observe as display exotic"
-},
+        "Difficulty": "Intermediate",
+        "Temperature": "22°C – 27°C",
+        "Humidity": "Moderate humidity with a moisture gradient. Keep the substrate slightly moist in one area while allowing the surface to dry; avoid waterlogged conditions.",
+        "Diet": "Pinhead crickets and small roach nymphs for spiderlings. Offer appropriately sized crickets, roaches and other suitable feeder insects as it grows.",
+        "Lifespan": "Females may live approximately 15 – 20 years; males commonly live around 3 – 5 years. Individual lifespan varies.",
+        "Temperament": "Bold and sometimes defensive. May flick urticating hairs or display threat behaviour when disturbed.",
+        "Activity": "Terrestrial species with a strong feeding response; may spend time digging or using a sheltered retreat.",
+        "Growth Rate": "Relatively fast-growing compared with many commonly kept terrestrial tarantulas.",
+        "Handling": "Avoid handling. This species is best maintained as a display animal."
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
-      "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
-      "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
-      "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
-},
+        "Enclosure": "Start with a small, escape-proof and well-ventilated sling enclosure. Upgrade to a spacious, low terrestrial enclosure as the tarantula grows.",
+        "Substrate": "Use pesticide-free coco fibre, unfertilised topsoil or a suitable soil blend. Provide enough depth for digging; larger specimens benefit from approximately 8 – 10 cm or more.",
+        "Moisture": "Maintain a moisture gradient. Keep one lower corner slightly moist while allowing the surface to dry. Never keep the substrate waterlogged.",
+        "Hides & Decor": "Provide a stable cork bark hide and simple, secure decor. Avoid heavy or sharp objects that could fall.",
+        "Water": "Provide a shallow water dish when the sling is large enough to access it safely. Keep fresh water available for larger specimens.",
+        "Ventilation": "Provide good cross-ventilation while ensuring openings are too small for the spiderling to escape.",
+        "Safety": "Keep the enclosure low with limited climbing height to reduce the risk of dangerous falls.",
+        "Placement": "Keep away from direct sunlight, excessive heat and sudden temperature changes."
+      },
       didYouKnow: [
-      "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
-      "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
-],
+        "Acanthoscurria geniculata is native to Brazil.",
+        "Its bright white knee bands create a striking contrast against its dark legs.",
+        "It is known for a strong feeding response and relatively fast growth.",
+        "Like other New World tarantulas, it has urticating hairs that can be flicked as a defence.",
+        "Despite its impressive size, it is a terrestrial species that benefits from floor space rather than a tall enclosure."
+      ],
       featured: true
-    },
+    }
+    ,
+
     {
       id: "mexican-red-knee",
       category: "tarantulas",
@@ -1426,41 +1867,48 @@
       subCategory: "tarantulas",
       name: "Mexican Red Knee",
       subtitle: "Brachypelma hamorii",
-      image: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Brachypelma_edit.jpg",
-      images: [],
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795044349/4ac69e35-83fe-40e6-b6a0-f2381af908ae.png",
+      images: ["https://res.cloudinary.com/pv8lnpft/image/upload/v1795044488/d2532931-1fb1-4985-a6b4-8203b52a053d.png",
+        "https://res.cloudinary.com/pv8lnpft/image/upload/v1795044349/4ac69e35-83fe-40e6-b6a0-f2381af908ae.png"
+      ],
       video: "",
-      description: "World-famous display species showcasing fiery orange-red leg joints and deep black velvety body. Very docile and long-lived.",
+      description: "A striking New World terrestrial tarantula recognised by its deep black body and vivid orange-red markings on its leg joints. A popular, slow-growing display species known for its distinctive appearance and long lifespan.",
       price: 2399,
       unit: "specimen",
       minQuantity: 1,
-      specs: {
-      "care": "Low Maintenance",
-      "temp": "23°C – 28°C",
-      "diet": "Pinhead crickets & roach nymphs",
-      "habitat": "Ventilated sling vial / enclosure",
-      "size": "1–1.5 cm"
-},
-      overview: "The Mexican Red Knee (Brachypelma hamorii) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+      size: "Current Size: 1 – 1.5 cm (Spiderling)",
+      overview: "The Mexican Red Knee (Brachypelma hamorii) is a terrestrial tarantula native to Mexico. Its contrasting black body and bright orange-red knee markings make it one of the most recognisable tarantulas in the hobby. It is generally slow-growing and adapted to relatively dry habitats. Provide a secure enclosure with suitable substrate, a stable hide, good ventilation and constant access to fresh water.",
       careRequirements: {
-      "Difficulty": "Low Maintenance",
-      "Temperature": "23°C – 28°C",
-      "Humidity": "55% – 70% with access to a shallow water dish",
-      "Diet": "Pinhead crickets & roach nymphs",
-      "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
-      "Temperament": "New World terrestrial species; observe as display exotic"
-},
+        "Difficulty": "Beginner",
+        "Temperature": "20°C – 26°C",
+        "Humidity": "Mostly dry conditions with good ventilation. Keep a small area of substrate slightly moist when needed and always provide fresh water.",
+        "Diet": "Small pinhead crickets and appropriately sized roach nymphs for spiderlings. Increase prey size as the tarantula grows and remove uneaten feeders.",
+        "Lifespan": "Females may live approximately 15 – 25+ years; males commonly live around 5 – 8 years. Individual lifespan varies.",
+        "Temperament": "Generally slow-moving, but temperament varies. May flick urticating hairs or become defensive when disturbed.",
+        "Activity": "Primarily terrestrial and often more active during the evening or night.",
+        "Handling": "Avoid routine handling. Observe as a display animal and use a catch cup for necessary transfers."
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
-      "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
-      "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
-      "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
-},
+        "Enclosure": "Small, escape-proof and well-ventilated terrestrial sling enclosure. Upgrade as the tarantula grows.",
+        "Substrate": "Use pesticide-free coco fibre, unfertilised soil or a suitable terrestrial substrate. Provide enough depth for a sling to retreat or burrow.",
+        "Moisture": "Keep most of the substrate dry to lightly dry. A small lower corner can remain slightly moist; avoid waterlogged substrate.",
+        "Hides & Decor": "Provide a small, stable cork bark hide or another suitable retreat.",
+        "Water": "Provide a tiny, shallow water dish when the sling is large enough to use it safely. Keep fresh water available.",
+        "Ventilation": "Provide good cross-ventilation to prevent stagnant air and excessive moisture.",
+        "Safety": "Keep the enclosure relatively low, with limited open space above the substrate to reduce fall injuries.",
+        "Placement": "Keep away from direct sunlight, heat sources and sudden temperature changes."
+      },
       didYouKnow: [
-      "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
-      "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
-],
+        "Brachypelma hamorii is native to Mexico.",
+        "Its bright orange-red knee markings contrast with its dark body.",
+        "It is a slow-growing species and may sometimes refuse food for extended periods.",
+        "Like other New World tarantulas, it has urticating hairs on its abdomen for defence.",
+        "Females can live for decades, making this a long-term pet commitment."
+      ],
       featured: true
     },
+
+
     {
       id: "green-bottle-blue",
       category: "tarantulas",
@@ -1468,41 +1916,52 @@
       subCategory: "tarantulas",
       name: "Green Bottle Blue (GBB)",
       subtitle: "Chromatopelma cyaneopubescens",
-      image: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Chromatopelma_cyaneopubescens.jpg",
-      images: [],
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795044690/ba8bfd6e-7eca-4941-aef7-85e45f93de4f.png",
+      images: ["https://res.cloudinary.com/pv8lnpft/image/upload/v1795044957/1fb3fed2-0a67-46bc-9310-1572f5ffb1dd.png",
+        "https://res.cloudinary.com/pv8lnpft/image/upload/v1795044690/ba8bfd6e-7eca-4941-aef7-85e45f93de4f.png"
+      ],
       video: "",
-      description: "Spectacular electric blue legs, metallic emerald-green carapace, and vibrant tiger-striped abdomen. Prolific heavy webber.",
+      description: "A spectacular New World tarantula featuring electric-blue legs, a metallic green carapace and a vibrant orange abdomen. Famous for its elaborate webbing, active behaviour and striking three-colour appearance.",
       price: 4799,
       unit: "specimen",
       minQuantity: 1,
-      specs: {
-      "care": "Low Maintenance",
-      "temp": "23°C – 28°C",
-      "diet": "Pinhead crickets & roach nymphs",
-      "habitat": "Ventilated sling vial / enclosure",
-      "size": "1–1.5 cm"
-},
-      overview: "The Green Bottle Blue (GBB) (Chromatopelma cyaneopubescens) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+      size: "Current Size: 1 – 1.5 cm (Spiderling)",
+      overview: "The Green Bottle Blue (Chromatopelma cyaneopubescens) is a terrestrial tarantula native to Venezuela's Paraguaná Peninsula. It is admired for its vivid blue legs, metallic green carapace and orange abdomen. This species is a prolific webber and often creates extensive silk tunnels and retreats throughout its enclosure. It prefers a well-ventilated, mostly dry setup with suitable anchor points, a secure hide and constant access to fresh water.",
       careRequirements: {
-      "Difficulty": "Low Maintenance",
-      "Temperature": "23°C – 28°C",
-      "Humidity": "55% – 70% with access to a shallow water dish",
-      "Diet": "Pinhead crickets & roach nymphs",
-      "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
-      "Temperament": "New World terrestrial species; observe as display exotic"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Temperature": "20°C – 26°C",
+        "Humidity": "Mostly dry conditions with strong ventilation. Avoid keeping the substrate constantly wet; provide fresh water at all times. Small slings may benefit from a slightly moist area.",
+        "Diet": "Pinhead crickets and small roach nymphs for spiderlings. Larger specimens can be offered appropriately sized crickets, roaches and locusts.",
+        "Lifespan": "Females may live approximately 12 – 14 years or longer; males commonly live around 3 – 4 years. Individual lifespan varies.",
+        "Temperament": "Fast-moving and often skittish. May flick urticating hairs when disturbed; avoid unnecessary interaction.",
+        "Activity": "Terrestrial species that may use elevated structures and retreats for extensive web construction.",
+        "Growth Rate": "Moderate to relatively fast, depending on feeding, temperature and individual development.",
+        "Webbing": "Prolific webber that can cover much of its enclosure with silk tunnels and web retreats.",
+        "Handling": "Avoid handling. Best maintained as a display species."
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
-      "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
-      "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
-      "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
-},
+        "Enclosure": "Use a small, secure and well-ventilated sling enclosure initially. Upgrade to a spacious terrestrial enclosure with good floor area as the tarantula grows.",
+        "Substrate": "Use well-draining, pesticide-free coco fibre or suitable soil-based substrate. Provide enough depth for a stable retreat while keeping the enclosure's open fall height low.",
+        "Moisture": "Keep the substrate mostly dry. For very small slings, a small slightly moist area can be provided without making the enclosure wet.",
+        "Hides & Web Anchors": "Provide cork bark, angled bark pieces, branches and other secure anchor points for web construction.",
+        "Water": "Provide a shallow water dish when the sling is large enough to access it safely. Keep clean, fresh water available.",
+        "Ventilation": "Provide strong cross-ventilation to prevent stagnant air and excessive moisture.",
+        "Safety": "Use a tightly secured lid with escape-proof ventilation openings. Keep the enclosure's fall height limited.",
+        "Maintenance": "Avoid repeatedly disturbing or removing established webbing. Remove uneaten prey and clean visible waste when necessary.",
+        "Placement": "Keep away from direct sunlight, excessive heat and sudden temperature changes."
+      },
       didYouKnow: [
-      "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
-      "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
-],
+        "Chromatopelma cyaneopubescens is native to Venezuela's Paraguaná Peninsula.",
+        "Its three distinctive colours include metallic green on the carapace, blue legs and an orange abdomen.",
+        "It is one of the hobby's well-known prolific webbers, creating extensive silk tunnels and retreats.",
+        "A settled specimen may cover much of its enclosure with webbing.",
+        "Like other New World tarantulas, it has urticating hairs that can be used as a defence.",
+        "It is the only currently recognised living species in the genus Chromatopelma."
+      ],
       featured: true
     },
+
+
     {
       id: "chaco-golden-knee",
       category: "tarantulas",
@@ -1510,41 +1969,47 @@
       subCategory: "tarantulas",
       name: "Chaco Golden Knee",
       subtitle: "Grammostola pulchripes",
-      image: "https://upload.wikimedia.org/wikipedia/commons/6/64/Grammostola_pulchripes_top_view.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795045219/3807384c-d2b9-4717-af85-3a035c670124.png",
       images: [],
       video: "",
-      description: "Gentle giant famous for golden-yellow striped knee markings and calm demeanor. Highly recommended for enthusiastic beginners.",
+      description: "A beautiful New World terrestrial tarantula recognised by its golden-yellow knee markings against a dark body. Known for its impressive adult size, generally calm nature and suitability for beginner keepers.",
       price: 1999,
       unit: "specimen",
       minQuantity: 1,
-      specs: {
-      "care": "Low Maintenance",
-      "temp": "23°C – 28°C",
-      "diet": "Pinhead crickets & roach nymphs",
-      "habitat": "Ventilated sling vial / enclosure",
-      "size": "1–1.5 cm"
-},
-      overview: "The Chaco Golden Knee (Grammostola pulchripes) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+      size: "Current Size: 1 – 1.5 cm (Spiderling)",
+      overview: "The Chaco Golden Knee (Grammostola pulchripes) is a terrestrial tarantula native to Paraguay and Argentina. It is admired for its golden leg markings, substantial adult size and generally manageable temperament. Young specimens may dig and create shallow retreats, while older individuals often use established hides. It thrives in a secure, well-ventilated enclosure with firm substrate, a suitable hide and access to fresh water.",
       careRequirements: {
-      "Difficulty": "Low Maintenance",
-      "Temperature": "23°C – 28°C",
-      "Humidity": "55% – 70% with access to a shallow water dish",
-      "Diet": "Pinhead crickets & roach nymphs",
-      "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
-      "Temperament": "New World terrestrial species; observe as display exotic"
-},
+        "Difficulty": "Beginner",
+        "Temperature": "20°C – 26°C",
+        "Humidity": "Mostly dry to moderately dry conditions. Maintain good ventilation and provide fresh water. A small lower corner can be slightly moist when needed, especially for young spiderlings.",
+        "Diet": "Pinhead crickets and small roach nymphs for spiderlings. Offer appropriately sized crickets and roaches as the tarantula grows.",
+        "Lifespan": "Females may live approximately 15 – 25 years; males generally have a much shorter lifespan, often around 3 – 5 years after maturity.",
+        "Temperament": "Generally calm and slow-moving, but individual behaviour varies. May flick urticating hairs or become defensive when disturbed.",
+        "Activity": "Primarily terrestrial. Younger specimens may burrow, while adults often settle into a sheltered retreat.",
+        "Growth Rate": "Slow to moderate.",
+        "Handling": "Avoid routine handling. Best maintained as a display animal."
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
-      "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
-      "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
-      "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
-},
+        "Enclosure": "Use a small, secure terrestrial sling enclosure initially. Upgrade to a spacious, low-height enclosure as the tarantula grows.",
+        "Substrate": "Use pesticide-free coco fibre, compacted unfertilised topsoil or a suitable soil blend. Provide diggable substrate for young specimens.",
+        "Moisture": "Keep the surface mostly dry. A small lower corner can be slightly moist when required, without making the enclosure waterlogged.",
+        "Hides & Decor": "Provide a stable cork bark hide or similar retreat. Keep decorations secure and avoid hard objects that could cause injury.",
+        "Water": "Provide a shallow water dish when the sling is large enough to access it safely. Keep fresh water available for larger specimens.",
+        "Ventilation": "Provide good ventilation to prevent stagnant air and excessive moisture.",
+        "Safety": "Fill a substantial portion of the enclosure with substrate and keep the open fall height low, particularly for heavier juveniles and adults.",
+        "Placement": "Keep away from direct sunlight, excessive heat and sudden temperature changes."
+      },
       didYouKnow: [
-      "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
-      "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
-],
+        "Grammostola pulchripes is native to Paraguay and Argentina.",
+        "Its golden-yellow knee markings make it easily recognisable.",
+        "Young specimens may dig their own retreats, while adults often use established hides.",
+        "It is a terrestrial tarantula, so floor space is more important than climbing height.",
+        "Females can live for decades, making this species a long-term pet commitment."
+      ],
       featured: false
     },
+
+
     {
       id: "salmon-pink",
       category: "tarantulas",
@@ -1552,87 +2017,97 @@
       subCategory: "tarantulas",
       name: "Salmon Pink",
       subtitle: "Lasiodora parahybana",
-      image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Brazilian_Salmon_Pink_Birdeater.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795045425/9d739bc4-2e90-4751-920c-5e8897c1de5a.png",
       images: [],
       video: "",
-      description: "One of the largest tarantula species in the world. Fast-growing established spiderling with salmon-pink hairs.",
+      description: "One of the largest commonly kept tarantula species, recognised by its dark body covered with distinctive salmon-pink hairs. Famous for its rapid growth, impressive adult size and strong feeding response.",
       price: 3000,
       unit: "specimen",
       minQuantity: 1,
-      specs: {
-      "care": "Low Maintenance",
-      "temp": "23°C – 28°C",
-      "diet": "Pinhead crickets & roach nymphs",
-      "habitat": "Ventilated sling vial / enclosure",
-      "size": "1 inch"
-},
-      overview: "The Salmon Pink (Lasiodora parahybana) is a captivating New World tarantula renowned among exotic hobbyists for its striking appearance and low maintenance requirements.",
+      size: "Current Size: Approximately 1 inch (Spiderling)",
+      overview: "The Brazilian Salmon Pink Birdeater (Lasiodora parahybana) is a large terrestrial New World tarantula native to northeastern Brazil. It is admired for its salmon-coloured hairs, impressive adult size and fast growth. This species is often an enthusiastic feeder, but can be skittish and defensive. Its enclosure should prioritise floor space, deep stable substrate, a secure hide, good ventilation and constant access to fresh water.",
       careRequirements: {
-      "Difficulty": "Low Maintenance",
-      "Temperature": "23°C – 28°C",
-      "Humidity": "55% – 70% with access to a shallow water dish",
-      "Diet": "Pinhead crickets & roach nymphs",
-      "Lifespan": "15 – 25 years (females), 4 – 6 years (males)",
-      "Temperament": "New World terrestrial species; observe as display exotic"
-},
+        "Difficulty": "Intermediate",
+        "Temperature": "22°C – 27°C",
+        "Humidity": "Moderate humidity with a moisture gradient. Keep the surface from becoming constantly wet while allowing some moisture in the lower substrate. Provide fresh water at all times.",
+        "Diet": "Small crickets and appropriately sized roach nymphs for spiderlings. Larger specimens can eat crickets, roaches and other suitable feeder insects.",
+        "Lifespan": "Females may live approximately 10 – 20 years; males commonly live around 3 – 6 years. Individual lifespan varies.",
+        "Temperament": "Often food-responsive and skittish. May move quickly, flick urticating hairs or become defensive when disturbed.",
+        "Adult Size": "Approximately 20 – 28 cm leg span, depending on the individual.",
+        "Growth Rate": "Fast-growing compared with many commonly kept tarantulas.",
+        "Activity": "Primarily terrestrial; may use hides and shallow retreats.",
+        "Handling": "Avoid handling. Its size, speed and urticating hairs make it unsuitable for routine handling."
+      },
       habitatSetup: {
-      "Enclosure": "Ventilated sling vial or acrylic terrestrial terrarium with secure locking lid",
-      "Substrate": "3–4 inches of dry to slightly damp coco fiber or peat blend for burrowing",
-      "Hides & Decor": "Curved cork bark hide and small shallow water dish (for specimens over 2 cm)",
-      "Ventilation": "Cross-ventilation holes to prevent stagnant humidity while retaining comfort"
-},
+        "Enclosure": "Start with a small, secure and well-ventilated sling enclosure. Upgrade progressively as the tarantula grows; adults require a spacious horizontal enclosure.",
+        "Substrate": "Use pesticide-free coco fibre, unfertilised topsoil or a suitable soil blend that holds its shape. Provide approximately 8 – 12 cm or more for larger juveniles and adults, adjusted to enclosure size.",
+        "Moisture": "Maintain a moisture gradient with some moisture in the lower substrate while allowing the surface to dry. Avoid waterlogged or stagnant conditions.",
+        "Hides & Decor": "Provide a stable cork bark hide and simple ground-level decor. Avoid heavy or unstable objects that could fall.",
+        "Water": "Provide a shallow, stable water dish when the sling is large enough to access it safely. Keep fresh water available.",
+        "Ventilation": "Provide adequate cross-ventilation to prevent stagnant air and excessive moisture.",
+        "Safety": "Prioritise floor space and keep the distance between the substrate and lid low. Large, heavy tarantulas can be seriously injured by falls.",
+        "Placement": "Keep away from direct sunlight, excessive heat and sudden temperature changes."
+      },
       didYouKnow: [
-      "New World tarantulas possess urticating hairs on their abdomen used as a passive defense mechanism against predators in nature.",
-      "Slings molt regularly as they grow, shedding their entire outer exoskeleton and emerging with renewed vibrant coloration."
-],
+        "Lasiodora parahybana is native to northeastern Brazil.",
+        "It is commonly called the Brazilian Salmon Pink Birdeater.",
+        "Its salmon-pink body hairs give the species its distinctive name.",
+        "It is a fast-growing species and can reach an impressive adult leg span.",
+        "Its strong feeding response makes it an enthusiastic predator of suitable feeder insects.",
+        "Like other New World tarantulas, it has urticating hairs that can cause skin and eye irritation."
+      ],
       featured: true
     },
+
     {
       id: "isopod-house-kit",
       category: "combo",
       categoryName: "Combo Packs",
       subCategory: "isopod-kit",
       name: "Isopod House Kit",
-      subtitle: "Bioactive Glass Vivarium Kit",
-      image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=800&q=80",
+      subtitle: "Complete Bioactive Glass Vivarium Kit",
+
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795035343/2d45afc1-280f-4a4a-a53c-c8a6774d90b2.png",
       images: [],
       video: "",
-      description: "Complete glass bioactive habitat setup. Includes glass isopod house, live plants, substrate blend, lotus pod hide, food, and a starter culture of 6 Cubaris Glacier isopods.",
+
+      description: "A complete bioactive isopod habitat kit featuring a glass house, live plants, sheet moss, bioactive substrate, natural hiding space, premium food and a starter culture of 6 Cubaris sp. Glacier isopods.",
+
       price: 1545,
       unit: "kit",
       minQuantity: 1,
+
       specs: {
-      "care": "Complete Bioactive Setup",
-      "temp": "Ambient Room Temp",
-      "diet": "Included in starter pack",
-      "habitat": "High-clarity glass enclosure",
-      "kitIncludes": [
-            "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height)",
-            "Fittonia albivenis (Patterned nerve plant)",
-            "Hemigraphis sp. Pink (Purple waffle plant)",
-            "Sheet Moss layer",
-            "Bioactive Isopod Substrate Blend",
-            "Lotus Pod (natural hide for isopods)",
-            "Premium Isopod Food",
-            "Isopod Culture: 6 Cubaris sp. \"Glacier\""
-      ]
-},
-      overview: "The Isopod House Kit is an all-inclusive, curated complete biological setup designed by Fish Tales specialists. Includes premium glass enclosure, substrate, live specimens, and balanced essentials.",
+        "care": "Beginner / Bioactive",
+        "temp": "Ambient Room Temperature",
+        "diet": "Premium Isopod Food included in the kit",
+        "habitat": "Glass Isopod House (5″×5″×5″)",
+        "size": "Complete Starter Kit (6 Isopods)"
+      },
+
+      overview: "The Isopod House Kit is a complete starter habitat designed for keeping and observing Cubaris sp. Glacier isopods in a planted bioactive enclosure. It combines a glass isopod house, live botanical elements, substrate, natural decor, food and a starter culture in one package.",
+
       careRequirements: {
-      "Setup Difficulty": "Beginner Friendly / Turnkey Kit",
-      "Operating Temp": "Ambient Room Temp",
-      "Maintenance": "Weekly misting or feeding as specified in care guidelines",
-      "Included Components": "Glass Isopod House (5\" L × 5\" D × 5\" H + 2.5\" roof height), Fittonia albivenis (Patterned nerve plant), Hemigraphis sp. Pink (Purple waffle plant), Sheet Moss layer, Bioactive Isopod Substrate Blend, Lotus Pod (natural hide for isopods), Premium Isopod Food, Isopod Culture: 6 Cubaris sp. \"Glacier\""
-},
+        "Setup Type": "Complete Bioactive Setup",
+        "Temperature": "Ambient Room Temperature",
+        "Diet": "Premium Isopod Food included in the kit",
+        "Livestock Included": "6 Cubaris sp. Glacier"
+      },
+
       habitatSetup: {
-      "Enclosure Construction": "High-clarity precision glass with optimal ventilation and biological balance",
-      "Placement": "Place on a sturdy, level surface away from direct harsh sunlight or extreme drafts",
-      "Lighting": "Gentle ambient room light or nano LED fixture supporting live botanical growth"
-},
-      didYouKnow: [
-      "Bioactive closed-loop habitats create self-sustaining micro-ecosystems where plants, micro-fauna, and custodial cleaners thrive harmoniously.",
-      "All kit components are hand-selected, cleaned, and balanced by Fish Tales biologists for immediate plug-and-play enjoyment."
-],
+        "Enclosure": "Glass Isopod House",
+        "Dimensions": "5 inches L × 5 inches D × 5 inches H + 2.5 inches roof height",
+        "Live Plant 1": "Fittonia albivenis (Patterned Nerve Plant)",
+        "Live Plant 2": "Hemigraphis sp. Pink (Purple Waffle Plant)",
+        "Ground Cover": "Sheet Moss",
+        "Substrate": "Bioactive Isopod Substrate Blend",
+        "Hiding Place": "Lotus Pod (Natural Hide)",
+        "Food": "Premium Isopod Food",
+        "Starter Culture": "6 Cubaris sp. Glacier"
+      },
+
+      didYouKnow: [],
+
       featured: true
     },
     {
@@ -1641,88 +2116,120 @@
       categoryName: "Combo Packs",
       subCategory: "aquarium-kit",
       name: "Half Cube Aquarium Kit",
-      subtitle: "Nano Desktop Aquascape System",
-      image: "https://images.unsplash.com/photo-1534043464124-3be32fe000c9?auto=format&fit=crop&w=800&q=80",
+      subtitle: "Complete Planted Betta Aquarium Kit",
+
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1794949703/6a075120-0425-4e4f-bbc0-86de19ce4d3a.png",
       images: [],
       video: "",
-      description: "Desktop planted aquarium kit. Includes Half Cube aquarium, 1 healthy Betta fish, live aquatic plants, and premium sand substrate.",
+
+      description: "A beginner-friendly aquarium kit featuring a half cube glass aquarium, one beautiful Betta fish, live aquatic plants and premium sand substrate. A complete combination to bring a natural aquatic environment into your home.",
+
       price: 999,
       unit: "kit",
       minQuantity: 1,
+
       specs: {
-      "care": "Complete Bioactive Setup",
-      "temp": "Ambient Room Temp",
-      "diet": "Included in starter pack",
-      "habitat": "High-clarity glass enclosure",
-      "kitIncludes": [
-            "Half Cube Aquarium",
-            "1 beautiful Betta Fish",
-            "Live aquatic plants",
-            "Premium sand substrate"
-      ]
-},
-      overview: "The Half Cube Aquarium Kit is an all-inclusive, curated complete biological setup designed by Fish Tales specialists. Includes premium glass enclosure, substrate, live specimens, and balanced essentials.",
+        "care": "Beginner Friendly",
+        "temp": "24°C – 28°C",
+        "diet": "Betta Pellets & live foods",
+        "habitat": "Half Cube Glass Aquarium",
+        "size": "Complete Betta Aquarium Kit"
+      },
+
+      overview: "The Half Cube Aquarium Kit is a complete aquarium package designed for hobbyists who want to start their aquarium journey. It includes a half cube aquarium, one Betta fish, live aquatic plants and premium sand substrate.",
+
+
       careRequirements: {
-      "Setup Difficulty": "Beginner Friendly / Turnkey Kit",
-      "Operating Temp": "Ambient Room Temp",
-      "Maintenance": "Weekly misting or feeding as specified in care guidelines",
-      "Included Components": "Half Cube Aquarium, 1 beautiful Betta Fish, Live aquatic plants, Premium sand substrate"
-},
+        "Livestock Included": "1 Betta Fish",
+        "Aquatic Plants": "Live Aquatic Plants",
+        "Substrate": "Premium Sand Substrate",
+        "Setup Type": "Planted Freshwater Aquarium",
+        "Experience Level": "Beginner Friendly"
+      },
+
       habitatSetup: {
-      "Enclosure Construction": "High-clarity precision glass with optimal ventilation and biological balance",
-      "Placement": "Place on a sturdy, level surface away from direct harsh sunlight or extreme drafts",
-      "Lighting": "Gentle ambient room light or nano LED fixture supporting live botanical growth"
-},
+        "Aquarium": "Half Cube Glass Aquarium",
+        "Fish": "1 Beautiful Betta Fish",
+        "Plants": "Live Aquatic Plants",
+        "Substrate": "Premium Sand Substrate",
+        "Aquascape": "Natural planted aquarium setup"
+      },
+
       didYouKnow: [
-      "Bioactive closed-loop habitats create self-sustaining micro-ecosystems where plants, micro-fauna, and custodial cleaners thrive harmoniously.",
-      "All kit components are hand-selected, cleaned, and balanced by Fish Tales biologists for immediate plug-and-play enjoyment."
-],
+        "Betta fish are known for their vibrant colours and flowing fins.",
+        "Live aquatic plants can provide natural cover and enrichment for aquarium fish.",
+        "A properly maintained planted aquarium can become a beautiful miniature aquatic ecosystem."
+      ],
+
       featured: true
     },
+
     {
       id: "glacier-colony-pack",
       category: "combo",
       categoryName: "Combo Packs",
       subCategory: "isopod-kit",
       name: "Glacier Colony Pack",
-      subtitle: "Cubaris murina var. Glacier",
-      image: "https://upload.wikimedia.org/wikipedia/commons/1/16/Cubaris_tarangensis_190481013.jpg",
+      subtitle: "Cubaris Murina Glacier – Buy 10 Get 1 Free",
+
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795036241/154502ad-b5bb-43ba-b232-38ed49c89ad6.png",
       images: [],
       video: "",
-      description: "Promotional colony pack: Purchase 10 Cubaris Murina Glacier isopods and receive 1 bonus isopod free of charge (11 specimens total).",
+
+      description: "Start your own Cubaris Murina Glacier colony with this special pack. Get 10 Glacier Isopods and receive 1 additional specimen free. A total of 11 beautiful white isopods for your bioactive enclosure or dedicated isopod culture.",
+
       price: 700,
-      unit: "11 pieces",
+      unit: "kit",
       minQuantity: 1,
+
       specs: {
-      "care": "Complete Bioactive Setup",
-      "temp": "Ambient Room Temp",
-      "diet": "Included in starter pack",
-      "habitat": "High-clarity glass enclosure",
-      "kitIncludes": [
-            "10 Cubaris Murina Glacier Isopods",
-            "1 Bonus Isopod (11 specimens total)",
-            "Ventilated transport culture cup",
-            "Starter food blend"
-      ]
-},
-      overview: "The Glacier Colony Pack is an all-inclusive, curated complete biological setup designed by Fish Tales specialists. Includes premium glass enclosure, substrate, live specimens, and balanced essentials.",
+        "Difficulty": "Beginner to Intermediate",
+        "Temperature": "20°C–26°C",
+        "Diet": "Decaying hardwood leaves, leaf litter and decomposed organic matter",
+        "Housing": "Suitable ventilated terrestrial isopod enclosure",
+        "Pack Size": "11 specimens (10 + 1 Free)"
+      },
+
+      overview: "Glacier Colony Pack is a special value pack containing 10 Cubaris Murina Glacier isopods plus 1 additional specimen free. It is suitable for hobbyists looking to start or expand their isopod colony.",
+
       careRequirements: {
-      "Setup Difficulty": "Beginner Friendly / Turnkey Kit",
-      "Operating Temp": "Ambient Room Temp",
-      "Maintenance": "Weekly misting or feeding as specified in care guidelines",
-      "Included Components": "10 Cubaris Murina Glacier Isopods, 1 Bonus Isopod (11 specimens total), Ventilated transport culture cup, Starter food blend"
-},
+        "Difficulty": "Beginner to Intermediate",
+        "Temperature": "20°C–26°C",
+        "Humidity": "Maintain a moist refuge with access to a drier area.",
+        "Moisture": "Maintain a moisture gradient and avoid waterlogging.",
+        "Diet": "Decaying hardwood leaves, leaf litter and decomposed organic matter.",
+        "Supplementary Food": "Small portions of vegetables, fish flakes or shrimp pellets.",
+        "Calcium": "Keep cuttlebone or another suitable calcium source available.",
+        "Ventilation": "Moderate to good ventilation.",
+        "Lighting": "Normal ambient light; avoid direct sunlight.",
+        "Housing": "Suitable ventilated terrestrial isopod enclosure."
+      },
+
       habitatSetup: {
-      "Enclosure Construction": "High-clarity precision glass with optimal ventilation and biological balance",
-      "Placement": "Place on a sturdy, level surface away from direct harsh sunlight or extreme drafts",
-      "Lighting": "Gentle ambient room light or nano LED fixture supporting live botanical growth"
-},
+        "Enclosure": "Secure, well-ventilated plastic tub or bioactive terrarium.",
+        "Substrate": "Organic soil mixed with decomposed hardwood and leaf litter.",
+        "Substrate Depth": "Approximately 5–8 cm.",
+        "Moisture Gradient": "Keep one side moist and the opposite side comparatively drier.",
+        "Moisture Retention": "Use damp sphagnum moss in the moist section.",
+        "Leaf Litter": "Provide pesticide-free hardwood leaves.",
+        "Hiding Places": "Cork bark and decaying hardwood pieces.",
+        "Food Source": "Maintain decaying leaf litter as the staple food source.",
+        "Calcium Source": "Provide cuttlebone or another suitable calcium supplement.",
+        "Ventilation": "Maintain airflow while preventing the enclosure from drying out."
+      },
+
       didYouKnow: [
-      "Bioactive closed-loop habitats create self-sustaining micro-ecosystems where plants, micro-fauna, and custodial cleaners thrive harmoniously.",
-      "All kit components are hand-selected, cleaned, and balanced by Fish Tales biologists for immediate plug-and-play enjoyment."
-],
+        "Cubaris murina is commonly known as the Little Sea Isopod.",
+        "The Glacier morph is recognised for its distinctive pale white appearance.",
+        "Isopods are terrestrial crustaceans, not insects.",
+        "Isopods help break down decaying leaves and organic matter.",
+        "Female isopods carry developing young in a specialised brood pouch called a marsupium.",
+        "Cubaris murina can roll into a protective ball when disturbed."
+      ],
+
       featured: true
     }
+
   ];
 
   /* ── 3b. Specialized Living Cultures Catalogue ────────────── */
@@ -1734,7 +2241,7 @@
       subCategory: "microworm",
       name: "Microworm Starter Culture",
       subtitle: "Panagrellus redivivus",
-      image: "live_food_cultures_category.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795047635/de7db151-2b1d-4458-a5d3-27698510d07a.png",
       images: ["live_food_cultures_category.jpg"],
       video: "",
       description: "Active, prolific starter culture of Panagrellus redivivus nematodes. Perfect for nano fish, bettas, and newborn fry. Simple oatmeal maintenance with zero foul odor.",
@@ -1761,8 +2268,8 @@
       subCategory: "vinegar-eel",
       name: "Vinegar Eel Live Culture",
       subtitle: "Turbatrix aceti",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Daphnia_magna.png/800px-Daphnia_magna.png",
-      images: ["https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Daphnia_magna.png/800px-Daphnia_magna.png"],
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795047047/f35faca0-8733-49d7-9f7c-a5aa8945f004.png",
+      images: [],
       video: "",
       description: "Resilient live culture of Turbatrix aceti. Unlike microworms that sink, vinegar eels swim continuously throughout the water column, ideal for surface-feeding fry.",
       price: 180,
@@ -1788,8 +2295,8 @@
       subCategory: "moina",
       name: "Moina Macrocopa Live Culture",
       subtitle: "Moina macrocopa",
-      image: "https://upload.wikimedia.org/wikipedia/commons/2/25/Daphnia_magna_-_NTNU.jpg",
-      images: ["https://upload.wikimedia.org/wikipedia/commons/2/25/Daphnia_magna_-_NTNU.jpg"],
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795047331/7eb2eca5-8404-489c-82ed-05328e660b43.png",
+      images: [],
       video: "",
       description: "High-density freshwater micro-crustacean starter culture. Smaller and softer-shelled than standard Daphnia magna, making them easier for small fish to digest.",
       price: 200,
@@ -1815,8 +2322,8 @@
       subCategory: "grindal-worm",
       name: "Grindal Worm Starter Culture",
       subtitle: "Enchytraeus buchholzi",
-      image: "https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=800&q=80",
-      images: ["https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=800&q=80"],
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795047563/52fa6208-04b9-442e-ab8d-9722f9eb1f05.png",
+      images: [],
       video: "",
       description: "Dense starter culture of Enchytraeus buchholzi on damp organic peat/coco fiber substrate. Exceptionally rich in protein and lipids for conditioning breeders.",
       price: 220,
@@ -1974,6 +2481,9 @@
     },
 
     formatPrice(num) {
+      if (num === null || num === undefined || num === '' || isNaN(num)) {
+        return 'Price on Request';
+      }
       return '₹' + Number(num).toLocaleString('en-IN');
     },
 
@@ -1992,16 +2502,19 @@
       ];
 
       items.forEach((item, index) => {
-        const itemTotal = item.price * item.quantity;
+        const hasPrice = item.price !== null && item.price !== undefined && Number(item.price) > 0;
+        const itemTotal = hasPrice ? this.formatPrice(item.price * item.quantity) : 'Price on Request';
         let qtyLabel;
-        if (item.pricingUnit === 'pair') {
+        if (item.id === 'glacier-colony-pack' || item.baseId === 'glacier-colony-pack') {
+          qtyLabel = `${item.quantity} Kit (${item.quantity * 11} specimens: ${item.quantity * 10} + ${item.quantity} Free)`;
+        } else if (item.pricingUnit === 'pair') {
           qtyLabel = item.quantity === 1 ? '1 pair' : `${item.quantity} pairs`;
         } else if (item.pricingUnit === 'kit') {
           qtyLabel = item.quantity === 1 ? '1 kit' : `${item.quantity} kits`;
         } else {
           qtyLabel = `${item.quantity} pcs`;
         }
-        lines.push(`${index + 1}. ${item.name} – ${qtyLabel} – ${this.formatPrice(itemTotal)}`);
+        lines.push(`${index + 1}. ${item.name} – ${qtyLabel} – ${itemTotal}`);
       });
 
       const subtotal = this.calcTotal(items);
@@ -2160,8 +2673,21 @@
   let currentSearch = '';
   let currentSort = 'default';
 
-  window.onCardVariantChange = function () {};
-  window.onModalVariantChange = function () {};
+  window.onCardVariantChange = function () { };
+  window.onModalVariantChange = function () { };
+
+  function getAllProducts() {
+    const list = [...PRODUCTS];
+    if (typeof LIVE_CULTURES !== 'undefined' && Array.isArray(LIVE_CULTURES)) {
+      LIVE_CULTURES.forEach(c => {
+        if (!list.some(p => String(p.id) === String(c.id))) {
+          list.push(c);
+        }
+      });
+    }
+    return list;
+  }
+  window.getAllProducts = getAllProducts;
 
   window.addCardVariantToCart = function (productId) {
     CartManager.addById(productId);
@@ -2175,12 +2701,12 @@
     const pageCategory = getCurrentPageCategory();
     const isAquariumPage = pageCategory === 'aquarium';
 
-    let list = [...PRODUCTS];
-
+    const allProductsPool = getAllProducts();
     // Ensure all products have variants and specs initialized
-    list.forEach(p => initProductVariantsAndSpecs(p));
+    allProductsPool.forEach(p => initProductVariantsAndSpecs(p));
 
-    let totalInCategory = PRODUCTS.length;
+    let list = [...allProductsPool];
+    let totalInCategory = allProductsPool.length;
 
     // 1. Filter by category & subcategory
     if (isAquariumPage) {
@@ -2196,15 +2722,7 @@
     } else if (pageCategory !== 'all') {
       // Dedicated category pages (isopods, tarantulas, combo packs, cultures)
       if (pageCategory === 'cultures') {
-        const culturePool = list.filter(p => p.category === 'cultures');
-        if (culturePool.length > 0) {
-          list = culturePool;
-        } else if (typeof LIVE_CULTURES !== 'undefined' && Array.isArray(LIVE_CULTURES)) {
-          list = [...LIVE_CULTURES];
-          list.forEach(p => initProductVariantsAndSpecs(p));
-        } else {
-          list = [];
-        }
+        list = list.filter(p => p.category === 'cultures');
         totalInCategory = list.length;
       } else {
         list = list.filter(p => p.category === pageCategory || ((pageCategory === 'combos' || pageCategory === 'combo') && (p.category === 'combo' || p.category === 'combos')));
@@ -2224,11 +2742,15 @@
       } else if (currentCategory === 'combos' || currentCategory === 'combo') {
         list = list.filter(p => p.category === 'combo' || p.category === 'combos');
         totalInCategory = list.length;
+      } else if (currentCategory === 'cultures' || currentCategory === 'culture') {
+        list = list.filter(p => p.category === 'cultures');
+        totalInCategory = list.length;
       } else if (currentCategory !== 'all') {
         list = list.filter(p => p.category === currentCategory);
         totalInCategory = list.length;
       } else {
-        totalInCategory = PRODUCTS.length;
+        // All Products: includes Aquarium & Fish, Isopods, Tarantulas, Combo Packs, and Cultures
+        totalInCategory = allProductsPool.length;
       }
     }
 
@@ -2288,8 +2810,9 @@
     grid.innerHTML = list.map(product => {
       initProductVariantsAndSpecs(product);
       const activeVariant = getProductSelectedVariant(product);
-      const displayPrice = CartManager.formatPrice(activeVariant.price);
-      const displayUnit = '/ ' + activeVariant.unit;
+      const hasPrice = activeVariant.price !== null && activeVariant.price !== undefined && Number(activeVariant.price) > 0;
+      const displayPrice = hasPrice ? CartManager.formatPrice(activeVariant.price) : 'Price on Request';
+      const displayUnit = hasPrice ? ('/ ' + activeVariant.unit) : '';
 
       return `
         <article class="product-card" data-id="${product.id}">
@@ -2341,6 +2864,8 @@
     }).join('');
   }
 
+  window.renderCartDrawerItems = renderCartDrawerItems;
+
   window.resetFilters = function () {
     currentCategory = 'all';
     currentAquariumFilter = 'all';
@@ -2371,8 +2896,8 @@
         tarantulas: 'tarantulas.html',
         combos: 'combo-packs.html',
         combo: 'combo-packs.html',
-        cultures: 'cultures.html',
-        culture: 'cultures.html'
+        cultures: 'culture.html',
+        culture: 'culture.html'
       };
       if (targetMap[categoryKey]) {
         window.location.href = targetMap[categoryKey];
@@ -2386,8 +2911,8 @@
       tarantulas: 'tarantulas.html',
       combos: 'combo-packs.html',
       combo: 'combo-packs.html',
-      cultures: 'cultures.html',
-      culture: 'cultures.html'
+      cultures: 'culture.html',
+      culture: 'culture.html'
     };
 
     const isMatch = (pageCat === categoryKey) ||
@@ -2404,6 +2929,15 @@
     }
 
     currentCategory = categoryKey;
+    if (categoryKey === 'all') {
+      currentAquariumFilter = 'all';
+      currentSearch = '';
+      currentSort = 'default';
+      const searchInput = document.getElementById('catalogSearch');
+      if (searchInput) searchInput.value = '';
+      const sortSelect = document.getElementById('catalogSort');
+      if (sortSelect) sortSelect.value = 'default';
+    }
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
       const val = tab.dataset.category || tab.dataset.filter;
       const active = (val === categoryKey) ||
@@ -2639,6 +3173,74 @@
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
+  /* ── 7a-2. Universal Product Video Renderer ──────────────── */
+  function renderProductVideo(videoUrl, posterUrl = '', productName = 'Specimen') {
+    if (!videoUrl || typeof videoUrl !== 'string') return '';
+    const cleanUrl = videoUrl.trim();
+    if (!cleanUrl || cleanUrl === 'null' || cleanUrl === 'undefined') return '';
+
+    // Validate standard web video URLs (http/https, relative, Cloudinary, mp4/webm/ogg/mov/etc)
+    const isUrl = /^https?:\/\//i.test(cleanUrl) || /^\//.test(cleanUrl) || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(cleanUrl);
+    if (!isUrl) return '';
+
+    // Determine poster (only if valid, non-empty, and not a placeholder or video URL itself)
+    let validPoster = '';
+    if (posterUrl && typeof posterUrl === 'string') {
+      const trimmedPoster = posterUrl.trim();
+      if (trimmedPoster && trimmedPoster !== PLACEHOLDER_IMG && !/\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(trimmedPoster)) {
+        validPoster = trimmedPoster;
+      }
+    }
+
+    const posterAttr = validPoster ? ` poster="${escapeSearchHTML(validPoster)}"` : '';
+    const safeName = escapeSearchHTML(productName || 'Specimen');
+
+    // Detect MIME type based on extension
+    let mimeType = 'video/mp4';
+    if (/\.webm(\?.*)?$/i.test(cleanUrl)) mimeType = 'video/webm';
+    else if (/\.ogg(\?.*)?$/i.test(cleanUrl)) mimeType = 'video/ogg';
+
+    return `
+      <section class="pdp-video-container" id="pdpVideoContainer" aria-label="${safeName} Specimen Video">
+        <div class="pdp-video-header">
+          <span class="pdp-video-badge">
+            <svg class="pdp-video-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            Specimen Live Video
+          </span>
+          <span class="pdp-video-sub">Live morphology &amp; swimming footage</span>
+        </div>
+        <div class="pdp-video-wrapper">
+          <video class="pdp-video-player"
+                 id="pdpProductVideo"
+                 controls
+                 playsinline
+                 preload="metadata"${posterAttr}
+                 aria-label="${safeName} live video footage"
+                 onerror="window.handleProductVideoError && window.handleProductVideoError(this)">
+            <source src="${escapeSearchHTML(cleanUrl)}" type="${mimeType}">
+            <p class="pdp-video-fallback">Your browser does not support HTML5 video. <a href="${escapeSearchHTML(cleanUrl)}" target="_blank" rel="noopener noreferrer" class="pdp-video-fallback-link">Watch or download video</a>.</p>
+          </video>
+          <div class="pdp-video-error-fallback" id="pdpVideoErrorFallback" style="display:none;" role="alert">
+            <span style="font-size: 1.75rem;">📹</span>
+            <p style="margin: 0; font-weight: 500;">Live specimen video stream could not be loaded.</p>
+            <a href="${escapeSearchHTML(cleanUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="color:#FFFFFF; border-color:#FFFFFF;">Open Video Stream Directly</a>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+  window.renderProductVideo = renderProductVideo;
+
+  window.handleProductVideoError = function (videoEl) {
+    if (!videoEl) return;
+    const fallback = document.getElementById('pdpVideoErrorFallback');
+    if (fallback) {
+      fallback.style.display = 'flex';
+    }
+  };
+
   /* ── 7b. Full-Page Product Detail Page (PDP) System ──────── */
   window.renderProductDetailPage = function () {
     const mainContainer = document.getElementById('pdpMain');
@@ -2650,10 +3252,10 @@
       requestedId = urlParams.get('id') || urlParams.get('product') || '';
     }
 
-    let product = PRODUCTS.find(p => String(p.id).toLowerCase() === String(requestedId).toLowerCase()) ||
-      (typeof LIVE_CULTURES !== 'undefined' && LIVE_CULTURES.find(p => String(p.id).toLowerCase() === String(requestedId).toLowerCase()));
+    const allCatalog = typeof getAllProducts === 'function' ? getAllProducts() : [...PRODUCTS];
+    let product = allCatalog.find(p => String(p.id).toLowerCase() === String(requestedId).toLowerCase());
     if (!product) {
-      product = PRODUCTS[0];
+      product = allCatalog[0] || PRODUCTS[0];
     }
     initProductVariantsAndSpecs(product);
 
@@ -2678,15 +3280,19 @@
     } else if (catLower === 'combos' || catLower === 'combo') {
       collectionUrl = 'combo-packs.html';
       collectionName = 'Combo Packs';
+    } else if (catLower === 'cultures' || catLower === 'culture') {
+      collectionUrl = 'culture.html';
+      collectionName = 'Live Food Cultures';
     }
 
     const activeVariant = getProductSelectedVariant(product);
-    const unitPrice = (activeVariant && activeVariant.price !== undefined) ? Number(activeVariant.price) : Number(product.price || 0);
+    const hasPrice = activeVariant && activeVariant.price !== null && activeVariant.price !== undefined && Number(activeVariant.price) > 0;
+    const unitPrice = hasPrice ? Number(activeVariant.price) : 0;
     const isIsopod = isIsopodProduct(product);
     const defaultQty = isIsopod ? 5 : 1;
     const minQty = defaultQty;
-    const displayPrice = CartManager.formatPrice(unitPrice);
-    const displayUnit = isIsopod ? '/ piece' : ('/ ' + (activeVariant ? activeVariant.unit : (product.pricingUnit || 'piece')));
+    const displayPrice = hasPrice ? CartManager.formatPrice(unitPrice) : 'Price on Request';
+    const displayUnit = hasPrice ? (isIsopod ? '/ piece' : ('/ ' + (activeVariant ? activeVariant.unit : (product.pricingUnit || 'piece')))) : '';
     const qtyLabel = isIsopod ? 'Select Quantity (pieces)' : getProductQuantityLabel(product);
 
     // Images gallery
@@ -2694,6 +3300,9 @@
     const galleryImages = (product.images && Array.isArray(product.images) && product.images.length > 0)
       ? product.images
       : [mainImg];
+
+    // Universal Video HTML rendering (reads video property dynamically for every product)
+    const videoHtml = renderProductVideo(product.video, product.image, product.name);
 
     // Scientific name & difficulty
     const scientificName = product.scientificName || product.subtitle || product.name;
@@ -2946,6 +3555,9 @@
                 </button>
               `).join('')}
             </div>
+
+            <!-- Universal Video Player (Renders conditionally if product.video exists) -->
+            ${videoHtml}
           </div>
 
           <!-- RIGHT COLUMN: Details & Purchase -->
@@ -2982,7 +3594,7 @@
                 <span class="pdp-qty-label">${qtyLabel}</span>
                 <div class="pdp-qty-total-wrap">
                   <span class="pdp-qty-total-label">Subtotal:</span>
-                  <span class="pdp-qty-total" id="pdpQtyTotal">${CartManager.formatPrice(unitPrice * minQty)}</span>
+                  <span class="pdp-qty-total" id="pdpQtyTotal">${hasPrice ? CartManager.formatPrice(unitPrice * minQty) : 'Price on Request'}</span>
                 </div>
               </div>
               <div class="pdp-qty-selector">
@@ -3112,8 +3724,9 @@
             ${relatedProducts.map(rel => {
       initProductVariantsAndSpecs(rel);
       const relVar = getProductSelectedVariant(rel);
-      const relPrice = CartManager.formatPrice(relVar.price);
-      const relUnit = isIsopodProduct(rel) ? '/ piece' : ('/ ' + relVar.unit);
+      const relHasPrice = relVar && relVar.price !== null && relVar.price !== undefined && Number(relVar.price) > 0;
+      const relPrice = relHasPrice ? CartManager.formatPrice(relVar.price) : 'Price on Request';
+      const relUnit = relHasPrice ? (isIsopodProduct(rel) ? '/ piece' : ('/ ' + relVar.unit)) : '';
       return `
                 <article class="product-card pdp-related-card" data-id="${rel.id}">
                   <div class="product-card-thumb" onclick="navigateToProduct('${rel.id}')" title="View ${rel.name}">
@@ -3181,6 +3794,15 @@
     if (prevBtn) prevBtn.addEventListener('click', () => selectGalleryImage(currentImgIdx - 1));
     if (nextBtn) nextBtn.addEventListener('click', () => selectGalleryImage(currentImgIdx + 1));
 
+    // Video Player Error Handling Listener
+    const videoEl = document.getElementById('pdpProductVideo');
+    if (videoEl) {
+      videoEl.addEventListener('error', function () {
+        const fallback = document.getElementById('pdpVideoErrorFallback');
+        if (fallback) fallback.style.display = 'flex';
+      }, true);
+    }
+
     // 2. Quantity Stepper Controls
     let currentQty = minQty;
     const qtyValEl = document.getElementById('pdpQty');
@@ -3200,7 +3822,7 @@
       }
       currentQty = next;
       if (qtyValEl) qtyValEl.textContent = currentQty;
-      if (qtyTotalEl) qtyTotalEl.textContent = CartManager.formatPrice(unitPrice * currentQty);
+      if (qtyTotalEl) qtyTotalEl.textContent = hasPrice ? CartManager.formatPrice(unitPrice * currentQty) : 'Price on Request';
     }
 
     if (minusBtn) minusBtn.addEventListener('click', () => updatePdpQuantity(-1));
@@ -3218,7 +3840,7 @@
     const directWaBtn = document.getElementById('pdpDirectWhatsAppBtn');
     if (directWaBtn) {
       directWaBtn.addEventListener('click', () => {
-        const totalStr = CartManager.formatPrice(unitPrice * currentQty);
+        const totalStr = hasPrice ? CartManager.formatPrice(unitPrice * currentQty) : 'Price on Request';
         const msg = [
           'Hello Fish Tales!',
           '',
@@ -3267,8 +3889,10 @@
 
     itemsWrap.innerHTML = items.map(item => {
       const isIsopod = isIsopodProduct(item);
-      const lineTotal = CartManager.formatPrice(item.price * item.quantity);
-      const unitLabel = item.pricingUnit === 'pair' ? 'per pair' : (item.pricingUnit === 'kit' ? 'kit' : (isIsopod ? 'per piece' : 'per piece'));
+      const hasItemPrice = item.price !== null && item.price !== undefined && Number(item.price) > 0;
+      const lineTotal = hasItemPrice ? CartManager.formatPrice(item.price * item.quantity) : 'Price on Request';
+      const unitLabel = hasItemPrice ? (item.pricingUnit === 'pair' ? 'per pair' : (item.pricingUnit === 'kit' ? 'kit' : (isIsopod ? 'per piece' : 'per piece'))) : '';
+      const metaPriceStr = hasItemPrice ? `${CartManager.formatPrice(item.price)} ${unitLabel}` : 'Price on Request';
       const productObj = PRODUCTS.find(p => String(p.id) === String(item.id)) || item;
       return `
         <div class="cart-item" data-id="${item.id}">
@@ -3277,8 +3901,8 @@
           </div>
           <div class="cart-item-info">
             <span class="cart-item-title">${item.name}</span>
-            <span class="cart-item-meta">${CartManager.formatPrice(item.price)} ${unitLabel}</span>
-            ${item.size ? `<span class="cart-item-meta" style="color:var(--color-amber);">Size: ${item.size}</span>` : ''}
+            <span class="cart-item-meta">${metaPriceStr}</span>
+            ${(String(item.id) === 'glacier-colony-pack' || String(item.baseId) === 'glacier-colony-pack') ? `<span class="cart-item-meta" style="color:var(--color-primary); font-size:0.75rem; font-weight:600;">Pack: ${item.quantity} Kit (${item.quantity * 11} specimens: ${item.quantity * 10} + ${item.quantity} Free)</span>` : (item.size ? `<span class="cart-item-meta" style="color:var(--color-amber);">Size: ${item.size}</span>` : '')}
             ${isIsopod ? `<span class="cart-item-min-notice">Minimum order: 5 pieces</span>` : ''}
             <div class="cart-item-stepper">
               <button class="cart-step-btn" onclick="CartManager.update('${item.id}', ${item.quantity - 1})" aria-label="Decrease quantity">−</button>
@@ -3294,6 +3918,8 @@
       `;
     }).join('');
   }
+
+  window.renderCartDrawerItems = renderCartDrawerItems;
 
   window.openCartDrawer = function () {
     const drawer = document.getElementById('cartDrawer');
@@ -3429,6 +4055,11 @@
       ''
     ).toLowerCase();
 
+    // Special Colony Pack handling
+    if (String(item.id) === 'glacier-colony-pack' || String(item.baseId) === 'glacier-colony-pack') {
+      return 'Kit (11 specimens: 10 + 1 Free)';
+    }
+
     // 1. Pair-based fish (Guppies, Mollies, or products sold per pair)
     if (rawUnit.includes('pair') || subCategory === 'guppy' || subCategory === 'molly') {
       return 'Pair';
@@ -3470,7 +4101,10 @@
     items.forEach((item) => {
       const { prodName } = getProductAndVariantDisplay(item);
       const unit = getOwnerProductQuantityUnit(item);
-      const lineTotalFormatted = CartManager.formatPrice(Number(item.price || 0) * Number(item.quantity || 1));
+      const hasItemPrice = item.price !== null && item.price !== undefined && Number(item.price) > 0;
+      const lineTotalFormatted = hasItemPrice
+        ? CartManager.formatPrice(Number(item.price) * Number(item.quantity || 1))
+        : 'Price on Request';
 
       lines.push(`${prodName} × ${item.quantity} ${unit} — ${lineTotalFormatted}`);
     });
@@ -3499,6 +4133,9 @@
 
     return lines.join('\n');
   }
+
+  window.getOwnerProductQuantityUnit = getOwnerProductQuantityUnit;
+  window.buildWhatsAppOrderMessage = buildWhatsAppOrderMessage;
 
   function loadSavedCustomer() {
     try {
@@ -3581,8 +4218,9 @@
 
     const itemsHtml = items.map(item => {
       const { prodName, variantName } = getProductAndVariantDisplay(item);
-      const lineTotal = CartManager.formatPrice(item.price * item.quantity);
-      const unitPrice = CartManager.formatPrice(item.price);
+      const hasPrice = item.price !== null && item.price !== undefined && Number(item.price) > 0;
+      const lineTotal = hasPrice ? CartManager.formatPrice(item.price * item.quantity) : 'Price on Request';
+      const unitPrice = hasPrice ? CartManager.formatPrice(item.price) : 'Price on Request';
       const img = item.image || PLACEHOLDER_IMG;
 
       return `
@@ -3862,8 +4500,9 @@
 
     const itemsSummaryHtml = items.map(item => {
       const { prodName, variantName } = getProductAndVariantDisplay(item);
-      const lineTotal = CartManager.formatPrice(item.price * item.quantity);
-      const unitPrice = CartManager.formatPrice(item.price);
+      const hasPrice = item.price !== null && item.price !== undefined && Number(item.price) > 0;
+      const lineTotal = hasPrice ? CartManager.formatPrice(item.price * item.quantity) : 'Price on Request';
+      const unitPrice = hasPrice ? CartManager.formatPrice(item.price) : 'Price on Request';
 
       return `
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; font-size:0.85rem;">
@@ -4185,6 +4824,8 @@
     }).join('');
   }
 
+  window.renderCartDrawerItems = renderCartDrawerItems;
+
   window.renderSearchOverlayResults = renderSearchOverlayResults;
 
 
@@ -4309,7 +4950,7 @@
         isMatch = true;
       } else if (targetKey === 'combos' && (text.includes('combo') || href.includes('combo-packs.html'))) {
         isMatch = true;
-      } else if (targetKey === 'cultures' && (text.includes('culture') || href.includes('cultures.html'))) {
+      } else if (targetKey === 'cultures' && (text.includes('culture') || href.includes('culture.html') || href.includes('cultures.html'))) {
         isMatch = true;
       } else if (targetKey === 'about' && (text.includes('about') || href.endsWith('#about'))) {
         isMatch = true;
@@ -4340,7 +4981,7 @@
       window.setActiveNavKey('tarantulas');
     } else if (page.includes('combo-packs')) {
       window.setActiveNavKey('combos');
-    } else if (page.includes('cultures')) {
+    } else if (page.includes('culture')) {
       window.setActiveNavKey('cultures');
     } else {
       // index.html / root
@@ -4401,6 +5042,15 @@
     }
 
     currentCategory = categoryKey;
+    if (categoryKey === 'all') {
+      currentAquariumFilter = 'all';
+      currentSearch = '';
+      currentSort = 'default';
+      const searchInput = document.getElementById('catalogSearch');
+      if (searchInput) searchInput.value = '';
+      const sortSelect = document.getElementById('catalogSort');
+      if (sortSelect) sortSelect.value = 'default';
+    }
     document.querySelectorAll('.filter-tab, .filter-pill').forEach(tab => {
       tab.classList.toggle('active', tab.dataset.category === categoryKey);
     });

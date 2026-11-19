@@ -30,14 +30,14 @@ assert.strictEqual(cards[0].href, 'aquarium-fish.html', 'Card 1 must be Aquarium
 assert.strictEqual(cards[1].href, 'isopods.html', 'Card 2 must be Isopods');
 assert.strictEqual(cards[2].href, 'tarantulas.html', 'Card 3 must be Tarantulas');
 assert.strictEqual(cards[3].href, 'combo-packs.html', 'Card 4 must be Combo Packs');
-assert.strictEqual(cards[4].href, 'cultures.html', 'Card 5 must be cultures.html');
+assert.strictEqual(cards[4].href, 'culture.html', 'Card 5 must be culture.html');
 console.log('  ✓ Sequence of all 5 cards verified');
 
 // Check Cultures card content
 const cultureCard = cards[4].full;
 assert(cultureCard.includes('Cultures'), 'Card 5 title must be Cultures');
 assert(
-  cultureCard.includes('Live food cultures including Microworm, Vinegar Eel, Moina, and Grindal Worm for healthy growth and natural nutrition.'),
+  cultureCard.replace(/\s+/g, ' ').includes('Live food cultures including Microworm, Vinegar Eel, Moina, and Grindal Worm for healthy growth and natural nutrition.'),
   'Card 5 description must match required text'
 );
 assert(
@@ -65,19 +65,19 @@ assert(
 );
 console.log('  ✓ Dedicated category hero .category-hero-cultures defined');
 
-// 3. Check cultures.html dedicated page
-console.log('\n3. Verifying cultures.html dedicated page architecture...');
-assert(fs.existsSync('cultures.html'), 'cultures.html must exist');
-const culturePageHtml = fs.readFileSync('cultures.html', 'utf8');
+// 3. Check culture.html dedicated page
+console.log('\n3. Verifying culture.html dedicated page architecture...');
+assert(fs.existsSync('culture.html'), 'culture.html must exist');
+const culturePageHtml = fs.readFileSync('culture.html', 'utf8');
 
-assert(culturePageHtml.includes('data-page-category="cultures"'), 'cultures.html must have data-page-category="cultures"');
-assert(culturePageHtml.includes('category-hero-cultures'), 'cultures.html must have .category-hero-cultures');
-assert(culturePageHtml.includes('id="productGrid"'), 'cultures.html must have #productGrid');
-assert(culturePageHtml.includes('id="siteHeader"'), 'cultures.html must have site header');
-assert(culturePageHtml.includes('id="cartDrawer"'), 'cultures.html must have cart drawer');
-assert(culturePageHtml.includes('id="checkoutModal"'), 'cultures.html must have checkout modal');
-assert(culturePageHtml.includes('script.js'), 'cultures.html must load script.js');
-console.log('  ✓ cultures.html matches dedicated category page architecture');
+assert(culturePageHtml.includes('data-page-category="cultures"'), 'culture.html must have data-page-category="cultures"');
+assert(culturePageHtml.includes('category-hero-cultures'), 'culture.html must have .category-hero-cultures');
+assert(culturePageHtml.includes('id="productGrid"'), 'culture.html must have #productGrid');
+assert(culturePageHtml.includes('id="siteHeader"'), 'culture.html must have site header');
+assert(culturePageHtml.includes('id="cartDrawer"'), 'culture.html must have cart drawer');
+assert(culturePageHtml.includes('id="checkoutModal"'), 'culture.html must have checkout modal');
+assert(culturePageHtml.includes('script.js'), 'culture.html must load script.js');
+console.log('  ✓ culture.html matches dedicated category page architecture');
 
 // 4. Test script.js runtime rendering of cultures
 console.log('\n4. Verifying script.js cultures category rendering...');
@@ -110,8 +110,8 @@ global.localStorage = {
 eval(fs.readFileSync('script.js', 'utf8'));
 
 // Verify PRODUCTS length is unchanged (no duplicate product data)
-assert.strictEqual(window.PRODUCTS.length, 32, 'Master PRODUCTS array must remain exactly 32 products (no duplicates)');
-console.log('  ✓ Zero duplicate product data created (PRODUCTS remains exactly 32)');
+assert.strictEqual(window.PRODUCTS.length, 38, 'Master PRODUCTS array must remain exactly 38 products (no duplicates)');
+console.log('  ✓ Zero duplicate product data created (PRODUCTS remains exactly 38)');
 
 // Verify CATEGORY_NAMES has cultures
 assert.strictEqual(window.CATEGORY_NAMES.cultures, 'Cultures', 'CATEGORY_NAMES must include cultures');

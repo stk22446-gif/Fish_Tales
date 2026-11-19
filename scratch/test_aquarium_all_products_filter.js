@@ -154,10 +154,10 @@ console.log('\n3. Verifying initial aquarium state:');
 domMock.window.filterAquariumCategory('all', false);
 
 let renderedCards = (mockGrid.innerHTML.match(/class="product-card"/g) || []).length;
-console.log(`  ✓ Rendered cards on 'all': ${renderedCards} (Expected 17)`);
-assert.strictEqual(renderedCards, 17, 'Should display all 17 Aquarium & Fish products on initial load');
+console.log(`  ✓ Rendered cards on 'all': ${renderedCards} (Expected 23)`);
+assert.strictEqual(renderedCards, 23, 'Should display all 23 Aquarium & Fish products on initial load');
 assert.strictEqual(mockActiveCategoryIndicator.textContent, 'All Products', 'Indicator should say All Products');
-assert(mockResultCount.innerHTML.includes('Showing <strong>17</strong> of <strong>17</strong>'), 'Count should say Showing 17 of 17');
+assert(mockResultCount.innerHTML.includes('Showing <strong>23</strong> of <strong>23</strong>'), 'Count should say Showing 23 of 23');
 assert(filterTabs[0].classList.contains('active'), 'All Products tab should be active');
 
 // 4. Test filtering subcategories: Guppy
@@ -176,16 +176,16 @@ console.log(`  ✓ Scroll triggered to target Y: ${lastScrolledTo.top} with beha
 console.log('\n5. Testing subcategory: Betta Fish');
 domMock.window.filterAquariumCategory('betta');
 renderedCards = (mockGrid.innerHTML.match(/class="product-card"/g) || []).length;
-console.log(`  ✓ Rendered cards on 'betta': ${renderedCards} (Expected 1)`);
-assert.strictEqual(renderedCards, 1, 'Betta filter should return 1 product');
+console.log(`  ✓ Rendered cards on 'betta': ${renderedCards} (Expected 4)`);
+assert.strictEqual(renderedCards, 4, 'Betta filter should return 4 products');
 assert(filterTabs[2].classList.contains('active'), 'Betta tab should be active');
 
 // 6. Test filtering subcategories: Molly
 console.log('\n6. Testing subcategory: Molly');
 domMock.window.filterAquariumCategory('molly');
 renderedCards = (mockGrid.innerHTML.match(/class="product-card"/g) || []).length;
-console.log(`  ✓ Rendered cards on 'molly': ${renderedCards} (Expected 1)`);
-assert.strictEqual(renderedCards, 1, 'Molly filter should return 1 product');
+console.log(`  ✓ Rendered cards on 'molly': ${renderedCards} (Expected 4)`);
+assert.strictEqual(renderedCards, 4, 'Molly filter should return 4 products');
 assert(filterTabs[4].classList.contains('active'), 'Molly tab should be active');
 
 // 7. Test filtering subcategories: Shrimps
@@ -204,8 +204,8 @@ lastNavigatedTo = null;
 domMock.window.filterAquariumCategory('all');
 
 renderedCards = (mockGrid.innerHTML.match(/class="product-card"/g) || []).length;
-console.log(`  ✓ Rendered cards after clicking 'All Products': ${renderedCards} (Expected 17)`);
-assert.strictEqual(renderedCards, 17, 'All 17 Aquarium & Fish products must be shown');
+console.log(`  ✓ Rendered cards after clicking 'All Products': ${renderedCards} (Expected 23)`);
+assert.strictEqual(renderedCards, 23, 'All 23 Aquarium & Fish products must be shown');
 
 // Check that no other categories are present
 assert(!mockGrid.innerHTML.includes('Panda King'), 'Isopods must not be displayed');
@@ -222,8 +222,8 @@ console.log('  ✓ Active states properly reset: All Products is active, subcate
 
 // Check counts and indicators
 assert.strictEqual(mockActiveCategoryIndicator.textContent, 'All Products', 'Indicator badge must say "All Products"');
-assert(mockResultCount.innerHTML.includes('Showing <strong>17</strong> of <strong>17</strong> products'), 'Product count must show 17 of 17');
-console.log('  ✓ Product count & indicator badge reflect 17 of 17 products.');
+assert(mockResultCount.innerHTML.includes('Showing <strong>23</strong> of <strong>23</strong> products'), 'Product count must show 23 of 23');
+console.log('  ✓ Product count & indicator badge reflect 23 of 23 products.');
 
 // Check scroll behavior
 assert(lastScrolledTo !== null, 'Scroll must be triggered');
@@ -241,8 +241,8 @@ lastNavigatedTo = null;
 domMock.window.filterByCategory('all');
 assert.strictEqual(lastNavigatedTo, null, 'filterByCategory("all") on aquarium-fish page must NOT redirect to index.html#catalogue');
 renderedCards = (mockGrid.innerHTML.match(/class="product-card"/g) || []).length;
-assert.strictEqual(renderedCards, 17, 'filterByCategory("all") must show all 17 aquarium products');
-console.log('  ✓ filterByCategory("all") stays on aquarium-fish page and renders all 17 aquarium products.');
+assert.strictEqual(renderedCards, 23, 'filterByCategory("all") must show all 23 aquarium products');
+console.log('  ✓ filterByCategory("all") stays on aquarium-fish page and renders all 23 aquarium products.');
 
 // 10. Test scrollToSection('catalogue') preserves active navigation
 console.log('\n10. Testing scrollToSection("catalogue") on aquarium-fish page:');

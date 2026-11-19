@@ -23,26 +23,31 @@ assert(heroPos < sliderPos, 'Hero must be before Promotional Auto Slider');
 assert(sliderPos < pillarsPos, 'Promotional Auto Slider must be immediately above Four Main Pillars');
 console.log('  ✓ Section Order verified: Hero -> Promotional Auto Slider -> Four Main Pillars');
 
-// 2. Verify Exact 3 Cloudinary Image URLs in Exact Order
-console.log('\n2. Verifying the 3 exact Cloudinary URLs and order:');
+// 2. Verify Exact 4 Cloudinary Image URLs in Exact Order
+console.log('\n2. Verifying the 4 exact Cloudinary URLs and order:');
 const expectedUrls = [
-  'https://res.cloudinary.com/pv8lnpft/image/upload/v1794949703/6a075120-0425-4e4f-bbc0-86de19ce4d3a.png', // Slide 1: Isopod House Kit
-  'https://res.cloudinary.com/pv8lnpft/image/upload/v1794949659/8dd7ee2e-c485-4ab0-b248-e12938751576.png', // Slide 2: Half Cube Aquarium Kit
-  'https://res.cloudinary.com/pv8lnpft/image/upload/v1794949621/42c4770a-f56f-44a1-af1d-6dff23ee4223.png'  // Slide 3: Shrimp Colony Offer
+  'https://res.cloudinary.com/pv8lnpft/image/upload/v1795035735/8d7fcd64-8ba8-491f-994f-7cf708171c94.png', // Slide 1: Isopod House Kit
+  'https://res.cloudinary.com/pv8lnpft/image/upload/v1795035895/6c4b9b82-cca6-43e8-93e1-24706ffd4412.png', // Slide 2: Half Cube Aquarium Kit
+  'https://res.cloudinary.com/pv8lnpft/image/upload/v1794949621/42c4770a-f56f-44a1-af1d-6dff23ee4223.png', // Slide 3: Shrimp Colony Offer
+  'https://res.cloudinary.com/pv8lnpft/image/upload/v1795036241/154502ad-b5bb-43ba-b232-38ed49c89ad6.png'  // Slide 4: Featured Living Realm Promotion
 ];
 
 const pos1 = html.indexOf(expectedUrls[0]);
 const pos2 = html.indexOf(expectedUrls[1]);
 const pos3 = html.indexOf(expectedUrls[2]);
+const pos4 = html.indexOf(expectedUrls[3]);
 
-assert(pos1 !== -1, 'Slide 1 Isopod House Kit URL must be present');
-assert(pos2 !== -1, 'Slide 2 Half Cube Aquarium Kit URL must be present');
-assert(pos3 !== -1, 'Slide 3 Shrimp Colony Offer URL must be present');
+assert(pos1 !== -1, 'Slide 1 URL must be present');
+assert(pos2 !== -1, 'Slide 2 URL must be present');
+assert(pos3 !== -1, 'Slide 3 URL must be present');
+assert(pos4 !== -1, 'Slide 4 URL must be present');
 assert(pos1 < pos2, 'Slide 1 must precede Slide 2');
 assert(pos2 < pos3, 'Slide 2 must precede Slide 3');
+assert(pos3 < pos4, 'Slide 3 must precede Slide 4');
 console.log('  ✓ Slide 1: Isopod House Kit present and first');
 console.log('  ✓ Slide 2: Half Cube Aquarium Kit present and second');
 console.log('  ✓ Slide 3: Shrimp Colony Offer present and third');
+console.log('  ✓ Slide 4: 4th Slide image present and fourth');
 
 // 3. Verify CSS in style.css
 console.log('\n3. Verifying CSS styling in style.css:');
@@ -116,7 +121,8 @@ function createMockElement(id, className = '') {
 const mockSlide0 = createMockElement('s0', 'promo-slide active');
 const mockSlide1 = createMockElement('s1', 'promo-slide');
 const mockSlide2 = createMockElement('s2', 'promo-slide');
-const mockSlides = [mockSlide0, mockSlide1, mockSlide2];
+const mockSlide3 = createMockElement('s3', 'promo-slide');
+const mockSlides = [mockSlide0, mockSlide1, mockSlide2, mockSlide3];
 
 const mockDot0 = createMockElement('d0', 'promo-dot active');
 mockDot0.dataset.slide = '0';
@@ -124,7 +130,9 @@ const mockDot1 = createMockElement('d1', 'promo-dot');
 mockDot1.dataset.slide = '1';
 const mockDot2 = createMockElement('d2', 'promo-dot');
 mockDot2.dataset.slide = '2';
-const mockDots = [mockDot0, mockDot1, mockDot2];
+const mockDot3 = createMockElement('d3', 'promo-dot');
+mockDot3.dataset.slide = '3';
+const mockDots = [mockDot0, mockDot1, mockDot2, mockDot3];
 
 const mockTrack = createMockElement('promoSliderTrack');
 const mockContainer = createMockElement('promoSliderContainer');
@@ -198,17 +206,23 @@ assert(mockSlide2.classList.contains('active'), 'Slide 2 must be active');
 assert(mockDot2.classList.contains('active'), 'Dot 2 must be active');
 console.log('  ✓ Step 2: Slide transitioned 1 -> 2');
 
-// Test Infinite loop: 2 -> 0
+// Test Autoplay step: 2 -> 3
 intervalCallback();
-assert(mockSlide0.classList.contains('active'), 'Slide 0 must be active after slide 2 (infinite loop)');
-assert(mockDot0.classList.contains('active'), 'Dot 0 must be active after slide 2 (infinite loop)');
-console.log('  ✓ Step 3: Infinite looping 2 -> 0 verified');
+assert(mockSlide3.classList.contains('active'), 'Slide 3 must be active');
+assert(mockDot3.classList.contains('active'), 'Dot 3 must be active');
+console.log('  ✓ Step 3: Slide transitioned 2 -> 3');
 
-// Test Clickable Navigation Dots: click Dot 2
-mockDot2.dispatchEvent('click');
-assert(mockSlide2.classList.contains('active'), 'Clicking Dot 2 must activate Slide 2');
-assert(mockDot2.classList.contains('active'), 'Clicking Dot 2 must activate Dot 2');
-console.log('  ✓ Clickable Navigation Dot interaction verified (direct jump to Slide 2)');
+// Test Infinite loop: 3 -> 0
+intervalCallback();
+assert(mockSlide0.classList.contains('active'), 'Slide 0 must be active after slide 3 (infinite loop)');
+assert(mockDot0.classList.contains('active'), 'Dot 0 must be active after slide 3 (infinite loop)');
+console.log('  ✓ Step 4: Infinite looping 3 -> 0 verified');
+
+// Test Clickable Navigation Dots: click Dot 3
+mockDot3.dispatchEvent('click');
+assert(mockSlide3.classList.contains('active'), 'Clicking Dot 3 must activate Slide 3');
+assert(mockDot3.classList.contains('active'), 'Clicking Dot 3 must activate Dot 3');
+console.log('  ✓ Clickable Navigation Dot interaction verified (direct jump to Slide 3)');
 
 // Test Desktop Hover: mouseenter pauses autoplay
 mockContainer.dispatchEvent('mouseenter');
@@ -222,18 +236,18 @@ assert(intervalCallback !== null, 'Mouseleave must resume autoplay timer');
 assert.strictEqual(intervalTime, 3000, 'Resumed autoplay timer interval must be 3000ms');
 console.log('  ✓ Desktop mouseleave autoplay resume verified');
 
-// Test Mobile Swipe Gesture: Swipe Left (next slide: 2 -> 0)
+// Test Mobile Swipe Gesture: Swipe Left (next slide: 3 -> 0)
 mockTrack.dispatchEvent('touchstart', { touches: [{ clientX: 200, clientY: 100 }] });
 mockTrack.dispatchEvent('touchmove', { touches: [{ clientX: 120, clientY: 100 }] }); // dx = -80px (swipe left)
 mockTrack.dispatchEvent('touchend');
-assert(mockSlide0.classList.contains('active'), 'Swipe left must advance to next slide (2 -> 0)');
+assert(mockSlide0.classList.contains('active'), 'Swipe left must advance to next slide (3 -> 0)');
 console.log('  ✓ Mobile swipe left gesture (advance next) verified');
 
-// Test Mobile Swipe Gesture: Swipe Right (prev slide: 0 -> 2)
+// Test Mobile Swipe Gesture: Swipe Right (prev slide: 0 -> 3)
 mockTrack.dispatchEvent('touchstart', { touches: [{ clientX: 100, clientY: 100 }] });
 mockTrack.dispatchEvent('touchmove', { touches: [{ clientX: 180, clientY: 100 }] }); // dx = +80px (swipe right)
 mockTrack.dispatchEvent('touchend');
-assert(mockSlide2.classList.contains('active'), 'Swipe right must return to prev slide (0 -> 2)');
+assert(mockSlide3.classList.contains('active'), 'Swipe right must return to prev slide (0 -> 3)');
 console.log('  ✓ Mobile swipe right gesture (return prev) verified');
 
 console.log('\n🎉 ALL PROMOTIONAL AUTO-SLIDER TESTS PASSED WITH 100% SUCCESS!');
