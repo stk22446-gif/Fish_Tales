@@ -85,12 +85,12 @@ bettas.forEach(b => {
   assert.strictEqual(p.categoryName, 'Aquarium & Fish');
   assert.strictEqual(p.subCategory, 'betta');
   assert.strictEqual(p.name, b.name);
-  assert.strictEqual(p.price, null, 'Price must not be fabricated/invented');
+  assert.strictEqual(p.price, 499, 'Betta products priced at ₹499 per variant');
   assert.strictEqual(p.unit, 'piece');
   assert(typeof p.image === 'string', 'Image must be string');
   assert.strictEqual(p.specs, undefined, 'Deprecated specs must be removed');
   assert(p.size && p.size.length > 0, 'Must have standalone size field');
-  console.log(`✓ ${b.name}: Unpriced / Price on Request verified (no fabricated price)`);
+  console.log(`✓ ${b.name}: ₹499 Price and variants verified`);
 });
 
 // 3. Test Product Detail Pages (PDP)
@@ -98,12 +98,7 @@ bettas.forEach(b => {
   mockWin.location.search = `?id=${item.id}`;
   mockWin.renderProductDetailPage();
   assert(capturedPdpHtml.includes(item.name), `PDP must display ${item.name}`);
-  if (item.price) {
-    assert(capturedPdpHtml.includes(`₹${item.price.toLocaleString('en-IN')}`), `PDP must display price for ${item.name}`);
-  } else {
-    assert(capturedPdpHtml.includes('Price on Request'), `PDP must display Price on Request for unpriced ${item.name}`);
-    assert(!capturedPdpHtml.includes('₹0'), `PDP must not show ₹0 for ${item.name}`);
-  }
+  assert(capturedPdpHtml.includes(`₹${(item.price || 499).toLocaleString('en-IN')}`), `PDP must display price for ${item.name}`);
   console.log(`✓ PDP for ${item.id} rendered accurately`);
 });
 
@@ -114,13 +109,12 @@ mockWin.addToCartById('betta-avatar-stardust-plakat', 1);
 
 let cartItems = mockWin.CartManager.getItems();
 assert.strictEqual(cartItems.length, 2);
-assert.strictEqual(mockWin.CartManager.getTotal(), 3000); // 3000 + 0
+assert.strictEqual(mockWin.CartManager.getTotal(), 3499); // 3000 + 499
 
-mockWin.renderCartDrawerItems(cartItems, 3000);
+mockWin.renderCartDrawerItems(cartItems, 3499);
 assert(capturedCartHtml.includes('Blue Eye Platinum White Lyre Tail Balloon Molly'));
 assert(capturedCartHtml.includes('Avatar Stardust — Plakat Variety'));
-assert(capturedCartHtml.includes('Price on Request'));
-console.log('✓ Cart Drawer handles priced and unpriced items cleanly');
+console.log('✓ Cart Drawer handles items cleanly');
 
 // 5. Test WhatsApp Order Generation
 const orderMsg = mockWin.buildWhatsAppOrderMessage({
@@ -133,7 +127,7 @@ const orderMsg = mockWin.buildWhatsAppOrderMessage({
 });
 
 assert(orderMsg.includes('Blue Eye Platinum White Lyre Tail Balloon Molly × 1 Pair — ₹3,000'));
-assert(orderMsg.includes('Avatar Stardust — Plakat Variety × 1 Pcs — Price on Request'));
+assert(orderMsg.includes('Avatar Stardust — Plakat Variety (Male) × 1 Pcs — ₹499'));
 console.log('✓ WhatsApp Order Message formatted correctly:');
 console.log('   - ' + orderMsg.split('\n').filter(l => l.includes('×')).join('\n   - '));
 

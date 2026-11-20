@@ -5550,6 +5550,101 @@ input {
   margin-top: 1px;
 }
 
+/* Betta Fish Gender Selection */
+.pdp-gender-section {
+  background: #ffffff;
+  border: 1px solid var(--border-color, #e2e8e5);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.pdp-gender-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.pdp-gender-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary-dark, #0d2818);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pdp-gender-label .required {
+  color: #e53e3e;
+}
+
+.pdp-gender-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted, #5f7a6b);
+}
+
+.pdp-gender-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.pdp-gender-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--bg-surface, #f8faf8);
+  border: 2px solid var(--border-color, #dce4e0);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  color: var(--text-dark, #1c2e24);
+}
+
+.pdp-gender-btn:hover {
+  border-color: var(--color-primary, #1b4332);
+  background: #f0f7f3;
+}
+
+.pdp-gender-btn.active {
+  border-color: var(--color-primary, #1b4332);
+  background: #ebf5f0;
+  box-shadow: 0 0 0 1px var(--color-primary, #1b4332);
+}
+
+.pdp-gender-btn-main {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.pdp-gender-symbol {
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.pdp-gender-symbol.male {
+  color: #2563eb;
+}
+
+.pdp-gender-symbol.female {
+  color: #db2777;
+}
+
+.pdp-gender-price {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-primary-dark, #0d2818);
+}
+
 .pdp-qty-section {
   background: #ffffff;
   border: 1px solid var(--border-color, #e2e8e5);
@@ -6029,6 +6124,13 @@ input {
     order: 7;
     margin-bottom: 1.25rem;
     font-size: 0.85rem;
+  }
+
+  /* 10b. Betta Gender Selection */
+  .pdp-gender-section {
+    order: 7;
+    margin-bottom: 1.1rem;
+    padding: 0.85rem 1rem;
   }
 
   /* 11. Quantity selector */

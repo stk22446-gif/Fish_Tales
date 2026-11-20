@@ -67,6 +67,30 @@
     return false;
   }
 
+  function isBettaProduct(productOrItem) {
+    if (!productOrItem) return false;
+    const cat = String(productOrItem.category || '').toLowerCase();
+    const subCat = String(productOrItem.subCategory || '').toLowerCase();
+    const id = String(productOrItem.id || productOrItem.baseId || '').toLowerCase();
+    const name = String(productOrItem.name || '').toLowerCase();
+
+    // Avoid combo kits or tanks that mention betta
+    if (cat === 'combos' || cat === 'combo' || subCat.includes('kit') || id.includes('kit') || name.includes('kit')) {
+      return false;
+    }
+
+    if (subCat === 'betta') return true;
+    if (id.includes('betta') || id.includes('samurai') || id.includes('crowntail')) return true;
+    if (name.includes('betta')) return true;
+
+    if (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) {
+      const master = PRODUCTS.find(p => String(p.id) === id || String(p.id) === String(productOrItem.baseId));
+      if (master && master.subCategory === 'betta') return true;
+    }
+
+    return false;
+  }
+
   function getProductQuantityLabel(product) {
     if (!product) return 'Select Quantity';
     const subCat = (product.subCategory || '').toLowerCase();
@@ -74,10 +98,15 @@
     const name = (product.name || '').toLowerCase();
     const pricingUnit = (product.unit || product.pricingUnit || '').toLowerCase();
 
-    // Fish types using pairs: Guppy / Molly / Betta (or any product priced/sold per pair)
-    if (subCat === 'guppy' || subCat === 'molly' || subCat === 'betta' ||
-      id.includes('guppy') || id.includes('molly') || id.includes('betta') ||
-      name.includes('guppy') || name.includes('molly') || name.includes('betta') ||
+    // Betta Fish is sold individually with Gender selection (Male/Female, unit: piece)
+    if (isBettaProduct(product)) {
+      return 'Select Quantity';
+    }
+
+    // Fish types using pairs: Guppy / Molly (or any product priced/sold per pair)
+    if (subCat === 'guppy' || subCat === 'molly' ||
+      id.includes('guppy') || id.includes('molly') ||
+      name.includes('guppy') || name.includes('molly') ||
       pricingUnit.includes('pair')) {
       return 'Select Pair';
     }
@@ -142,6 +171,17 @@
       p.price = null;
     } else {
       p.price = Number(p.price);
+    }
+    if (p.variants && Array.isArray(p.variants)) {
+      p.variants.forEach(v => {
+        if (!v.id) v.id = (v.name || '').toLowerCase();
+        if (!v.label) v.label = v.name;
+        if (!v.gender) v.gender = v.name;
+        if (!v.unit) v.unit = p.unit || 'piece';
+      });
+      if ((p.price === null || p.price === undefined) && p.variants[0]) {
+        p.price = Number(p.variants[0].price);
+      }
     }
     if (!p.unit) {
       p.unit = p.pricingUnit || (isIsopodProduct(p) ? 'piece' : 'pair');
@@ -391,6 +431,28 @@
   function getProductSelectedVariant(product) {
     if (!product) return { name: '', price: null, unit: 'piece', label: 'piece' };
     initProductVariantsAndSpecs(product);
+    if (product.variants && Array.isArray(product.variants) && product.variants.length > 0) {
+      const selected = (typeof selectedVariants !== 'undefined' && selectedVariants[product.id] !== undefined)
+        ? selectedVariants[product.id]
+        : 0;
+      let variant = null;
+      if (typeof selected === 'string') {
+        variant = product.variants.find(v => (v.name && v.name.toLowerCase() === selected.toLowerCase()) || (v.id && v.id.toLowerCase() === selected.toLowerCase()));
+      } else if (typeof selected === 'number' && product.variants[selected]) {
+        variant = product.variants[selected];
+      }
+      if (!variant) variant = product.variants[0];
+
+      return {
+        id: (variant.id || variant.name || '').toLowerCase(),
+        name: `${product.name} (${variant.name})`,
+        variantName: variant.name,
+        gender: variant.gender || variant.name,
+        price: Number(variant.price),
+        unit: variant.unit || product.unit || product.pricingUnit || 'piece',
+        label: variant.label || variant.name
+      };
+    }
     const hasPrice = product.price !== null && product.price !== undefined && !isNaN(product.price) && Number(product.price) > 0;
     return {
       name: product.name,
@@ -1005,6 +1067,7 @@
       category: "aquarium",
       categoryName: "Aquarium & Fish",
       subCategory: "guppy",
+
       name: "Green Moscow Guppy",
       subtitle: "Poecilia reticulata",
       image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795042216/687f7103-783a-477f-bb58-556898d5cac5.png",
@@ -1094,52 +1157,64 @@
       featured: false
     },
 
+
     {
-      id: "show-grade-betta",
+      id: "black-samurai-plakat-betta",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
       subCategory: "betta",
-      name: "Show Grade Betta Fish",
-      subtitle: "Betta splendens",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795042372/dfbebb09-be81-4cd1-8d46-6adbbdbad80d.png",
+      name: "Black Samurai Plakat Betta",
+      subtitle: "Betta splendens (Black Samurai Plakat Variety)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795197330/03430d1a-c210-4fb3-8359-db7cc36874e7.png",
       images: [],
       video: "",
-      description: "A striking ornamental Betta splendens admired for its vibrant colours, iridescent scales and elegant flowing fins. A beautiful centrepiece fish for a carefully maintained freshwater aquarium.",
-      price: 350,
+      description: "A striking Black Samurai Plakat Betta featuring a deep black body covered with shimmering metallic silver-white armour-like scales. Its compact body and short, powerful fins create a bold and distinctive appearance.",
+      price: 499,
       unit: "piece",
+      variants: [
+        {
+          name: "Male",
+          price: 499
+        },
+        {
+          name: "Female",
+          price: 499
+        }
+      ],
       minQuantity: 1,
-      size: "Adult (Approximately 5–7 cm, depending on variety)",
-      overview: "The Show Grade Betta Fish (Betta splendens), also known as the Siamese Fighting Fish, is a popular ornamental freshwater species recognised for its vivid colours, distinctive finnage and curious behaviour. Bettas are labyrinth fish that can breathe atmospheric air at the water surface. Each fish may display individual differences in colour, fin shape and personality.",
+      size: "Adult (Approximately 5–7 cm including fins)",
+      overview: "The Black Samurai Plakat Betta is a selectively bred variety of Betta splendens admired for its dramatic black and metallic silver-white coloration. Its characteristic Samurai pattern creates an armour-like appearance across the head and body, while the Plakat variety features shorter fins and a compact swimming profile. Individual fish may show natural variations in scale coverage, colour and pattern.",
       careRequirements: {
         "Difficulty": "Beginner with a properly equipped aquarium",
         "Water Temperature": "24°C – 28°C",
-        "Diet": "Carnivorous; feed quality Betta pellets as the staple, supplemented with Daphnia, brine shrimp and bloodworms",
+        "Diet": "Carnivorous; quality Betta pellets as the staple, supplemented with Daphnia, brine shrimp and bloodworms",
         "Lifespan": "Approximately 3 – 5 years with proper care",
         "pH Range": "6.5 – 7.5",
         "Temperament": "Territorial; adult males should be housed separately",
-        "Social Behaviour": "Generally kept individually; carefully selected tankmates may be possible in a suitably sized aquarium"
+        "Social Behaviour": "Generally kept individually; carefully selected tankmates may be possible in a suitable aquarium"
       },
       habitatSetup: {
         "Aquarium Size": "At least 19 litres (5 gallons); around 38 litres (10 gallons) provides more stable conditions",
-        "Heating": "Use a suitable adjustable heater and thermometer to maintain stable warm water",
+        "Heating": "Use an adjustable heater and thermometer to maintain stable warm water",
         "Filtration": "Gentle sponge filter or low-flow adjustable filtration",
-        "Water Flow": "Low flow; strong currents can stress bettas, especially long-finned varieties",
+        "Water Flow": "Low to moderate flow; avoid strong currents",
         "Substrate": "Smooth sand or fine gravel",
         "Plants & Decor": "Live plants such as Anubias and Java Fern, with smooth decorations and hiding spots",
-        "Resting Areas": "Broad-leaf plants or resting spots near the water surface",
-        "Water Quality": "Use a fully cycled aquarium and maintain clean, stable water with zero ammonia and nitrite",
+        "Resting Areas": "Broad-leaf plants and resting spots near the water surface",
+        "Water Quality": "Use a fully cycled aquarium and maintain zero ammonia and nitrite",
         "Aquarium Cover": "A secure lid is recommended because bettas can jump",
-        "Tankmates": "Avoid housing adult males together; choose any community tankmates carefully"
+        "Tankmates": "Avoid housing adult males together; select community tankmates carefully"
       },
       didYouKnow: [
-        "Bettas possess a specialised labyrinth organ that allows them to breathe atmospheric air directly from the water surface.",
-        "Male bettas are territorial and should not be housed together.",
-        "Bettas naturally inhabit slow-moving, vegetation-rich freshwater environments.",
-        "Their flowing fins and wide range of colours have been developed through selective breeding.",
-        "Bettas can learn to recognise familiar feeding routines and may respond to their keeper."
+        "The Samurai pattern is known for its metallic, armour-like scale appearance.",
+        "Plakat bettas have shorter fins than traditional long-finned varieties.",
+        "The Black Samurai pattern can vary between individual fish.",
+        "Bettas possess a specialised labyrinth organ that allows them to breathe atmospheric air.",
+        "Male bettas are territorial and should not be housed together."
       ],
       featured: true
     },
+
     {
       id: "betta-avatar-stardust-plakat",
       category: "aquarium",
@@ -1151,8 +1226,18 @@
       images: [],
       video: "",
       description: "A spectacular short-finned Plakat Betta displaying a deep midnight-black base dusted with shimmering metallic blue and cyan scales reminiscent of a cosmic starfield. Active, vigorous, and agile.",
-      price: null,
+      price: 499,
       unit: "piece",
+      variants: [
+        {
+          name: "Male",
+          price: 499
+        },
+        {
+          name: "Female",
+          price: 499
+        }
+      ],
       minQuantity: 1,
       size: "Adult (Approximately 4.5 – 6 cm)",
       overview: "Avatar Stardust is a highly prized modern Betta splendens morph celebrated for its dark, velvety black body heavily speckled with luminous, star-like metallic cyan and electric blue scales. As a traditional Plakat variety, it possesses compact, muscular finnage that allows swift, unhindered swimming and superior stamina compared to heavy long-finned varieties. Each individual specimen displays a unique constellation of iridescence.",
@@ -1195,8 +1280,18 @@
       images: [],
       video: "",
       description: "A bold Halfmoon Plakat (HMPK) Betta characterized by a dynamic red, gold, and metallic armored mask pattern reminiscent of the iconic Ironman color scheme, paired with a crisp 180-degree caudal spread.",
-      price: null,
+      price: 499,
       unit: "piece",
+      variants: [
+        {
+          name: "Male",
+          price: 499
+        },
+        {
+          name: "Female",
+          price: 499
+        }
+      ],
       minQuantity: 1,
       size: "Adult (Approximately 5 – 6.5 cm)",
       overview: "The RGG (Red Gold Green / Red Galaxy Gold) Ironman Halfmoon Plakat is an elite exhibition-grade Betta splendens strain. It blends bold red and metallic gold or copper scaling across its flanks with an armored head mask, echoing the famous superhero aesthetic. As a Halfmoon Plakat, it features short, stout rays with a wide D-shaped 180-degree tail flare, combining show-quality conformation with robust vitality.",
@@ -1241,8 +1336,18 @@
       ],
       video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795046116/7f93b8d6edaec52538e950e60ad77415.mp4",
       description: "An ethereal show-grade Betta splendens featuring pristine, solid snow-white pigmentation and dramatic crowntail finnage with deeply extended, crown-like webbing reduction along each ray.",
-      price: null,
+      price: 499,
       unit: "piece",
+      variants: [
+        {
+          name: "Male",
+          price: 499
+        },
+        {
+          name: "Female",
+          price: 499
+        }
+      ],
       minQuantity: 1,
       size: "Adult (Approximately 5 – 7 cm including fin rays)",
       overview: "The Pure White Crowntail Betta is a breathtaking specimen known for its angelic, opaque white coloration free of dark spotting or red wash. Its hallmark feature is the crowntail finnage, where the webbing between the fin rays is reduced by 33% to 50%, leaving slender, needle-like spike extensions that resemble an ornate royal crown. The delicate fins require clean, gentle water conditions to prevent ray curling and maintain pristine structural integrity.",
@@ -2404,6 +2509,10 @@
       }
     },
 
+    getItems() {
+      return this.load();
+    },
+
     save(items) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
@@ -2426,13 +2535,19 @@
       return items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     },
 
+    getTotal() {
+      return this.calcTotal(this.load());
+    },
+
     calcCount(items) {
       return items.reduce((sum, item) => sum + item.quantity, 0);
     },
 
-    add(product, qty = 1) {
+    add(product, qty = 1, variant = null) {
       if (!product || !product.id) return;
       initProductVariantsAndSpecs(product);
+
+      const isBetta = isBettaProduct(product);
 
       // Special Minimum Order Quantity rule ONLY for Isopods (min: 5 pieces)
       const minQty = product.minQuantity || (isIsopodProduct(product) ? 5 : 1);
@@ -2445,20 +2560,48 @@
         qty = Math.floor(qty);
       }
 
-      const cartId = String(product.id);
-      const displayName = product.name;
-      const activePrice = Number(product.price || 0);
-      const activeUnit = isIsopodProduct(product) ? 'pieces' : (product.unit || product.pricingUnit || 'piece');
+      let cartId = String(product.id);
+      let displayName = product.name;
+      let activePrice = Number(product.price || 0);
+      let activeUnit = isIsopodProduct(product) ? 'pieces' : (product.unit || product.pricingUnit || 'piece');
+      let itemGender = null;
+      let itemVariantName = null;
+
+      if (product.variants && Array.isArray(product.variants) && product.variants.length > 0) {
+        let chosenVariant = null;
+        if (typeof variant === 'string') {
+          chosenVariant = product.variants.find(v => (v.name && v.name.toLowerCase() === variant.toLowerCase()) || (v.id && v.id.toLowerCase() === variant.toLowerCase()));
+        } else if (variant && (variant.name || variant.gender || variant.id)) {
+          const vKey = String(variant.name || variant.gender || variant.id).toLowerCase();
+          chosenVariant = product.variants.find(v => (v.name && v.name.toLowerCase() === vKey) || (v.id && v.id.toLowerCase() === vKey));
+        } else if (typeof selectedVariants !== 'undefined' && selectedVariants[product.id]) {
+          const sel = String(selectedVariants[product.id]).toLowerCase();
+          chosenVariant = product.variants.find(v => (v.name && v.name.toLowerCase() === sel) || (v.id && v.id.toLowerCase() === sel));
+        }
+        if (!chosenVariant) {
+          chosenVariant = product.variants[0];
+        }
+
+        const vName = chosenVariant.name;
+        itemGender = vName;
+        itemVariantName = vName;
+        cartId = `${product.id}__${vName.toLowerCase()}`;
+        displayName = `${product.name} (${vName})`;
+        activePrice = Number(chosenVariant.price);
+        activeUnit = chosenVariant.unit || product.unit || 'piece';
+      }
 
       const items = this.load();
-      const idx = items.findIndex(i => String(i.id) === cartId || String(i.baseId) === cartId);
+      const idx = items.findIndex(i => String(i.id) === cartId);
       if (idx >= 0) {
         items[idx].quantity += qty;
       } else {
         items.push({
           id: cartId,
-          baseId: cartId,
+          baseId: String(product.id),
           name: displayName,
+          gender: itemGender,
+          variantName: itemVariantName,
           price: activePrice,
           pricingUnit: activeUnit,
           unit: activeUnit,
@@ -2472,7 +2615,7 @@
       showToast(`Added ${displayName} to cart!`, 'success');
     },
 
-    addById(id, qty = null) {
+    addById(id, qty = null, variant = null) {
       const product = PRODUCTS.find(p => String(p.id) === String(id)) ||
         (typeof LIVE_CULTURES !== 'undefined' && LIVE_CULTURES.find(p => String(p.id) === String(id)));
       if (!product) {
@@ -2483,7 +2626,7 @@
       if (qty === null || qty === undefined || isNaN(qty)) {
         qty = product.minQuantity || (isIsopodProduct(product) ? 5 : 1);
       }
-      this.add(product, qty);
+      this.add(product, qty, variant);
     },
 
     update(id, qty) {
@@ -2588,12 +2731,14 @@
   window.CATEGORY_NAMES = CATEGORY_NAMES;
   window.getCurrentPageCategory = getCurrentPageCategory;
   window.CartManager = CartManager;
-  window.addToCartById = (id, qty = 1) => CartManager.addById(id, qty);
+  window.addToCartById = (id, qty = 1, variant = null) => CartManager.addById(id, qty, variant);
   window.renderProductGrid = renderProductGrid;
   window.initProductVariantsAndSpecs = initProductVariantsAndSpecs;
   window.getProductSelectedVariant = getProductSelectedVariant;
   window.isIsopodProduct = isIsopodProduct;
+  window.isBettaProduct = isBettaProduct;
   window.getProductQuantityLabel = getProductQuantityLabel;
+  window.selectedVariants = selectedVariants;
 
   /* ── 5. Toast Notification Controller ────────────────────── */
   function showToast(message, type = 'success') {
@@ -2739,6 +2884,16 @@
   window.getAllProducts = getAllProducts;
 
   window.addCardVariantToCart = function (productId) {
+    const product = PRODUCTS.find(p => String(p.id) === String(productId)) ||
+      (typeof LIVE_CULTURES !== 'undefined' && LIVE_CULTURES.find(p => String(p.id) === String(productId)));
+    if (!product) {
+      console.warn('Product not found for id:', productId);
+      return;
+    }
+    if (product.variants && Array.isArray(product.variants) && product.variants.length > 0) {
+      CartManager.add(product, 1, product.variants[0].name);
+      return;
+    }
     CartManager.addById(productId);
   };
 
@@ -3338,6 +3493,11 @@
     const hasPrice = activeVariant && activeVariant.price !== null && activeVariant.price !== undefined && Number(activeVariant.price) > 0;
     const unitPrice = hasPrice ? Number(activeVariant.price) : 0;
     const isIsopod = isIsopodProduct(product);
+    const hasVariants = product.variants && Array.isArray(product.variants) && product.variants.length > 0;
+    if (hasVariants && !selectedVariants[product.id]) {
+      selectedVariants[product.id] = product.variants[0].name;
+    }
+    const currentSelectedGender = hasVariants ? (selectedVariants[product.id] || product.variants[0].name) : null;
     const defaultQty = isIsopod ? 5 : 1;
     const minQty = defaultQty;
     const displayPrice = hasPrice ? CartManager.formatPrice(unitPrice) : 'Price on Request';
@@ -3637,6 +3797,33 @@
             <!-- Minimum Order Notice (if applicable) -->
             ${minOrderNoticeHtml}
 
+            <!-- Gender / Variant Selection (rendered directly from product.variants) -->
+            ${hasVariants ? `
+            <div class="pdp-gender-section" id="pdpGenderSection">
+              <div class="pdp-gender-header">
+                <label class="pdp-gender-label">Select Gender <span class="required">*</span></label>
+                <span class="pdp-gender-hint">Required before adding to cart</span>
+              </div>
+              <div class="pdp-gender-options" role="radiogroup" aria-label="Select Gender">
+                ${product.variants.map((v, vIdx) => {
+                  const isMale = (v.name || '').toLowerCase() === 'male';
+                  const isSelected = (currentSelectedGender && currentSelectedGender.toLowerCase() === (v.name || '').toLowerCase()) || (!currentSelectedGender && vIdx === 0);
+                  const symbolClass = isMale ? 'male' : 'female';
+                  const symbolChar = isMale ? '♂' : '♀';
+                  return `
+                <button type="button" class="pdp-gender-btn ${isSelected ? 'active' : ''}" data-gender="${v.name}" data-variant-index="${vIdx}" role="radio" aria-checked="${isSelected ? 'true' : 'false'}">
+                  <div class="pdp-gender-btn-main">
+                    <span class="pdp-gender-symbol ${symbolClass}">${symbolChar}</span>
+                    <span>${v.name}</span>
+                  </div>
+                  <span class="pdp-gender-price">${CartManager.formatPrice(v.price)}</span>
+                </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+            ` : ''}
+
             <!-- Quantity Selector & Dynamic Total -->
             <div class="pdp-qty-section">
               <div class="pdp-qty-header">
@@ -3877,11 +4064,32 @@
     if (minusBtn) minusBtn.addEventListener('click', () => updatePdpQuantity(-1));
     if (plusBtn) plusBtn.addEventListener('click', () => updatePdpQuantity(1));
 
+    // 2b. Gender / Variant Selection Event Handlers
+    if (hasVariants) {
+      const genderBtns = document.querySelectorAll('.pdp-gender-btn');
+      genderBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const chosenGender = btn.dataset.gender || (product.variants[0] && product.variants[0].name);
+          selectedVariants[product.id] = chosenGender;
+          genderBtns.forEach(b => {
+            const isActive = (b.dataset.gender === chosenGender);
+            b.classList.toggle('active', isActive);
+            b.setAttribute('aria-checked', isActive ? 'true' : 'false');
+          });
+        });
+      });
+    }
+
     // 3. Add to Cart Button
     const addCartBtn = document.getElementById('pdpAddToCartBtn');
     if (addCartBtn) {
       addCartBtn.addEventListener('click', () => {
-        CartManager.addById(product.id, currentQty);
+        if (hasVariants) {
+          const chosenGender = selectedVariants[product.id] || (product.variants[0] && product.variants[0].name);
+          CartManager.add(product, currentQty, chosenGender);
+        } else {
+          CartManager.addById(product.id, currentQty);
+        }
       });
     }
 
@@ -3890,17 +4098,19 @@
     if (directWaBtn) {
       directWaBtn.addEventListener('click', () => {
         const totalStr = hasPrice ? CartManager.formatPrice(unitPrice * currentQty) : 'Price on Request';
+        const chosenGender = hasVariants ? (selectedVariants[product.id] || (product.variants[0] && product.variants[0].name)) : null;
         const msg = [
           'Hello Fish Tales!',
           '',
           `I would like to order/enquire about:`,
-          `• Product: ${product.name}`,
+          `• Product: ${product.name}` + (chosenGender ? ` (${chosenGender})` : ''),
+          chosenGender ? `• Gender: ${chosenGender}` : null,
           `• Scientific Name: ${scientificName}`,
-          `• Quantity: ${currentQty} ${isIsopod ? 'pieces' : (activeVariant ? activeVariant.unit : 'unit')}`,
+          `• Quantity: ${currentQty} ${hasVariants ? 'pcs' : (isIsopod ? 'pieces' : (activeVariant ? activeVariant.unit : 'unit'))}`,
           `• Total Value: ${totalStr}`,
           '',
           'Please confirm livestock availability, shipping schedule and payment info (Prepaid only, COD unavailable).'
-        ].join('\n');
+        ].filter(Boolean).join('\n');
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
       });
     }
@@ -3942,7 +4152,7 @@
       const lineTotal = hasItemPrice ? CartManager.formatPrice(item.price * item.quantity) : 'Price on Request';
       const unitLabel = hasItemPrice ? (item.pricingUnit === 'pair' ? 'per pair' : (item.pricingUnit === 'kit' ? 'kit' : (isIsopod ? 'per piece' : 'per piece'))) : '';
       const metaPriceStr = hasItemPrice ? `${CartManager.formatPrice(item.price)} ${unitLabel}` : 'Price on Request';
-      const productObj = PRODUCTS.find(p => String(p.id) === String(item.id)) || item;
+      const productObj = PRODUCTS.find(p => String(p.id) === String(item.id) || String(p.id) === String(item.baseId)) || item;
       return `
         <div class="cart-item" data-id="${item.id}">
           <div class="cart-item-thumb">
@@ -3951,6 +4161,7 @@
           <div class="cart-item-info">
             <span class="cart-item-title">${item.name}</span>
             <span class="cart-item-meta">${metaPriceStr}</span>
+            ${item.gender ? `<span class="cart-item-meta" style="color:var(--color-primary, #1b4332); font-weight:600; font-size:0.75rem;">Gender: ${item.gender}</span>` : ''}
             ${(String(item.id) === 'glacier-colony-pack' || String(item.baseId) === 'glacier-colony-pack') ? `<span class="cart-item-meta" style="color:var(--color-primary); font-size:0.75rem; font-weight:600;">Pack: ${item.quantity} Kit (${item.quantity * 11} specimens: ${item.quantity * 10} + ${item.quantity} Free)</span>` : (item.size ? `<span class="cart-item-meta" style="color:var(--color-amber);">Size: ${item.size}</span>` : '')}
             ${isIsopod ? `<span class="cart-item-min-notice">Minimum order: 5 pieces</span>` : ''}
             <div class="cart-item-stepper">
@@ -4148,14 +4359,17 @@
     ];
 
     items.forEach((item) => {
-      const { prodName } = getProductAndVariantDisplay(item);
+      const { prodName, variantName } = getProductAndVariantDisplay(item);
       const unit = getOwnerProductQuantityUnit(item);
       const hasItemPrice = item.price !== null && item.price !== undefined && Number(item.price) > 0;
       const lineTotalFormatted = hasItemPrice
         ? CartManager.formatPrice(Number(item.price) * Number(item.quantity || 1))
         : 'Price on Request';
 
-      lines.push(`${prodName} × ${item.quantity} ${unit} — ${lineTotalFormatted}`);
+      const genderStr = item.gender || (variantName === 'Male' || variantName === 'Female' ? variantName : '');
+      const itemTitle = genderStr ? `${prodName} (${genderStr})` : prodName;
+
+      lines.push(`${itemTitle} × ${item.quantity} ${unit} — ${lineTotalFormatted}`);
     });
 
     lines.push(divider);

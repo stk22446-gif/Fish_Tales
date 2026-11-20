@@ -85,14 +85,14 @@ assert(renderedPdp.includes('7f93b8d6edaec52538e950e60ad77415.mp4'), 'Video must
 assert(renderedPdp.includes('Pure White Crowntail'), 'Product name must be Pure White Crowntail');
 console.log('  ✓ Betta Pure White Crowntail correctly renders HTML5 video player with controls, playsinline, metadata');
 
-// 4. Test Product with image but NO video (e.g. Red Lace Guppy)
-console.log('\n4. Verifying PDP render for product without video (id: guppy-red-lace):');
-currentUrl = 'product.html?id=guppy-red-lace';
+// 4. Test Product with image but NO video (e.g. Golden Molly)
+console.log('\n4. Verifying PDP render for product without video (id: molly-golden):');
+currentUrl = 'product.html?id=molly-golden';
 mockWindow.renderProductDetailPage();
 
 assert(!renderedPdp.includes('pdp-video-container'), 'Product without video must NOT render .pdp-video-container');
 assert(!renderedPdp.includes('<video'), 'Product without video must NOT render <video>');
-assert(renderedPdp.includes('Red Lace Guppy'), 'Product name must be Red Lace Guppy');
+assert(renderedPdp.includes('Golden Molly'), 'Product name must be Golden Molly');
 assert(renderedPdp.includes('pdpMainImg'), 'Product without video must preserve image gallery');
 console.log('  ✓ Product without video preserves image gallery and renders ZERO video element');
 
