@@ -1813,7 +1813,7 @@
       video: "",
       description:
         "A stunning Platinum White Balloon Molly featuring a pearly white body, beautiful blue eyes and a distinctive rounded balloon-shaped body. Its elegant round tail and translucent white fins give it a unique appearance, making it an attractive addition to a peaceful community aquarium.",
-      price: 1999,
+      price: 180,
       unit: "pair",
       minQuantity: 1,
       size: "Standard",
@@ -1849,7 +1849,7 @@
       subCategory: "molly",
       name: "Blue Eye Platinum White Lyre Tail Balloon Molly",
       subtitle: "Poecilia sphenops var. Balloon Lyretail",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795046446/7a27a05d-48ca-4c2b-93aa-5363f080666f.png",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795208178/c69085b4-5733-4563-a476-cfb7906e1035.jpg",
       images: [],
       video: "",
       description: "An exceptional Balloon Molly variety featuring a compact, rounded body profile, shimmering platinum-white scales, elegant lyretail caudal extensions, and distinctive blue-tinted eyes. Peaceful, active, and well suited for planted community aquariums.",
@@ -1893,7 +1893,7 @@
       subCategory: "molly",
       name: "Crystal Eye Zebra Lyre Tail Balloon Molly",
       subtitle: "Poecilia sphenops var. Balloon Zebra",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795046636/418d60ce-0db9-423f-a621-014345060b07.png",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795208487/8cbbe049-9647-424a-a1d6-d1f03b407f14.jpg",
       images: [],
       video: "",
       description: "A rare and captivating Balloon Molly displaying dramatic dark zebra banding across a light body, flowing lyretail finnage, and reflective crystal-clear eyes. An eye-catching, charismatic livebearer for dedicated community setups.",
@@ -1931,47 +1931,44 @@
     },
 
     {
-      id: "molly-platinum-white-round-tail-balloon",
+      id: "crystal-eyes-zebra-round-tail-balloon-molly",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
       subCategory: "molly",
-      name: "Platinum White Round Tail Balloon Molly",
-      subtitle: "Poecilia sphenops var. Balloon Round Tail",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795046900/8e9e2b1f-6309-4443-8325-63cd1edbe15a.png",
+      name: "Crystal Eyes Zebra Round Tail Balloon Molly",
+      subtitle: "Poecilia sphenops (Zebra Balloon Molly Variety)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795209044/2ac4f78f-d364-4e3f-a643-7490a8ae7f31.jpg",
       images: [],
       video: "",
-      description: "A charming Balloon Molly featuring glistening porcelain-white platinum coloration and a smooth, classic rounded caudal fin. Compact, playful, and gentle, swimming gracefully in peaceful community aquariums.",
+      description:
+        "Crystal Eyes Zebra Round Tail Balloon Molly is a distinctive ornamental livebearer featuring a rounded balloon-shaped body, zebra-like contrasting markings and crystal-like eyes. Its attractive round tail and unique pattern make it a beautiful addition to a peaceful community aquarium.",
       price: 1999,
       unit: "pair",
       minQuantity: 1,
-      size: "Adult Pair (Subject to supplier stock availability)",
-      overview: "The Platinum White Round Tail Balloon Molly features a bright, solid platinum sheen across its deep, rounded body. Unlike lyretail strains, this variety sports a traditional symmetrical rounded caudal fin that gives it a clean, classic profile and stable swimming agility. They are hardy, friendly livebearers that appreciate well-oxygenated, mineral-rich aquariums with gentle water flow.",
+      size: "Standard",
+      overview:
+        "This ornamental Molly variety combines the compact balloon body shape with zebra-style markings and a rounded caudal fin. Crystal Eyes and Zebra are trade descriptions of its appearance, not separate species. Individual fish may vary in pattern, colour and eye appearance.",
       careRequirements: {
-        "Difficulty": "Beginner Friendly",
-        "Water Temperature": "23°C – 28°C",
-        "Diet": "Omnivorous; spirulina flakes, plant-based pellets, algae wafers, and occasional protein treats",
-        "Lifespan": "Approximately 3 – 5 years",
-        "pH Range": "7.0 – 8.2",
-        "General Hardness (GH)": "Moderately hard to hard water (12 – 25 dGH)",
-        "Temperament": "Peaceful and friendly community fish",
-        "Social Behaviour": "Social livebearer; enjoys the company of other peaceful mollies"
+        temperature: "24–28°C",
+        pH: "7.0–8.2",
+        diet: "Quality flakes, pellets and vegetable-based foods",
+        temperament: "Peaceful; suitable for compatible community aquariums",
+        careLevel: "Easy"
       },
       habitatSetup: {
-        "Aquarium Size": "Minimum 50 to 60 litres (13–15 gallons)",
-        "Substrate": "Inert sand or smooth river gravel",
-        "Filtration": "Standard sponge or canister filter with gentle surface agitation",
-        "Water Flow": "Low to moderate flow",
-        "Plants & Decor": "Planted areas with Vallisneria, Cryptocoryne, and floating cover",
-        "Water Quality": "Mature cycled aquarium with regular partial water changes",
-        "Aquarium Cover": "Keep aquarium covered to prevent jumping"
+        tankSize: "60 litres or larger",
+        filtration: "Good filtration with gentle water movement",
+        heating: "Stable tropical temperature",
+        plants: "Live plants and open swimming space",
+        water: "Clean, conditioned water with regular maintenance"
       },
       didYouKnow: [
-        "The round tail (or fan tail) is the traditional ancestral tail morphology of the species, providing balanced propulsion.",
-        "The platinum white iridescence is produced by guanine crystals in the dermal iridophore cells of the scales.",
-        "Balloon mollies have a naturally compacted abdominal cavity, so smaller, frequent feedings are ideal.",
-        "Female mollies can store viable sperm for several months and produce successive broods."
+        "Balloon Mollies are selectively bred for their rounded body shape.",
+        "Zebra markings create a distinctive striped appearance.",
+        "Round Tail describes the rounded shape of the caudal fin.",
+        "Mollies are livebearers and give birth to live young."
       ],
-      featured: true
+      featured: false
     },
 
     {
