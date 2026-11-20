@@ -2260,27 +2260,45 @@ textarea {
 .cart-item-stepper {
   display: inline-flex;
   align-items: center;
+  justify-content: space-between;
+  width: 120px;
+  max-width: 120px;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  box-sizing: border-box;
+  flex-grow: 0;
+  flex-shrink: 0;
+  align-self: flex-start;
   border: 1px solid var(--border-leaf);
   border-radius: var(--radius-xs);
   background-color: var(--bg-page);
   margin-top: 0.35rem;
+  padding: 0;
+  overflow: hidden;
 }
 
 .cart-qty-btn,
 .cart-step-btn {
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
+  width: 38px;
+  min-width: 38px;
+  max-width: 38px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-primary);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.1rem;
   background: transparent;
   border: none;
   cursor: pointer;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+  flex-grow: 0;
+  line-height: 1;
+  user-select: none;
   transition: background-color var(--trans-fast);
 }
 
@@ -2291,11 +2309,19 @@ textarea {
 
 .cart-qty-val,
 .cart-step-val {
-  min-width: 28px;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--color-primary-dark);
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  user-select: none;
 }
 
 .cart-item-remove {
@@ -3961,22 +3987,28 @@ input {
 
   .cart-item-stepper,
   .cart-qty-ctrl {
-    min-height: 36px;
+    width: 120px;
+    max-width: 120px;
+    height: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    align-self: flex-start;
   }
 
   .cart-step-btn,
   .cart-qty-btn {
-    width: 34px;
-    height: 34px;
-    min-width: 34px;
-    min-height: 34px;
+    width: 38px;
+    height: 100%;
+    min-width: 38px;
+    max-width: 38px;
     font-size: 1.1rem;
   }
 
   .cart-step-val,
   .cart-qty-val {
-    min-width: 28px;
-    font-size: 0.9rem;
+    flex: 1;
+    height: 100%;
+    font-size: 0.88rem;
   }
 
   .cart-item-remove {

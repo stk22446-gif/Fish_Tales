@@ -1808,7 +1808,7 @@
       subCategory: "molly",
       name: "Platinum White Blue Eyes Round Tail Balloon Molly",
       subtitle: "Poecilia sphenops (Balloon Molly Variety)",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795207614/8e498d59-99c0-4542-8610-2f7825d089ee.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795209337/974694b4-aa29-4bcb-b117-12034e8e78af.jpg",
       images: [],
       video: "",
       description:
@@ -1849,7 +1849,7 @@
       subCategory: "molly",
       name: "Blue Eye Platinum White Lyre Tail Balloon Molly",
       subtitle: "Poecilia sphenops var. Balloon Lyretail",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795208178/c69085b4-5733-4563-a476-cfb7906e1035.jpg",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795209253/a04801b7-37a6-494e-b3c0-43f95d2c002f.jpg",
       images: [],
       video: "",
       description: "An exceptional Balloon Molly variety featuring a compact, rounded body profile, shimmering platinum-white scales, elegant lyretail caudal extensions, and distinctive blue-tinted eyes. Peaceful, active, and well suited for planted community aquariums.",
