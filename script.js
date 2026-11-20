@@ -4929,42 +4929,170 @@
   };
   window.checkoutState = checkoutState;
 
-  function generateOrderId() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const dateStr = `${year}${month}${day}`;
+  /* ── 8. Dedicated Checkout & WhatsApp Order Engine ───────── */
+  const ORDERS_STORAGE_KEY = 'fishtales_orders';
 
-    let seq = 1;
+  function getStoredOrders() {
     try {
-      const stored = localStorage.getItem('fishtales_order_seq');
-      if (stored) {
-        seq = parseInt(stored, 10) + 1;
+      if (typeof localStorage === 'undefined') return [];
+      const raw = localStorage.getItem(ORDERS_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) return parsed;
       }
-      localStorage.setItem('fishtales_order_seq', String(seq));
-    } catch {
-      seq = Math.floor(1 + Math.random() * 999);
+    } catch (e) {
+      console.warn('Error reading stored orders:', e);
     }
-    const seqStr = String(seq).padStart(3, '0');
-    return `FT-${dateStr}-${seqStr}`;
+    return [];
+  }
+
+  function saveOrderToStorage(orderData) {
+    try {
+      if (typeof localStorage === 'undefined' || !orderData || !orderData.orderId) return;
+      const orders = getStoredOrders();
+      const existingIdx = orders.findIndex(o => o.orderId === orderData.orderId);
+      if (existingIdx >= 0) {
+        orders[existingIdx] = { ...orders[existingIdx], ...orderData };
+      } else {
+        orders.push(orderData);
+      }
+      localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders));
+    } catch (e) {
+      console.warn('Error saving order to storage:', e);
+    }
+  }
+
+  function isOrderIdExisting(id) {
+    if (!id) return false;
+    const orders = getStoredOrders();
+    return orders.some(o => o.orderId === id || o.id === id);
+  }
+
+  function getSecureRandomAlphanumeric(len = 8) {
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const cryptoObj = (typeof window !== 'undefined' && (window.crypto || window.msCrypto)) ||
+                      (typeof globalThis !== 'undefined' && globalThis.crypto);
+    if (!cryptoObj || typeof cryptoObj.getRandomValues !== 'function') {
+      throw new Error('Cryptographically secure random number generator (crypto.getRandomValues) is unavailable.');
+    }
+
+    let result = '';
+    const buffer = new Uint8Array(len * 2);
+    while (result.length < len) {
+      cryptoObj.getRandomValues(buffer);
+      for (let i = 0; i < buffer.length && result.length < len; i++) {
+        const val = buffer[i];
+        if (val < 252) { // 36 * 7 = 252, perfectly eliminates modulo bias across 36 characters
+          result += chars[val % chars.length];
+        }
+      }
+    }
+    return result;
   }
 
   function formatOrderDateTime(d = new Date()) {
-    const day = String(d.getDate()).padStart(2, '0');
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const year = d.getFullYear();
-    const dateStr = `${day}/${month}/${year}`;
+    try {
+      const formatter = new Intl.DateTimeFormat('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
+      const parts = formatter.formatToParts(d);
+      const map = {};
+      parts.forEach(p => { map[p.type] = p.value; });
 
-    let hours = d.getHours();
-    const minutes = String(d.getMinutes()).padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    const timeStr = `${hours}:${minutes} ${ampm}`;
+      const day = String(map.day).padStart(2, '0');
+      const month = String(map.month).padStart(2, '0');
+      const year = String(map.year);
+      let hour = String(map.hour).padStart(2, '0');
+      const minute = String(map.minute).padStart(2, '0');
+      const dayPeriod = (map.dayPeriod || '').toUpperCase();
 
-    return { date: dateStr, time: timeStr };
+      const dateStr = `${day}/${month}/${year}`;
+      const timeStr = `${hour}:${minute} ${dayPeriod}`;
+      return {
+        date: dateStr,
+        time: timeStr,
+        combined: `${dateStr} (${timeStr})`,
+        year,
+        month,
+        day,
+        timestamp: d.getTime ? d.getTime() : Date.now()
+      };
+    } catch {
+      // Fallback: calculate IST using UTC + 330 minutes (UTC + 5:30)
+      const utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+      const ist = new Date(utc + (330 * 60000));
+      const day = String(ist.getDate()).padStart(2, '0');
+      const month = String(ist.getMonth() + 1).padStart(2, '0');
+      const year = String(ist.getFullYear());
+      let hours = ist.getHours();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      const hour = String(hours).padStart(2, '0');
+      const minute = String(ist.getMinutes()).padStart(2, '0');
+      const dateStr = `${day}/${month}/${year}`;
+      const timeStr = `${hour}:${minute} ${ampm}`;
+      return {
+        date: dateStr,
+        time: timeStr,
+        combined: `${dateStr} (${timeStr})`,
+        year,
+        month,
+        day,
+        timestamp: d.getTime ? d.getTime() : Date.now()
+      };
+    }
   }
+
+  function generateOrderId(creationDate = new Date()) {
+    const dt = formatOrderDateTime(creationDate);
+    const dateStr = `${dt.year}${dt.month}${dt.day}`;
+    let attempts = 0;
+    const maxAttempts = 100;
+
+    while (attempts < maxAttempts) {
+      attempts++;
+      const randomCode = getSecureRandomAlphanumeric(8);
+      const candidateId = `FT-${dateStr}-${randomCode}`;
+      if (!isOrderIdExisting(candidateId)) {
+        return candidateId;
+      }
+    }
+    throw new Error('Could not generate unique order ID after maximum attempts.');
+  }
+
+  function ensureOrderMetadata() {
+    if (!checkoutState.orderId) {
+      try {
+        checkoutState.orderId = generateOrderId();
+      } catch (err) {
+        console.error('Order ID generation failed:', err);
+        if (typeof showToast === 'function') {
+          showToast('Secure order ID generation failed. Please use a modern browser.', 'error');
+        }
+        throw err;
+      }
+    }
+    if (!checkoutState.orderDate || !checkoutState.orderTime) {
+      const dt = formatOrderDateTime();
+      checkoutState.orderDate = dt.date;
+      checkoutState.orderTime = dt.time;
+      checkoutState.orderTimestamp = dt.timestamp;
+    }
+  }
+
+  window.generateOrderId = generateOrderId;
+  window.formatOrderDateTime = formatOrderDateTime;
+  window.getStoredOrders = getStoredOrders;
+  window.saveOrderToStorage = saveOrderToStorage;
+  window.isOrderIdExisting = isOrderIdExisting;
+  window.ensureOrderMetadata = ensureOrderMetadata;
 
   function getProductAndVariantDisplay(item) {
     let prodName = item.name;
@@ -5046,7 +5174,24 @@
   }
 
   function buildWhatsAppOrderMessage(orderDetails) {
-    const { orderId, date, time, items, subtotal, customer } = orderDetails;
+    let { orderId, date, time, items, subtotal, customer } = orderDetails || {};
+
+    if (!orderId) {
+      orderId = (checkoutState && checkoutState.orderId) ? checkoutState.orderId : generateOrderId();
+      if (checkoutState) checkoutState.orderId = orderId;
+    }
+
+    if (!date) {
+      const dt = formatOrderDateTime();
+      date = (checkoutState && checkoutState.orderDate) || dt.date;
+      time = (checkoutState && checkoutState.orderTime) || dt.time;
+      if (checkoutState) {
+        checkoutState.orderDate = date;
+        checkoutState.orderTime = time;
+      }
+    }
+
+    const formattedDate = time ? `${date} (${time})` : date;
     const divider = '━━━━━━━━━━━━━━━━━━━━';
     const lines = [
       '🐠 FISH TALES',
@@ -5054,7 +5199,7 @@
       divider,
       '📋 *ORDER INFORMATION*',
       `🆔 Order ID: ${orderId}`,
-      `📅 Date: ${date}` + (time ? ` (${time})` : ''),
+      `📅 Date: ${formattedDate}`,
       divider,
       '📦 *PRODUCT DETAILS*'
     ];
@@ -5154,10 +5299,7 @@
     }
 
     loadSavedCustomer();
-    if (!checkoutState.orderId) checkoutState.orderId = generateOrderId();
-    const dt = formatOrderDateTime();
-    checkoutState.orderDate = dt.date;
-    checkoutState.orderTime = dt.time;
+    ensureOrderMetadata();
     checkoutState.step = 1;
     checkoutState.isSubmitting = false;
 
@@ -5469,6 +5611,7 @@
       pincode
     };
     saveCustomerToStorage(checkoutState.customer);
+    ensureOrderMetadata();
 
     window.renderCheckoutStep2();
   };
@@ -5628,6 +5771,8 @@
       return;
     }
 
+    ensureOrderMetadata();
+
     checkoutState.isSubmitting = true;
     const btn = document.getElementById('btnContinueWhatsApp');
     if (btn) {
@@ -5646,6 +5791,8 @@
       subtotal: CartManager.getTotal(),
       customer: { ...checkoutState.customer }
     };
+
+    saveOrderToStorage(orderDetails);
 
     const message = buildWhatsAppOrderMessage(orderDetails);
     const encoded = encodeURIComponent(message);
@@ -5724,6 +5871,8 @@
       return;
     }
 
+    ensureOrderMetadata();
+
     if (checkoutState.step === 1 && typeof window.renderCheckoutStep1 === 'function') {
       window.renderCheckoutStep1();
     } else if (checkoutState.step === 2 && typeof window.renderCheckoutStep2 === 'function') {
@@ -5741,10 +5890,7 @@
     }
 
     loadSavedCustomer();
-    if (!checkoutState.orderId) checkoutState.orderId = generateOrderId();
-    const dt = formatOrderDateTime();
-    checkoutState.orderDate = dt.date;
-    checkoutState.orderTime = dt.time;
+    ensureOrderMetadata();
     checkoutState.step = 1;
     checkoutState.isSubmitting = false;
     checkoutState.isCompleted = false;
@@ -6322,6 +6468,11 @@
       }
     });
 
+    // 2a-2. Initialize Dedicated Checkout Page if on checkout.html
+    if (typeof isDedicatedCheckoutPage === 'function' && isDedicatedCheckoutPage()) {
+      initCheckoutPage();
+    }
+
     // 2b. Initialize Promotional Auto-Slider if present
     initPromoSlider();
 
@@ -6478,6 +6629,9 @@
     }
     if (typeof window.initPromoSlider === 'function') {
       window.initPromoSlider();
+    }
+    if (typeof isDedicatedCheckoutPage === 'function' && isDedicatedCheckoutPage()) {
+      initCheckoutPage();
     }
   }
 
