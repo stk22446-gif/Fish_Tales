@@ -476,7 +476,7 @@
       images: [],
       video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795120621/WhatsApp_Video_2026-11-20_at_1.36.54_AM.mp4",
       description: "Striking red-orange lace-patterned caudal fin with intricate dark markings and a shimmering iridescent body. A beautiful fancy guppy for peaceful planted freshwater aquariums.",
-      price: 250,
+      price: 249,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -529,7 +529,7 @@
       images: [],
       video: "",
       description: "Lustrous golden body coloration combined with enlarged, flowing Dumbo Ear pectoral fins. A graceful and eye-catching fancy guppy for planted freshwater aquariums.",
-      price: 280,
+      price: 279,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -581,7 +581,7 @@
       images: [],
       video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795120336/WhatsApp_Video_2026-11-20_at_1.46.03_AM.mp4",
       description: "Distinctive Dumbo Ear Guppy featuring enlarged, flowing pectoral fins, shimmering cobalt-blue coloration, and an elegant appearance in planted freshwater aquariums.",
-      price: 250,
+      price: 249,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -632,7 +632,7 @@
       images: [],
       video: "",
       description: "Elegant platinum-white body coloration paired with enlarged Dumbo Ear pectoral fins and a broad, flowing halfmoon-shaped caudal fin.",
-      price: 280,
+      price: 279,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -687,7 +687,7 @@
       ],
       video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795120900/WhatsApp_Video_2026-11-20_at_1.39.22_AM.mp4",
       description: "A striking fancy guppy featuring metallic blue dragon-scale patterns, oversized Dumbo Ear pectoral fins and a broad, flowing halfmoon-shaped tail.",
-      price: 280,
+      price: 279,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -735,7 +735,7 @@
       images: [],
       video: "",
       description: "An elegant fancy guppy featuring deep, velvety black coloration and distinctive enlarged Dumbo Ear pectoral fins that create a graceful swimming appearance.",
-      price: 250,
+      price: 279,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -783,7 +783,7 @@
       images: [],
       video: "",
       description: "A striking Albino Full Red (AFR) Guppy featuring rich, solid red coloration, a prominent oversized dorsal fin and flowing red tail.",
-      price: 300,
+      price: 299,
       unit: "pair (Few Pair Left)",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -820,8 +820,6 @@
       featured: true
     },
 
-
-
     {
       id: "guppy-dark-knight-dragon-dumbo",
       category: "aquarium",
@@ -833,7 +831,7 @@
       images: [],
       video: "",
       description: "A dramatic fancy guppy featuring a dark dragon-scale appearance with deep navy and violet undertones, complemented by distinctive enlarged Dumbo Ear pectoral fins.",
-      price: 280,
+      price: 279,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -869,7 +867,6 @@
       featured: false
     },
 
-
     {
       id: "guppy-red-platinum-koi-dumbo",
       category: "aquarium",
@@ -881,7 +878,7 @@
       images: [],
       video: "",
       description: "An attractive fancy guppy featuring a shimmering platinum body, vibrant red and koi-style colour patches, and distinctive enlarged Dumbo Ear pectoral fins.",
-      price: 280,
+      price: 279,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -917,7 +914,6 @@
       featured: false
     },
 
-
     {
       id: "guppy-magenta-red-tiger",
       category: "aquarium",
@@ -929,7 +925,7 @@
       images: [],
       video: "",
       description: "A colourful fancy guppy featuring vibrant magenta-red body tones and distinctive tiger-like markings, creating a bold and eye-catching appearance.",
-      price: 250,
+      price: 249,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -965,7 +961,6 @@
       featured: false
     },
 
-
     {
       id: "guppy-white-tuxido",
       category: "aquarium",
@@ -977,7 +972,7 @@
       images: [],
       video: "",
       description: "A striking two-tone fancy guppy featuring a light white or platinum front, a contrasting dark tuxedo-style rear body and elegant white flowing fins.",
-      price: 250,
+      price: 249,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -1013,7 +1008,6 @@
       featured: false
     },
 
-
     {
       id: "guppy-silverado-red-dragon",
       category: "aquarium",
@@ -1025,7 +1019,7 @@
       images: [],
       video: "",
       description: "A distinctive fancy guppy combining a shimmering silver or platinum-toned body with contrasting red dragon-style patterns across its flowing fins.",
-      price: 280,
+      price: 279,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -1060,7 +1054,6 @@
       ],
       featured: false
     },
-
 
     {
       id: "guppy-green-moscow",
@@ -1121,7 +1114,7 @@
       images: [],
       video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795120066/WhatsApp_Video_2026-11-20_at_1.53.08_AM.mp4",
       description: "An elegant pure white albino strain featuring translucent pearl-white bodies, flowing snow-white fins, and striking ruby-red eyes that stand out vividly against dark substrates and lush aquarium plants.",
-      price: 250,
+      price: 249,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -1156,7 +1149,6 @@
       ],
       featured: false
     },
-
 
     {
       id: "black-samurai-plakat-betta",
@@ -1213,6 +1205,58 @@
         "Male bettas are territorial and should not be housed together."
       ],
       featured: true
+    },
+
+
+    {
+      id: "wild-mahachai-spade-tail",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "Wild (Mahachai Spade Tail)",
+      subtitle: "Betta mahachaiensis",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795204570/069bbda9-f592-4b2e-b759-8d75772a12cd.png",
+      images: [],
+      video: "",
+      description: "A stunning wild-type Betta featuring a dark brown-black body covered in brilliant metallic green and turquoise iridescence. Its distinctive spade-shaped tail and shimmering scale patterns create a beautiful natural appearance.",
+      price: 1499,
+      unit: "piece",
+      minQuantity: 1,
+      size: "Adult (Approximately 4 – 6 cm)",
+      overview: "The Mahachai Betta (Betta mahachaiensis) is a wild Betta species native to the coastal region of Samut Sakhon, Thailand. It is recognised by its dark brown-to-black body, iridescent green-blue scale rows and characteristic markings on the gill covers. The Spade Tail form is a selectively bred aquarium variety with a distinctive pointed caudal-fin shape. This species naturally inhabits nipa palm swamps and brackish coastal waters.",
+      careRequirements: {
+        "Difficulty": "Intermediate",
+        "Water Temperature": "22°C – 28°C",
+        "Diet": "Carnivorous; offer Daphnia, Artemia, bloodworms and other small live or frozen invertebrates. Quality Betta pellets may also be accepted.",
+        "Lifespan": "Approximately 3 – 5 years with proper care",
+        "pH Range": "7.0 – 8.5 (documented care range; natural habitat measurements vary)",
+        "Water Hardness": "Moderately hard to hard water; approximately 5 – 20 dGH",
+        "Water Type": "Freshwater to slightly brackish conditions, depending on the fish's acclimation and source.",
+        "Temperament": "Males can be territorial, particularly around breeding and nesting areas.",
+        "Social Behaviour": "Best maintained as a species-focused setup. Carefully monitored male-female pairs may be kept in suitable conditions."
+      },
+      habitatSetup: {
+        "Aquarium Size": "Approximately 40 – 45 litres or larger for a pair, with adequate floor space.",
+        "Heating": "Use an adjustable heater and thermometer to maintain stable tropical temperatures.",
+        "Filtration": "Gentle sponge filtration is recommended.",
+        "Water Flow": "Low flow, with calm swimming areas.",
+        "Substrate": "Fine sand or smooth aquarium gravel.",
+        "Plants & Decor": "Dense live plants, floating vegetation, driftwood and natural hiding places.",
+        "Leaf Litter": "Aquarium-safe dried leaves such as Indian Almond leaves can provide shelter and natural cover.",
+        "Water Quality": "Use a fully cycled aquarium and maintain zero ammonia and nitrite.",
+        "Aquarium Cover": "A secure lid is essential because Bettas are capable jumpers.",
+        "Surface Access": "Keep the water surface accessible for atmospheric breathing and bubble-nest building.",
+        "Acclimation": "Acclimate gradually to the aquarium's water parameters. Do not add salt without considering the fish's existing acclimation and source conditions."
+      },
+      didYouKnow: [
+        "Betta mahachaiensis was scientifically described in 2012.",
+        "It is native to coastal nipa palm swamps around Samut Sakhon, Thailand.",
+        "Its metallic green-blue scale rows contrast beautifully against its dark body.",
+        "Males build bubble nests, often using sheltered spaces near the water surface.",
+        "It is the only Betta species known to be naturally restricted to brackish-water habitats.",
+        "The Spade Tail form is a bred aquarium variety rather than a guaranteed natural feature of every wild specimen."
+      ],
+      featured: false
     },
 
     {
@@ -1304,6 +1348,402 @@
     },
 
     {
+      id: "wild-imbellis-spade-tail",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "Wild (Imbellis Spade Tail)",
+      subtitle: "Betta imbellis",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795203367/edd5ed84-a9b6-4476-819f-f6951cb021ee.png",
+      images: [],
+      video: "",
+      description: "A fascinating wild-type Betta featuring an elegant spade-shaped tail, dark body and iridescent blue-green scale patterns. Its natural appearance and distinctive fin markings make it an attractive addition to specialised freshwater aquariums.",
+      price: 1499,
+      unit: "piece",
+      minQuantity: 1,
+      size: "Adult (Approximately 4 – 6 cm)",
+      overview: "Betta imbellis, commonly known as the Crescent Betta or Peaceful Betta, is a wild Betta species native to parts of Southeast Asia, including Thailand and Malaysia. It is recognised for its dark body, iridescent blue-green markings and characteristic reddish crescent along the tail edge. The Spade Tail designation describes the fin shape offered in this trade variety. It is a bubble-nesting labyrinth fish that prefers calm, warm and densely planted freshwater environments.",
+      careRequirements: {
+        "Difficulty": "Intermediate",
+        "Water Temperature": "24°C – 28°C",
+        "Diet": "Carnivorous; offer quality Betta pellets along with Daphnia, Artemia, mosquito larvae and other suitable live or frozen foods.",
+        "Lifespan": "Approximately 3 – 5 years with proper care",
+        "pH Range": "5.0 – 7.5",
+        "Water Hardness": "Soft to moderately hard water; approximately 1 – 10 dGH",
+        "Temperament": "Generally less aggressive than domesticated Betta splendens, but males can still be territorial.",
+        "Social Behaviour": "Can be maintained individually. Pair or group keeping requires a suitably spacious, densely planted aquarium and careful monitoring."
+      },
+      habitatSetup: {
+        "Aquarium Size": "Approximately 40 litres or larger for a pair; provide more space for groups.",
+        "Heating": "Use an adjustable aquarium heater and thermometer to maintain stable tropical temperatures.",
+        "Filtration": "Gentle sponge filtration is recommended.",
+        "Water Flow": "Low flow, as this species prefers calm water.",
+        "Substrate": "Fine sand or smooth aquarium gravel.",
+        "Plants & Decor": "Use dense live plants, floating plants, driftwood and natural hiding places.",
+        "Leaf Litter": "Indian Almond leaves and other aquarium-safe botanicals can provide natural cover.",
+        "Water Quality": "Maintain a fully cycled aquarium with zero ammonia and nitrite and stable water conditions.",
+        "Aquarium Cover": "A secure lid is essential because wild Bettas are capable jumpers.",
+        "Surface Access": "Keep the water surface accessible for atmospheric breathing and bubble-nest building."
+      },
+      didYouKnow: [
+        "Betta imbellis is commonly known as the Crescent Betta or Peaceful Betta.",
+        "Its reddish crescent-shaped tail marking is one of its characteristic features.",
+        "It is a bubble-nesting species, with males guarding the nest.",
+        "It possesses a specialised labyrinth organ that allows it to breathe atmospheric air.",
+        "Despite its common name, males can still show territorial behaviour.",
+        "It naturally inhabits slow-moving and vegetation-rich freshwater environments."
+      ],
+      featured: false
+    },
+
+    {
+      id: "nemo-galaxy-rosetail-betta",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "Nemo Galaxy Rosetail",
+      subtitle: "Betta splendens (Nemo Galaxy Rosetail Variety)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795204834/aaf5eff5-1e9d-4980-bfc2-09285e81a989.jpg",
+      images: [],
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795204862/WhatsApp_Video_2026-11-21_at_1.27.35_AM.mp4",
+      description: "A spectacular ornamental Betta featuring vibrant Nemo-inspired orange, red and yellow colour patches, shimmering metallic Galaxy scales and luxurious Rosetail finnage. Its heavily branched, flowing tail creates an elegant rose-petal appearance.",
+      price: 799,
+      unit: "piece",
+      minQuantity: 1,
+      variants: [
+        {
+          name: "Male",
+          price: 799
+        },
+        {
+          name: "Female",
+          price: 499
+        }
+      ],
+      size: "Adult (Approximately 5 – 7 cm including fins)",
+      overview: "The Nemo Galaxy Rosetail Betta is a selectively bred variety of Betta splendens that combines a bright Nemo-style multicolour pattern with reflective Galaxy scales and elaborate Rosetail fins. Nemo patterns commonly feature orange, red and yellow tones, while Galaxy markings add metallic or iridescent scale coverage. The Rosetail finnage is characterised by extensive branching of the tail rays, creating overlapping, ruffled edges resembling rose petals. Individual colour patterns and fin development can vary between fish.",
+      careRequirements: {
+        "Difficulty": "Intermediate",
+        "Water Temperature": "24°C – 28°C",
+        "Diet": "Carnivorous; quality Betta pellets as the staple, supplemented with Daphnia, brine shrimp and occasional bloodworms.",
+        "Lifespan": "Approximately 3 – 5 years with proper care",
+        "pH Range": "6.5 – 7.5",
+        "Water Hardness": "Soft to moderately hard water",
+        "Temperament": "Territorial; adult males should be housed separately.",
+        "Social Behaviour": "Generally kept individually. Avoid fin-nipping tankmates.",
+        "Fin Care": "Heavy Rosetail finnage requires gentle water flow, clean water and smooth aquarium decor."
+      },
+      habitatSetup: {
+        "Aquarium Size": "At least 19 litres (5 gallons); approximately 38 litres (10 gallons) provides more stable conditions.",
+        "Heating": "Use an adjustable heater and thermometer to maintain stable tropical temperatures.",
+        "Filtration": "Gentle sponge filter or low-flow adjustable filtration.",
+        "Water Flow": "Very gentle flow to prevent excessive effort when swimming.",
+        "Substrate": "Smooth sand or fine aquarium gravel.",
+        "Plants & Decor": "Live plants such as Anubias and Java Fern, with smooth decorations and hiding places.",
+        "Resting Areas": "Broad-leaf plants and resting spots near the water surface.",
+        "Water Quality": "Use a fully cycled aquarium. Maintain zero ammonia and nitrite and keep nitrate controlled.",
+        "Aquarium Cover": "A secure lid is recommended because Bettas can jump.",
+        "Fin Protection": "Avoid sharp ornaments, rough surfaces and strong filter intakes that may damage delicate fins."
+      },
+      didYouKnow: [
+        "Nemo is a trade description commonly associated with bright orange, red and yellow Betta colour patterns.",
+        "Galaxy refers to reflective metallic or iridescent scale markings.",
+        "Rosetail Bettas have heavily branched tail rays that create a ruffled, rose-petal appearance.",
+        "Rosetail is a fin variation related to Halfmoon finnage.",
+        "Excessively heavy finnage can make swimming difficult, so good fin balance and mobility are important.",
+        "Marble-influenced colour patterns may change as the fish grows."
+      ],
+      featured: false
+    },
+
+    {
+      id: "nemo-candy-crowntail-betta",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "Nemo Candy Crowntail",
+      subtitle: "Betta splendens (Nemo Candy Crowntail Variety)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795205516/0b1883d3-b7d0-479d-80d3-dff2a8f32a7b.jpg",
+      images: [],
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795205655/WhatsApp_Video_2026-11-21_at_1.40.43_AM.mp4",
+      description: "A vibrant ornamental Betta featuring a colourful Nemo-inspired combination of orange, red and yellow patterns with distinctive crown-like fins. Its extended fin rays and reduced webbing create a dramatic spiky appearance.",
+      price: 1399,
+      unit: "piece",
+      minQuantity: 1,
+      size: "Adult (Approximately 5 – 7 cm including fins)",
+      overview: "The Nemo Candy Crowntail Betta is a selectively bred variety of Betta splendens combining a bright multicolour Nemo or Candy pattern with distinctive Crowntail finnage. Its colour pattern may feature orange, red, yellow, white and other contrasting shades. The Crowntail characteristic comes from extended fin rays that project beyond the reduced webbing, creating a crown-like silhouette. Individual fish can vary in colour distribution, pattern and fin development.",
+      careRequirements: {
+        "Difficulty": "Beginner to Intermediate",
+        "Water Temperature": "24°C – 28°C",
+        "Diet": "Carnivorous; quality Betta pellets as the staple, supplemented with Daphnia, brine shrimp and occasional bloodworms.",
+        "Lifespan": "Approximately 3 – 5 years with proper care",
+        "pH Range": "6.5 – 7.5",
+        "Water Hardness": "Soft to moderately hard water",
+        "Temperament": "Territorial; adult males should be housed separately.",
+        "Social Behaviour": "Generally kept individually. Avoid aggressive and fin-nipping tankmates.",
+        "Fin Care": "Extended fin rays require clean water, gentle flow and smooth aquarium decor."
+      },
+      habitatSetup: {
+        "Aquarium Size": "At least 19 litres (5 gallons); approximately 38 litres (10 gallons) provides more stable conditions.",
+        "Heating": "Use an adjustable heater and thermometer to maintain stable tropical temperatures.",
+        "Filtration": "Gentle sponge filter or low-flow adjustable filtration.",
+        "Water Flow": "Gentle current to avoid stressing the extended fins.",
+        "Substrate": "Smooth sand or fine aquarium gravel.",
+        "Plants & Decor": "Live plants such as Anubias and Java Fern, with smooth decorations and hiding places.",
+        "Resting Areas": "Broad-leaf plants and resting spots near the water surface.",
+        "Water Quality": "Use a fully cycled aquarium and maintain zero ammonia and nitrite.",
+        "Aquarium Cover": "A secure lid is recommended because Bettas can jump.",
+        "Fin Protection": "Avoid sharp ornaments, rough surfaces and strong filter intakes."
+      },
+      didYouKnow: [
+        "Nemo is a hobby colour-pattern name commonly associated with orange, red and yellow Betta markings.",
+        "Candy patterns can contain several contrasting colours and vary between individual fish.",
+        "Crowntail fins have extended rays with reduced webbing between them.",
+        "The Crowntail is a fin type, while Nemo Candy describes the colour pattern.",
+        "Bettas can breathe atmospheric air using a specialised labyrinth organ."
+      ],
+      featured: false
+    },
+
+
+    {
+      id: "nemo-candy-plakat-betta",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "Nemo Candy PK Betta",
+      subtitle: "Betta splendens (Nemo Candy Plakat)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795206037/052793c6-ce31-4065-9e29-7625704f4ef0.jpg",
+      images: [],
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795206053/WhatsApp_Video_2026-11-21_at_1.47.37_AM.mp4",
+      description:
+        "Nemo Candy Plakat Betta is a colourful short-finned Betta splendens variety. It displays attractive combinations of orange, red, yellow, white and sometimes blue or dark patches. Each fish has its own unique colour distribution and pattern.",
+      price: 699,
+      unit: "piece",
+      minQuantity: 1,
+      variants: [
+        { name: "Male", price: 699 },
+        { name: "Female", price: 499 }
+      ],
+      size: "Standard",
+      overview:
+        "Nemo Candy describes the colour and pattern, while Plakat (PK) describes the short-fin form. Plakat Bettas have compact fins and an active swimming style. Individual colours and markings may vary.",
+      careRequirements: {
+        temperature: "25–28°C",
+        pH: "6.5–7.5",
+        diet: "High-quality Betta pellets, frozen or live foods such as brine shrimp and bloodworms",
+        temperament: "Territorial; keep males separately",
+        careLevel: "Beginner to Intermediate"
+      },
+      habitatSetup: {
+        tankSize: "At least 19 litres recommended",
+        filtration: "Gentle filtration",
+        heating: "Stable tropical temperature with a heater",
+        plants: "Live plants and hiding spaces",
+        water: "Clean, conditioned and properly cycled water"
+      },
+      didYouKnow: [
+        "Nemo Candy is a trade colour-pattern name, not a separate Betta species.",
+        "PK stands for Plakat, which means short-finned.",
+        "Every Nemo Candy Betta can have a unique colour pattern.",
+        "Male and female fish may differ in body shape and fin appearance."
+      ],
+      featured: false
+    },
+
+    {
+      id: "hmpk-nemo-candy-dumbo-ear-betta",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "HMPK Nemo Candy Dumbo Ear Betta",
+      subtitle: "Betta splendens (Halfmoon Plakat Nemo Candy Dumbo Ear)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795206236/a3bcd590-8f9e-4842-a9bc-cf831d7ca836.png",
+      images: ["https://res.cloudinary.com/pv8lnpft/image/upload/v1795206236/a3bcd590-8f9e-4842-a9bc-cf831d7ca836.png",
+        "https://res.cloudinary.com/pv8lnpft/image/upload/v1795206452/288d567e-7898-47ca-bdaf-7d94a02d6ea6.jpg"
+      ],
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795206288/WhatsApp_Video_2026-11-21_at_1.49.35_AM.mp4",
+      description:
+        "The HMPK Nemo Candy Dumbo Ear Betta is a colourful ornamental Betta splendens variety featuring a Nemo Candy-inspired multicolour pattern, compact Plakat fins and enlarged pectoral fins known as Dumbo Ears. Its colours may include vibrant orange, red, yellow, white and other contrasting shades.",
+      price: 1399,
+      unit: "piece",
+      minQuantity: 1,
+      variants: [
+        { name: "Male", price: 1399 },
+        { name: "Female", price: 799 }
+      ],
+      size: "Standard",
+      overview:
+        "HMPK stands for Halfmoon Plakat, combining a short-finned Plakat body with a broad Halfmoon-style tail. Dumbo Ear refers to the enlarged pectoral fins, while Nemo Candy describes the colour pattern. Each fish has its own unique markings and colour distribution.",
+      careRequirements: {
+        temperature: "25–28°C",
+        pH: "6.5–7.5",
+        diet: "High-quality Betta pellets, frozen or live foods such as brine shrimp and bloodworms",
+        temperament: "Territorial; males should be housed separately",
+        careLevel: "Beginner to Intermediate"
+      },
+      habitatSetup: {
+        tankSize: "At least 19 litres recommended",
+        filtration: "Gentle filtration with low water flow",
+        heating: "Stable tropical temperature with a heater",
+        plants: "Live plants and resting or hiding spaces",
+        water: "Clean, conditioned and properly cycled water"
+      },
+      didYouKnow: [
+        "HMPK combines Halfmoon-style tail shape with short Plakat fins.",
+        "Dumbo Ears are enlarged pectoral fins that resemble elephant ears.",
+        "Nemo Candy refers to the colour pattern, not a separate Betta species.",
+        "Male and female Bettas can differ in fin development and appearance."
+      ],
+      featured: false
+    },
+
+    {
+      id: "hmpk-dumbo-ear-betta",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "HMPK Dumbo Ear Betta",
+      subtitle: "Betta splendens (Halfmoon Plakat Dumbo Ear)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795205212/aafcd56e-d0af-4f67-9db5-e211af8d4762.jpg",
+      images: ["https://res.cloudinary.com/pv8lnpft/image/upload/v1795205212/aafcd56e-d0af-4f67-9db5-e211af8d4762.jpg",
+        "https://res.cloudinary.com/pv8lnpft/image/upload/v1795205229/2f8d0fd0-e9c0-4c4c-8a3c-f681a4f867f9.jpg"
+      ],
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795205390/WhatsApp_Video_2026-11-21_at_1.34.23_AM.mp4",
+      description: "A distinctive Betta variety combining the compact, short-finned Halfmoon Plakat body with oversized Dumbo Ear pectoral fins. Its broad, wing-like side fins and wide halfmoon-shaped tail create an impressive swimming display.",
+      price: 499,
+      unit: "piece",
+      minQuantity: 1,
+      size: "Adult (Approximately 5 – 7 cm including fins)",
+      overview: "The HMPK Dumbo Ear Betta is a selectively bred variety of Betta splendens combining two distinctive finnage traits. HMPK (Halfmoon Plakat) describes its short-finned body and broad tail that can spread towards a halfmoon shape, while Dumbo Ear refers to its enlarged pectoral fins resembling elephant ears. The combination creates a compact, muscular-looking fish with unusually prominent side fins. Colour and pattern can vary between individual specimens.",
+      careRequirements: {
+        "Difficulty": "Intermediate",
+        "Water Temperature": "25°C – 28°C",
+        "Diet": "Carnivorous; quality Betta pellets as the staple, supplemented with Daphnia, brine shrimp and occasional bloodworms.",
+        "Lifespan": "Approximately 3 – 5 years with proper care",
+        "pH Range": "6.5 – 7.5",
+        "Water Hardness": "Soft to moderately hard water",
+        "Temperament": "Territorial; adult males should be housed separately.",
+        "Social Behaviour": "Generally kept individually. Avoid aggressive or fin-nipping tankmates.",
+        "Fin Care": "Large pectoral fins need clean water, gentle flow and smooth aquarium decor."
+      },
+      habitatSetup: {
+        "Aquarium Size": "At least 19 litres (5 gallons); approximately 38 litres (10 gallons) provides more stable conditions.",
+        "Heating": "Use an adjustable heater and thermometer to maintain stable tropical temperatures.",
+        "Filtration": "Gentle sponge filter or low-flow adjustable filtration.",
+        "Water Flow": "Very gentle current to make swimming easier for the enlarged pectoral fins.",
+        "Substrate": "Smooth sand or fine aquarium gravel.",
+        "Plants & Decor": "Live plants such as Anubias and Java Fern, with smooth decorations and hiding places.",
+        "Resting Areas": "Broad-leaf plants and resting spots near the water surface.",
+        "Water Quality": "Use a fully cycled aquarium and maintain zero ammonia and nitrite.",
+        "Aquarium Cover": "A secure lid is recommended because Bettas can jump.",
+        "Fin Protection": "Avoid sharp ornaments, rough surfaces and strong filter intakes."
+      },
+      didYouKnow: [
+        "HMPK stands for Halfmoon Plakat, a short-finned Betta form with a broad halfmoon-style tail.",
+        "Dumbo Ear refers to enlarged pectoral fins, not the tail shape.",
+        "The enlarged pectoral fins are also called Elephant Ears or Big Ears.",
+        "Dumbo fins can occur with different tail types, including Plakat and Halfmoon.",
+        "Both male and female Bettas can display the Dumbo Ear trait."
+      ],
+      featured: false
+    },
+
+
+    {
+      id: "crowntail-betta",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "Crowntail Betta Fish",
+      subtitle: "Betta splendens (Crowntail Variety)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795206769/4f6b058e-3c7d-4883-a514-359525e6e4ce.jpg",
+      images: [],
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795206920/WhatsApp_Video_2026-11-21_at_2.00.26_AM.mp4",
+      description:
+        "Crowntail Betta is a beautiful ornamental freshwater fish known for its distinctive spiky tail and fins. Its fin rays extend beyond the webbing, creating an elegant crown-like appearance. Available in different colours and patterns, every fish has its own unique look.",
+      price: 299,
+      unit: "piece",
+      minQuantity: 1,
+      variants: [
+        { name: "Male", price: 299 },
+        { name: "Female", price: 199 }
+      ],
+      size: "Standard",
+      overview:
+        "Crowntail is a fin type of Betta splendens, recognised by its reduced fin webbing and extended rays. Males generally display more prominent finnage, while females may have shorter or less elaborate fins.",
+      careRequirements: {
+        temperature: "25–28°C",
+        pH: "6.5–7.5",
+        diet: "High-quality Betta pellets, frozen or live foods such as brine shrimp",
+        temperament: "Territorial; males should be housed separately",
+        careLevel: "Beginner to Intermediate"
+      },
+      habitatSetup: {
+        tankSize: "At least 19 litres recommended",
+        filtration: "Gentle filtration with low water flow",
+        heating: "Stable tropical temperature with a heater",
+        plants: "Live plants and hiding spaces",
+        water: "Clean, conditioned and properly cycled water"
+      },
+      didYouKnow: [
+        "Crowntail Bettas are named after their crown-like fin appearance.",
+        "Their extended fin rays create a spiky appearance.",
+        "Crowntail describes the fin type, not the fish's colour.",
+        "Male and female Crowntails can have noticeably different finnage."
+      ],
+      featured: false
+    },
+
+    {
+      id: "wild-alien-spade-tail",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "Wild (Alien Spade Tail)",
+      subtitle: "Betta splendens-complex hybrid (Alien Line)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795203897/fbb7a513-6b29-4280-83ae-12ed675c8a74.png",
+      images: [],
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795203625/WhatsApp_Video_2026-11-21_at_1.09.46_AM.mp4",
+      description: "A striking wild-type Alien Betta featuring metallic iridescent scales, a dark base colour and a distinctive spade-shaped tail. Its compact body and shimmering blue-green or turquoise patterns create a unique exotic appearance.",
+      price: 1499,
+      unit: "piece",
+      minQuantity: 1,
+      size: "Adult (Approximately 5 – 7 cm)",
+      overview: "The Alien Spade Tail Betta is a selectively bred hybrid line associated with the Betta splendens complex and wild-type Betta varieties. It is admired for its metallic blue, green or turquoise iridescence, dark facial markings and wild-style appearance. The Spade Tail form has a caudal fin that narrows towards a central pointed tip, resembling a playing-card spade. Exact hybrid ancestry and colour patterns can vary between breeder lines.",
+      careRequirements: {
+        "Difficulty": "Intermediate",
+        "Water Temperature": "24°C – 28°C",
+        "Diet": "Carnivorous; quality Betta pellets supplemented with Daphnia, brine shrimp and suitable frozen or live foods.",
+        "Lifespan": "Approximately 3 – 5 years with proper care",
+        "pH Range": "6.0 – 7.5",
+        "Water Hardness": "Soft to moderately hard water",
+        "Temperament": "Territorial; males may show aggression towards other males.",
+        "Social Behaviour": "Individual housing is recommended, especially for males. Do not assume that hybrid Alien Bettas can safely live together."
+      },
+      habitatSetup: {
+        "Aquarium Size": "At least 19 litres (5 gallons); approximately 38 litres (10 gallons) provides more stable conditions.",
+        "Heating": "Use an adjustable heater and thermometer to maintain stable tropical temperatures.",
+        "Filtration": "Gentle sponge filter or low-flow filtration.",
+        "Water Flow": "Low flow with calm swimming areas.",
+        "Substrate": "Smooth sand or fine aquarium gravel.",
+        "Plants & Decor": "Live plants such as Anubias and Java Fern, with driftwood and smooth hiding places.",
+        "Resting Areas": "Broad-leaf plants and resting spots near the water surface.",
+        "Water Quality": "Use a fully cycled aquarium and maintain zero ammonia and nitrite.",
+        "Aquarium Cover": "A secure lid is recommended because Bettas can jump.",
+        "Surface Access": "Keep the water surface accessible for atmospheric breathing."
+      },
+      didYouKnow: [
+        "Alien Betta is a trade name for selectively bred hybrid lines, not a separate scientific species.",
+        "Its metallic scales can reflect blue, green and turquoise shades under different lighting.",
+        "The Spade Tail has a pointed caudal-fin tip resembling a playing-card spade.",
+        "Alien Betta lines may have different wild-type ancestry depending on the breeder.",
+        "Like other labyrinth fish, Bettas can breathe atmospheric air at the water surface."
+      ],
+      featured: false
+    },
+
+    {
       id: "betta-pure-white-crowntail",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
@@ -1370,7 +1810,7 @@
       images: [],
       video: "",
       description: "A lively and peaceful livebearer with bright golden-yellow coloration. Golden Mollies actively explore their aquarium and graze on algae and natural biofilm.",
-      price: 180,
+      price: 179,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (1 Male + 1 Female)",
@@ -1416,7 +1856,7 @@
       images: [],
       video: "",
       description: "An exceptional Balloon Molly variety featuring a compact, rounded body profile, shimmering platinum-white scales, elegant lyretail caudal extensions, and distinctive blue-tinted eyes. Peaceful, active, and well suited for planted community aquariums.",
-      price: 3000,
+      price: 2999,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (Subject to supplier stock availability)",
@@ -1460,7 +1900,7 @@
       images: [],
       video: "",
       description: "A rare and captivating Balloon Molly displaying dramatic dark zebra banding across a light body, flowing lyretail finnage, and reflective crystal-clear eyes. An eye-catching, charismatic livebearer for dedicated community setups.",
-      price: 3500,
+      price: 3499,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (Subject to supplier stock availability)",
@@ -1504,7 +1944,7 @@
       images: [],
       video: "",
       description: "A charming Balloon Molly featuring glistening porcelain-white platinum coloration and a smooth, classic rounded caudal fin. Compact, playful, and gentle, swimming gracefully in peaceful community aquariums.",
-      price: 2000,
+      price: 1999,
       unit: "pair",
       minQuantity: 1,
       size: "Adult Pair (Subject to supplier stock availability)",
@@ -1541,14 +1981,14 @@
       id: "shrimp-crystal-red",
       category: "aquarium",
       categoryName: "Shrimps",
-      subCategory: "shrimps",
+      subCategory: "shrimp",
       name: "Crystal Red Shrimp",
       subtitle: "Caridina cf. cantonensis var. Crystal Red",
       image: "https://upload.wikimedia.org/wikipedia/commons/4/47/Caridina-cf-cantonensis-crystal-red.jpg",
       images: [],
       video: "",
       description: "Prized high-grade dwarf freshwater shrimp displaying vivid red and bright white bands. Gentle algae grazer ideal for nano planted tanks.",
-      price: 150,
+      price: 149,
       unit: "piece",
       minQuantity: 1,
       specs: {
@@ -1593,7 +2033,7 @@
       images: [],
       video: "",
       description: "An attractive Mediterranean pill isopod recognised by its dark brown to grey body and vivid yellow dorsal spots. A fascinating species for bioactive enclosures and dedicated isopod colonies.",
-      price: 120,
+      price: 119,
       unit: "piece",
       minQuantity: 5,
       size: "Adult Size (Approximately 1.8 – 2.3 cm)",
@@ -1637,7 +2077,7 @@
       images: [],
       video: "",
       description: "An attractive orange colour form of the hardy Cubaris murina, admired for its warm orange tones, active behaviour and suitability for humid bioactive enclosures.",
-      price: 60,
+      price: 50,
       unit: "piece",
       minQuantity: 5,
       size: "Adult Size (Approximately 0.8 – 1.2 cm)",
@@ -1681,7 +2121,7 @@
       images: [],
       video: "",
       description: "A beautiful pale-white colour morph of Cubaris murina, admired for its frosty appearance, compact rounded body and suitability for humid bioactive enclosures.",
-      price: 70,
+      price: 69,
       unit: "piece",
       minQuantity: 5,
       size: "Adult Size (Approximately 0.8 – 1.2 cm)",
@@ -1726,7 +2166,7 @@
       images: [],
       video: "",
       description: "A fast-moving and attractive orange colour morph featuring contrasting pied patches and a subtle powdery appearance. An active detritivore suited to well-maintained bioactive enclosures.",
-      price: 60,
+      price: 69,
       unit: "piece",
       minQuantity: 5,
       size: "Adult Size (Approximately 1 – 1.5 cm)",
@@ -1772,7 +2212,7 @@
       images: [],
       video: "",
       description: "A premium collector isopod admired for its beautiful coffee-brown and creamy beige marbled coloration. A distinctive tropical species suited to carefully maintained, humid isopod enclosures.",
-      price: 600,
+      price: 599,
       unit: "piece",
       minQuantity: 5,
       size: "Adult Size (Approximately 15 – 22 mm)",
@@ -1819,7 +2259,7 @@
       images: [],
       video: "",
       description: "Exquisite pastel pink and creamy white hues mimicking delicate sakura blossoms. A prized gem among luxury isopod enthusiasts.",
-      price: 750,
+      price: 749,
       unit: "piece",
       minQuantity: 5,
       specs: {
@@ -1861,7 +2301,7 @@
       images: [],
       video: "",
       description: "A distinctive pill isopod recognised by its rugged, granular slate-grey to bluish-grey shell. An active and hardy species that makes an interesting addition to bioactive enclosures and dedicated isopod colonies.",
-      price: 150,
+      price: 149,
       unit: "piece",
       minQuantity: 5,
       size: "Adult Size (Approximately 1.5 – 2.1 cm)",
@@ -2155,7 +2595,7 @@
       images: [],
       video: "",
       description: "One of the largest commonly kept tarantula species, recognised by its dark body covered with distinctive salmon-pink hairs. Famous for its rapid growth, impressive adult size and strong feeding response.",
-      price: 3000,
+      price: 2999,
       unit: "specimen",
       minQuantity: 1,
       size: "Current Size: Approximately 1 inch (Spiderling)",
@@ -2312,7 +2752,7 @@
 
       description: "Start your own Cubaris Murina Glacier colony with this special pack. Get 10 Glacier Isopods and receive 1 additional specimen free. A total of 11 beautiful white isopods for your bioactive enclosure or dedicated isopod culture.",
 
-      price: 700,
+      price: 699,
       unit: "kit",
       minQuantity: 1,
 
@@ -2379,7 +2819,7 @@
       images: ["live_food_cultures_category.jpg"],
       video: "",
       description: "Active, prolific starter culture of Panagrellus redivivus nematodes. Perfect for nano fish, bettas, and newborn fry. Simple oatmeal maintenance with zero foul odor.",
-      price: 150,
+      price: 149,
       unit: "Culture",
       minQuantity: 1,
       specs: {
@@ -2406,7 +2846,7 @@
       images: [],
       video: "",
       description: "Resilient live culture of Turbatrix aceti. Unlike microworms that sink, vinegar eels swim continuously throughout the water column, ideal for surface-feeding fry.",
-      price: 180,
+      price: 179,
       unit: "Culture",
       minQuantity: 1,
       specs: {
@@ -2433,7 +2873,7 @@
       images: [],
       video: "",
       description: "High-density freshwater micro-crustacean starter culture. Smaller and softer-shelled than standard Daphnia magna, making them easier for small fish to digest.",
-      price: 200,
+      price: 199,
       unit: "Culture",
       minQuantity: 1,
       specs: {
@@ -2460,7 +2900,7 @@
       images: [],
       video: "",
       description: "Dense starter culture of Enchytraeus buchholzi on damp organic peat/coco fiber substrate. Exceptionally rich in protein and lipids for conditioning breeders.",
-      price: 220,
+      price: 219,
       unit: "Culture",
       minQuantity: 1,
       specs: {
@@ -4197,6 +4637,8 @@
     orderDate: '',
     orderTime: '',
     isSubmitting: false,
+    isCompleted: false,
+    lastSubmittedWaUrl: '',
     customer: {
       fullName: '',
       mobile: '',
@@ -4849,17 +5291,17 @@
 
         <div id="checkoutPostActions" style="display:none;" class="checkout-post-actions">
           <div style="font-weight:700; color:var(--color-primary-dark); font-size:0.95rem;">
-            ✓ WhatsApp Chat Opened in New Tab!
+            ✓ Order Placed &amp; WhatsApp Opened!
           </div>
           <div style="font-size:0.825rem; color:var(--text-muted); max-width:440px;">
-            Your order reference <code>${checkoutState.orderId}</code> is ready to send. Your cart is preserved safely in case you need to return.
+            Your order reference <code>${checkoutState.orderId}</code> has been prepared and sent to WhatsApp. Your cart has been automatically cleared.
           </div>
           <div style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center; margin-top:0.25rem;">
-            <button type="button" class="btn btn-outline btn-sm" onclick="closeCheckoutModal();">
-              Keep Cart Saved &amp; Close
+            <button type="button" class="btn btn-primary btn-sm" onclick="closeCheckoutModal();">
+              Done &amp; Close
             </button>
-            <button type="button" class="btn btn-primary btn-sm" onclick="CartManager.clear(); closeCheckoutModal(); showToast('Cart cleared. Thank you for ordering with Fish Tales!', 'success');">
-              Order Confirmed? Clear Cart
+            <button type="button" class="btn btn-outline btn-sm" onclick="window.reopenWhatsAppOrder();">
+              Re-open WhatsApp
             </button>
           </div>
         </div>
@@ -4867,8 +5309,19 @@
     `;
   };
 
+  window.reopenWhatsAppOrder = function () {
+    if (checkoutState.lastSubmittedWaUrl) {
+      window.open(checkoutState.lastSubmittedWaUrl, '_blank');
+    }
+  };
+
   window.proceedToWhatsApp = function () {
     if (checkoutState.isSubmitting) return;
+
+    if (checkoutState.isCompleted && checkoutState.lastSubmittedWaUrl) {
+      window.open(checkoutState.lastSubmittedWaUrl, '_blank');
+      return;
+    }
 
     const items = CartManager.load();
     if (items.length === 0) {
@@ -4890,16 +5343,38 @@
       orderId: checkoutState.orderId,
       date: checkoutState.orderDate,
       time: checkoutState.orderTime,
-      items: items,
+      items: items.map(item => ({ ...item })),
       subtotal: CartManager.getTotal(),
-      customer: checkoutState.customer
+      customer: { ...checkoutState.customer }
     };
 
     const message = buildWhatsAppOrderMessage(orderDetails);
     const encoded = encodeURIComponent(message);
     const waUrl = `https://wa.me/919654297430?text=${encoded}`;
+    checkoutState.lastSubmittedWaUrl = waUrl;
 
-    window.open(waUrl, '_blank');
+    try {
+      window.open(waUrl, '_blank');
+    } catch (err) {
+      console.error('Failed to open WhatsApp window:', err);
+      checkoutState.isSubmitting = false;
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+          </svg>
+          Continue to WhatsApp &rarr;
+        `;
+      }
+      showToast('Could not open WhatsApp. Please check your browser settings and try again.', 'error');
+      return;
+    }
+
+    // Automatically clear cart after successful order placement
+    checkoutState.isCompleted = true;
+    CartManager.clear();
+    showToast('Order placed successfully! Your cart has been cleared.', 'success');
 
     setTimeout(() => {
       checkoutState.isSubmitting = false;
