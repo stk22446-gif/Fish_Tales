@@ -1813,7 +1813,7 @@
       video: "",
       description:
         "A stunning Platinum White Balloon Molly featuring a pearly white body, beautiful blue eyes and a distinctive rounded balloon-shaped body. Its elegant round tail and translucent white fins give it a unique appearance, making it an attractive addition to a peaceful community aquarium.",
-      price: 180,
+      price: 1999,
       unit: "pair",
       minQuantity: 1,
       size: "Standard",
