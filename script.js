@@ -1167,7 +1167,7 @@
       subtitle: "Betta splendens (Black Samurai Plakat Variety)",
       image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795197330/03430d1a-c210-4fb3-8359-db7cc36874e7.png",
       images: [],
-      video: "",
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795197472/WhatsApp_Video_2026-11-20_at_11.19.38_PM.mp4",
       description: "A striking Black Samurai Plakat Betta featuring a deep black body covered with shimmering metallic silver-white armour-like scales. Its compact body and short, powerful fins create a bold and distinctive appearance.",
       price: 499,
       unit: "piece",
@@ -1220,26 +1220,16 @@
       category: "aquarium",
       categoryName: "Aquarium & Fish",
       subCategory: "betta",
-      name: "Avatar Stardust — Plakat Variety",
+      name: "Avatar Stardust",
       subtitle: "Betta splendens (Shortfin Plakat)",
       image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795045676/7612bf26-e9d9-4217-891c-3fa2d710e805.png",
       images: [],
-      video: "",
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795200735/WhatsApp_Video_2026-11-21_at_12.13.35_AM.mp4",
       description: "A spectacular short-finned Plakat Betta displaying a deep midnight-black base dusted with shimmering metallic blue and cyan scales reminiscent of a cosmic starfield. Active, vigorous, and agile.",
-      price: 499,
+      price: 3499,
       unit: "piece",
-      variants: [
-        {
-          name: "Male",
-          price: 499
-        },
-        {
-          name: "Female",
-          price: 499
-        }
-      ],
       minQuantity: 1,
-      size: "Adult (Approximately 4.5 – 6 cm)",
+      size: "Adult (Male)",
       overview: "Avatar Stardust is a highly prized modern Betta splendens morph celebrated for its dark, velvety black body heavily speckled with luminous, star-like metallic cyan and electric blue scales. As a traditional Plakat variety, it possesses compact, muscular finnage that allows swift, unhindered swimming and superior stamina compared to heavy long-finned varieties. Each individual specimen displays a unique constellation of iridescence.",
       careRequirements: {
         "Difficulty": "Beginner with suitable heated nano setup",
@@ -1274,26 +1264,16 @@
       category: "aquarium",
       categoryName: "Aquarium & Fish",
       subCategory: "betta",
-      name: "RGG Ironman — Halfmoon Plakat Variety",
+      name: "RGG Ironman — Halfmoon",
       subtitle: "Betta splendens (Halfmoon Plakat)",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795045913/4f775a40-8f7a-4ac6-a0a1-3ffb1a43fe19.png",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795201198/ac0bfb02-53c6-4db6-a786-39f450ba6e42.png",
       images: [],
       video: "",
       description: "A bold Halfmoon Plakat (HMPK) Betta characterized by a dynamic red, gold, and metallic armored mask pattern reminiscent of the iconic Ironman color scheme, paired with a crisp 180-degree caudal spread.",
-      price: 499,
+      price: 1249,
       unit: "piece",
-      variants: [
-        {
-          name: "Male",
-          price: 499
-        },
-        {
-          name: "Female",
-          price: 499
-        }
-      ],
       minQuantity: 1,
-      size: "Adult (Approximately 5 – 6.5 cm)",
+      size: "Adult (Male)",
       overview: "The RGG (Red Gold Green / Red Galaxy Gold) Ironman Halfmoon Plakat is an elite exhibition-grade Betta splendens strain. It blends bold red and metallic gold or copper scaling across its flanks with an armored head mask, echoing the famous superhero aesthetic. As a Halfmoon Plakat, it features short, stout rays with a wide D-shaped 180-degree tail flare, combining show-quality conformation with robust vitality.",
       careRequirements: {
         "Difficulty": "Beginner to Intermediate",
@@ -3806,11 +3786,11 @@
               </div>
               <div class="pdp-gender-options" role="radiogroup" aria-label="Select Gender">
                 ${product.variants.map((v, vIdx) => {
-                  const isMale = (v.name || '').toLowerCase() === 'male';
-                  const isSelected = (currentSelectedGender && currentSelectedGender.toLowerCase() === (v.name || '').toLowerCase()) || (!currentSelectedGender && vIdx === 0);
-                  const symbolClass = isMale ? 'male' : 'female';
-                  const symbolChar = isMale ? '♂' : '♀';
-                  return `
+      const isMale = (v.name || '').toLowerCase() === 'male';
+      const isSelected = (currentSelectedGender && currentSelectedGender.toLowerCase() === (v.name || '').toLowerCase()) || (!currentSelectedGender && vIdx === 0);
+      const symbolClass = isMale ? 'male' : 'female';
+      const symbolChar = isMale ? '♂' : '♀';
+      return `
                 <button type="button" class="pdp-gender-btn ${isSelected ? 'active' : ''}" data-gender="${v.name}" data-variant-index="${vIdx}" role="radio" aria-checked="${isSelected ? 'true' : 'false'}">
                   <div class="pdp-gender-btn-main">
                     <span class="pdp-gender-symbol ${symbolClass}">${symbolChar}</span>
@@ -3819,7 +3799,7 @@
                   <span class="pdp-gender-price">${CartManager.formatPrice(v.price)}</span>
                 </button>
                   `;
-                }).join('')}
+    }).join('')}
               </div>
             </div>
             ` : ''}
