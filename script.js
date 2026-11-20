@@ -1649,7 +1649,6 @@
       featured: false
     },
 
-
     {
       id: "crowntail-betta",
       category: "aquarium",
@@ -1658,7 +1657,9 @@
       name: "Crowntail Betta Fish",
       subtitle: "Betta splendens (Crowntail Variety)",
       image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795206769/4f6b058e-3c7d-4883-a514-359525e6e4ce.jpg",
-      images: [],
+      images: ["https://res.cloudinary.com/pv8lnpft/image/upload/v1795206769/4f6b058e-3c7d-4883-a514-359525e6e4ce.jpg",
+        "https://res.cloudinary.com/pv8lnpft/image/upload/v1795207232/71e6bbe6-231b-445f-b965-d2c5ef088b1b.jpg"
+      ],
       video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795206920/WhatsApp_Video_2026-11-21_at_2.00.26_AM.mp4",
       description:
         "Crowntail Betta is a beautiful ornamental freshwater fish known for its distinctive spiky tail and fins. Its fin rays extend beyond the webbing, creating an elegant crown-like appearance. Available in different colours and patterns, every fish has its own unique look.",
@@ -1799,52 +1800,48 @@
       featured: true
     },
 
+
     {
-      id: "molly-golden",
+      id: "platinum-white-blue-eyes-round-tail-balloon-molly",
       category: "aquarium",
       categoryName: "Aquarium & Fish",
       subCategory: "molly",
-      name: "Golden Molly",
-      subtitle: "Poecilia sphenops",
-      image: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Gold_Molly_1.jpg",
+      name: "Platinum White Blue Eyes Round Tail Balloon Molly",
+      subtitle: "Poecilia sphenops (Balloon Molly Variety)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795207614/8e498d59-99c0-4542-8610-2f7825d089ee.jpg",
       images: [],
       video: "",
-      description: "A lively and peaceful livebearer with bright golden-yellow coloration. Golden Mollies actively explore their aquarium and graze on algae and natural biofilm.",
-      price: 179,
+      description:
+        "A stunning Platinum White Balloon Molly featuring a pearly white body, beautiful blue eyes and a distinctive rounded balloon-shaped body. Its elegant round tail and translucent white fins give it a unique appearance, making it an attractive addition to a peaceful community aquarium.",
+      price: 1999,
       unit: "pair",
       minQuantity: 1,
-      size: "Adult Pair (1 Male + 1 Female)",
-      overview: "The Golden Molly (Poecilia sphenops) is a selectively bred colour variety of the common molly, admired for its warm golden-yellow appearance and active swimming behaviour. This peaceful livebearer is suited to appropriately sized freshwater community aquariums with stable, mineral-rich water. Mollies are omnivores and naturally graze on algae and other food found on surfaces.",
+      size: "Standard",
+      overview:
+        "This ornamental Molly variety is recognised by its platinum-white colouration, blue eyes, compact balloon-shaped body and rounded tail. Individual fish may show slight variations in body shape and colour intensity.",
       careRequirements: {
-        "Difficulty": "Beginner with suitable water conditions",
-        "Water Temperature": "22°C – 28°C",
-        "Diet": "Omnivorous; provide quality flakes or micro-pellets along with vegetable-based foods such as spirulina flakes, algae wafers and blanched vegetables",
-        "Lifespan": "Approximately 3 – 5 years",
-        "pH Range": "7.0 – 8.5",
-        "General Hardness (GH)": "Moderately hard to hard water (approximately 15 – 30 dGH)",
-        "Temperament": "Generally peaceful and active community fish",
-        "Social Behaviour": "Social livebearers that do well in groups; keeping more females than males helps reduce persistent mating attention"
+        temperature: "24–28°C",
+        pH: "7.0–8.2",
+        diet: "Omnivorous; quality flakes, pellets and vegetable-based foods",
+        temperament: "Peaceful; suitable for compatible community aquariums",
+        careLevel: "Easy"
       },
       habitatSetup: {
-        "Aquarium Size": "Around 75 litres (20 gallons) or larger for a small group; provide more space for additional fish",
-        "Substrate": "Aquarium sand or smooth gravel",
-        "Filtration": "Reliable biological filtration with good water circulation",
-        "Water Flow": "Moderate flow with calm areas for swimming",
-        "Plants & Decor": "Live plants such as Vallisneria and Java Fern provide cover and grazing surfaces",
-        "Swimming Space": "Leave open areas for active swimming alongside planted sections",
-        "Water Quality": "Use a fully cycled aquarium; maintain stable water with zero ammonia and nitrite and keep nitrate controlled",
-        "Tankmates": "Choose peaceful fish that prefer similar hard, alkaline water conditions",
-        "Aquarium Cover": "A secure lid is recommended because mollies can jump"
+        tankSize: "60 litres or larger",
+        filtration: "Good filtration with gentle water movement",
+        heating: "Stable tropical temperature",
+        plants: "Live plants and open swimming space",
+        water: "Clean, conditioned water with regular maintenance"
       },
       didYouKnow: [
-        "Mollies are livebearers, meaning females give birth to free-swimming young rather than laying eggs.",
-        "They naturally graze on algae and biofilm growing on aquarium surfaces.",
-        "Mollies can tolerate both freshwater and mildly brackish conditions, but added salt is not essential for healthy freshwater keeping.",
-        "Their diet should include plenty of plant-based food alongside other suitable foods.",
-        "Female mollies are generally larger and fuller-bodied than males."
+        "Balloon Mollies are selectively bred for their rounded body shape.",
+        "Platinum White colouration gives the fish a pearly appearance.",
+        "Blue eyes create a striking contrast against the white body.",
+        "Mollies are livebearers, meaning females give birth to live young."
       ],
-      featured: true
+      featured: false
     },
+
     {
       id: "molly-blue-eye-platinum-white-lyretail-balloon",
       category: "aquarium",
