@@ -28,6 +28,7 @@
   const CATEGORY_NAMES = {
     all: 'All Products',
     aquarium: 'Aquarium & Fish',
+    betta: 'Betta',
     isopods: 'Isopods',
     tarantulas: 'Tarantulas',
     combos: 'Combo Packs',
@@ -1972,46 +1973,252 @@
     },
 
     {
-      id: "shrimp-crystal-red",
+      id: "bloody-mary-shrimp",
       category: "aquarium",
-      categoryName: "Shrimps",
+      categoryName: "Aquarium & Fish",
       subCategory: "shrimp",
-      name: "Crystal Red Shrimp",
-      subtitle: "Caridina cf. cantonensis var. Crystal Red",
-      image: "https://upload.wikimedia.org/wikipedia/commons/4/47/Caridina-cf-cantonensis-crystal-red.jpg",
+      name: "Bloody Mary Shrimp",
+      subtitle: "Neocaridina davidi (Bloody Mary)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795210106/c52f7278-d689-405a-b554-6dd5832f6dad.jpg",
       images: [],
       video: "",
-      description: "Prized high-grade dwarf freshwater shrimp displaying vivid red and bright white bands. Gentle algae grazer ideal for nano planted tanks.",
+      description:
+        "Bloody Mary Shrimp is a popular freshwater dwarf shrimp known for its deep, rich red colour and attractive appearance. Its striking coloration makes it a beautiful addition to planted aquariums and peaceful shrimp-only setups.",
+      price: 179,
+      unit: "Pair",
+      minQuantity: 1,
+      size: "Approximately 1–2.5 cm",
+      overview:
+        "Bloody Mary is a selectively bred red colour variety of Neocaridina davidi. It is admired for its deep red body and translucent to lightly coloured shell appearance. Colour intensity can vary between individual shrimp.",
+      careRequirements: {
+        temperature: "20–26°C",
+        pH: "6.5–7.8",
+        diet: "Shrimp pellets, algae, biofilm and blanched vegetables",
+        temperament: "Peaceful; suitable for shrimp-only and compatible community tanks",
+        careLevel: "Easy to Intermediate"
+      },
+      habitatSetup: {
+        tankSize: "At least 20 litres recommended",
+        filtration: "Gentle sponge filtration",
+        heating: "Maintain stable temperature; avoid sudden fluctuations",
+        plants: "Moss, live plants and natural hiding spaces",
+        water: "Stable, clean and properly cycled freshwater with no copper contamination"
+      },
+      didYouKnow: [
+        "Bloody Mary is a selectively bred colour variety of Neocaridina davidi.",
+        "Their deep red colour makes them popular in planted aquariums.",
+        "They feed on biofilm and algae growing on aquarium surfaces.",
+        "Females are generally larger and have a rounder underside than males."
+      ],
+      featured: false
+    },
+
+    {
+      id: "blue-dream-shrimp",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "shrimp",
+      name: "Blue Dream Shrimp",
+      subtitle: "Neocaridina davidi (Blue Dream)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795210988/ff85743e-1932-436d-a417-e45bc1aaea7a.jpg",
+      images: [],
+      video: "",
+      description:
+        "Blue Dream Shrimp is a beautiful freshwater dwarf shrimp known for its rich blue colouration. Its vibrant appearance makes it a popular choice for planted aquariums, aquascapes and dedicated shrimp tanks.",
+      price: 149,
+      unit: "Pair",
+      minQuantity: 1,
+      size: "Approximately 1–2.5 cm",
+      overview:
+        "Blue Dream is a selectively bred blue colour variety of Neocaridina davidi. It is admired for its deep blue body colour, peaceful behaviour and suitability for planted freshwater aquariums. Colour intensity may vary between individual shrimp.",
+      careRequirements: {
+        temperature: "20–26°C",
+        pH: "6.5–7.8",
+        diet: "Shrimp pellets, algae, biofilm and blanched vegetables",
+        temperament: "Peaceful; suitable for shrimp-only and compatible community tanks",
+        careLevel: "Easy to Intermediate"
+      },
+      habitatSetup: {
+        tankSize: "At least 20 litres recommended",
+        filtration: "Gentle sponge filtration",
+        heating: "Maintain stable temperature and avoid sudden fluctuations",
+        plants: "Moss, live plants and natural hiding spaces",
+        water: "Stable, clean and properly cycled freshwater; avoid copper contamination"
+      },
+      didYouKnow: [
+        "Blue Dream is a selectively bred colour variety of Neocaridina davidi.",
+        "Their blue colour stands out beautifully against green aquarium plants.",
+        "They feed on biofilm and algae growing on aquarium surfaces.",
+        "Females are generally larger and have a rounder underside than males."
+      ],
+      featured: false
+    },
+
+
+    {
+      id: "yellow-shrimp",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "shrimp",
+      name: "Yellow Shrimp",
+      subtitle: "Neocaridina davidi (Yellow)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795211293/1ddb4fad-e4d3-4045-b062-7f0ba4203dbf.jpg",
+      images: [],
+      video: "",
+      description:
+        "Yellow Shrimp is a vibrant freshwater dwarf shrimp admired for its bright yellow to golden body colour. Its cheerful appearance makes it a beautiful addition to planted aquariums, aquascapes and dedicated shrimp tanks.",
       price: 149,
       unit: "piece",
       minQuantity: 1,
-      specs: {
-        "care": "Intermediate / Peaceful",
-        "temp": "21°C – 25°C",
-        "diet": "Biofilm, specialized shrimp pellets & blanched vegetables",
-        "habitat": "Planted freshwater nano tank",
-        "size": "Adult (2–2.5 cm)"
-      },
-      overview: "The Crystal Red Shrimp (Caridina cf. cantonensis var. Crystal Red) is a premier dwarf freshwater invertebrate exhibiting striking opaque white and vivid red color banding. Exceptional algae grazer for planted aquascapes.",
+      size: "Approximately 1–2.5 cm",
+      overview:
+        "Yellow Shrimp is a selectively bred colour variety of Neocaridina davidi. It is popular for its golden-yellow colouration, peaceful behaviour and suitability for planted freshwater aquariums. Colour intensity may vary between individual shrimp.",
       careRequirements: {
-        "Difficulty": "Intermediate / Peaceful",
-        "Water Temp": "21°C – 25°C",
-        "Diet": "Biofilm, specialized shrimp pellets & blanched vegetables",
-        "Lifespan": "1.5 – 2 years",
-        "pH Range": "6.2 – 6.8",
-        "TDS / GH": "TDS 110–140 ppm, GH 4–6"
+        temperature: "20–26°C",
+        pH: "6.5–7.8",
+        diet: "Shrimp pellets, algae, biofilm and blanched vegetables",
+        temperament: "Peaceful; suitable for shrimp-only and compatible community tanks",
+        careLevel: "Easy to Intermediate"
       },
       habitatSetup: {
-        "Aquarium Size": "5 to 10 gallons mature planted nano tank",
-        "Filtration & Flow": "Sponge filtration only to prevent shrimplets from being drawn into impellers",
-        "Substrate": "Active buffering substrate maintaining slightly acidic pH",
-        "Plants & Decor": "Cholla wood, Indian almond leaves, and dense mosses (Java, Christmas, Phoenix)"
+        tankSize: "At least 20 litres recommended",
+        filtration: "Gentle sponge filtration",
+        heating: "Maintain stable temperature and avoid sudden fluctuations",
+        plants: "Moss, live plants and natural hiding spaces",
+        water: "Stable, clean and properly cycled freshwater; avoid copper contamination"
       },
       didYouKnow: [
-        "Crystal Red Shrimps originate from a rare red mutation of wild Bee Shrimp discovered in Japan in the 1990s.",
-        "They molt their exoskeleton as they grow, during which they hide in mosses until their new shell hardens."
+        "Yellow Shrimp is a selectively bred colour variety of Neocaridina davidi.",
+        "Their bright yellow colour creates a beautiful contrast against green aquatic plants.",
+        "They feed on biofilm and algae growing on aquarium surfaces.",
+        "Females are generally larger and have a rounder underside than males."
       ],
-      featured: true
+      featured: false
+    },
+
+    {
+      id: "chocolate-shrimp",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "shrimp",
+      name: "Chocolate Shrimp",
+      subtitle: "Neocaridina davidi (Chocolate)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795211861/4cce6378-acd3-4cbc-b9c1-7a4dfe82141a.jpg",
+      images: [],
+      video: "",
+      description:
+        "Chocolate Shrimp is an attractive freshwater dwarf shrimp known for its rich chocolate-brown to dark earthy coloration. Its natural-looking appearance makes it a unique addition to planted aquariums and peaceful shrimp setups.",
+      price: 149,
+      unit: "piece",
+      minQuantity: 1,
+      size: "Approximately 1–2.5 cm",
+      overview:
+        "Chocolate Shrimp is a selectively bred colour variety of Neocaridina davidi. Its body can display shades of brown, dark chocolate and earthy tones. Colour intensity may vary between individual shrimp.",
+      careRequirements: {
+        temperature: "20–26°C",
+        pH: "6.5–7.8",
+        diet: "Shrimp pellets, algae, biofilm and blanched vegetables",
+        temperament: "Peaceful; suitable for shrimp-only and compatible community tanks",
+        careLevel: "Easy to Intermediate"
+      },
+      habitatSetup: {
+        tankSize: "At least 20 litres recommended",
+        filtration: "Gentle sponge filtration",
+        heating: "Maintain stable temperature and avoid sudden fluctuations",
+        plants: "Moss, live plants and natural hiding spaces",
+        water: "Stable, clean and properly cycled freshwater; avoid copper contamination"
+      },
+      didYouKnow: [
+        "Chocolate is a selectively bred colour variety of Neocaridina davidi.",
+        "Its earthy brown colour creates a natural look in planted aquariums.",
+        "Chocolate Shrimp feed on biofilm and algae growing on aquarium surfaces.",
+        "Females are generally larger and have a rounder underside than males."
+      ],
+      featured: false
+    },
+
+
+    {
+      id: "black-rose-shrimp",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "shrimp",
+      name: "Black Rose Shrimp",
+      subtitle: "Neocaridina davidi (Black Rose)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795211864/91c306ad-c4e7-492b-903d-0cf8ad327c1a.jpg",
+      images: [],
+      video: "",
+      description:
+        "Black Rose Shrimp is a striking freshwater dwarf shrimp admired for its deep black, dark charcoal and sometimes velvety appearance. Its elegant dark coloration creates a beautiful contrast against green aquatic plants, making it a popular choice for planted aquariums.",
+      price: 149,
+      unit: "piece",
+      minQuantity: 1,
+      size: "Approximately 1–2.5 cm",
+      overview:
+        "Black Rose is a selectively bred dark-colour variety of Neocaridina davidi. Its body can display rich black or charcoal shades, with colour intensity varying between individual shrimp.",
+      careRequirements: {
+        temperature: "20–26°C",
+        pH: "6.5–7.8",
+        diet: "Shrimp pellets, algae, biofilm and blanched vegetables",
+        temperament: "Peaceful; suitable for shrimp-only and compatible community tanks",
+        careLevel: "Easy to Intermediate"
+      },
+      habitatSetup: {
+        tankSize: "At least 20 litres recommended",
+        filtration: "Gentle sponge filtration",
+        heating: "Maintain stable temperature and avoid sudden fluctuations",
+        plants: "Moss, live plants and natural hiding spaces",
+        water: "Stable, clean and properly cycled freshwater; avoid copper contamination"
+      },
+      didYouKnow: [
+        "Black Rose is a selectively bred colour variety of Neocaridina davidi.",
+        "Their dark coloration looks striking against bright green aquarium plants.",
+        "They feed on biofilm and algae growing on aquarium surfaces.",
+        "Females are generally larger and have a rounder underside than males."
+      ],
+      featured: false
+    },
+
+
+    {
+      id: "red-rili-shrimp",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "shrimp",
+      name: "Red Rili Shrimp",
+      subtitle: "Neocaridina davidi (Red Rili)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795212078/87893add-0f44-4127-a1cc-ebaac15a92c1.jpg",
+      images: [],
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795212087/WhatsApp_Video_2026-11-21_at_3.29.13_AM.mp4",
+      description:
+        "Red Rili Shrimp is a beautiful freshwater dwarf shrimp featuring a distinctive combination of vibrant red and transparent sections across its body. Its unique patterned appearance makes it a popular choice for planted aquariums and aquascapes.",
+      price: 149,
+      unit: "piece",
+      minQuantity: 1,
+      size: "Approximately 1–2.5 cm",
+      overview:
+        "Red Rili is a selectively bred colour-pattern variety of Neocaridina davidi. It is recognised by its red head and tail sections with a transparent or lightly coloured central body. Pattern distribution and colour intensity may vary between individual shrimp.",
+      careRequirements: {
+        temperature: "20–26°C",
+        pH: "6.5–7.8",
+        diet: "Shrimp pellets, algae, biofilm and blanched vegetables",
+        temperament: "Peaceful; suitable for shrimp-only and compatible community tanks",
+        careLevel: "Easy to Intermediate"
+      },
+      habitatSetup: {
+        tankSize: "At least 20 litres recommended",
+        filtration: "Gentle sponge filtration",
+        heating: "Maintain stable temperature and avoid sudden fluctuations",
+        plants: "Moss, live plants and natural hiding spaces",
+        water: "Stable, clean and properly cycled freshwater; avoid copper contamination"
+      },
+      didYouKnow: [
+        "Red Rili is a selectively bred pattern variety of Neocaridina davidi.",
+        "Its transparent middle section creates a distinctive two-tone appearance.",
+        "Red Rili Shrimp feed on biofilm and algae growing on aquarium surfaces.",
+        "Females are generally larger and have a rounder underside than males."
+      ],
+      featured: false
     },
 
     // ISOPODS 
@@ -2809,8 +3016,8 @@
       subCategory: "microworm",
       name: "Microworm Starter Culture",
       subtitle: "Panagrellus redivivus",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795047635/de7db151-2b1d-4458-a5d3-27698510d07a.png",
-      images: ["live_food_cultures_category.jpg"],
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795212307/00ac7572-7bde-48d4-897f-abdf6781c0a8.png",
+      images: [],
       video: "",
       description: "Active, prolific starter culture of Panagrellus redivivus nematodes. Perfect for nano fish, bettas, and newborn fry. Simple oatmeal maintenance with zero foul odor.",
       price: 149,
@@ -2834,13 +3041,13 @@
       category: "cultures",
       categoryName: "Cultures",
       subCategory: "vinegar-eel",
-      name: "Vinegar Eel Live Culture",
+      name: "Vinegar Eel Live Starter Culture",
       subtitle: "Turbatrix aceti",
       image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795047047/f35faca0-8733-49d7-9f7c-a5aa8945f004.png",
       images: [],
       video: "",
       description: "Resilient live culture of Turbatrix aceti. Unlike microworms that sink, vinegar eels swim continuously throughout the water column, ideal for surface-feeding fry.",
-      price: 179,
+      price: 99,
       unit: "Culture",
       minQuantity: 1,
       specs: {
@@ -2848,7 +3055,7 @@
         "Culture Medium": "Organic apple cider vinegar and sliced apple",
         "Size": "1.0 – 2.0 mm free swimmers",
         "Temperature": "18°C – 28°C",
-        "Suitability": "Betta fry, Rainbowfish fry, Gouramis"
+        "Suitability": "Betta fry, Guppy fry, Nano tetras, Killifish"
       },
       overview: "Vinegar eels are virtually uncrashable cultures that require minimal maintenance. They can survive in freshwater for days without fouling water quality.",
       careRequirements: "Keep in a 50/50 mix of raw apple cider vinegar and dechlorinated water with apple slices.",
@@ -2861,7 +3068,7 @@
       category: "cultures",
       categoryName: "Cultures",
       subCategory: "moina",
-      name: "Moina Macrocopa Live Culture",
+      name: "Moina Live Starter Culture",
       subtitle: "Moina macrocopa",
       image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795047331/7eb2eca5-8404-489c-82ed-05328e660b43.png",
       images: [],
@@ -2943,6 +3150,9 @@
         el.textContent = count;
       });
       renderCartDrawerItems(items, total);
+      if (typeof window.syncCheckoutPage === 'function') {
+        window.syncCheckoutPage(items);
+      }
     },
 
     calcTotal(items) {
@@ -3178,7 +3388,7 @@
   const AQUARIUM_FILTER_NAMES = {
     all: 'All Products',
     aquarium: 'Aquarium',
-    betta: 'Betta Fish',
+    betta: 'Betta',
     guppy: 'Guppy',
     molly: 'Molly',
     shrimps: 'Shrimps',
@@ -3219,6 +3429,7 @@
   }
 
   function filterAquariumCategory(filterKey, shouldScroll = true) {
+    homeVisibleProductsCount = 4;
     currentAquariumFilter = filterKey || 'all';
 
     // When resetting to 'all', clear active search so all 17 aquarium products are displayed
@@ -3280,6 +3491,9 @@
   }
   let currentSearch = '';
   let currentSort = 'default';
+  let homeVisibleProductsCount = 4;
+  window.getHomeVisibleProductsCount = function () { return homeVisibleProductsCount; };
+  window.setHomeVisibleProductsCount = function (n) { homeVisibleProductsCount = n; };
 
   window.onCardVariantChange = function () { };
   window.onModalVariantChange = function () { };
@@ -3314,10 +3528,12 @@
   function renderProductGrid() {
     const grid = document.getElementById('productGrid');
     const countEl = document.getElementById('resultCount');
+    const paginationWrap = document.getElementById('cataloguePaginationWrap');
     if (!grid) return;
 
     const pageCategory = getCurrentPageCategory();
     const isAquariumPage = pageCategory === 'aquarium';
+    const isHomePage = pageCategory === 'all' || pageCategory === 'home';
 
     const allProductsPool = getAllProducts();
     // Ensure all products have variants and specs initialized
@@ -3350,6 +3566,9 @@
       // Home page (index.html)
       if (currentCategory === 'aquarium') {
         list = list.filter(p => isAquariumProduct(p));
+        totalInCategory = list.length;
+      } else if (currentCategory === 'betta') {
+        list = list.filter(p => p.subCategory === 'betta');
         totalInCategory = list.length;
       } else if (currentCategory === 'isopods') {
         list = list.filter(p => p.category === 'isopods');
@@ -3391,9 +3610,17 @@
       list.sort((a, b) => a.name.localeCompare(b.name));
     }
 
+    const totalMatching = list.length;
+    const shouldPaginate = Boolean(paginationWrap);
+    const displayedList = shouldPaginate ? list.slice(0, homeVisibleProductsCount) : list;
+
     // Update Showing X of Y products counter
     if (countEl) {
-      countEl.innerHTML = `Showing <strong>${list.length}</strong> of <strong>${totalInCategory}</strong> products`;
+      if (shouldPaginate) {
+        countEl.innerHTML = `Showing <strong>${displayedList.length}</strong> of <strong>${totalMatching}</strong> products`;
+      } else {
+        countEl.innerHTML = `Showing <strong>${list.length}</strong> of <strong>${totalInCategory}</strong> products`;
+      }
     }
 
     const indicatorEl = document.getElementById('activeCategoryIndicator');
@@ -3408,6 +3635,10 @@
     }
 
     if (list.length === 0) {
+      if (paginationWrap) {
+        paginationWrap.innerHTML = '';
+        paginationWrap.style.display = 'none';
+      }
       const filterLabel = isAquariumPage ? (AQUARIUM_FILTER_NAMES[currentAquariumFilter] || currentAquariumFilter) : '';
       const emptyMsg = currentSearch.trim()
         ? `We couldn't find any living specimens matching "${currentSearch}". Try refining your search or resetting category filters.`
@@ -3425,7 +3656,7 @@
       return;
     }
 
-    grid.innerHTML = list.map(product => {
+    grid.innerHTML = displayedList.map(product => {
       initProductVariantsAndSpecs(product);
       const activeVariant = getProductSelectedVariant(product);
       const hasPrice = activeVariant.price !== null && activeVariant.price !== undefined && Number(activeVariant.price) > 0;
@@ -3480,11 +3711,61 @@
         </article>
       `;
     }).join('');
+
+    // Render Load More / Show Less Controls (When pagination container is present)
+    if (paginationWrap) {
+      if (!shouldPaginate || totalMatching <= 4) {
+        paginationWrap.innerHTML = '';
+        paginationWrap.style.display = 'none';
+      } else {
+        paginationWrap.style.display = 'flex';
+        const hasMore = homeVisibleProductsCount < totalMatching;
+        const canShowLess = homeVisibleProductsCount > 4;
+
+        let buttonsHtml = '';
+        if (hasMore) {
+          buttonsHtml += `
+            <button type="button" class="btn-load-more" id="btnLoadMore" onclick="loadMoreHomeProducts()">
+              <span>Load More</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-9"/>
+              </svg>
+            </button>
+          `;
+        }
+        if (canShowLess) {
+          buttonsHtml += `
+            <button type="button" class="btn-show-less" id="btnShowLess" onclick="showLessHomeProducts()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m18 15-6-6-6 6"/>
+              </svg>
+              <span>Show Less</span>
+            </button>
+          `;
+        }
+        paginationWrap.innerHTML = buttonsHtml;
+      }
+    }
   }
+
+  window.loadMoreHomeProducts = function () {
+    homeVisibleProductsCount += 4;
+    renderProductGrid();
+  };
+
+  window.showLessHomeProducts = function () {
+    homeVisibleProductsCount = 4;
+    renderProductGrid();
+    const catalogueEl = document.getElementById('catalogue');
+    if (catalogueEl && typeof catalogueEl.scrollIntoView === 'function') {
+      catalogueEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   window.renderCartDrawerItems = renderCartDrawerItems;
 
   window.resetFilters = function () {
+    homeVisibleProductsCount = 4;
     currentCategory = 'all';
     currentAquariumFilter = 'all';
     currentSearch = '';
@@ -3501,6 +3782,7 @@
   };
 
   window.filterByCategory = function (categoryKey) {
+    homeVisibleProductsCount = 4;
     const pageCat = getCurrentPageCategory();
     if (pageCat === 'aquarium') {
       // If filtering aquarium subcategories or all on the Aquarium & Fish page, stay on this page
@@ -3567,11 +3849,13 @@
   };
 
   window.handleCatalogSearch = function (query) {
+    homeVisibleProductsCount = 4;
     currentSearch = query;
     renderProductGrid();
   };
 
   window.handleCatalogSort = function (sortValue) {
+    homeVisibleProductsCount = 4;
     currentSort = sortValue;
     renderProductGrid();
   };
@@ -4643,6 +4927,7 @@
       pincode: ''
     }
   };
+  window.checkoutState = checkoutState;
 
   function generateOrderId() {
     const now = new Date();
@@ -4844,6 +5129,13 @@
       .replace(/>/g, '&gt;');
   }
 
+  function isDedicatedCheckoutPage() {
+    return (typeof window !== 'undefined' && window.location && typeof window.location.pathname === 'string' && window.location.pathname.endsWith('checkout.html')) ||
+      (typeof document !== 'undefined' && document.body && typeof document.body.getAttribute === 'function' && document.body.getAttribute('data-page') === 'checkout') ||
+      (typeof document !== 'undefined' && document.getElementById('checkoutContent') && !document.getElementById('checkoutModal'));
+  }
+  window.isDedicatedCheckoutPage = isDedicatedCheckoutPage;
+
   window.openCheckoutModal = function () {
     const items = CartManager.load();
     if (items.length === 0) {
@@ -4855,8 +5147,14 @@
       window.closeCartDrawer();
     }
 
+    // Always navigate to dedicated checkout page
+    if (!isDedicatedCheckoutPage()) {
+      window.location.href = 'checkout.html';
+      return;
+    }
+
     loadSavedCustomer();
-    checkoutState.orderId = generateOrderId();
+    if (!checkoutState.orderId) checkoutState.orderId = generateOrderId();
     const dt = formatOrderDateTime();
     checkoutState.orderDate = dt.date;
     checkoutState.orderTime = dt.time;
@@ -4864,11 +5162,15 @@
     checkoutState.isSubmitting = false;
 
     window.renderCheckoutStep1();
+  };
 
-    const modal = document.getElementById('checkoutModal');
-    if (modal) {
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+  window.navigateBackToCart = function () {
+    if (typeof window.openCartDrawer === 'function') {
+      window.openCartDrawer();
+    } else if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = 'index.html';
     }
   };
 
@@ -4877,6 +5179,9 @@
     if (modal) {
       modal.classList.remove('active');
       document.body.style.overflow = '';
+    }
+    if (isDedicatedCheckoutPage()) {
+      window.location.href = 'index.html';
     }
   };
 
@@ -4989,7 +5294,7 @@
             </div>
 
             <div class="checkout-actions-row">
-              <button type="button" class="btn btn-outline" onclick="closeCheckoutModal(); openCartDrawer();">
+              <button type="button" class="btn btn-outline" onclick="window.navigateBackToCart();">
                 &larr; Back to Cart
               </button>
               <button type="submit" class="btn btn-primary">
@@ -5388,6 +5693,66 @@
     }, 1000);
   };
 
+  /* ── Dedicated Checkout Page Handlers ────────────────────── */
+  window.renderCheckoutEmptyState = function () {
+    const content = document.getElementById('checkoutContent');
+    if (!content) return;
+    content.innerHTML = `
+      <div class="checkout-empty-state">
+        <div class="checkout-empty-icon">🛒</div>
+        <h2 class="checkout-empty-title">Your Cart is Empty</h2>
+        <p class="checkout-empty-desc">
+          You do not have any items in your cart to checkout. Browse our living catalogue of show guppy pairs, Betta fish, rare isopods, tarantulas and live food cultures.
+        </p>
+        <div class="checkout-empty-actions">
+          <a href="index.html" class="btn btn-primary">
+            Explore Living Collection &rarr;
+          </a>
+          <a href="aquarium-fish.html" class="btn btn-outline">
+            View Aquarium &amp; Fish
+          </a>
+        </div>
+      </div>
+    `;
+  };
+
+  window.syncCheckoutPage = function (items) {
+    if (!isDedicatedCheckoutPage()) return;
+
+    if (!items || items.length === 0) {
+      window.renderCheckoutEmptyState();
+      return;
+    }
+
+    if (checkoutState.step === 1 && typeof window.renderCheckoutStep1 === 'function') {
+      window.renderCheckoutStep1();
+    } else if (checkoutState.step === 2 && typeof window.renderCheckoutStep2 === 'function') {
+      window.renderCheckoutStep2();
+    }
+  };
+
+  function initCheckoutPage() {
+    if (!isDedicatedCheckoutPage()) return;
+
+    const items = CartManager.load();
+    if (items.length === 0) {
+      window.renderCheckoutEmptyState();
+      return;
+    }
+
+    loadSavedCustomer();
+    if (!checkoutState.orderId) checkoutState.orderId = generateOrderId();
+    const dt = formatOrderDateTime();
+    checkoutState.orderDate = dt.date;
+    checkoutState.orderTime = dt.time;
+    checkoutState.step = 1;
+    checkoutState.isSubmitting = false;
+    checkoutState.isCompleted = false;
+
+    window.renderCheckoutStep1();
+  }
+  window.initCheckoutPage = initCheckoutPage;
+
   /* ── 9. Live Search Overlay ──────────────────────────────── */
   function escapeSearchHTML(str) {
     if (!str) return '';
@@ -5734,6 +6099,7 @@
   };
 
   window.filterCategoryAndScroll = function (categoryKey) {
+    homeVisibleProductsCount = 4;
     if (typeof window.closeMobileMenu === "function") window.closeMobileMenu();
     const targetMap = {
       aquarium: 'aquarium-fish.html',

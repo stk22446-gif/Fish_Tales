@@ -1648,7 +1648,267 @@ textarea {
   line-height: 1.6;
 }
 
-/* ── 11. Botanical Principles ("Why Fish Tales") ───────────── */
+/* ── 10b. Catalogue Load More & Show Less Controls ────────────── */
+.catalogue-pagination-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-load-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.85rem 2.25rem;
+  font-size: 0.975rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-sm, 6px);
+  background-color: var(--color-primary, #174B32);
+  color: #FFFFFF;
+  border: 1px solid var(--color-primary, #174B32);
+  box-shadow: 0 4px 14px rgba(23, 75, 50, 0.16);
+  cursor: pointer;
+  transition: all var(--trans-base);
+}
+
+.btn-load-more:hover {
+  background-color: var(--color-primary-dark, #103823);
+  border-color: var(--color-primary-dark, #103823);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(23, 75, 50, 0.22);
+}
+
+.btn-show-less {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.85rem 2rem;
+  font-size: 0.975rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm, 6px);
+  background-color: transparent;
+  color: var(--color-primary-dark, #103823);
+  border: 1.5px solid var(--border-leaf, rgba(23, 75, 50, 0.25));
+  cursor: pointer;
+  transition: all var(--trans-base);
+}
+
+.btn-show-less:hover {
+  background-color: var(--color-primary, #174B32);
+  color: #FFFFFF;
+  border-color: var(--color-primary, #174B32);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(23, 75, 50, 0.16);
+}
+
+@media (max-width: 600px) {
+  .catalogue-pagination-wrap {
+    margin-top: 2rem;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-load-more,
+  .btn-show-less {
+    width: 100%;
+    padding: 0.85rem 1.25rem;
+  }
+}
+
+/* ── 11. About Us / Brand Story ("A Passion That Became a Business") ── */
+.about-section {
+  padding: 5.5rem 0;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Open, unboxed editorial story container */
+.about-editorial-wrap,
+.about-content-card {
+  max-width: 860px;
+  margin: 0 auto;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.about-story-text {
+  max-width: 780px;
+  margin: 0 auto 3.5rem auto;
+  font-size: 1.125rem;
+  line-height: 1.9;
+  color: var(--text-body);
+}
+
+.about-story-text p {
+  margin-bottom: 1.6rem;
+}
+
+.about-story-text p:last-child {
+  margin-bottom: 0;
+}
+
+.about-story-text strong {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* Four Brand Pillars — Open Editorial Layout */
+.about-values-block {
+  margin-top: 3.5rem;
+  padding-top: 2.75rem;
+  border-top: 1px solid var(--border-leaf);
+}
+
+.about-values-heading {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.about-values-heading .value-sep {
+  color: var(--color-leaf);
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.about-value-column,
+.about-value-card {
+  background: transparent;
+  border: none;
+  border-top: 2px solid var(--color-primary);
+  border-radius: 0;
+  padding: 1.25rem 0 0 0;
+  text-align: left;
+  box-shadow: none;
+  transition: border-color var(--trans-base);
+}
+
+.about-value-column:hover,
+.about-value-card:hover {
+  border-color: var(--color-orange);
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.about-value-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.02em;
+}
+
+.about-value-desc {
+  font-size: 0.925rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Editorial Brand Sign-off / Tagline */
+.about-tagline-badge,
+.about-editorial-tagline {
+  margin-top: 3.75rem;
+  padding-top: 2.25rem;
+  border-top: 1px dashed var(--border-leaf);
+  text-align: center;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-tagline-text {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 900px) {
+  .about-section {
+    padding: 4.25rem 0;
+  }
+
+  .about-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1.75rem;
+  }
+
+  .about-story-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 2.75rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-section {
+    padding: 3.25rem 0;
+  }
+
+  .about-values-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .about-value-column,
+  .about-value-card {
+    padding-top: 1rem;
+  }
+
+  .about-values-heading {
+    font-size: 1rem;
+    gap: 0.45rem;
+    margin-bottom: 2rem;
+  }
+
+  .about-story-text {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .about-tagline-text {
+    font-size: 1.05rem;
+    line-height: 1.45;
+  }
+}
+
+/* ── 11b. Botanical Principles (legacy compatibility) ───────────── */
 .why-section {
   padding: 5rem 0;
   background-color: var(--bg-surface);
@@ -1703,36 +1963,35 @@ textarea {
   line-height: 1.6;
 }
 
-/* ── 12. Unboxing Video & Live Arrival Policy Section ───────────── */
+/* ── 12. Unboxing Video & Live Arrival Policy Section (Editorial Unboxed) ── */
 .policy-section {
-  padding: 5rem 0;
-  background-color: var(--bg-mint-tint, #F4F8F4);
+  padding: 5.5rem 0;
+  background-color: var(--bg-surface);
   border-bottom: 1px solid var(--border-subtle, rgba(23, 75, 50, 0.12));
 }
 
 .policy-card {
-  max-width: 860px;
+  max-width: 820px;
   margin: 0 auto;
-  background-color: #FFFFFF;
-  border: 1px solid var(--border-leaf, rgba(23, 75, 50, 0.18));
-  border-top: 4px solid var(--color-primary, #174B32);
-  border-radius: var(--radius-md, 12px);
-  padding: 2.75rem 3rem;
-  box-shadow: 0 12px 36px rgba(16, 56, 35, 0.08);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
 }
 
 .policy-card-header {
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
   text-align: center;
 }
 
 .policy-section-title {
   font-family: var(--font-serif, "Cinzel Decorative", Georgia, serif);
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: 700;
   color: var(--color-primary-dark, #103823);
   line-height: 1.35;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1749,16 +2008,16 @@ textarea {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
+  gap: 1rem;
 }
 
 .policy-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1.15rem;
+  gap: 0.55rem;
+  padding: 0.65rem 1.35rem;
   border-radius: var(--radius-full, 9999px);
-  font-size: 0.875rem;
+  font-size: 0.925rem;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
@@ -1766,128 +2025,164 @@ textarea {
 .policy-badge-video {
   background-color: #FFF3E0;
   color: #C2410C;
-  border: 1px solid #FFD8A8;
+  border: 1.5px solid #FFD8A8;
+  box-shadow: 0 2px 8px rgba(194, 65, 12, 0.08);
 }
 
 .policy-badge-shipping {
   background-color: #EBF7EE;
   color: #174B32;
-  border: 1px solid #C4E7CB;
+  border: 1.5px solid #C4E7CB;
+  box-shadow: 0 2px 8px rgba(23, 75, 50, 0.08);
 }
 
 .policy-lead-text {
-  font-size: 1.05rem;
+  font-size: 1.125rem;
   color: var(--text-body, #2C3531);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
+  line-height: 1.85;
+  margin-bottom: 2.25rem;
+  text-align: center;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .policy-checklist {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.75rem 0;
+  margin: 0 auto 2.5rem auto;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1.1rem;
+  max-width: 760px;
 }
 
 .policy-checklist li {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
-  font-size: 0.95rem;
+  gap: 0.95rem;
+  font-size: 1.025rem;
   color: var(--text-body, #2C3531);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .policy-check-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
-  min-width: 22px;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
   border-radius: 50%;
   background-color: #EBF7EE;
   color: #174B32;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 800;
   margin-top: 0.15rem;
   border: 1px solid #C4E7CB;
 }
 
 .policy-replacement-box {
-  background-color: #FFFDF5;
+  background-color: rgba(230, 81, 0, 0.05);
   border-left: 4px solid var(--color-orange, #E65100);
-  border-top: 1px solid #F0E6D2;
-  border-right: 1px solid #F0E6D2;
-  border-bottom: 1px solid #F0E6D2;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
   border-radius: var(--radius-sm, 6px);
-  padding: 1.25rem 1.5rem;
-  margin: 1.75rem 0 1.25rem 0;
+  padding: 1.5rem 1.75rem;
+  margin: 2.25rem auto 1.75rem auto;
+  max-width: 760px;
 }
 
 .policy-replacement-title {
-  font-size: 0.95rem;
+  font-size: 1.05rem;
+  font-weight: 700;
   color: #C2410C;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.45rem;
 }
 
 .policy-replacement-text {
-  font-size: 0.925rem;
-  color: #4A4031;
-  line-height: 1.65;
+  font-size: 0.975rem;
+  color: #3F3728;
+  line-height: 1.7;
   margin: 0;
 }
 
 .policy-safe-notice {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-muted, #556B2F);
-  margin-top: 1.25rem;
+  margin-top: 1.75rem;
   text-align: center;
+  font-style: italic;
+}
+
+.policy-support-cta {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px dashed var(--border-leaf, rgba(23, 75, 50, 0.2));
+  text-align: center;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  background: transparent;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  box-shadow: none;
 }
 
 @media (max-width: 768px) {
   .policy-section {
-    padding: 3rem 0;
+    padding: 3.5rem 0;
   }
 
   .policy-card {
-    padding: 1.75rem 1.25rem;
-    border-radius: var(--radius-sm, 8px);
+    padding: 0;
   }
 
   .policy-section-title {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
   }
 
   .policy-badges-row {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.6rem;
+    gap: 0.65rem;
   }
 
   .policy-badge {
     justify-content: center;
-    padding: 0.5rem 0.85rem;
-    font-size: 0.8125rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
   }
 
   .policy-lead-text {
-    font-size: 0.95rem;
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: 1.6rem;
   }
 
   .policy-checklist li {
-    font-size: 0.875rem;
+    font-size: 0.925rem;
   }
 
   .policy-replacement-box {
-    padding: 1rem 1.15rem;
+    padding: 1.25rem;
   }
 
-  .policy-replacement-text {
-    font-size: 0.85rem;
+  .policy-support-cta {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
   }
+}
+
+.policy-replacement-box {
+  padding: 1rem 1.15rem;
+}
+
+.policy-replacement-text {
+  font-size: 0.85rem;
+}
 }
 
 /* ── 13. Contact & WhatsApp Desk ──────────────────────────── */
@@ -4495,7 +4790,12 @@ input {
 }
 
 .category-hero-cultures {
-  background-image: url('live_food_cultures_category.jpg');
+  background-image: url('https://res.cloudinary.com/pv8lnpft/image/upload/v1795214847/f7bf7963-0c45-4f9d-bce9-7a3212d77d06.png');
+}
+
+.category-hero-policy {
+  background-color: var(--color-primary-dark, #103823);
+  background-image: radial-gradient(circle at 50% 30%, rgba(23, 75, 50, 0.75) 0%, rgba(10, 36, 22, 0.95) 100%);
 }
 
 .category-hero-overlay {
@@ -4620,6 +4920,12 @@ input {
 
   .category-hero-cultures {
     background-position: center center;
+  }
+
+  .category-hero-policy {
+    background-position: center center;
+    min-height: 180px;
+    padding: 2.25rem 1rem 1.75rem 1rem;
   }
 
   .category-hero-section .catalogue-title {
@@ -5144,8 +5450,81 @@ input {
   align-items: center;
 }
 
+/* ============================================================
+   16b. DEDICATED CHECKOUT PAGE STYLING
+   ============================================================ */
+
+.checkout-page-section {
+  padding: 2.25rem 0 4.5rem;
+  min-height: calc(100vh - 340px);
+  background-color: var(--bg-page);
+}
+
+.checkout-page-container {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.checkout-page-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-leaf);
+  border-radius: var(--radius-md);
+  padding: 2.25rem 2.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.checkout-empty-state {
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+}
+
+.checkout-empty-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.checkout-empty-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.checkout-empty-desc {
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto 1.75rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.checkout-empty-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
+  .checkout-page-section {
+    padding: 1.25rem 0 2.5rem;
+  }
+
+  .checkout-page-card {
+    padding: 1.25rem 1rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .checkout-empty-state {
+    padding: 2rem 1rem;
+  }
+
+  .checkout-empty-title {
+    font-size: 1.5rem;
+  }
+
   .checkout-dialog {
     padding: 1.25rem;
     max-height: 92vh;
@@ -5409,7 +5788,8 @@ input {
   height: 100%;
   max-height: 480px;
   display: block;
-  object-fit: contain; /* Maintain natural aspect ratio without stretching or cropping */
+  object-fit: contain;
+  /* Maintain natural aspect ratio without stretching or cropping */
   background: #000000;
   border-radius: var(--radius-sm, 12px);
 }
