@@ -2646,7 +2646,7 @@
       subCategory: "tarantulas",
       name: "Chilean Rose Hair",
       subtitle: "Grammostola rosea",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795044064/590cb229-29c5-47db-aa6a-3a9507467cfd.png",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795292187/7d66e22d-f31d-4bce-a46a-8e975d6e2a92.jpg",
       images: [],
       video: "",
       description: "A hardy, slow-growing New World terrestrial tarantula known for its subtle rose-coloured hairs and adaptable nature. A popular species among tarantula keepers, though individual temperament and feeding behaviour can vary.",
@@ -2693,7 +2693,7 @@
       subCategory: "tarantulas",
       name: "Brazilian Whiteknee",
       subtitle: "Acanthoscurria geniculata",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795044166/ff33845c-f511-47f7-8301-08e24fb6f6bb.png",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795291971/9051cee1-e0af-4b19-8b01-1a5e30d2713f.jpg",
       images: [],
       video: "",
       description: "A large and impressive New World terrestrial tarantula recognised by its jet-black legs with striking white knee bands. Known for its fast growth, strong feeding response and bold behaviour, making it an eye-catching species for experienced display enthusiasts.",
@@ -2741,8 +2741,9 @@
       subCategory: "tarantulas",
       name: "Mexican Red Knee",
       subtitle: "Brachypelma hamorii",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795044349/4ac69e35-83fe-40e6-b6a0-f2381af908ae.png",
-      images: ["https://res.cloudinary.com/pv8lnpft/image/upload/v1795044488/d2532931-1fb1-4985-a6b4-8203b52a053d.png",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795292286/0cfff734-bda4-4a42-9a39-d4f5b0ce64b2.jpg",
+      images: ["https://res.cloudinary.com/pv8lnpft/image/upload/v1795292286/0cfff734-bda4-4a42-9a39-d4f5b0ce64b2.jpg",
+        "https://res.cloudinary.com/pv8lnpft/image/upload/v1795044488/d2532931-1fb1-4985-a6b4-8203b52a053d.png",
         "https://res.cloudinary.com/pv8lnpft/image/upload/v1795044349/4ac69e35-83fe-40e6-b6a0-f2381af908ae.png"
       ],
       video: "",
@@ -2843,7 +2844,7 @@
       subCategory: "tarantulas",
       name: "Chaco Golden Knee",
       subtitle: "Grammostola pulchripes",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795045219/3807384c-d2b9-4717-af85-3a035c670124.png",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795292512/147214d8-12aa-4a50-a732-b1a7fd4b78e3.jpg",
       images: [],
       video: "",
       description: "A beautiful New World terrestrial tarantula recognised by its golden-yellow knee markings against a dark body. Known for its impressive adult size, generally calm nature and suitability for beginner keepers.",
@@ -2884,53 +2885,57 @@
     },
 
 
+
     {
       id: "salmon-pink",
       category: "tarantulas",
       categoryName: "Tarantulas",
-      subCategory: "tarantulas",
+      subCategory: "terrestrial",
       name: "Salmon Pink",
       subtitle: "Lasiodora parahybana",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795045425/9d739bc4-2e90-4751-920c-5e8897c1de5a.png",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795292777/0edff5bf-6e95-4ab1-b78c-1f27ef4802cd.jpg",
       images: [],
       video: "",
-      description: "One of the largest commonly kept tarantula species, recognised by its dark body covered with distinctive salmon-pink hairs. Famous for its rapid growth, impressive adult size and strong feeding response.",
-      price: 2999,
-      unit: "specimen",
+      description:
+        "The Salmon Pink Birdeater is a large, impressive terrestrial tarantula known for its salmon-pink hairs, robust body and rapid growth. It is a popular species among tarantula enthusiasts due to its striking appearance and impressive size.",
+      price: 2200,
+      unit: "piece",
       minQuantity: 1,
-      size: "Current Size: Approximately 1 inch (Spiderling)",
-      overview: "The Brazilian Salmon Pink Birdeater (Lasiodora parahybana) is a large terrestrial New World tarantula native to northeastern Brazil. It is admired for its salmon-coloured hairs, impressive adult size and fast growth. This species is often an enthusiastic feeder, but can be skittish and defensive. Its enclosure should prioritise floor space, deep stable substrate, a secure hide, good ventilation and constant access to fresh water.",
+      size: "1.5–2 cm",
+      variants: [
+        {
+          name: "1.5–2 cm",
+          price: 2200
+        },
+        {
+          name: "1 Inch+",
+          price: 3333
+        }
+      ],
+      overview:
+        "Lasiodora parahybana is a fast-growing terrestrial tarantula native to Brazil. It develops salmon-pink hairs across its dark body and legs as it matures.",
       careRequirements: {
-        "Difficulty": "Intermediate",
-        "Temperature": "22°C – 27°C",
-        "Humidity": "Moderate humidity with a moisture gradient. Keep the surface from becoming constantly wet while allowing some moisture in the lower substrate. Provide fresh water at all times.",
-        "Diet": "Small crickets and appropriately sized roach nymphs for spiderlings. Larger specimens can eat crickets, roaches and other suitable feeder insects.",
-        "Lifespan": "Females may live approximately 10 – 20 years; males commonly live around 3 – 6 years. Individual lifespan varies.",
-        "Temperament": "Often food-responsive and skittish. May move quickly, flick urticating hairs or become defensive when disturbed.",
-        "Adult Size": "Approximately 20 – 28 cm leg span, depending on the individual.",
-        "Growth Rate": "Fast-growing compared with many commonly kept tarantulas.",
-        "Activity": "Primarily terrestrial; may use hides and shallow retreats.",
-        "Handling": "Avoid handling. Its size, speed and urticating hairs make it unsuitable for routine handling."
+        temperature: "22–27°C",
+        humidity: "Maintain a moisture gradient with a suitable humid refuge",
+        diet: "Appropriately sized feeder insects",
+        temperament: "Defensive and potentially fast-moving; avoid handling",
+        careLevel: "Intermediate"
       },
       habitatSetup: {
-        "Enclosure": "Start with a small, secure and well-ventilated sling enclosure. Upgrade progressively as the tarantula grows; adults require a spacious horizontal enclosure.",
-        "Substrate": "Use pesticide-free coco fibre, unfertilised topsoil or a suitable soil blend that holds its shape. Provide approximately 8 – 12 cm or more for larger juveniles and adults, adjusted to enclosure size.",
-        "Moisture": "Maintain a moisture gradient with some moisture in the lower substrate while allowing the surface to dry. Avoid waterlogged or stagnant conditions.",
-        "Hides & Decor": "Provide a stable cork bark hide and simple ground-level decor. Avoid heavy or unstable objects that could fall.",
-        "Water": "Provide a shallow, stable water dish when the sling is large enough to access it safely. Keep fresh water available.",
-        "Ventilation": "Provide adequate cross-ventilation to prevent stagnant air and excessive moisture.",
-        "Safety": "Prioritise floor space and keep the distance between the substrate and lid low. Large, heavy tarantulas can be seriously injured by falls.",
-        "Placement": "Keep away from direct sunlight, excessive heat and sudden temperature changes."
+        enclosure: "Secure terrestrial enclosure with adequate floor space",
+        substrate: "Moisture-retaining substrate suitable for burrowing",
+        moisture: "Provide a moist section and a relatively drier area",
+        ventilation: "Good cross ventilation",
+        hidingPlaces: "Cork bark or a suitable hide",
+        water: "Always provide a shallow water dish"
       },
       didYouKnow: [
-        "Lasiodora parahybana is native to northeastern Brazil.",
-        "It is commonly called the Brazilian Salmon Pink Birdeater.",
-        "Its salmon-pink body hairs give the species its distinctive name.",
-        "It is a fast-growing species and can reach an impressive adult leg span.",
-        "Its strong feeding response makes it an enthusiastic predator of suitable feeder insects.",
-        "Like other New World tarantulas, it has urticating hairs that can cause skin and eye irritation."
+        "Salmon Pink is known for its rapid growth.",
+        "It can grow into one of the larger tarantula species.",
+        "Its salmon-coloured hairs become more noticeable as it matures.",
+        "It is a terrestrial species that benefits from suitable burrowing space."
       ],
-      featured: true
+      featured: false
     },
 
     {
