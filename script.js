@@ -66,6 +66,11 @@
     const catLabel = String(productOrItem.categoryLabel || productOrItem.categoryName || '').toLowerCase();
     const id = String(productOrItem.id || productOrItem.baseId || '').toLowerCase();
 
+    // Springtails Culture is a live cleanup-crew starter culture (minQuantity: 1), not an isopod specimen
+    if (id === 'springtails-culture') {
+      return false;
+    }
+
     // Check if category identifier is explicitly 'isopods'
     if (cat === 'isopods' || subCat === 'isopods' || catLabel === 'isopods') {
       return true;
@@ -3271,8 +3276,10 @@
 
     {
       id: "springtails-culture",
-      category: "culture",
+      category: "cultures",
       categoryName: "Live Cultures",
+      categories: ["cultures", "isopods", "tarantulas"],
+      additionalCategories: ["isopods", "tarantulas"],
       subCategory: "cleanup-crew",
       name: "Springtails Starter Culture",
       subtitle: "Live Bioactive Cleanup Crew",
@@ -3283,7 +3290,7 @@
       description:
         "Live Springtails Culture for bioactive terrariums, vivariums and isopod enclosures. Springtails are tiny beneficial organisms that help consume mould, fungi and decaying organic matter, supporting a cleaner and healthier bioactive environment.",
 
-      price: 99, // Add your selling price
+      price: 99,
       unit: "culture",
       minQuantity: 1,
       size: "Starter Culture",
@@ -3594,6 +3601,8 @@
   // Expose global convenience helpers
   window.CONTACT_EMAIL = CONTACT_EMAIL;
   window.PRODUCTS = PRODUCTS;
+  window.LIVE_CULTURES = LIVE_CULTURES;
+  window.getAllProducts = getAllProducts;
   window.CATEGORY_NAMES = CATEGORY_NAMES;
   window.getCurrentPageCategory = getCurrentPageCategory;
   window.CartManager = CartManager;
@@ -3673,6 +3682,37 @@
         return true;
     }
   }
+
+  function productMatchesCategory(p, catKey) {
+    if (!p || !catKey) return false;
+    const target = String(catKey).toLowerCase().trim();
+    if (target === 'all') return true;
+
+    // Primary category match (handling cultures/culture & combos/combo)
+    const pCat = String(p.category || '').toLowerCase().trim();
+    if (pCat === target) return true;
+    if ((target === 'cultures' || target === 'culture') && (pCat === 'cultures' || pCat === 'culture')) return true;
+    if ((target === 'combos' || target === 'combo') && (pCat === 'combos' || pCat === 'combo')) return true;
+
+    // Sub-category match
+    const pSubCat = String(p.subCategory || '').toLowerCase().trim();
+    if (pSubCat === target) return true;
+
+    // Category associations array (categories or additionalCategories)
+    const catList = Array.isArray(p.categories) ? p.categories : (Array.isArray(p.additionalCategories) ? p.additionalCategories : []);
+    for (const c of catList) {
+      const cLower = String(c).toLowerCase().trim();
+      if (cLower === target) return true;
+      if ((target === 'cultures' || target === 'culture') && (cLower === 'cultures' || cLower === 'culture')) return true;
+      if ((target === 'combos' || target === 'combo') && (cLower === 'combos' || cLower === 'combo')) return true;
+    }
+
+    // Aquarium check
+    if (target === 'aquarium' && isAquariumProduct(p)) return true;
+
+    return false;
+  }
+  window.productMatchesCategory = productMatchesCategory;
 
   function filterAquariumCategory(filterKey, shouldScroll = true) {
     currentAquariumFilter = filterKey || 'all';
@@ -3797,13 +3837,8 @@
       }
     } else if (pageCategory !== 'all') {
       // Dedicated category pages (isopods, tarantulas, combo packs, cultures)
-      if (pageCategory === 'cultures') {
-        list = list.filter(p => p.category === 'cultures');
-        totalInCategory = list.length;
-      } else {
-        list = list.filter(p => p.category === pageCategory || ((pageCategory === 'combos' || pageCategory === 'combo') && (p.category === 'combo' || p.category === 'combos')));
-        totalInCategory = list.length;
-      }
+      list = list.filter(p => productMatchesCategory(p, pageCategory));
+      totalInCategory = list.length;
     } else {
       // Home page (index.html)
       if (currentCategory === 'aquarium') {
@@ -3812,20 +3847,8 @@
       } else if (currentCategory === 'betta') {
         list = list.filter(p => p.subCategory === 'betta');
         totalInCategory = list.length;
-      } else if (currentCategory === 'isopods') {
-        list = list.filter(p => p.category === 'isopods');
-        totalInCategory = list.length;
-      } else if (currentCategory === 'tarantulas') {
-        list = list.filter(p => p.category === 'tarantulas');
-        totalInCategory = list.length;
-      } else if (currentCategory === 'combos' || currentCategory === 'combo') {
-        list = list.filter(p => p.category === 'combo' || p.category === 'combos');
-        totalInCategory = list.length;
-      } else if (currentCategory === 'cultures' || currentCategory === 'culture') {
-        list = list.filter(p => p.category === 'cultures');
-        totalInCategory = list.length;
       } else if (currentCategory !== 'all') {
-        list = list.filter(p => p.category === currentCategory);
+        list = list.filter(p => productMatchesCategory(p, currentCategory));
         totalInCategory = list.length;
       } else {
         // All Products: includes Aquarium & Fish, Isopods, Tarantulas, Combo Packs, and Cultures
@@ -4093,7 +4116,9 @@
   /* ── 7. Product Detail Navigation & Modal ─────────────────── */
   window.navigateToProduct = function (productId) {
     if (typeof window !== 'undefined' && window.location && typeof window.location.href === 'string') {
-      window.location.href = 'product.html?id=' + encodeURIComponent(productId);
+      const pageCat = typeof getCurrentPageCategory === 'function' ? getCurrentPageCategory() : '';
+      const fromParam = (pageCat && pageCat !== 'all' && pageCat !== 'home') ? `&from=${encodeURIComponent(pageCat)}` : '';
+      window.location.href = 'product.html?id=' + encodeURIComponent(productId) + fromParam;
     } else if (typeof window.openProductModal === 'function') {
       window.openProductModal(productId);
     }
@@ -4415,6 +4440,22 @@
       collectionName = 'Live Food Cultures';
     }
 
+    if (product.id === 'springtails-culture') {
+      const ref = (typeof document !== 'undefined' && document.referrer) ? document.referrer.toLowerCase() : '';
+      const urlParams = (typeof window !== 'undefined' && window.location && window.location.search) ? new URLSearchParams(window.location.search) : null;
+      const fromParam = urlParams ? (urlParams.get('from') || urlParams.get('cat') || '').toLowerCase() : '';
+      if (fromParam === 'isopods' || ref.includes('isopod')) {
+        collectionUrl = 'isopods.html';
+        collectionName = 'Bioactive Isopods';
+      } else if (fromParam === 'tarantulas' || ref.includes('tarantula')) {
+        collectionUrl = 'tarantulas.html';
+        collectionName = 'Exotic Tarantulas';
+      } else {
+        collectionUrl = 'culture.html';
+        collectionName = 'Live Food Cultures';
+      }
+    }
+
     const activeVariant = getProductSelectedVariant(product);
     const hasPrice = activeVariant && activeVariant.price !== null && activeVariant.price !== undefined && Number(activeVariant.price) > 0;
     const unitPrice = hasPrice ? Number(activeVariant.price) : 0;
@@ -4452,7 +4493,18 @@
       || 'Beginner Friendly';
 
     // Related products (3-4 items)
-    let related = PRODUCTS.filter(p => String(p.id) !== String(product.id) && (p.subCategory === product.subCategory || p.category === product.category));
+    let related = [];
+    if (product.id === 'springtails-culture') {
+      if (collectionUrl === 'isopods.html') {
+        related = PRODUCTS.filter(p => String(p.id) !== String(product.id) && p.category === 'isopods');
+      } else if (collectionUrl === 'tarantulas.html') {
+        related = PRODUCTS.filter(p => String(p.id) !== String(product.id) && p.category === 'tarantulas');
+      } else {
+        related = PRODUCTS.filter(p => String(p.id) !== String(product.id) && (p.category === 'cultures' || p.category === 'culture'));
+      }
+    } else {
+      related = PRODUCTS.filter(p => String(p.id) !== String(product.id) && (p.subCategory === product.subCategory || p.category === product.category));
+    }
     if (related.length < 3) {
       const others = PRODUCTS.filter(p => String(p.id) !== String(product.id) && !related.includes(p));
       related = related.concat(others);
@@ -6265,7 +6317,8 @@
     const q = rawQ.toLowerCase();
     const queryTokens = q.split(/\s+/).filter(Boolean);
 
-    const matches = PRODUCTS.filter(p => {
+    const allSearchable = typeof getAllProducts === 'function' ? getAllProducts() : [...PRODUCTS];
+    const matches = allSearchable.filter(p => {
       initProductVariantsAndSpecs(p);
 
       const name = (p.name || '').toLowerCase();
@@ -6276,9 +6329,10 @@
       const sciName = (p.scientificName || p.subtitle || '').toLowerCase();
       const desc = (p.description || '').toLowerCase();
       const id = (p.id || '').toLowerCase();
+      const catList = Array.isArray(p.categories) ? p.categories.join(' ').toLowerCase() : (Array.isArray(p.additionalCategories) ? p.additionalCategories.join(' ').toLowerCase() : '');
 
       // Combined searchable text corpus
-      const corpus = `${name} ${cat} ${catName} ${subCat} ${subtitle} ${sciName} ${desc} ${id}`;
+      const corpus = `${name} ${cat} ${catName} ${subCat} ${subtitle} ${sciName} ${desc} ${id} ${catList}`;
 
       // Every word in query should match (supporting plural/singular variations)
       return queryTokens.every(token => {
