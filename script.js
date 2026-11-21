@@ -2290,7 +2290,7 @@
       images: [],
       video: "",
       description: "An attractive orange colour form of the hardy Cubaris murina, admired for its warm orange tones, active behaviour and suitability for humid bioactive enclosures.",
-      price: 50,
+      price: 49,
       unit: "piece",
       minQuantity: 5,
       size: "Adult Size (Approximately 0.8 – 1.2 cm)",
@@ -2373,10 +2373,12 @@
       category: "isopods",
       categoryName: "Isopods",
       subCategory: "isopods",
-      name: "Porcellionides pruinosus Orange Pied",
+      name: "Powder Orange",
       subtitle: "Porcellionides pruinosus 'Orange Pied'",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795043219/0a58d8eb-e990-411e-a0a4-d402fb216407.png",
-      images: [],
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795290740/d4122bff-6bc9-4955-b41c-23f8001a3538.jpg",
+      images: ["https://res.cloudinary.com/pv8lnpft/image/upload/v1795290740/d4122bff-6bc9-4955-b41c-23f8001a3538.jpg",
+        "https://res.cloudinary.com/pv8lnpft/image/upload/v1795290745/7081bfce-54e0-426e-9b39-00d57b753d8d.jpg"
+      ],
       video: "",
       description: "A fast-moving and attractive orange colour morph featuring contrasting pied patches and a subtle powdery appearance. An active detritivore suited to well-maintained bioactive enclosures.",
       price: 69,
@@ -2549,6 +2551,91 @@
       featured: false
     },
 
+
+    {
+      id: "orange-dalmatian-isopod",
+      category: "isopods",
+      categoryName: "Isopods",
+      subCategory: "porcellionides",
+      name: "Orange Dalmatian",
+      subtitle: "Porcellionides pruinosus (Orange Dalmatian)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795290312/ef098854-1709-4ff9-8107-e23f73a8e42f.jpg",
+      images: [],
+      video: "",
+      description:
+        "Orange Dalmatian Isopods are an attractive patterned variety featuring a pale orange base colour with distinctive darker orange spots across their segmented bodies. Their unique markings and active behaviour make them an interesting addition to bioactive terrariums and isopod collections.",
+      price: 39,
+      unit: "piece",
+      minQuantity: 5,
+      size: "Approximately 1–1.5 cm",
+      overview:
+        "Orange Dalmatian is a captive-bred colour and pattern morph of Porcellionides pruinosus. It is recognised by its orange-toned body and contrasting spotted markings. Pattern distribution and colour intensity may vary between individuals.",
+      careRequirements: {
+        temperature: "20–27°C",
+        humidity: "Maintain a moist-to-drier moisture gradient",
+        diet: "Dried leaf litter, decaying hardwood, vegetables and occasional protein foods",
+        temperament: "Peaceful, active and suitable for bioactive cleanup crews",
+        careLevel: "Beginner"
+      },
+      habitatSetup: {
+        enclosure: "Well-ventilated plastic or glass enclosure",
+        substrate: "Isopod substrate mixed with decaying hardwood and leaf litter",
+        moisture: "Keep one section consistently moist with sphagnum moss and another relatively drier",
+        ventilation: "Moderate cross ventilation",
+        hidingPlaces: "Cork bark, dried leaves and natural hiding spaces",
+        calcium: "Provide cuttlebone or another suitable calcium source"
+      },
+      didYouKnow: [
+        "Orange Dalmatian is a captive-bred colour and pattern morph.",
+        "Its spotted appearance makes every individual slightly different.",
+        "Porcellionides pruinosus is known for its fast breeding rate.",
+        "These isopods help break down decaying organic matter in bioactive setups."
+      ],
+      featured: false
+    },
+
+
+    {
+      id: "dairy-cow-isopod",
+      category: "isopods",
+      categoryName: "Isopods",
+      subCategory: "porcellio",
+      name: "Dairy Cow",
+      subtitle: "Porcellio laevis (Dairy Cow)",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795290967/0c047e38-fdc7-4b3d-bca9-4a2e44c9e35f.jpg",
+      images: [],
+      video: "",
+      description:
+        "Dairy Cow Isopods are a popular ornamental isopod variety recognised by their distinctive black spots and patches on a creamy white body. Their bold cow-like pattern, active behaviour and fast breeding make them a favourite among isopod enthusiasts.",
+      price: 79,
+      unit: "piece",
+      minQuantity: 5,
+      size: "Approximately 1.5–2 cm",
+      overview:
+        "Dairy Cow is the common hobby name for a distinctive black-and-white patterned Porcellio isopod culture, commonly sold as Porcellio laevis. Individual markings vary, giving each isopod a unique appearance.",
+      careRequirements: {
+        temperature: "21–27°C",
+        humidity: "Maintain a moist refuge with a relatively drier side",
+        diet: "Dried leaf litter, decaying hardwood, vegetables and regular protein foods",
+        temperament: "Active and generally peaceful within their own colony",
+        careLevel: "Beginner"
+      },
+      habitatSetup: {
+        enclosure: "Well-ventilated plastic or glass enclosure",
+        substrate: "Organic soil mixed with decaying hardwood and leaf litter",
+        moisture: "Keep one section consistently moist and the remaining area relatively drier",
+        ventilation: "Moderate cross ventilation",
+        hidingPlaces: "Cork bark, dried leaves and natural hiding spaces",
+        calcium: "Provide cuttlebone or another suitable calcium source"
+      },
+      didYouKnow: [
+        "Dairy Cow Isopods are named after their black-and-white cow-like markings.",
+        "They are active feeders and benefit from regular protein supplementation.",
+        "They reproduce readily when provided with suitable food and moisture.",
+        "They cannot roll into a ball like Armadillidium isopods."
+      ],
+      featured: false
+    },
 
     // TARANTULAS
 
