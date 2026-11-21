@@ -441,16 +441,20 @@
     }
   }
 
-  function getProductSelectedVariant(product) {
-    if (!product) return { name: '', price: null, unit: 'piece', label: 'piece' };
+  function getProductSelectedVariant(product, overrideKey = null) {
+    if (!product) return { name: '', variantName: '', gender: null, price: null, unit: 'piece', label: 'piece' };
     initProductVariantsAndSpecs(product);
     if (product.variants && Array.isArray(product.variants) && product.variants.length > 0) {
-      const selected = (typeof selectedVariants !== 'undefined' && selectedVariants[product.id] !== undefined)
-        ? selectedVariants[product.id]
-        : 0;
+      let selected = overrideKey;
+      if (selected === null || selected === undefined) {
+        selected = (typeof selectedVariants !== 'undefined' && selectedVariants[product.id] !== undefined)
+          ? selectedVariants[product.id]
+          : 0;
+      }
       let variant = null;
       if (typeof selected === 'string') {
-        variant = product.variants.find(v => (v.name && v.name.toLowerCase() === selected.toLowerCase()) || (v.id && v.id.toLowerCase() === selected.toLowerCase()));
+        const sLower = selected.toLowerCase();
+        variant = product.variants.find(v => (v.name && v.name.toLowerCase() === sLower) || (v.id && v.id.toLowerCase() === sLower));
       } else if (typeof selected === 'number' && product.variants[selected]) {
         variant = product.variants[selected];
       }
@@ -469,10 +473,23 @@
     const hasPrice = product.price !== null && product.price !== undefined && !isNaN(product.price) && Number(product.price) > 0;
     return {
       name: product.name,
+      variantName: null,
+      gender: null,
       price: hasPrice ? Number(product.price) : null,
       unit: product.unit || product.pricingUnit || 'piece',
       label: product.unit || product.pricingUnit || 'piece'
     };
+  }
+
+  function calculateVariantSubtotal(product, quantity = 1, variantKey = null) {
+    if (!product) return 0;
+    initProductVariantsAndSpecs(product);
+    const variant = getProductSelectedVariant(product, variantKey);
+    const unitPrice = (variant && variant.price !== null && variant.price !== undefined && !isNaN(variant.price))
+      ? Number(variant.price)
+      : (product.price !== null && product.price !== undefined && !isNaN(product.price) ? Number(product.price) : 0);
+    const qty = Math.max(1, parseInt(quantity, 10) || 1);
+    return unitPrice * qty;
   }
 
   /* ── 3. Master Product Catalogue (Standardized Schema) ───── */
@@ -2884,8 +2901,6 @@
       featured: false
     },
 
-
-
     {
       id: "salmon-pink",
       category: "tarantulas",
@@ -2898,14 +2913,14 @@
       video: "",
       description:
         "The Salmon Pink Birdeater is a large, impressive terrestrial tarantula known for its salmon-pink hairs, robust body and rapid growth. It is a popular species among tarantula enthusiasts due to its striking appearance and impressive size.",
-      price: 2200,
+      price: 2199,
       unit: "piece",
       minQuantity: 1,
       size: "1.5–2 cm",
       variants: [
         {
           name: "1.5–2 cm",
-          price: 2200
+          price: 2199
         },
         {
           name: "1 Inch+",
@@ -2937,6 +2952,64 @@
       ],
       featured: false
     },
+
+
+    {
+      id: "pumpkin-patch-tarantula",
+      category: "tarantulas",
+      categoryName: "Tarantulas",
+      subCategory: "terrestrial",
+      name: "Pumpkin Patch Tarantula",
+      subtitle: "Hapalopus sp. Colombia",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795294200/bd6e95d9-2194-44ea-9e2a-7f6cc42d51e2.jpg",
+      images: [],
+      video: "",
+      description:
+        "The Pumpkin Patch Tarantula is a small, colourful New World terrestrial tarantula known for its striking orange and black pumpkin-like markings. It is an active species that creates fascinating web structures and is popular among tarantula enthusiasts.",
+
+      price: 2699, // Update with your selling price
+      unit: "piece",
+      minQuantity: 1,
+      size: "Current Size: 1.5 – 2 cm", // Add available sling size
+
+      overview:
+        "Commonly known as the Pumpkin Patch Tarantula, Hapalopus sp. Colombia is admired for its distinctive orange and dark markings. It is a relatively small terrestrial tarantula that can create extensive webbing around its enclosure.",
+
+      careRequirements: {
+        temperature: "22–26°C",
+        humidity: "Maintain moderate substrate moisture with good ventilation. Avoid waterlogged conditions.",
+        temperament:
+          "Fast-moving and defensive when disturbed. Not recommended for handling.",
+        feeding:
+          " appropriately sized live feeder insects such as small crickets and roaches. Adjust prey size according to the tarantula.",
+        water:
+          "Provide a shallow water dish when the tarantula is large enough; maintain access to moisture for smaller slings."
+      },
+
+      habitatSetup: {
+        enclosure: "Terrestrial enclosure with sufficient floor space",
+        substrate:
+          "Coco peat or a suitable moisture-retaining substrate",
+        hiding:
+          "Provide cork bark or another secure hide",
+        ventilation:
+          "Ensure good cross-ventilation",
+        decoration:
+          "Add cork bark and suitable enclosure furnishings for web anchoring",
+        safety:
+          "Keep the enclosure secure and avoid excessive height to reduce fall injuries"
+      },
+
+      didYouKnow: [
+        "Its orange and black markings resemble the colours of a pumpkin.",
+        "It is known for creating impressive webbing around its enclosure.",
+        "Despite its small size, it can be surprisingly quick."
+      ],
+
+      featured: false
+    },
+
+    // COMBO OFFER 
 
     {
       id: "isopod-house-kit",
@@ -3194,6 +3267,63 @@
       didYouKnow: "Moina reproduce both sexually and asexually, allowing populations to double within 48 to 72 hours under optimal feeding.",
       featured: true
     },
+
+
+    {
+      id: "springtails-culture",
+      category: "culture",
+      categoryName: "Live Cultures",
+      subCategory: "cleanup-crew",
+      name: "Springtails Starter Culture",
+      subtitle: "Live Bioactive Cleanup Crew",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795294959/52a9f429-e626-4941-80af-f6b9f0a061ba.jpg",
+      images: [],
+      video: "",
+
+      description:
+        "Live Springtails Culture for bioactive terrariums, vivariums and isopod enclosures. Springtails are tiny beneficial organisms that help consume mould, fungi and decaying organic matter, supporting a cleaner and healthier bioactive environment.",
+
+      price: 99, // Add your selling price
+      unit: "culture",
+      minQuantity: 1,
+      size: "Starter Culture",
+
+      overview:
+        "Springtails are tiny soil-dwelling hexapods commonly used as a bioactive cleanup crew. They feed on mould, fungi and decomposing organic matter and help maintain a balanced terrarium ecosystem.",
+
+      careRequirements: {
+        temperature: "Approximately 20–26°C",
+        humidity: "Maintain a consistently moist culture environment without flooding",
+        feeding:
+          "Feed small amounts of suitable springtail food, such as yeast or specialised springtail food",
+        maintenance:
+          "Avoid overfeeding. Remove excess uneaten food if mould develops excessively",
+        handling:
+          "Handle the culture gently and avoid exposing it to direct sunlight"
+      },
+
+      habitatSetup: {
+        container: "Ventilated culture container",
+        substrate:
+          "Charcoal or an appropriate springtail culture substrate",
+        moisture:
+          "Keep the substrate moist with a small amount of clean, dechlorinated water",
+        ventilation:
+          "Provide suitable ventilation while preventing the culture from drying out",
+        placement:
+          "Keep in a shaded location away from direct sunlight"
+      },
+
+      didYouKnow: [
+        "Springtails are not insects; they belong to the group Collembola.",
+        "They help consume mould and decaying organic matter.",
+        "They are widely used in bioactive terrariums and isopod enclosures.",
+        "They can help maintain a balanced miniature ecosystem."
+      ],
+
+      featured: false
+    },
+
     {
       id: "culture-grindal-worm",
       category: "cultures",
@@ -3471,6 +3601,7 @@
   window.renderProductGrid = renderProductGrid;
   window.initProductVariantsAndSpecs = initProductVariantsAndSpecs;
   window.getProductSelectedVariant = getProductSelectedVariant;
+  window.calculateVariantSubtotal = calculateVariantSubtotal;
   window.isIsopodProduct = isIsopodProduct;
   window.isBettaProduct = isBettaProduct;
   window.getProductQuantityLabel = getProductQuantityLabel;
@@ -3630,7 +3761,8 @@
       return;
     }
     if (product.variants && Array.isArray(product.variants) && product.variants.length > 0) {
-      CartManager.add(product, 1, product.variants[0].name);
+      const activeVariant = getProductSelectedVariant(product);
+      CartManager.add(product, 1, activeVariant.variantName || product.variants[0].name);
       return;
     }
     CartManager.addById(productId);
@@ -4130,9 +4262,7 @@
     // Dynamically calculate and update total price
     if (product) {
       initProductVariantsAndSpecs(product);
-      const variant = getProductSelectedVariant(product);
-      const unitPrice = (variant && variant.price !== undefined) ? Number(variant.price) : Number(product.price || 0);
-      const total = unitPrice * qty;
+      const total = calculateVariantSubtotal(product, qty);
       const totalEl = document.getElementById('modalQtyTotal');
       if (totalEl) {
         totalEl.textContent = CartManager.formatPrice(total);
@@ -4294,6 +4424,12 @@
       selectedVariants[product.id] = product.variants[0].name;
     }
     const currentSelectedGender = hasVariants ? (selectedVariants[product.id] || product.variants[0].name) : null;
+    const isGenderVariant = hasVariants && product.variants.some(v => {
+      const n = (v.name || '').toLowerCase();
+      return n === 'male' || n === 'female';
+    });
+    const variantSectionTitle = isGenderVariant ? 'Select Gender' : 'Select Option';
+    const variantSectionHint = isGenderVariant ? 'Required before adding to cart' : 'Choose option before adding to cart';
     const defaultQty = isIsopod ? 5 : 1;
     const minQty = defaultQty;
     const displayPrice = hasPrice ? CartManager.formatPrice(unitPrice) : 'Price on Request';
@@ -4597,20 +4733,24 @@
             ${hasVariants ? `
             <div class="pdp-gender-section" id="pdpGenderSection">
               <div class="pdp-gender-header">
-                <label class="pdp-gender-label">Select Gender <span class="required">*</span></label>
-                <span class="pdp-gender-hint">Required before adding to cart</span>
+                <label class="pdp-gender-label">${variantSectionTitle} <span class="required">*</span></label>
+                <span class="pdp-gender-hint">${variantSectionHint}</span>
               </div>
-              <div class="pdp-gender-options" role="radiogroup" aria-label="Select Gender">
+              <div class="pdp-gender-options" role="radiogroup" aria-label="${variantSectionTitle}">
                 ${product.variants.map((v, vIdx) => {
-      const isMale = (v.name || '').toLowerCase() === 'male';
-      const isSelected = (currentSelectedGender && currentSelectedGender.toLowerCase() === (v.name || '').toLowerCase()) || (!currentSelectedGender && vIdx === 0);
-      const symbolClass = isMale ? 'male' : 'female';
-      const symbolChar = isMale ? '♂' : '♀';
+      const vName = v.name || '';
+      const vNameLower = vName.toLowerCase();
+      const isMale = vNameLower === 'male';
+      const isFemale = vNameLower === 'female';
+      const isSelected = (currentSelectedGender && currentSelectedGender.toLowerCase() === vNameLower) || (!currentSelectedGender && vIdx === 0);
+      const symbolHtml = isMale
+        ? '<span class="pdp-gender-symbol male">♂</span>'
+        : (isFemale ? '<span class="pdp-gender-symbol female">♀</span>' : '');
       return `
-                <button type="button" class="pdp-gender-btn ${isSelected ? 'active' : ''}" data-gender="${v.name}" data-variant-index="${vIdx}" role="radio" aria-checked="${isSelected ? 'true' : 'false'}">
+                <button type="button" class="pdp-gender-btn ${isSelected ? 'active' : ''}" data-gender="${escapeHtml(vName)}" data-variant-index="${vIdx}" role="radio" aria-checked="${isSelected ? 'true' : 'false'}">
                   <div class="pdp-gender-btn-main">
-                    <span class="pdp-gender-symbol ${symbolClass}">${symbolChar}</span>
-                    <span>${v.name}</span>
+                    ${symbolHtml}
+                    <span>${escapeHtml(vName)}</span>
                   </div>
                   <span class="pdp-gender-price">${CartManager.formatPrice(v.price)}</span>
                 </button>
@@ -4837,10 +4977,33 @@
 
     // 2. Quantity Stepper Controls
     let currentQty = minQty;
+    let currentUnitPrice = unitPrice;
     const qtyValEl = document.getElementById('pdpQty');
     const qtyTotalEl = document.getElementById('pdpQtyTotal');
+    const unitPriceEl = document.getElementById('pdpUnitPrice');
+    const priceUnitEl = document.getElementById('pdpPriceUnit');
     const minusBtn = document.getElementById('pdpQtyMinus');
     const plusBtn = document.getElementById('pdpQtyPlus');
+
+    function syncPdpPricing() {
+      if (hasVariants) {
+        const selected = selectedVariants[product.id] || (product.variants[0] && product.variants[0].name);
+        const resolved = getProductSelectedVariant(product, selected);
+        if (resolved && resolved.price !== null && resolved.price !== undefined && !isNaN(resolved.price)) {
+          currentUnitPrice = Number(resolved.price);
+        }
+        if (unitPriceEl) {
+          unitPriceEl.textContent = CartManager.formatPrice(currentUnitPrice);
+        }
+        if (priceUnitEl) {
+          priceUnitEl.textContent = resolved && resolved.unit ? ('/ ' + resolved.unit) : (product.unit ? ('/ ' + product.unit) : '');
+        }
+      }
+      if (qtyTotalEl) {
+        const subtotal = currentUnitPrice * currentQty;
+        qtyTotalEl.textContent = (currentUnitPrice > 0 || hasPrice) ? CartManager.formatPrice(subtotal) : 'Price on Request';
+      }
+    }
 
     function updatePdpQuantity(delta) {
       let next = currentQty + delta;
@@ -4854,7 +5017,7 @@
       }
       currentQty = next;
       if (qtyValEl) qtyValEl.textContent = currentQty;
-      if (qtyTotalEl) qtyTotalEl.textContent = hasPrice ? CartManager.formatPrice(unitPrice * currentQty) : 'Price on Request';
+      syncPdpPricing();
     }
 
     if (minusBtn) minusBtn.addEventListener('click', () => updatePdpQuantity(-1));
@@ -4872,9 +5035,13 @@
             b.classList.toggle('active', isActive);
             b.setAttribute('aria-checked', isActive ? 'true' : 'false');
           });
+          syncPdpPricing();
         });
       });
     }
+
+    // Sync live pricing on initial render
+    syncPdpPricing();
 
     // 3. Add to Cart Button
     const addCartBtn = document.getElementById('pdpAddToCartBtn');
@@ -4893,16 +5060,20 @@
     const directWaBtn = document.getElementById('pdpDirectWhatsAppBtn');
     if (directWaBtn) {
       directWaBtn.addEventListener('click', () => {
-        const totalStr = hasPrice ? CartManager.formatPrice(unitPrice * currentQty) : 'Price on Request';
         const chosenGender = hasVariants ? (selectedVariants[product.id] || (product.variants[0] && product.variants[0].name)) : null;
+        const resolved = hasVariants ? getProductSelectedVariant(product, chosenGender) : activeVariant;
+        const livePrice = (resolved && resolved.price !== null && resolved.price !== undefined) ? Number(resolved.price) : currentUnitPrice;
+        const totalStr = livePrice > 0 ? CartManager.formatPrice(livePrice * currentQty) : (hasPrice ? CartManager.formatPrice(currentUnitPrice * currentQty) : 'Price on Request');
+        const unitName = hasVariants ? (resolved && resolved.unit ? resolved.unit : 'pcs') : (isIsopod ? 'pieces' : (activeVariant ? activeVariant.unit : 'unit'));
+        const optionLabel = isGenderVariant ? 'Gender' : 'Option';
         const msg = [
           'Hello Fish Tales!',
           '',
           `I would like to order/enquire about:`,
           `• Product: ${product.name}` + (chosenGender ? ` (${chosenGender})` : ''),
-          chosenGender ? `• Gender: ${chosenGender}` : null,
+          chosenGender ? `• ${optionLabel}: ${chosenGender}` : null,
           `• Scientific Name: ${scientificName}`,
-          `• Quantity: ${currentQty} ${hasVariants ? 'pcs' : (isIsopod ? 'pieces' : (activeVariant ? activeVariant.unit : 'unit'))}`,
+          `• Quantity: ${currentQty} ${unitName}`,
           `• Total Value: ${totalStr}`,
           '',
           'Please confirm livestock availability, shipping schedule and payment info (Prepaid only, COD unavailable).'
