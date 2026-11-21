@@ -19,6 +19,18 @@
   const CONTACT_EMAIL = 'fishtales.exotic@gmail.com';
   const STORAGE_KEY = 'fishtales_cart';
 
+  /* ── 1b. Global Security Sanitizer ─────────────────────────── */
+  function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+  window.escapeHtml = escapeHtml;
+
   /* ── 2. Clean Neutral Placeholder (No Vector Animal Art) ────── */
   const PLACEHOLDER_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23F8F6E9'/%3E%3Crect x='130' y='80' width='140' height='100' rx='8' fill='%23FFFFFF' stroke='%23DCEBCB' stroke-width='2'/%3E%3Ccircle cx='165' cy='115' r='10' fill='%23DCEBCB'/%3E%3Cpath d='M135 165 l35 -25 l30 20 l35 -25 l25 20' stroke='%2375A65A' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ctext x='200' y='215' font-family='sans-serif' font-size='12' font-weight='600' fill='%23174B32' text-anchor='middle' letter-spacing='0.08em'%3EFISH TALES%3C/text%3E%3Ctext x='200' y='235' font-family='sans-serif' font-size='10' fill='%2375A65A' text-anchor='middle'%3EPhoto Reference%3C/text%3E%3C/svg%3E";
 
@@ -2230,7 +2242,7 @@
       subCategory: "isopods",
       name: "Armadillidium Gestroi",
       subtitle: "Armadillidium gestroi",
-      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795042536/ce83f0db-68a5-4fed-b112-bbbeceba3beb.png",
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795279686/4caa899e-b35b-4c52-8eb7-ecf2cddede0c.jpg",
       images: [],
       video: "",
       description: "An attractive Mediterranean pill isopod recognised by its dark brown to grey body and vivid yellow dorsal spots. A fascinating species for bioactive enclosures and dedicated isopod colonies.",
@@ -3124,7 +3136,15 @@
     load() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? JSON.parse(raw) : [];
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return [];
+        return parsed.filter(item => {
+          return item && typeof item === 'object' &&
+            typeof item.id === 'string' && item.id.length > 0 && item.id.length < 150 &&
+            typeof item.quantity === 'number' && Number.isFinite(item.quantity) && item.quantity > 0 &&
+            (item.price === null || item.price === undefined || (typeof item.price === 'number' && Number.isFinite(item.price) && item.price >= 0));
+        });
       } catch {
         return [];
       }
@@ -3370,16 +3390,19 @@
     if (!container) return;
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
-    toast.innerHTML = `
-      <span>${type === 'success' ? '✓' : 'ℹ'}</span>
-      <span>${message}</span>
-    `;
+    const iconSpan = document.createElement('span');
+    iconSpan.textContent = type === 'success' ? '✓' : 'ℹ';
+    const msgSpan = document.createElement('span');
+    msgSpan.textContent = String(message || '');
+    toast.appendChild(iconSpan);
+    toast.appendChild(msgSpan);
     container.appendChild(toast);
     setTimeout(() => {
       toast.classList.add('fade-out');
       setTimeout(() => toast.remove(), 300);
     }, 2800);
   }
+  window.showToast = showToast;
 
   /* ── 6. Product Filtering, Search & Catalogue Rendering ──── */
   let currentCategory = 'all';
@@ -3429,7 +3452,6 @@
   }
 
   function filterAquariumCategory(filterKey, shouldScroll = true) {
-    homeVisibleProductsCount = 4;
     currentAquariumFilter = filterKey || 'all';
 
     // When resetting to 'all', clear active search so all 17 aquarium products are displayed
@@ -3491,9 +3513,6 @@
   }
   let currentSearch = '';
   let currentSort = 'default';
-  let homeVisibleProductsCount = 4;
-  window.getHomeVisibleProductsCount = function () { return homeVisibleProductsCount; };
-  window.setHomeVisibleProductsCount = function (n) { homeVisibleProductsCount = n; };
 
   window.onCardVariantChange = function () { };
   window.onModalVariantChange = function () { };
@@ -3528,7 +3547,6 @@
   function renderProductGrid() {
     const grid = document.getElementById('productGrid');
     const countEl = document.getElementById('resultCount');
-    const paginationWrap = document.getElementById('cataloguePaginationWrap');
     if (!grid) return;
 
     const pageCategory = getCurrentPageCategory();
@@ -3610,17 +3628,9 @@
       list.sort((a, b) => a.name.localeCompare(b.name));
     }
 
-    const totalMatching = list.length;
-    const shouldPaginate = Boolean(paginationWrap);
-    const displayedList = shouldPaginate ? list.slice(0, homeVisibleProductsCount) : list;
-
     // Update Showing X of Y products counter
     if (countEl) {
-      if (shouldPaginate) {
-        countEl.innerHTML = `Showing <strong>${displayedList.length}</strong> of <strong>${totalMatching}</strong> products`;
-      } else {
-        countEl.innerHTML = `Showing <strong>${list.length}</strong> of <strong>${totalInCategory}</strong> products`;
-      }
+      countEl.innerHTML = `Showing <strong>${list.length}</strong> of <strong>${totalInCategory}</strong> products`;
     }
 
     const indicatorEl = document.getElementById('activeCategoryIndicator');
@@ -3635,15 +3645,13 @@
     }
 
     if (list.length === 0) {
-      if (paginationWrap) {
-        paginationWrap.innerHTML = '';
-        paginationWrap.style.display = 'none';
-      }
       const filterLabel = isAquariumPage ? (AQUARIUM_FILTER_NAMES[currentAquariumFilter] || currentAquariumFilter) : '';
-      const emptyMsg = currentSearch.trim()
-        ? `We couldn't find any living specimens matching "${currentSearch}". Try refining your search or resetting category filters.`
-        : (isAquariumPage && filterLabel)
-          ? `We currently have no specimens available in "${filterLabel}". Explore our other aquarium collections or check back soon.`
+      const safeSearch = escapeHtml(currentSearch.trim());
+      const safeFilter = escapeHtml(filterLabel);
+      const emptyMsg = safeSearch
+        ? `We couldn't find any living specimens matching "${safeSearch}". Try refining your search or resetting category filters.`
+        : (isAquariumPage && safeFilter)
+          ? `We currently have no specimens available in "${safeFilter}". Explore our other aquarium collections or check back soon.`
           : `We couldn't find any living specimens matching your selection. Try resetting category filters.`;
       grid.innerHTML = `
         <div class="catalogue-empty-state">
@@ -3656,7 +3664,7 @@
       return;
     }
 
-    grid.innerHTML = displayedList.map(product => {
+    grid.innerHTML = list.map(product => {
       initProductVariantsAndSpecs(product);
       const activeVariant = getProductSelectedVariant(product);
       const hasPrice = activeVariant.price !== null && activeVariant.price !== undefined && Number(activeVariant.price) > 0;
@@ -3849,13 +3857,11 @@
   };
 
   window.handleCatalogSearch = function (query) {
-    homeVisibleProductsCount = 4;
     currentSearch = query;
     renderProductGrid();
   };
 
   window.handleCatalogSort = function (sortValue) {
-    homeVisibleProductsCount = 4;
     currentSort = sortValue;
     renderProductGrid();
   };
@@ -4851,26 +4857,30 @@
       const unitLabel = hasItemPrice ? (item.pricingUnit === 'pair' ? 'per pair' : (item.pricingUnit === 'kit' ? 'kit' : (isIsopod ? 'per piece' : 'per piece'))) : '';
       const metaPriceStr = hasItemPrice ? `${CartManager.formatPrice(item.price)} ${unitLabel}` : 'Price on Request';
       const productObj = PRODUCTS.find(p => String(p.id) === String(item.id) || String(p.id) === String(item.baseId)) || item;
+      const safeId = escapeHtml(item.id);
+      const safeName = escapeHtml(item.name);
+      const safeGender = item.gender ? escapeHtml(item.gender) : '';
+      const safeSize = item.size ? escapeHtml(item.size) : '';
       return `
-        <div class="cart-item" data-id="${item.id}">
+        <div class="cart-item" data-id="${safeId}">
           <div class="cart-item-thumb">
-            <img src="${productObj.image || PLACEHOLDER_IMG}" alt="${item.name}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
+            <img src="${productObj.image || PLACEHOLDER_IMG}" alt="${safeName}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
           </div>
           <div class="cart-item-info">
-            <span class="cart-item-title">${item.name}</span>
+            <span class="cart-item-title">${safeName}</span>
             <span class="cart-item-meta">${metaPriceStr}</span>
-            ${item.gender ? `<span class="cart-item-meta" style="color:var(--color-primary, #1b4332); font-weight:600; font-size:0.75rem;">Gender: ${item.gender}</span>` : ''}
-            ${(String(item.id) === 'glacier-colony-pack' || String(item.baseId) === 'glacier-colony-pack') ? `<span class="cart-item-meta" style="color:var(--color-primary); font-size:0.75rem; font-weight:600;">Pack: ${item.quantity} Kit (${item.quantity * 11} specimens: ${item.quantity * 10} + ${item.quantity} Free)</span>` : (item.size ? `<span class="cart-item-meta" style="color:var(--color-amber);">Size: ${item.size}</span>` : '')}
+            ${safeGender ? `<span class="cart-item-meta" style="color:var(--color-primary, #1b4332); font-weight:600; font-size:0.75rem;">Gender: ${safeGender}</span>` : ''}
+            ${(String(item.id) === 'glacier-colony-pack' || String(item.baseId) === 'glacier-colony-pack') ? `<span class="cart-item-meta" style="color:var(--color-primary); font-size:0.75rem; font-weight:600;">Pack: ${item.quantity} Kit (${item.quantity * 11} specimens: ${item.quantity * 10} + ${item.quantity} Free)</span>` : (safeSize ? `<span class="cart-item-meta" style="color:var(--color-amber);">Size: ${safeSize}</span>` : '')}
             ${isIsopod ? `<span class="cart-item-min-notice">Minimum order: 5 pieces</span>` : ''}
             <div class="cart-item-stepper">
-              <button class="cart-step-btn" onclick="CartManager.update('${item.id}', ${item.quantity - 1})" aria-label="Decrease quantity">−</button>
+              <button class="cart-step-btn" onclick="CartManager.update('${safeId}', ${item.quantity - 1})" aria-label="Decrease quantity">−</button>
               <span class="cart-step-val">${item.quantity}</span>
-              <button class="cart-step-btn" onclick="CartManager.update('${item.id}', ${item.quantity + 1})" aria-label="Increase quantity">+</button>
+              <button class="cart-step-btn" onclick="CartManager.update('${safeId}', ${item.quantity + 1})" aria-label="Increase quantity">+</button>
             </div>
           </div>
           <div class="cart-item-right">
             <span class="cart-item-price">${lineTotal}</span>
-            <span class="cart-item-remove" onclick="CartManager.remove('${item.id}')">Remove</span>
+            <span class="cart-item-remove" onclick="CartManager.remove('${safeId}')">Remove</span>
           </div>
         </div>
       `;
@@ -4971,7 +4981,7 @@
   function getSecureRandomAlphanumeric(len = 8) {
     const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const cryptoObj = (typeof window !== 'undefined' && (window.crypto || window.msCrypto)) ||
-                      (typeof globalThis !== 'undefined' && globalThis.crypto);
+      (typeof globalThis !== 'undefined' && globalThis.crypto);
     if (!cryptoObj || typeof cryptoObj.getRandomValues !== 'function') {
       throw new Error('Cryptographically secure random number generator (crypto.getRandomValues) is unavailable.');
     }
@@ -5252,7 +5262,12 @@
       if (raw) {
         const saved = JSON.parse(raw);
         if (saved && typeof saved === 'object') {
-          Object.assign(checkoutState.customer, saved);
+          const allowedFields = ['fullName', 'mobile', 'email', 'address', 'city', 'state', 'pincode'];
+          allowedFields.forEach(field => {
+            if (typeof saved[field] === 'string') {
+              checkoutState.customer[field] = saved[field].substring(0, 300);
+            }
+          });
         }
       }
     } catch { }
@@ -5344,6 +5359,8 @@
 
     const itemsHtml = items.map(item => {
       const { prodName, variantName } = getProductAndVariantDisplay(item);
+      const safeProdName = escapeHtml(prodName);
+      const safeVariantName = escapeHtml(variantName);
       const hasPrice = item.price !== null && item.price !== undefined && Number(item.price) > 0;
       const lineTotal = hasPrice ? CartManager.formatPrice(item.price * item.quantity) : 'Price on Request';
       const unitPrice = hasPrice ? CartManager.formatPrice(item.price) : 'Price on Request';
@@ -5352,11 +5369,11 @@
       return `
         <div class="checkout-item-row">
           <div class="checkout-item-thumb">
-            <img src="${img}" alt="${prodName}" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
+            <img src="${img}" alt="${safeProdName}" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMG}';">
           </div>
           <div class="checkout-item-info">
-            <div class="checkout-item-name" title="${prodName}">${prodName}</div>
-            <div class="checkout-item-variant">${variantName}</div>
+            <div class="checkout-item-name" title="${safeProdName}">${safeProdName}</div>
+            <div class="checkout-item-variant">${safeVariantName}</div>
             <div class="checkout-item-submeta">Qty: ${item.quantity} &times; ${unitPrice}</div>
           </div>
           <div class="checkout-item-price">${lineTotal}</div>
@@ -5389,7 +5406,7 @@
             <div class="checkout-form-row">
               <div class="checkout-form-group">
                 <label class="checkout-label" for="checkoutFullName">Full Name <span class="required-star">*</span></label>
-                <input type="text" id="checkoutFullName" class="checkout-input" placeholder="e.g. Rahul Sharma" value="${escapeHtml(c.fullName)}" required autocomplete="name" oninput="clearFieldError('fullName')">
+                <input type="text" id="checkoutFullName" class="checkout-input" placeholder="e.g. Rahul Sharma" value="${escapeHtml(c.fullName)}" maxlength="70" required autocomplete="name" oninput="clearFieldError('fullName')">
                 <div class="checkout-field-error" id="err-fullName">Please enter your full name</div>
               </div>
 
@@ -5405,26 +5422,26 @@
 
             <div class="checkout-form-group">
               <label class="checkout-label" for="checkoutEmail">Email Address <span style="font-weight:400; color:var(--text-muted);">(Optional)</span></label>
-              <input type="email" id="checkoutEmail" class="checkout-input" placeholder="e.g. name@example.com" value="${escapeHtml(c.email)}" autocomplete="email" oninput="clearFieldError('email')">
+              <input type="email" id="checkoutEmail" class="checkout-input" placeholder="e.g. name@example.com" value="${escapeHtml(c.email)}" maxlength="100" autocomplete="email" oninput="clearFieldError('email')">
               <div class="checkout-field-error" id="err-email">Please enter a valid email address or leave blank</div>
             </div>
 
             <div class="checkout-form-group">
               <label class="checkout-label" for="checkoutAddress">Complete Delivery Address <span class="required-star">*</span></label>
-              <textarea id="checkoutAddress" class="checkout-textarea" placeholder="Flat / House No., Building Name, Street, Landmark" required autocomplete="street-address" oninput="clearFieldError('address')">${escapeHtml(c.address)}</textarea>
+              <textarea id="checkoutAddress" class="checkout-textarea" placeholder="Flat / House No., Building Name, Street, Landmark" maxlength="250" required autocomplete="street-address" oninput="clearFieldError('address')">${escapeHtml(c.address)}</textarea>
               <div class="checkout-field-error" id="err-address">Please enter your complete delivery address</div>
             </div>
 
             <div class="checkout-form-row">
               <div class="checkout-form-group">
                 <label class="checkout-label" for="checkoutCity">City <span class="required-star">*</span></label>
-                <input type="text" id="checkoutCity" class="checkout-input" placeholder="e.g. Bengaluru" value="${escapeHtml(c.city)}" required autocomplete="address-level2" oninput="clearFieldError('city')">
+                <input type="text" id="checkoutCity" class="checkout-input" placeholder="e.g. Bengaluru" value="${escapeHtml(c.city)}" maxlength="50" required autocomplete="address-level2" oninput="clearFieldError('city')">
                 <div class="checkout-field-error" id="err-city">Please enter your city</div>
               </div>
 
               <div class="checkout-form-group">
                 <label class="checkout-label" for="checkoutState">State <span class="required-star">*</span></label>
-                <input type="text" id="checkoutState" class="checkout-input" placeholder="e.g. Karnataka" value="${escapeHtml(c.state)}" required autocomplete="address-level1" oninput="clearFieldError('state')">
+                <input type="text" id="checkoutState" class="checkout-input" placeholder="e.g. Karnataka" value="${escapeHtml(c.state)}" maxlength="50" required autocomplete="address-level1" oninput="clearFieldError('state')">
                 <div class="checkout-field-error" id="err-state">Please enter your state</div>
               </div>
             </div>
@@ -5515,17 +5532,17 @@
       return;
     }
 
-    const fullName = nameInput.value.trim();
-    let rawMobile = mobileInput.value.trim().replace(/[\s\-\(\)]/g, '');
+    const fullName = nameInput.value.replace(/[\r\n\t]/g, ' ').trim().substring(0, 70);
+    let rawMobile = mobileInput.value.trim().replace(/[\s\-\(\)]/g, '').substring(0, 14);
     if (rawMobile.startsWith('+91')) rawMobile = rawMobile.substring(3);
     else if (rawMobile.startsWith('91') && rawMobile.length === 12) rawMobile = rawMobile.substring(2);
     else if (rawMobile.startsWith('0') && rawMobile.length === 11) rawMobile = rawMobile.substring(1);
 
-    const email = emailInput ? emailInput.value.trim() : '';
-    const address = addressInput.value.trim();
-    const city = cityInput.value.trim();
-    const state = stateInput.value.trim();
-    const pincode = pincodeInput.value.trim();
+    const email = emailInput ? emailInput.value.trim().substring(0, 100) : '';
+    const address = addressInput.value.replace(/[\r\n]{3,}/g, '\n\n').trim().substring(0, 250);
+    const city = cityInput.value.replace(/[\r\n\t]/g, ' ').trim().substring(0, 50);
+    const state = stateInput.value.replace(/[\r\n\t]/g, ' ').trim().substring(0, 50);
+    const pincode = pincodeInput.value.trim().substring(0, 6);
 
     let isValid = true;
     let firstInvalidInput = null;
@@ -5777,6 +5794,7 @@
     const btn = document.getElementById('btnContinueWhatsApp');
     if (btn) {
       btn.disabled = true;
+      btn.style.pointerEvents = 'none';
       btn.innerHTML = `
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spin"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         Connecting to WhatsApp...
@@ -5806,6 +5824,7 @@
       checkoutState.isSubmitting = false;
       if (btn) {
         btn.disabled = false;
+        btn.style.pointerEvents = '';
         btn.innerHTML = `
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
@@ -5826,6 +5845,7 @@
       checkoutState.isSubmitting = false;
       if (btn) {
         btn.disabled = false;
+        btn.style.pointerEvents = '';
         btn.innerHTML = `
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
