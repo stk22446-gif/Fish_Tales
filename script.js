@@ -1338,6 +1338,149 @@
       featured: true
     },
 
+
+    {
+      id: "pure-rosetail-betta",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "Pure Rosetail Betta Fish",
+      subtitle: "Premium Rosetail Betta splendens",
+
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795343992/284a2cdf-70ab-4034-b7db-f96155be2878.png",
+      images: ["https://res.cloudinary.com/pv8lnpft/image/upload/v1795343992/284a2cdf-70ab-4034-b7db-f96155be2878.png",
+        "https://res.cloudinary.com/pv8lnpft/image/upload/v1795344056/064ec6ba-49a3-436e-8f24-ea2faacbb113.png",
+      ],
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795344131/WhatsApp_Video_2026-11-22_at_4.04.48_PM.mp4",
+      description:
+        "The Pure Rosetail Betta is a fancy Betta splendens variety known for its elaborate, heavily branched fins that create a rose-like appearance. Its flowing tail and impressive finnage make it a striking addition to a carefully maintained aquarium.",
+
+      price: 499,
+      unit: "piece",
+      minQuantity: 1,
+
+      variants: [
+        { name: "Male", price: 299 },
+        { name: "Female", price: 119 }
+      ],
+
+      size: "As per available stock",
+
+      overview:
+        "Rosetail Betta is a selectively bred Betta splendens variety featuring extensive fin branching and overlapping fin rays. Its rose-like finnage gives it a distinctive ornamental appearance. Provide calm water conditions and sufficient swimming space.",
+
+      careRequirements: {
+        temperature: "25–28°C",
+        pH: "Approximately 6.5–7.5",
+        temperament:
+          "Males are territorial and should generally be housed individually. Avoid aggressive tankmates.",
+        feeding:
+          "High-quality Betta pellets supplemented with suitable frozen or live foods such as bloodworms and brine shrimp.",
+        water:
+          "Use clean, dechlorinated and properly cycled freshwater. Perform regular partial water changes.",
+        filtration:
+          "Use gentle filtration with low water flow to protect the delicate flowing fins.",
+        maintenance:
+          "Monitor water quality regularly and remove uneaten food to maintain clean water."
+      },
+
+      habitatSetup: {
+        aquarium:
+          "A properly maintained aquarium of at least 19 litres is recommended.",
+        substrate:
+          "Smooth sand or fine aquarium gravel.",
+        plants:
+          "Live plants and soft resting leaves provide shelter and resting areas.",
+        filtration:
+          "Gentle sponge filtration is recommended.",
+        lighting:
+          "Moderate aquarium lighting with a consistent day-night cycle.",
+        decoration:
+          "Avoid sharp decorations that can damage delicate fins."
+      },
+
+      didYouKnow: [
+        "Rosetail Bettas have extensively branched fin rays.",
+        "Their overlapping fins create a distinctive rose-like appearance.",
+        "Their elaborate finnage requires extra care to prevent fin damage.",
+        "Rosetail is a fin-type description, not a separate Betta species."
+      ],
+
+      featured: false
+    },
+
+
+    {
+      id: "double-tail-betta",
+      category: "aquarium",
+      categoryName: "Aquarium & Fish",
+      subCategory: "betta",
+      name: "Double Tail Betta Fish",
+      subtitle: "Double Tail Betta splendens",
+
+      image: "https://res.cloudinary.com/pv8lnpft/image/upload/v1795344515/90739cac-7063-4d96-8ba3-d72d63aad509.png",
+      images: ["https://res.cloudinary.com/pv8lnpft/image/upload/v1795344515/90739cac-7063-4d96-8ba3-d72d63aad509.png",
+        "https://res.cloudinary.com/pv8lnpft/image/upload/v1795344602/b3e2f056-7342-4385-9600-33f125c782b4.png"
+      ],
+      video: "https://res.cloudinary.com/pv8lnpft/video/upload/v1795344564/WhatsApp_Video_2026-11-22_at_4.06.16_PM.mp4",
+
+      description:
+        "The Double Tail Betta is a distinctive Betta splendens variety known for its two separate caudal fin lobes, giving the tail a beautiful split appearance. Its unique finnage and ornamental appeal make it a popular choice among Betta enthusiasts.",
+
+      price: 499,
+      unit: "piece",
+      minQuantity: 1,
+
+      variants: [
+        { name: "Male", price: 399 },
+        { name: "Female", price: 249 }
+      ],
+
+      size: "As per available stock",
+
+      overview:
+        "Double Tail Betta is a selectively bred Betta splendens variety characterised by a caudal fin divided into two distinct lobes. It often has a broader dorsal fin and a compact body shape compared with some other Betta varieties.",
+
+      careRequirements: {
+        temperature: "25–28°C",
+        pH: "Approximately 6.5–7.5",
+        temperament:
+          "Males are territorial and should generally be housed individually. Choose tankmates carefully.",
+        feeding:
+          "High-quality Betta pellets supplemented with suitable frozen or live foods such as brine shrimp and bloodworms.",
+        water:
+          "Use clean, dechlorinated and properly cycled freshwater. Perform regular partial water changes.",
+        filtration:
+          "Gentle filtration with low water flow is recommended.",
+        maintenance:
+          "Monitor water quality and inspect the delicate fins regularly for signs of damage or fin rot."
+      },
+
+      habitatSetup: {
+        aquarium:
+          "A properly maintained aquarium of at least 19 litres is recommended.",
+        substrate:
+          "Smooth sand or fine aquarium gravel.",
+        plants:
+          "Live plants and soft resting leaves provide shelter and resting areas.",
+        filtration:
+          "Gentle sponge filtration is recommended.",
+        lighting:
+          "Moderate lighting with a consistent day-night cycle.",
+        decoration:
+          "Avoid sharp decorations that can damage delicate fins."
+      },
+
+      didYouKnow: [
+        "Double Tail Bettas have two distinct caudal fin lobes.",
+        "They often have a broader dorsal fin than other Betta varieties.",
+        "The Double Tail trait is the result of selective breeding.",
+        "Double Tail is a fin-type variety, not a separate Betta species."
+      ],
+
+      featured: false
+    },
+
     {
       id: "betta-rgg-ironman-halfmoon-plakat",
       category: "aquarium",
