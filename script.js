@@ -36,6 +36,7 @@
 
   // Selected variant state tracker: productId -> variantIndex
   const selectedVariants = {};
+  let homeVisibleProductsCount = 4;
 
   const CATEGORY_NAMES = {
     all: 'All Products',
@@ -1355,13 +1356,13 @@
       description:
         "The Pure Rosetail Betta is a fancy Betta splendens variety known for its elaborate, heavily branched fins that create a rose-like appearance. Its flowing tail and impressive finnage make it a striking addition to a carefully maintained aquarium.",
 
-      price: 499,
+      price: 299,
       unit: "piece",
       minQuantity: 1,
 
       variants: [
         { name: "Male", price: 299 },
-        { name: "Female", price: 119 }
+        { name: "Female", price: 219 }
       ],
 
       size: "As per available stock",
@@ -4109,50 +4110,13 @@
         </article>
       `;
     }).join('');
-
-    // Render Load More / Show Less Controls (When pagination container is present)
-    if (paginationWrap) {
-      if (!shouldPaginate || totalMatching <= 4) {
-        paginationWrap.innerHTML = '';
-        paginationWrap.style.display = 'none';
-      } else {
-        paginationWrap.style.display = 'flex';
-        const hasMore = homeVisibleProductsCount < totalMatching;
-        const canShowLess = homeVisibleProductsCount > 4;
-
-        let buttonsHtml = '';
-        if (hasMore) {
-          buttonsHtml += `
-            <button type="button" class="btn-load-more" id="btnLoadMore" onclick="loadMoreHomeProducts()">
-              <span>Load More</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="m6 9 6 6 6-9"/>
-              </svg>
-            </button>
-          `;
-        }
-        if (canShowLess) {
-          buttonsHtml += `
-            <button type="button" class="btn-show-less" id="btnShowLess" onclick="showLessHomeProducts()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="m18 15-6-6-6 6"/>
-              </svg>
-              <span>Show Less</span>
-            </button>
-          `;
-        }
-        paginationWrap.innerHTML = buttonsHtml;
-      }
-    }
   }
 
   window.loadMoreHomeProducts = function () {
-    homeVisibleProductsCount += 4;
     renderProductGrid();
   };
 
   window.showLessHomeProducts = function () {
-    homeVisibleProductsCount = 4;
     renderProductGrid();
     const catalogueEl = document.getElementById('catalogue');
     if (catalogueEl && typeof catalogueEl.scrollIntoView === 'function') {
@@ -4540,7 +4504,7 @@
   };
 
   /* ── 7b. Full-Page Product Detail Page (PDP) System ──────── */
-  window.renderProductDetailPage = function () {
+  function renderProductDetailPage() {
     const mainContainer = document.getElementById('pdpMain');
     if (!mainContainer) return;
 
@@ -5276,7 +5240,8 @@
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
       });
     }
-  };
+  }
+  window.renderProductDetailPage = renderProductDetailPage;
 
   /* ── 8. Cart Drawer Controller ───────────────────────────── */
   function renderCartDrawerItems(items, total) {
@@ -6534,12 +6499,15 @@
 
   /* ── Mobile Menu Handlers ────────────────────────────────── */
   window.toggleMobileMenu = function (e) {
+    if (e && typeof e.preventDefault === 'function') {
+      e.preventDefault();
+    }
     if (e && typeof e.stopPropagation === 'function') {
       e.stopPropagation();
     }
     const navMenu = document.getElementById('navMenu');
     const hamburger = document.getElementById('hamburger');
-    const backdrop = document.getElementById('mobileNavBackdrop');
+    const backdrop = document.getElementById('mobileNavBackdrop') || document.querySelector('.mobile-nav-backdrop');
     if (!navMenu) return;
 
     const isOpen = navMenu.classList.toggle('active');
@@ -6547,6 +6515,7 @@
     if (hamburger) {
       hamburger.classList.toggle('active', isOpen);
       hamburger.setAttribute('aria-expanded', String(isOpen));
+      hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
       // Fallback for single-SVG markups
       const closeIcon = hamburger.querySelector('.icon-close');
       const burgerIcon = hamburger.querySelector('.icon-hamburger');
@@ -6559,6 +6528,7 @@
 
     if (backdrop) {
       backdrop.classList.toggle('active', isOpen);
+      backdrop.setAttribute('aria-hidden', String(!isOpen));
     }
     document.body.classList.toggle('mobile-nav-open', isOpen);
     return isOpen;
@@ -6567,7 +6537,7 @@
   window.closeMobileMenu = function () {
     const navMenu = document.getElementById('navMenu');
     const hamburger = document.getElementById('hamburger');
-    const backdrop = document.getElementById('mobileNavBackdrop');
+    const backdrop = document.getElementById('mobileNavBackdrop') || document.querySelector('.mobile-nav-backdrop');
     if (!navMenu) return;
 
     navMenu.classList.remove('active');
@@ -6575,6 +6545,7 @@
     if (hamburger) {
       hamburger.classList.remove('active');
       hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open navigation menu');
       const closeIcon = hamburger.querySelector('.icon-close');
       const burgerIcon = hamburger.querySelector('.icon-hamburger');
       if (!closeIcon || !burgerIcon) {
@@ -6584,6 +6555,7 @@
 
     if (backdrop) {
       backdrop.classList.remove('active');
+      backdrop.setAttribute('aria-hidden', 'true');
     }
     document.body.classList.remove('mobile-nav-open');
   };
@@ -6593,10 +6565,21 @@
     const navMenu = document.getElementById('navMenu');
     if (!hamburger || !navMenu) return;
 
+    // Accessibility attributes
+    if (!hamburger.getAttribute('aria-controls')) {
+      hamburger.setAttribute('aria-controls', 'navMenu');
+    }
+    if (!hamburger.hasAttribute('aria-expanded')) {
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+    if (!hamburger.getAttribute('aria-label')) {
+      hamburger.setAttribute('aria-label', 'Toggle navigation menu');
+    }
+
     if (hamburger.dataset.menuInitialized === 'true') return;
     hamburger.dataset.menuInitialized = 'true';
 
-    // Remove inline onclick to guarantee only this single listener handles clicks
+    // Remove inline onclick so that only the clean listener handles clicks
     hamburger.removeAttribute('onclick');
 
     // Single dedicated click handler for hamburger
@@ -6606,8 +6589,17 @@
       window.toggleMobileMenu(e);
     });
 
+    // Keyboard support: Enter / Space toggle
+    hamburger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        window.toggleMobileMenu(e);
+      }
+    });
+
     // Tapping on the backdrop closes the menu
-    const backdrop = document.getElementById('mobileNavBackdrop');
+    const backdrop = document.getElementById('mobileNavBackdrop') || document.querySelector('.mobile-nav-backdrop');
     if (backdrop) {
       backdrop.addEventListener('click', (e) => {
         e.preventDefault();
@@ -6631,6 +6623,23 @@
       }
       window.closeMobileMenu();
     });
+
+    // Escape key closes mobile menu
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        const nm = document.getElementById('navMenu');
+        if (nm && nm.classList.contains('active')) {
+          window.closeMobileMenu();
+        }
+      }
+    });
+
+    // Mobile resize listener to reset menu if viewport widens to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        window.closeMobileMenu();
+      }
+    }, { passive: true });
   };
 
   /* ── 10. Smooth Scroll & Navigation Helpers ──────────────── */
